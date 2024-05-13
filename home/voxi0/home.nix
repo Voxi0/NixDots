@@ -11,18 +11,6 @@
 	username = "voxi0";
 	homeDirectory = "/home/voxi0";
 	stateVersion = "23.11";
-
-	# User Packages
-    packages = with pkgs; [
-      # Apps
-      firefox
-
-      # CLI Utilities
-      neofetch htop lf unzip wget curl
-
-      # Dev Tools
-      openssh python3 gcc gnumake cmake rustup
-    ];
   };
 
   # Programs Config

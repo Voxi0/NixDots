@@ -10,7 +10,10 @@
   # Packages
   home.packages = with pkgs; [
     # Apps
-    neofetch imagemagick htop
+    firefox neofetch imagemagick htop lf unzip wget curl
+
+    # Dev Tools
+    openssh python3 gcc gnumake cmakeCurses rustup
 
     # Fonts
     (nerdfonts.override {fonts = [
