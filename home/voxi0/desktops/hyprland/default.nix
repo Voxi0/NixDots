@@ -29,54 +29,6 @@
   home.file.".config/hypr/hyprpaper.conf".source = ./hypr/hyprpaper.conf;
   home.file."Pictures/".source = ./hypr/Pictures;
 
-  # Set System Default Cursor Theme
-  home.pointerCursor = {
-    name = "Bibata-Modern-Classic";
-    package = pkgs.bibata-cursors;
-    size = 24;
-  };
-
-  # GTK
-  gtk = {
-    # Enable/Disable GTK
-    enable = true;
-
-    # Application Theme
-    theme = {
-      name = "Catppuccin-Mocha-Standard-Flamingo-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        variant = "mocha";
-        accents = [ "flamingo" ];
-        size = "standard";
-        tweaks = [ "normal" ];
-      };
-    };
-
-    # Icon Theme
-    iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
-    };
-  };
-
-  # QT
-  qt = {
-    # Enable/Disable QT
-    enable = true;
-
-    # Platform Theme
-    platformTheme.name = "qt6ct";
-
-    # Style
-    style = {
-      name = "Catppuccin-Mocha-Standard-Flamingo-Dark";
-      package = pkgs.catppuccin-kde.override {
-        flavour = [ "mocha" ];
-        accents = [ "flamingo" ];
-      };
-    };
-  };
-
   # Session Environment Variables
   home.sessionVariables = {
     # Required if Cursor Keeps Disappearing
@@ -92,7 +44,7 @@
     QT_QPA_PLATFORMTHEME = "qt6ct";
 
     # Tell Apps to Use Wayland
-    NIXOS_OZONE_WL = "1";
+    # NIXOS_OZONE_WL = "1";
     XDG_SESSION_TYPE = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
     ANKI_WAYLAND = "1";

@@ -1,1 +1,3 @@
+update.sh
+node_modules
 nixos/hardware-configuration.nix

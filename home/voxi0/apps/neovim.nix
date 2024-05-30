@@ -182,7 +182,6 @@
       lualine = {
         enable = true;
         iconsEnabled = true;
-        theme = "auto";
       };
 
       # Super Useful Plugins

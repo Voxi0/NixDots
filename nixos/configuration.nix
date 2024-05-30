@@ -31,7 +31,7 @@
       canTouchEfiVariables = true;
     };
 
-    # Bootloader Settings
+    # GRUB
     grub = {
       enable = true;
       device = "nodev";
