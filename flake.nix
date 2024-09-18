@@ -1,51 +1,31 @@
 {
-  # Flake Description
-  description = "NixOS Flake";
+  description = "Voxi0's NixOS Flake";
 
-  # Flake Dependencies
   inputs = {
-    # Nix Packages Repo
+    # Nix package repository to use
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home Manager
+    # Manages user dotfiles
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixVim
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # System-wide colorscheming and typography
+    stylix.url = "github:danth/stylix";
   };
 
-  # Flake Outputs - What to do After Fetching All The Flake Inputs
-  outputs = { nixpkgs, home-manager, ... }@inputs: let
+  outputs = { self, nixpkgs, ... }@inputs: let
     system = "x86_64-linux";
+    username = "voxi0";
+    pkgs = nixpkgs.legacyPackages.${system};
+    genHostConfig = { hostname }: import ./hosts/host-config.nix {
+      inherit nixpkgs system hostname username inputs;
+    };
   in {
+    # NixOS configurations
     nixosConfigurations = {
-      NixOS = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./nixos/configuration.nix
-          home-manager.nixosModules.home-manager {
-            # Use Packages Installed on System and User Profiles
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            # Optionally Pass Through Arguments to 'home.nix' File Using 'extraSpecialArgs'
-
-            # Users
-            home-manager.users.voxi0 = {
-              imports = [
-                ./home/voxi0/home.nix
-                inputs.nixvim.homeManagerModules.nixvim
-              ];
-            };
-          }
-        ];
-      };
+      neo = genHostConfig { hostname = "neo"; };
     };
   };
 }
