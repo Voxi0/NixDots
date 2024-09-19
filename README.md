@@ -3,7 +3,7 @@ My personal NixOS and Home Manager dotfiles. Using Disko to declaratively partit
 tremendously. Feel free to use my config however you like.
 
 ### Installing NixOS with NixDots
-Just run this command to fetch NixDots and run the installer - <br>
+Just run this command while booted into the NixOS live ISO to fetch NixDots and run the installer - <br>
 ``` sh
 git clone https://github.com/Voxi0/NixDots.git && cd NixDots && nix-shell ./install.nix
 ```
