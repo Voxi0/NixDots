@@ -6,4 +6,4 @@
 
 <h3>Installing NixOS with NixDots</h3>
 Just run this command to fetch NixDots and run the installer - <br>
-'git clone https://github.com/Voxi0/NixDots.git && cd NixDots && nix-shell ./install.nix'
+```git clone https://github.com/Voxi0/NixDots.git && cd NixDots && nix-shell ./install.nix```
