@@ -4,6 +4,9 @@
     # Set the password for the default user - Default username is mine of course :P
     passwd voxi0
 
+    # Change the owner of '/etc/nixos' from root to the default user
+    sudo chown voxi0 /etc/nixos
+
     # Exit chroot
     exit
   ";
