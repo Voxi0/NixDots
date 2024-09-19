@@ -1,8 +1,9 @@
-<div align="center">
-    <img src="https://github.com/NixOS/nixos-artwork/blob/master/logo/nix-snowflake-colours.svg?raw=true" width=128>
-    <h1>❄️ NixDots ❄️</h1>
-</div>
+## NixDots
+My personal NixOS and Home Manager dotfiles. Using Disko to declaratively partition disks which automates the install process
+tremendously. Feel free to use my config however you like.
 
 ### Installing NixOS with NixDots
 Just run this command to fetch NixDots and run the installer - <br>
-```git clone https://github.com/Voxi0/NixDots.git && cd NixDots && nix-shell ./install.nix```
+``` sh
+git clone https://github.com/Voxi0/NixDots.git && cd NixDots && nix-shell ./install.nix
+```
