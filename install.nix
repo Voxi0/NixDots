@@ -1,9 +1,8 @@
-{ pkgs ? import <nixpkgs> {} }: pkgs.mkShellNoCC {
+{ pkgs ? import <nixpkgs> {} }: let
+  DISKO_CONFIG="./disko.nix";
+  MOUNT_POINT="/mnt";
+in pkgs.mkShellNoCC {
   shellHook = ''
-    # Variables
-    DISKO_CONFIG="./disko.nix"
-    MOUNT_POINT="/mnt"
-
     # Run Disko to partition, format, and mount the disk
     echo "Running Disko to partition, format, and mount the disk..."
     sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "$DISKO_CONFIG" || { echo "Disko failed"; exit 1; }
@@ -21,9 +20,7 @@
 
     # Move dotfiles to the new system
     echo "Copying dotfiles to new system..."
-    sudo cp -r /path/to/dotfiles/* ${MOUNT_POINT}/etc/nixos/ || { echo "Failed to copy dotfiles"; exit 1; }
-    # Optionally back up old configuration.nix instead of deleting
-    # sudo mv ${MOUNT_POINT}/etc/nixos/configuration.nix ${MOUNT_POINT}/etc/nixos/configuration.nix.bak
+    sudo cp -r ./* ./.git* ${MOUNT_POINT}/etc/nixos/ || { echo "Failed to copy dotfiles"; exit 1; }
 
     # Chroot into the new system and rebuild NixOS
     echo "Entering chroot environment and rebuilding NixOS..."
