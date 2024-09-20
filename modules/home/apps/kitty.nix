@@ -41,10 +41,61 @@
       package = pkgs.fastfetch;
       settings = {
         logo = {
-          type = "kitty-direct";
           source = ./../Pictures/Fastfetch/howls.png;
-          width = 300;
+          width = 25;
         };
+        modules = [
+          # Start
+          {
+            type = "custom";
+            format = "\u001b[36m    コンピューター";}
+          {
+            type = "custom";
+            format = "┌────────────────────────────────────────────────────┐";}
+
+          # OS, Kernel, Packages and Display
+          {
+            type = "os";
+            key = "   OS";
+            keyColor = "red";}
+          {
+              type = "kernel";
+              key = "   Kernel";
+              keyColor = "red";}
+          {
+            type = "packages";
+            key = "   Packages";
+            keyColor = "green";}
+          {
+            type = "display";
+            key = "  󰍹 Display";
+            keyColor = "green";}
+
+          # User, WM, Terminal and Uptime
+          {
+            type = "title";
+            key = "  ";}
+          {
+            type = "wm";
+            key = "  󱂬 WM";
+            keyColor = "yellow";}
+          {
+            type = "terminal";
+            key = "   Terminal";
+            keyColor = "yellow";}
+          {
+            type = "uptime";
+            key = "  󱫐 Uptime ";
+            keyColor = "red";}
+          {
+            type = "custom";
+            format = "└───────────────────────────────────────────────────┘";}
+          
+          {
+            type = "colors";
+            paddingLeft = 2;
+            symbol = "circle";}
+        ];
       };
     };
   };
