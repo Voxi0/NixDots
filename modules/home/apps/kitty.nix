@@ -35,65 +35,78 @@
       };
     };
 
-    # Fastfetch - Fetch script configuration
+    # Fetch script configurations
+    # Fastfetch
     programs.fastfetch = {
       enable = true;
       package = pkgs.fastfetch;
       settings = {
         logo = {
+          type = "kitty";
           source = ./../Pictures/Fastfetch/howls.png;
           width = 25;
+          height = 12;
         };
+
+        display.separator = "  ";
+
         modules = [
           # Start
           {
             type = "custom";
-            format = "\u001b[36m    コンピューター";}
-          {
-            type = "custom";
-            format = "┌────────────────────────────────────────────────────┐";}
+            format = "┌─────────────────────────────────────┐";}
 
           # OS, Kernel, Packages and Display
           {
             type = "os";
-            key = "   OS";
+            paddingLeft = 4;
+            key = "\t OS";
+            keyColor = "red";
+            format = "{name} {version}";}
+          {
+            type = "kernel";
+            paddingLeft = 4;
+            key = "\t Kernel";
             keyColor = "red";}
           {
-              type = "kernel";
-              key = "   Kernel";
-              keyColor = "red";}
-          {
             type = "packages";
-            key = "   Packages";
+            paddingLeft = 4;
+            key = "\t Packages";
             keyColor = "green";}
           {
             type = "display";
-            key = "  󰍹 Display";
-            keyColor = "green";}
+            paddingLeft = 4;
+            key = "\t󰍹 Display";
+            keyColor = "green";
+            format = "{width}x{height}";}
 
           # User, WM, Terminal and Uptime
           {
             type = "title";
-            key = "  ";}
+            paddingLeft = 4;
+            key = "\t";}
           {
             type = "wm";
-            key = "  󱂬 WM";
+            paddingLeft = 4;
+            key = "\t󱂬 WM";
             keyColor = "yellow";}
           {
             type = "terminal";
-            key = "   Terminal";
+            paddingLeft = 4;
+            key = "\t Terminal";
             keyColor = "yellow";}
           {
             type = "uptime";
-            key = "  󱫐 Uptime ";
+            paddingLeft = 4;
+            key = "\t󱫐 Uptime";
             keyColor = "red";}
           {
             type = "custom";
-            format = "└───────────────────────────────────────────────────┘";}
+            format = "└────────────────────────────────────┘";}
           
           {
             type = "colors";
-            paddingLeft = 2;
+            paddingLeft = 11;
             symbol = "circle";}
         ];
       };
