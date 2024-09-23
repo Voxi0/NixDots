@@ -15,6 +15,7 @@
           # Import Home Manager modules
           imports = [
             ./${hostname}/home.nix
+            inputs.nixvim.homeManagerModules.nixvim
           ];
 
           # User information

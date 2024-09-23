@@ -13,6 +13,12 @@
 
     # System-wide colorscheming and typography
     stylix.url = "github:danth/stylix";
+
+    # Nixvim - Makes it very easy to customize Neovim using Nix
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: let

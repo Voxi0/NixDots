@@ -60,4 +60,5 @@
   };
 
   # Enable/Disable applications
+  emacs.enable = false;
 }
