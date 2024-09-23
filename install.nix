@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> {} }: let
   diskoConfig = ./disko.nix;
-  chrootCommands = "
+  chrootCommands = ''
     # Set the password for the default user - Default username is mine of course :P
     passwd voxi0
 
@@ -9,7 +9,7 @@
 
     # Exit chroot
     exit
-  ";
+  '';
 in pkgs.mkShellNoCC {
   shellHook = ''
     # Partition, format and mount disks using Disko - Disk configurations are defined in the 'disko.nix' file
@@ -31,7 +31,7 @@ in pkgs.mkShellNoCC {
 
     # Chroot into the new installation to run extra commands
     echo "Entering chroot environment..."
-    if ! sudo nixos-enter --command ${chrootCommands}; then
+    if ! sudo nixos-enter --command "bash -c '${chrootCommands}'"; then
       echo "Failed to enter chroot environment"
     fi
 

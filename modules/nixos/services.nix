@@ -10,7 +10,7 @@
     # X11 windowing system
     xserver = {
       enable = true;
-      excludePackages = with pkgs; [ xterm ];
+      excludePackages = [];
 
       # Keymap
       xkb = {

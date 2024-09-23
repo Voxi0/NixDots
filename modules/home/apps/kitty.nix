@@ -8,7 +8,7 @@
   config = lib.mkIf config.kitty.enable {
     # Install CLI utilities
     home.packages = with pkgs; [
-      neovim lf btop
+      lf btop
     ];
 
     # Kitty terminal configuration
@@ -43,19 +43,14 @@
       settings = {
         logo = {
           type = "kitty";
-          source = ./../Pictures/Fastfetch/howls.png;
+          source = ./../Pictures/Fastfetch/pochita.png;
           width = 25;
           height = 12;
         };
 
-        display.separator = "  ";
+        display.separator = " > ";
 
         modules = [
-          # Start
-          {
-            type = "custom";
-            format = "┌─────────────────────────────────────┐";}
-
           # OS, Kernel, Packages and Display
           {
             type = "os";
@@ -100,14 +95,6 @@
             paddingLeft = 4;
             key = "\t󱫐 Uptime";
             keyColor = "red";}
-          {
-            type = "custom";
-            format = "└────────────────────────────────────┘";}
-          
-          {
-            type = "colors";
-            paddingLeft = 11;
-            symbol = "circle";}
         ];
       };
     };

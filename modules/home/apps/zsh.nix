@@ -8,7 +8,7 @@
   config = lib.mkIf config.zsh.enable {
     # Install ZSH packages
     home.packages = with pkgs; [
-      oh-my-zsh thefuck fzf
+      oh-my-zsh thefuck fzf lsd
     ];
 
     # ZSH configuration
@@ -20,8 +20,9 @@
 
       # Shell aliases to make it faster to type frequently used commands
       shellAliases = {
-        ll = "ls -l";
-        la = "ls -a";
+        ll = "lsd -l";
+        la = "lsd -a";
+        lla = "lsd -al";
         update = "sudo nixos-rebuild switch";
         clean = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
       };

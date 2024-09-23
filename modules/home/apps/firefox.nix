@@ -11,6 +11,8 @@
       enable = true;
       profiles = {
         Voxi0 = {
+          isDefault = true;
+
           # Browser settings
           settings = {
             "browser.fullscreen.autohide" = false;
