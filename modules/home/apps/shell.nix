@@ -9,6 +9,7 @@
     # Shell aliases to make it faster to type frequently used commands
     # Set regardless of whether ZSH is enabled or not
     home.shellAliases = {
+      "ls" = "lsd";
       "ll" = "lsd -l";
       "la" = "lsd -a";
       "lla" = "lsd -al";
