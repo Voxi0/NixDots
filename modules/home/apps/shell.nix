@@ -1,18 +1,51 @@
 { pkgs, lib, config, ... }: {
   # Module options
   options = {
+    zsh.enable = lib.mkEnableOption "Enables ZSH";
     kitty.enable = lib.mkEnableOption "Enables Kitty";
   };
 
-  # Configure Kitty if it's enabled
-  config = lib.mkIf config.kitty.enable {
-    # Install CLI utilities
+  config = {
+    # Shell aliases to make it faster to type frequently used commands
+    # Set regardless of whether ZSH is enabled or not
+    home.shellAliases = {
+      "ll" = "lsd -l";
+      "la" = "lsd -a";
+      "lla" = "lsd -al";
+      "update-switch" = "sudo nixos-rebuild switch";
+      "update-boot" = "sudo nixos-rebuild boot";
+      "clean" = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+    };
+
+    # Install ZSH packages
     home.packages = with pkgs; [
-      lf btop
-    ];
+      lsd lf btop
+    ] ++ (if config.zsh.enable then
+      (with pkgs; [
+        oh-my-zsh thefuck fzf
+      ])
+    else []);
+
+    # ZSH configuration
+    programs.zsh = lib.mkIf config.zsh.enable {
+      enable = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+
+      # Command history
+      history.size = 1000;
+
+      # Oh-My-ZSH
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ "git" "thefuck" "fzf" ];
+        theme = "lambda";
+      };
+    };
 
     # Kitty terminal configuration
-    programs.kitty = {
+    programs.kitty = lib.mkIf config.kitty.enable {
       enable = true;
       settings = {
         # Disable popup confirmation window when closing Kitty terminal

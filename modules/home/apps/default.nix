@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }: {
   # Import Nix modules
   imports = [
-    ./zsh.nix ./kitty.nix ./neovim.nix ./emacs.nix ./firefox.nix ./git.nix ./vscode.nix ./vesktop.nix
+    ./shell.nix ./neovim.nix ./emacs.nix ./firefox.nix ./git.nix ./vscode.nix ./vesktop.nix
   ];
 
   # Enable all applications by default
