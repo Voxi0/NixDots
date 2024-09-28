@@ -55,4 +55,5 @@
   };
 
   # Enable/Disable applications
+  vscode.enable = false;
 }

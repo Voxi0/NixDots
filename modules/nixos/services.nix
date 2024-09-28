@@ -4,8 +4,13 @@
     # Touchpad support
     libinput.enable = true;
 
-    # Login manager
-    displayManager.sddm.enable = true;
+    # Display/Login manager
+    displayManager.sddm = {
+      enable = true;
+      enableHidpi = true;
+      theme = "tokyo-night-sddm";
+      autoNumlock = true;
+    };
 
     # X11 windowing system
     xserver = {
