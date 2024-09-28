@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, ... }: {
   # Module options
   options = {
     neovim.enable = lib.mkEnableOption "Enables Neovim";
@@ -54,6 +54,16 @@
         # Faster autocompletion
         updatetime = 100;
 
+        # Code folding
+        foldmethod = "expr";                      # Set folding method to expression
+        foldexpr = "nvim_treesitter#foldexpr()";  # Use Treesitter for folding
+        foldlevel = 10;                           # How many folds to keep open when a new file is opened
+        foldcolumn = "0";
+        foldtext = "";
+        fillchars = {
+          fold = " ";                             # Set to a space to avoid trailing dots
+        };
+
         # Set file encoding
         encoding = "utf-8";
         fileencoding = "utf-8";
@@ -67,8 +77,16 @@
 
       # Keybinds
       keymaps = [
+        # Toggle Neotree/LazyGit
         {action = "<Cmd>Neotree toggle<CR>"; key = "<C-n>";}
         {action = "<Cmd>LazyGit<CR>"; key = "<C-g>";}
+
+        # Code folding
+        {action = "za"; key = "za";}               # Toggle fold
+        {action = "zc"; key = "zc";}               # Close fold
+        {action = "zo"; key = "zo";}               # Open fold
+        {action = "zM"; key = "zM";}               # Close all folds
+        {action = "zR"; key = "zR";}               # Open all folds
       ];
 
       # Plugins
@@ -91,7 +109,7 @@
               "│"
             ];
           };
-        }; 
+        };
 
         # NeoTree - File explorer
         neo-tree = {
@@ -104,14 +122,16 @@
             "<tab>" = {
               command = "open";
               # disable `nowait` if you have existing combos starting with this char that you want to use
-              nowait = false;
+              nowait = true;
             };
             "<2-LeftMouse>" = "open";
-            "<esc>" = "revert_preview";
+
+            # Preview file on hover
             P = {
               command = "toggle_preview";
               config = { use_float = true; };
             };
+            "<esc>" = "revert_preview";
             l = "focus_preview";
             S = "open_split";
             # S = "split_with_window_picker";
@@ -153,6 +173,7 @@
           settings = {
             auto_install = true;
             indent.enable = false;
+            fold.enable = true;
           };
         };
 
@@ -160,6 +181,7 @@
         lsp = {
           enable = true;
           servers = {
+            nixd.enable = true;
             clangd.enable = true;
             ts-ls.enable = true;
             lua-ls.enable = true;

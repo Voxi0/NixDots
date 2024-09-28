@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: {
+{ lib, ... }: {
   # Import Nix modules
   imports = [
     ./shell.nix ./neovim.nix ./emacs.nix ./firefox.nix ./git.nix ./vscode.nix ./vesktop.nix

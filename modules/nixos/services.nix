@@ -10,12 +10,12 @@
     # X11 windowing system
     xserver = {
       enable = true;
-      excludePackages = [];
+      excludePackages = [ pkgs.xterm ];
 
       # Keymap
       xkb = {
         layout = "gb";
-	      variant = "";
+	    variant = "";
       };
     };
 
