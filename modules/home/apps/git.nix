@@ -11,5 +11,11 @@
       userName = "Voxi0";
       userEmail = "alif200099@gmail.com";
     };
+    programs.lazygit = {
+      enable = true;
+      settings = {
+        gui.theme.lightTheme = false;
+      };
+    };
   };
 }

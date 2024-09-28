@@ -20,11 +20,6 @@
         recursive = true;
       };
     };
-
-    # Session variables
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
   };
 
   # GTK - Stylix already handles theme and cursor, so only the icon theme is set here
@@ -60,5 +55,4 @@
   };
 
   # Enable/Disable applications
-  emacs.enable = false;
 }

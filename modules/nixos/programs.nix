@@ -8,10 +8,7 @@ _: {
       enableSSHSupport = true;
     };
 
-    # ZSH - Must be enabled when using ZSH
-    zsh.enable = true;
-
-    # Hyprland - If not enabled, won't show up in login manager
-    hyprland.enable = true;
+    zsh.enable = true;      # Required to set ZSH as the default shell for the user
+    hyprland.enable = true; # Required to ensure that Hyprland shows up in the display/login manager
   };
 }

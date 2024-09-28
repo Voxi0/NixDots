@@ -37,20 +37,19 @@
 
       # Options
       opts = {
-        # Enable/Disable truecolors
+        # Enable/Disable truecolors disable text wrapping and enable line numbering
         termguicolors = true;
-
-        # Line numbering
+        wrap = false;
         number = true;
         relativenumber = false;
 
         # Indentation
-        smartindent = false;
+        smartindent = true;
         autoindent = false;
         shiftwidth = 4;
         tabstop = 4;
         softtabstop = 4;
-        expandtab = false;
+        expandtab = true;
 
         # Faster autocompletion
         updatetime = 100;
@@ -68,7 +67,8 @@
 
       # Keybinds
       keymaps = [
-        {action = "<Cmd>NvimTreeToggle<CR>"; key = "<C-n>";}
+        {action = "<Cmd>Neotree toggle<CR>"; key = "<C-n>";}
+        {action = "<Cmd>Neotree toggle float git_status git_base=main<CR>"; key="<C-g>";}
       ];
 
       # Plugins
@@ -82,11 +82,58 @@
           theme = "dashboard";
         };
 
-        # NvimTree - File explorer
-        nvim-tree = {
+        # NeoTree - File explorer
+        neo-tree = {
           enable = true;
-          disableNetrw = true;
-          git.enable = true;
+          enableDiagnostics = true;
+          enableGitStatus = true;
+          enableModifiedMarkers = true;
+          useDefaultMappings = false;
+          window.mappings = {
+            "<tab>" = {
+              command = "open";
+              # disable `nowait` if you have existing combos starting with this char that you want to use
+              nowait = false;
+            };
+            "<2-LeftMouse>" = "open";
+            "<esc>" = "revert_preview";
+            P = {
+              command = "toggle_preview";
+              config = { use_float = true; };
+            };
+            l = "focus_preview";
+            S = "open_split";
+            # S = "split_with_window_picker";
+            s = "open_vsplit";
+            # s = "vsplit_with_window_picker";
+            t = "open_tabnew";
+            # "<cr>" = "open_drop";
+            # t = "open_tab_drop";
+            w = "open_with_window_picker";
+            C = "close_node";
+            z = "close_all_nodes";
+            # Z = "expand_all_nodes";
+            R = "refresh";
+            a = {
+              command = "add";
+              # some commands may take optional config options, see `:h neo-tree-mappings` for details
+              config = {
+                show_path = "none"; # "none", "relative", "absolute"
+              };
+            };
+            d = "delete";
+            r = "rename";
+            y = "copy_to_clipboard";
+            x = "cut_to_clipboard";
+            p = "paste_from_clipboard";
+            c = "copy"; # takes text input for destination, also accepts the config.show_path and config.insert_as options
+            m = "move"; # takes text input for destination, also accepts the config.show_path and config.insert_as options
+            e = "toggle_auto_expand_width";
+            q = "close_window";
+            "?" = "show_help";
+            "<" = "prev_source";
+            ">" = "next_source";
+          };
         };
 
         # Treesitter - Syntax highlighting

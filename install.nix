@@ -5,7 +5,7 @@
     passwd voxi0
 
     # Change the owner of '/etc/nixos' from root to the default user
-    sudo chown voxi0 /etc/nixos
+    chown voxi0 /etc/nixos
 
     # Exit chroot
     exit
@@ -31,7 +31,7 @@ in pkgs.mkShellNoCC {
 
     # Chroot into the new installation to run extra commands
     echo "Entering chroot environment..."
-    if ! sudo nixos-enter --command "bash -c '${chrootCommands}'"; then
+    if ! sudo nixos-enter --command "bash ${chrootCommands}"; then
       echo "Failed to enter chroot environment"
     fi
 
