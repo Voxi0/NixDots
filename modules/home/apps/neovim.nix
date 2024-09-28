@@ -68,7 +68,7 @@
       # Keybinds
       keymaps = [
         {action = "<Cmd>Neotree toggle<CR>"; key = "<C-n>";}
-        {action = "<Cmd>Neotree toggle float git_status git_base=main<CR>"; key="<C-g>";}
+        {action = "<Cmd>LazyGit<CR>"; key = "<C-g>";}
       ];
 
       # Plugins
@@ -76,11 +76,22 @@
         # Icons
         web-devicons.enable = true;
 
-        # Dashboard
-        alpha = {
+        # LazyGit
+        lazygit = {
           enable = true;
-          theme = "dashboard";
-        };
+          settings = {
+            floating_window_border_chars = [
+              "╭"
+              "─"
+              "╮"
+              "│"
+              "╯"
+              "─"
+              "╰"
+              "│"
+            ];
+          };
+        }; 
 
         # NeoTree - File explorer
         neo-tree = {
