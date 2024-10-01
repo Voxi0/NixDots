@@ -8,7 +8,6 @@
     displayManager.sddm = {
       enable = true;
       enableHidpi = true;
-      theme = "tokyo-night-sddm";
       autoNumlock = true;
     };
 
@@ -20,7 +19,7 @@
       # Keymap
       xkb = {
         layout = "gb";
-	    variant = "";
+	      variant = "";
       };
     };
 

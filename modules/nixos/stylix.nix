@@ -52,12 +52,12 @@
         popups = 10;
       };
     };
-
+    
     # Opacity/Transparency of various applications
     opacity = {
       desktop = 1.0;
       applications = 1.0;
-      terminal = 0.7;
+      terminal = 0.8;
       popups = 1.0;
     };
   };

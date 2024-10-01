@@ -1,8 +1,6 @@
-{ lib, config, ... }: {
+{ lib, config, pkgs, ... }: {
   # Module options
-  options = {
-    neovim.enable = lib.mkEnableOption "Enables Neovim";
-  };
+  options.neovim.enable = lib.mkEnableOption "Enables Neovim";
 
   # Configure Neovim if it's enabled
   config = lib.mkIf config.neovim.enable {
@@ -12,6 +10,10 @@
       viAlias = true;
       vimAlias = true;
 
+      # Extra dependencies
+      extraPackages = with pkgs; [ wl-clipboard ];
+
+      # Colorscheme
       colorschemes.catppuccin = {
         enable = true;
         settings = {
@@ -44,11 +46,11 @@
         relativenumber = false;
 
         # Indentation
-        smartindent = true;
+        smartindent = false;
         autoindent = false;
-        shiftwidth = 4;
-        tabstop = 4;
-        softtabstop = 4;
+        shiftwidth = 2;
+        tabstop = 2;
+        softtabstop = 2;
         expandtab = true;
 
         # Faster autocompletion
@@ -60,56 +62,39 @@
         foldlevel = 10;                           # How many folds to keep open when a new file is opened
         foldcolumn = "0";
         foldtext = "";
-        fillchars = {
-          fold = " ";                             # Set to a space to avoid trailing dots
-        };
+        fillchars.fold = " ";                     # Set to a space to avoid trailing dots
+
+        # Clipboard
+        clipboard = "unnamedplus";
 
         # Set file encoding
         encoding = "utf-8";
         fileencoding = "utf-8";
       };
 
-      # Global options
-      globals = {
-        # Set leader key to space
-        mapleader = " ";
-      };
+      # Set the leader key to space
+      globals.mapleader = "<Space>";
 
       # Keybinds
       keymaps = [
         # Toggle Neotree/LazyGit
-        {action = "<Cmd>Neotree toggle<CR>"; key = "<C-n>";}
-        {action = "<Cmd>LazyGit<CR>"; key = "<C-g>";}
-
-        # Code folding
-        {action = "za"; key = "za";}               # Toggle fold
-        {action = "zc"; key = "zc";}               # Close fold
-        {action = "zo"; key = "zo";}               # Open fold
-        {action = "zM"; key = "zM";}               # Close all folds
-        {action = "zR"; key = "zR";}               # Open all folds
+        {action = "<Cmd>Neotree toggle<CR>"; mode = [ "n" "v" ]; key = "<C-n>";}
+        {action = "<Cmd>LazyGit<CR>"; mode = [ "n" ]; key = "<C-g>";}
       ];
 
       # Plugins
       plugins = {
-        # Icons
+        # Icons, Noice (Experimental Neovim UI) and Lualine (Statusline for Neovim)
         web-devicons.enable = true;
-
-        # LazyGit
-        lazygit = {
+        noice.enable = true;
+        lualine = {
           enable = true;
-          settings = {
-            floating_window_border_chars = [
-              "╭"
-              "─"
-              "╮"
-              "│"
-              "╯"
-              "─"
-              "╰"
-              "│"
-            ];
+          settings.options = {
+            theme = "auto";
+            icons_enabled = true;
           };
         };
+
 
         # NeoTree - File explorer
         neo-tree = {
@@ -166,18 +151,16 @@
             ">" = "next_source";
           };
         };
-
-        # Treesitter - Syntax highlighting
+        
+        # Treesitter syntax highlighting and LSP
         treesitter = {
           enable = true;
           settings = {
             auto_install = true;
-            indent.enable = false;
+            indent.enable = true;
             fold.enable = true;
           };
         };
-
-        # LSP
         lsp = {
           enable = true;
           servers = {
@@ -188,7 +171,7 @@
           };
         };
 
-        # Autocompletion
+        # Snippets and autocompletion
         luasnip.enable = true;
         cmp_luasnip.enable = true;
         cmp-path.enable = true;
@@ -213,21 +196,23 @@
           };
         };
 
-        # Noice - Experimental Neovim UI
-        noice.enable = true;
-
-        # Lualine
-        lualine = {
-          enable = true;
-          settings.options = {
-            theme = "auto";
-            icons_enabled = true;
-          };
-        };
-
         # Super useful plugins
         nvim-autopairs.enable = true;
-        nix.enable = true;
+        lazygit = {
+          enable = true;
+          settings = {
+            floating_window_border_chars = [
+              "╭"
+              "─"
+              "╮"
+              "│"
+              "╯"
+              "─"
+              "╰"
+              "│"
+            ];
+          };
+        };
       };
     };
   };
