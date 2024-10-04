@@ -14,6 +14,9 @@
     # System-wide colorscheming and typography
     stylix.url = "github:danth/stylix";
 
+    # Efficient animated wallpaper daemon for wayland, controlled at runtime
+    swww.url = "github:LGFae/swww";
+
     # Nixvim - Makes it very easy to customize Neovim using Nix
     nixvim = {
       url = "github:nix-community/nixvim";

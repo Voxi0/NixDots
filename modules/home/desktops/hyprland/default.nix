@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   # Import Nix modules
   imports = [
     ./apps
@@ -7,11 +7,17 @@
   # Base packages
   home.packages = with pkgs; [
     # Base
-    hyprpaper qt6Packages.qt6ct libnotify
+    inputs.swww.packages.${pkgs.system}.swww qt6Packages.qt6ct libnotify
 
     # Utilities
     pamixer brightnessctl grim slurp feh udiskie
   ];
+
+  # Stop Stylix from using Hyprpaper to set the wallpaper - We want to use SWWW for wallpapers instead
+  stylix.targets = {
+    hyprland.enable = false;  # Must be disabled in order to disable Hyprpaper without any conflicts
+    hyprpaper.enable = false;
+  };
 
   # Hyprland
   wayland.windowManager.hyprland = {

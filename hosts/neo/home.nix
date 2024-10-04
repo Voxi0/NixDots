@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   # Import Nix modules
   imports = [
     ./../../modules/home/desktops

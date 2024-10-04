@@ -10,7 +10,7 @@
       home-manager = {
         useUserPackages = true;
         useGlobalPkgs = true;
-        extraSpecialArgs = { };
+        extraSpecialArgs = { inherit inputs; };
         users."${username}" = {
           # Import Home Manager modules
           imports = [

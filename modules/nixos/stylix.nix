@@ -6,10 +6,9 @@
 
     # Enable/Disable setting Stylix themes for various apps automatically
     autoEnable = true;
-
-    # Wallpaper - Used to generate a colorscheme if one isn't set manually. Also sets the desktop wallpaper if possible
-    image = ./../home/Pictures/Wallpapers/wallpaper3.jpg;
-    imageScalingMode = "fill";
+    
+    # Image used to generate a colorscheme if one isn't set manually - Also sets the image as wallpaper if possible
+    image = ./../home/Pictures/Wallpapers/wallpaper1.jpg;
 
     # Force light/dark when generating a theme using the wallpaper
     polarity = "dark";

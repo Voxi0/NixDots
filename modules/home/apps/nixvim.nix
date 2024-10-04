@@ -4,6 +4,7 @@
 
   # Configure Neovim if it's enabled
   config = lib.mkIf config.neovim.enable {
+    stylix.targets.nixvim.enable = false;
     programs.nixvim = {
       enable = true;
       defaultEditor = true;
@@ -11,14 +12,16 @@
       vimAlias = true;
 
       # Extra dependencies
-      extraPackages = with pkgs; [ wl-clipboard ];
+      extraPackages = with pkgs; [ wl-clipboard ripgrep ];
 
       # Colorscheme
       colorschemes.catppuccin = {
         enable = true;
         settings = {
-          term_colors = true;
-          transparent_background = false;
+          borderless_telescope = true;
+          italic_comments = true;
+          terminal_colors = true;
+          transparent = false;
           background = {
             light = "latte";
             dark = "mocha";
@@ -39,8 +42,7 @@
 
       # Options
       opts = {
-        # Enable/Disable truecolors disable text wrapping and enable line numbering
-        termguicolors = true;
+        # Disable text wrapping and enable line numbering
         wrap = false;
         number = true;
         relativenumber = false;
@@ -57,12 +59,11 @@
         updatetime = 100;
 
         # Code folding
-        foldmethod = "expr";                      # Set folding method to expression
-        foldexpr = "nvim_treesitter#foldexpr()";  # Use Treesitter for folding
-        foldlevel = 10;                           # How many folds to keep open when a new file is opened
-        foldcolumn = "0";
-        foldtext = "";
-        fillchars.fold = " ";                     # Set to a space to avoid trailing dots
+        foldenable = true;      # Enable folding
+        foldcolumn = "1";       # Show fold column
+        foldlevel = 99;         # Start with all folds open
+        foldlevelstart = 99;    # Ensure all folds are open by default
+        foldmethod = "manual";  # Let nvim-ufo handle folding methods
 
         # Clipboard
         clipboard = "unnamedplus";
@@ -78,15 +79,65 @@
       # Keybinds
       keymaps = [
         # Toggle Neotree/LazyGit
-        {action = "<Cmd>Neotree toggle<CR>"; mode = [ "n" "v" ]; key = "<C-n>";}
+        {action = "<Cmd>NvimTreeToggle<CR>"; mode = [ "n" "v" ]; key = "<C-n>";}
         {action = "<Cmd>LazyGit<CR>"; mode = [ "n" ]; key = "<C-g>";}
+
+        # Code folding
+        {action = "require('ufo').openAllFolds"; mode = [ "n" ]; key = "zR";}
+        {action = "require('ufo').closeAllFolds"; mode = [ "n" ]; key = "zM";}
       ];
 
       # Plugins
       plugins = {
-        # Icons, Noice (Experimental Neovim UI) and Lualine (Statusline for Neovim)
-        web-devicons.enable = true;
-        noice.enable = true;
+        # Discord rich presence for Neovim/Nixvim
+        neocord = {
+          enable = true;
+          settings = {
+            # Logo
+            logo = "auto";
+            logo_tooltip = null;
+            main_image = "language";
+            enable_line_number = false;
+
+            show_time = true;   # Show the timer - How long you're using Neovim
+            auto_update = true; # Update activity based on autocmd events
+
+            # Rich presence text
+            terminal_text = "Using The Terminal...";
+            editing_text = "Editing %s";
+            file_explorer_text = "Browsing %s";
+            workspace_text = "Working on %s";
+            git_commit_text = "Committing...";
+            plugin_manager_text = "Managing plugins...";
+          };
+        };
+
+        # UI
+        barbar.enable = true;         # Tabline
+        web-devicons.enable = true;   # Icons
+
+        # Experimental Neovim UI and nvim-notify required for noice.nvim
+        noice = {
+          enable = true;
+          lsp.override = {
+            "vim.lsp.util.convert_input_to_markdown_lines" = true;
+            "vim.lsp.util.stylize_markdown" = true;
+            "cmp.entry.get_documentation" = true;
+          };
+        };
+        notify = {
+          enable = true;
+          fps = 60; 
+          level = "info"; # Minimum log level to display
+        };
+
+        # Greeter/Dashboard
+        alpha = {
+          enable = true;
+          theme = "dashboard";
+        };
+
+        # Statusbar
         lualine = {
           enable = true;
           settings.options = {
@@ -95,79 +146,50 @@
           };
         };
 
-
         # NeoTree - File explorer
-        neo-tree = {
+        nvim-tree = {
           enable = true;
-          enableDiagnostics = true;
-          enableGitStatus = true;
-          enableModifiedMarkers = true;
-          useDefaultMappings = false;
-          window.mappings = {
-            "<tab>" = {
-              command = "open";
-              # disable `nowait` if you have existing combos starting with this char that you want to use
-              nowait = true;
-            };
-            "<2-LeftMouse>" = "open";
-
-            # Preview file on hover
-            P = {
-              command = "toggle_preview";
-              config = { use_float = true; };
-            };
-            "<esc>" = "revert_preview";
-            l = "focus_preview";
-            S = "open_split";
-            # S = "split_with_window_picker";
-            s = "open_vsplit";
-            # s = "vsplit_with_window_picker";
-            t = "open_tabnew";
-            # "<cr>" = "open_drop";
-            # t = "open_tab_drop";
-            w = "open_with_window_picker";
-            C = "close_node";
-            z = "close_all_nodes";
-            # Z = "expand_all_nodes";
-            R = "refresh";
-            a = {
-              command = "add";
-              # some commands may take optional config options, see `:h neo-tree-mappings` for details
-              config = {
-                show_path = "none"; # "none", "relative", "absolute"
-              };
-            };
-            d = "delete";
-            r = "rename";
-            y = "copy_to_clipboard";
-            x = "cut_to_clipboard";
-            p = "paste_from_clipboard";
-            c = "copy"; # takes text input for destination, also accepts the config.show_path and config.insert_as options
-            m = "move"; # takes text input for destination, also accepts the config.show_path and config.insert_as options
-            e = "toggle_auto_expand_width";
-            q = "close_window";
-            "?" = "show_help";
-            "<" = "prev_source";
-            ">" = "next_source";
+          disableNetrw = true;
+          hijackCursor = false;
+          sortBy = "name";
+          actions = {
+            changeDir.enable = false;
+            openFile.quitOnOpen = true;     # Close the tree when opening a file
+            removeFile.closeWindow = true;  # Close any window displaying a file when removing the file from the tree
+            useSystemClipboard = true;
           };
         };
-        
-        # Treesitter syntax highlighting and LSP
+
+        # Syntax highlighting
         treesitter = {
           enable = true;
           settings = {
             auto_install = true;
             indent.enable = true;
-            fold.enable = true;
+            fold.enable = false;
           };
         };
+
+        # LSP
         lsp = {
           enable = true;
           servers = {
-            nixd.enable = true;
-            clangd.enable = true;
-            ts-ls.enable = true;
-            lua-ls.enable = true;
+            nixd.enable = true;     # Nix
+            clangd.enable = true;   # C/C++
+            html.enable = true;     # HTML
+            ts-ls.enable = true;    # Typescript
+          };
+        };
+
+        # A pretty Diagnostics, references, telescope results, quickfix and location list
+        trouble = {
+          enable = true;
+          settings = {
+            mode = "workspace_diagnostics";
+            position = "bottom";
+            icons = false;
+            indent_lines = true;
+            auto_close = true;              # Auto close if there's no diagnostics
           };
         };
 
@@ -188,16 +210,16 @@
               {name = "path";}
               {name = "buffer";}
             ];
-            snippet.expand = ''
-              function(args)
-                require("luasnip").lsp_expand(args.body)
-              end
-            '';
+            snippet.expand = "luasnip";
           };
         };
 
         # Super useful plugins
-        nvim-autopairs.enable = true;
+        nvim-autopairs.enable = true;   # Autoclose symbols
+        indent-blankline.enable = true; # Indent lines
+        nvim-ufo.enable = true;         # Code folding
+        spectre.enable = true;          # Search and replace
+        vim-css-color.enable = true;    # CSS color picker
         lazygit = {
           enable = true;
           settings = {
