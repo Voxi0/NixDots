@@ -17,6 +17,9 @@
     # Efficient animated wallpaper daemon for wayland, controlled at runtime
     swww.url = "github:LGFae/swww";
 
+    # AGS - Widget library
+    ags.url = "github:Aylur/ags";
+
     # Nixvim - Makes it very easy to customize Neovim using Nix
     nixvim = {
       url = "github:nix-community/nixvim";
