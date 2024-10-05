@@ -18,7 +18,7 @@
     swww.url = "github:LGFae/swww";
 
     # AGS - Widget library
-    ags.url = "github:Aylur/ags";
+    ags.url = "github:aylur/ags/v2";
 
     # Nixvim - Makes it very easy to customize Neovim using Nix
     nixvim = {

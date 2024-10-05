@@ -18,9 +18,7 @@
 
       # Additional packages to add to GJS's runtime
       extraPackages = with pkgs; [
-        gtksourceview
-        webkitgtk
-        accountsservice
+        gtksourceview webkitgtk accountsservice
       ];
     };
   };

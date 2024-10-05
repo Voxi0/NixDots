@@ -1,10 +1,20 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, inputs, pkgs, ... }: {
   # Module options
-  options.neovim.enable = lib.mkEnableOption "Enables Neovim";
+  options = {
+    neovim.enable = lib.mkEnableOption "Enables Neovim";
+  };
 
   # Configure Neovim if it's enabled
   config = lib.mkIf config.neovim.enable {
+    # Import Nix modules
+    imports = [
+      inputs.nixvim.homeManagerModules.nixvim
+    ];
+
+    # Don't let Stylix theme Nixvim - We will do it manually
     stylix.targets.nixvim.enable = false;
+
+    # Nixvim configuration
     programs.nixvim = {
       enable = true;
       defaultEditor = true;
