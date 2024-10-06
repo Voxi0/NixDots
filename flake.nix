@@ -1,6 +1,8 @@
 {
+  # Flake description
   description = "Voxi0's NixOS Flake";
 
+  # Flake dependencies
   inputs = {
     # Nix package repository to use
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -27,6 +29,7 @@
     };
   };
 
+  # Flake outputs/actions - What to do after fetching all dependencies
   outputs = { self, nixpkgs, ... }@inputs: let
     system = "x86_64-linux";
     username = "voxi0";
