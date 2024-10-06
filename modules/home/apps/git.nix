@@ -1,11 +1,11 @@
 { lib, config, ... }: {
   # Module options
   options = {
-    git.enable = lib.mkEnableOption "Enables Git";
+    enableGit = lib.mkEnableOption "Enables Git";
   };
 
   # Configure Git if it's enabled
-  config = lib.mkIf config.git.enable {
+  config = lib.mkIf config.enableGit {
     programs.git = {
       enable = true;
       userName = "Voxi0";

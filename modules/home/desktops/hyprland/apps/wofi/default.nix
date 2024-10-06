@@ -1,11 +1,11 @@
 { lib, config, pkgs, ... }: {
   # Module options
   options = {
-    wofi.enable = lib.mkEnableOption "Enables Wofi";
+    enableWofi = lib.mkEnableOption "Enables Wofi";
   };
 
   # Configure Wofi if it's enabled
-  config = lib.mkIf config.wofi.enable {
+  config = lib.mkIf config.enableWofi {
     # Don't let Stylix style Wofi
     stylix.targets.wofi.enable = false;
 
@@ -20,7 +20,7 @@
         width = 440;
         height = 240;
       };
-      style = ''${builtins.readFile(./style.css)}'';
+      style = ''${builtins.readFile ./style.css}'';
     };
   };
 }

@@ -1,11 +1,11 @@
 { lib, config, pkgs, ... }: {
   # Module options
   options = {
-    emacs.enable = lib.mkEnableOption "Enables Emacs";
+    enableEmacs = lib.mkEnableOption "Enables Emacs";
   };
 
   # Configure Emacs if it's enabled
-  config = lib.mkIf config.emacs.enable {
+  config = lib.mkIf config.enableEmacs {
     programs.emacs = {
       enable = true;
       package = pkgs.emacs;

@@ -1,11 +1,11 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, ... }: {
   # Module options
   options = {
-    waybar.enable = lib.mkEnableOption true;
+    enableWaybar = lib.mkEnableOption true;
   };
 
   # Configure Waybar if it's enabled
-  config = lib.mkIf config.waybar.enable {
+  config = lib.mkIf config.enableWaybar {
     # Don't let Stylix style Waybar
     stylix.targets.waybar.enable = false;
 

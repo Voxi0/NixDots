@@ -1,16 +1,16 @@
 { lib, config, inputs, pkgs, ... }: {
+  # Import Nix modules
+  imports = [
+    inputs.ags.homeManagerModules.default
+  ];
+
   # Module options
   options = {
-    ags.enable = lib.mkEnableOption "Enables AGS";
+    enableAGS = lib.mkEnableOption "Enables AGS";
   };
 
   # Configure AGS if it's enabled
-  config = lib.mkIf config.ags.enable {
-    # Import Nix modules
-    imports = [
-      inputs.ags.homeManagerModules.default
-    ];
-
+  config = lib.mkIf config.enableAGS {
     # AGS configuration
     programs.ags = {
       enable = true;
@@ -19,7 +19,9 @@
       # Additional packages to add to GJS's runtime
       extraPackages = with pkgs; [
         gtksourceview webkitgtk accountsservice
-      ];
+      ] ++ (with inputs.ags.packages.${pkgs.system}; [
+        hyprland battery
+      ]);
     };
   };
 }

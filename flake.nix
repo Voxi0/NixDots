@@ -30,7 +30,6 @@
   outputs = { self, nixpkgs, ... }@inputs: let
     system = "x86_64-linux";
     username = "voxi0";
-    pkgs = nixpkgs.legacyPackages.${system};
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
       inherit nixpkgs system hostname username inputs;
     };
