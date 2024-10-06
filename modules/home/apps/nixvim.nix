@@ -78,6 +78,10 @@
         # Clipboard
         clipboard = "unnamedplus";
 
+        # Spell checking
+        spelllang = "en_us";
+        spell = true;
+
         # Set file encoding
         encoding = "utf-8";
         fileencoding = "utf-8";
