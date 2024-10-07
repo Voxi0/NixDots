@@ -1,11 +1,11 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, ... }: {
   # Module options
   options = {
-    mako.enable = lib.mkEnableOption true;
+    enableMako = lib.mkEnableOption true;
   };
 
   # Configure Mako if it's enabled
-  config = lib.mkIf config.mako.enable {
+  config = lib.mkIf config.enableMako {
     # Mako donfiguration
     services.mako = {
       # Enable/Disable Mako

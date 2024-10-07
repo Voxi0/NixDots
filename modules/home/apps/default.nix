@@ -5,12 +5,12 @@
   ];
 
   # Enable all applications by default
-  zsh.enable = lib.mkDefault true;
-  kitty.enable = lib.mkDefault true;
-  neovim.enable = lib.mkDefault true;
-  emacs.enable = lib.mkDefault true;
-  firefox.enable = lib.mkDefault true;
-  git.enable = lib.mkDefault true;
-  vscode.enable = lib.mkDefault true;
-  vesktop.enable = lib.mkDefault true;
+  enableZSH = lib.mkDefault true;
+  enableKitty = lib.mkDefault true;
+  enableNeovim = lib.mkDefault true;
+  enableEmacs = lib.mkDefault true;
+  enableVSCode = lib.mkDefault true;
+  enableFirefox = lib.mkDefault true;
+  enableGit = lib.mkDefault true;
+  enableVesktop = lib.mkDefault true;
 }

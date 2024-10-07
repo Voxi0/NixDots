@@ -1,8 +1,8 @@
 { pkgs, lib, config, ... }: {
   # Module options
   options = {
-    zsh.enable = lib.mkEnableOption "Enables ZSH";
-    kitty.enable = lib.mkEnableOption "Enables Kitty";
+    enableZSH = lib.mkEnableOption "Enables ZSH";
+    enableKitty = lib.mkEnableOption "Enables Kitty";
   };
 
   config = {
@@ -21,14 +21,14 @@
     # Install ZSH packages
     home.packages = with pkgs; [
       lsd lf btop
-    ] ++ (if config.zsh.enable then
+    ] ++ (if config.enableZSH then
       (with pkgs; [
         oh-my-zsh thefuck fzf
       ])
     else []);
 
     # ZSH configuration
-    programs.zsh = lib.mkIf config.zsh.enable {
+    programs.zsh = lib.mkIf config.enableZSH {
       enable = true;
       enableCompletion = true;
       autosuggestion.enable = true;
@@ -46,7 +46,7 @@
     };
 
     # Kitty terminal configuration
-    programs.kitty = lib.mkIf config.kitty.enable {
+    programs.kitty = lib.mkIf config.enableKitty {
       enable = true;
       settings = {
         # Disable popup confirmation window when closing Kitty terminal

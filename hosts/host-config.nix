@@ -5,7 +5,6 @@
   specialArgs = { inherit inputs username; };
   modules = [
     ./${hostname}/configuration.nix
-    inputs.stylix.nixosModules.stylix
     inputs.home-manager.nixosModules.home-manager {
       home-manager = {
         useUserPackages = true;
@@ -15,7 +14,6 @@
           # Import Home Manager modules
           imports = [
             ./${hostname}/home.nix
-            inputs.nixvim.homeManagerModules.nixvim
           ];
 
           # User information

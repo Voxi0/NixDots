@@ -1,11 +1,12 @@
 { lib, ... }: {
   # Import Nix modules
   imports = [
-    ./wofi ./waybar.nix ./mako.nix
+    ./wofi ./ags ./waybar.nix ./mako.nix
   ];
 
   # Enable all applications by default
-  wofi.enable = lib.mkDefault true;
-  waybar.enable = lib.mkDefault true;
-  mako.enable = lib.mkDefault true;
+  enableWofi = lib.mkDefault true;
+  enableAGS = lib.mkDefault true;
+  enableWaybar = lib.mkDefault true;
+  enableMako = lib.mkDefault true;
 }

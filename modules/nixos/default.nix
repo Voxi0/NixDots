@@ -1,4 +1,4 @@
-_: {
+{ lib, ... }: {
   imports = [
     ./system.nix
     ./services.nix
@@ -8,4 +8,7 @@ _: {
     ./networking.nix
     ./programs.nix
   ];
+
+  # Default options
+  enableStylix = lib.mkDefault true;
 }

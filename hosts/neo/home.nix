@@ -55,6 +55,6 @@
   };
 
   # Enable/Disable applications
-  vscode.enable = false;
-  emacs.enable = false;
+  enableVSCode = false;
+  enableEmacs = false;
 }

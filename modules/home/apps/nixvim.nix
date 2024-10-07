@@ -1,10 +1,20 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, inputs, pkgs, ... }: {
+  # Import Nix modules
+  imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+  ];
+
   # Module options
-  options.neovim.enable = lib.mkEnableOption "Enables Neovim";
+  options = {
+    enableNeovim = lib.mkEnableOption "Enables Neovim"; 
+  };
 
   # Configure Neovim if it's enabled
-  config = lib.mkIf config.neovim.enable {
+  config = lib.mkIf config.enableNeovim {
+    # Don't let Stylix theme Nixvim - We will do it manually
     stylix.targets.nixvim.enable = false;
+
+    # Nixvim configuration
     programs.nixvim = {
       enable = true;
       defaultEditor = true;
@@ -67,6 +77,10 @@
 
         # Clipboard
         clipboard = "unnamedplus";
+
+        # Spell checking
+        spelllang = "en_us";
+        spell = true;
 
         # Set file encoding
         encoding = "utf-8";
