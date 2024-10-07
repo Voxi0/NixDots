@@ -6,21 +6,21 @@
   };
 
   config = {
-    # Shell aliases to make it faster to type frequently used commands
-    # Set regardless of whether ZSH is enabled or not
+    # Home
     home.shellAliases = {
-      "ls" = "lsd";
-      "ll" = "lsd -l";
-      "la" = "lsd -a";
-      "lla" = "lsd -al";
-      "update-switch" = "sudo nixos-rebuild switch";
-      "update-boot" = "sudo nixos-rebuild boot";
-      "clean" = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+      "ls" = "eza";
+      "ll" = "eza -l";
+      "la" = "eza --all";
+      "lla" = "eza --all -l";
+      "update-switch" = "nh os switch -H";
+      "update-boot" = "nh os boot -H";
+      "update-test" = "nh os test -H";
+      "clean" = "nh clean all";
     };
 
     # Install ZSH packages
     home.packages = with pkgs; [
-      lsd lf btop
+      nh lf btop
     ] ++ (if config.enableZSH then
       (with pkgs; [
         oh-my-zsh thefuck fzf
@@ -67,6 +67,16 @@
         enable_audio_bell = true;
         window_alert_on_bell = true;
       };
+    };
+
+    # Eza - A modern alternative to 'ls'
+    programs.eza = {
+      enable = true;
+      icons = true;
+      git = true;
+      extraOptions = [
+        "--colour=always"
+      ];
     };
 
     # Fetch script configurations
