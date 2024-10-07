@@ -19,6 +19,7 @@ in pkgs.mkShellNoCC {
     # Move NixDots to the new system
     echo "Installing NixDots to new system..."
     sudo mkdir -p /mnt/etc/nixos
+    rm -rf ./hardware-configuration.nix
     if ! sudo cp -r ./* /mnt/etc/nixos/; then
       echo "Failed to install NixDots"; exit 1;
     fi
