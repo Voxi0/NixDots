@@ -1,15 +1,5 @@
 { pkgs ? import <nixpkgs> {} }: let
   diskoConfig = ./disko.nix;
-  chrootCommands = ''
-    # Set the password for the default user - Default username is mine of course :P
-    passwd voxi0
-
-    # Change the owner of '/etc/nixos' from root to the default user
-    chown voxi0 /etc/nixos
-
-    # Exit chroot
-    exit
-  '';
 in pkgs.mkShellNoCC {
   shellHook = ''
     # Partition, format and mount disks using Disko - Disk configurations are defined in the 'disko.nix' file
@@ -23,17 +13,28 @@ in pkgs.mkShellNoCC {
       echo "Failed to install NixDots"; exit 1;
     fi
 
+    # Generate 'hardware-configuration.nix' for the new system
+    if ! sudo nixos-generate-config --root /mnt; then
+      echo "Failed to generate 'hardware-configuration.nix' for new system"; exit 1;
+    fi
+    sudo rm -rf /mnt/etc/nixos/configuration.nix
+
     # Install NixOS
     echo "Installing NixOS..."
-    if ! sudo nixos-install --flake /mnt/etc/nixos/#neo; then
+    if ! sudo nixos-install --no-root-passwd --no-channel-copy --flake /mnt/etc/nixos/#neo; then
       echo "NixOS installation failed"; exit 1;
     fi
 
     # Chroot into the new installation to run extra commands
     echo "Entering chroot environment..."
-    if ! sudo nixos-enter --command "bash ${chrootCommands}"; then
-      echo "Failed to enter chroot environment"
+    if ! sudo nixos-enter --command; then
+      echo "Failed to enter chroot environment"; exit 1;
     fi
+
+    # Chroot commands
+    passwd voxi0
+    chown voxi0 /etc/nixos
+    exit
 
     # Installation complete
     echo "Installation complete! The system will power off now."
