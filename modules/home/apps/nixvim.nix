@@ -191,19 +191,7 @@
             nixd.enable = true;     # Nix
             clangd.enable = true;   # C/C++
             html.enable = true;     # HTML
-            ts-ls.enable = true;    # Typescript
-          };
-        };
-
-        # A pretty Diagnostics, references, telescope results, quickfix and location list
-        trouble = {
-          enable = true;
-          settings = {
-            mode = "workspace_diagnostics";
-            position = "bottom";
-            icons = false;
-            indent_lines = true;
-            auto_close = true;              # Auto close if there's no diagnostics
+            ts_ls.enable = true;    # Typescript
           };
         };
 
