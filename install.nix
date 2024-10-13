@@ -33,9 +33,11 @@ in pkgs.mkShellNoCC {
 
     # Chroot into the new installation to run extra commands
     echo "Entering chroot environment..."
-    if ! sudo nixos-enter --command ./chrootCommands.sh; then
+    sudo cp ./chrootCommands.sh /mnt/
+    if ! sudo nixos-enter -- bash -c './chrootCommands.sh'; then
       echo "Failed to enter chroot environment"; exit 1;
     fi
+    sudo rm /mnt/chrootCommands.sh
 
     # Installation complete
     echo "Installation complete! The system will power off now."
