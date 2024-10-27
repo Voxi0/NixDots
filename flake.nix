@@ -22,9 +22,9 @@
     # AGS - Widget library
     ags.url = "github:aylur/ags/v2";
 
-    # Nixvim - Makes it very easy to customize Neovim using Nix
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    # NVF
+    nvf = {
+      url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
