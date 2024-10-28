@@ -72,7 +72,7 @@
     # Eza - A modern alternative to 'ls'
     programs.eza = {
       enable = true;
-      icons = true;
+      icons = "auto";
       git = true;
       extraOptions = [
         "--colour=always"
