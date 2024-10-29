@@ -11,6 +11,12 @@
 
   # Configure Neovim if it's enabled
   config = lib.mkIf config.enableNeovim {
+    # Extra packages required
+    home.packages = with pkgs; [
+      wl-clipboard ripgrep
+    ];
+
+    # NVF configuration
     programs.nvf = {
       enable = true;
       settings.vim = {
@@ -24,22 +30,45 @@
         # Enable experimental Lua module loader to speed up the start process
         enableLuaLoader = true;
 
-        # Extra packages to install
-        extraPackages = with pkgs; [ wl-clipboard ripgrep ];
-
         # General
         leaderKey = " ";
         lineNumberMode = "number";
         spellcheck.enable = true;
         colourTerm = true;
+        updateTime = 100;
+        preventJunkFiles = true;                # Prevent swapfile and backupfile from being created
         useSystemClipboard = true;              # Required to copy text from Neovim and paste it somewhere else and vice versa
         wordWrap = false;                       # Don't let any text wrap around the screen
-        disableArrows = true;                   # Prevent arrow keys from moving the cursor
+        disableArrows = false;                  # Prevent arrow keys from moving the cursor
         visuals = {
-          fidget-nvim.enable = true;            # Extensible UI for Neovim notifications and LSP progress messages.
+          enable = true;
           nvimWebDevicons.enable = true;        # Icons
           scrollBar.enable = true;              # Scrollbar and smooth scrolling
           smoothScroll.enable = true;
+          indentBlankline.enable = true;
+          cellularAutomaton = {
+            enable = true;
+            mappings.makeItRain = "<leader>mir";
+          };
+        };
+
+        # Lua
+        options = {
+          # Indentation
+          "smartindent" = false;
+          "expandtab" = true;                   # Use spaces for indentation
+
+          # Code folding
+          "foldmethod" = "expr";
+          "foldexpr" = "nvim_ufo#foldexpr()";
+          "foldcolumn" = "0";
+          "foldlevel" = 99;
+          "foldlevelstart" = 99;
+          "foldenable" = true;
+
+          # File encoding
+					"encoding" = "utf-8";
+					"fileencoding" = "utf-8";
         };
 
         # Keybinds
@@ -51,6 +80,10 @@
               silent = true;
               action = "<cmd>LazyGit<CR>";
             };
+
+            # Nvim UFO
+            "zR".action = "require('ufo').openAllFolds";
+            "zM".action = "require('ufo').closeAllFolds";
           };
         };
 
@@ -63,8 +96,12 @@
         };
 
         # UI
+        notify.nvim-notify.enable = true;
         ui = {
           noice.enable = true;
+          breadcrumbs.enable = true;
+          colorizer.enable = true;
+          fastaction.enable = true;
         };
 
         # Statusline
@@ -94,6 +131,7 @@
 
           lightbulb.enable = true;        # Show code suggestions
           lspSignature.enable = true;     # Shows function signature when you type
+          lsplines.enable = true;         # Show LSP diagnostics using virtual lines on top of the real line of code
 
           # VSCode like pictograms for Neovim LSP
           lspkind = {
@@ -103,47 +141,16 @@
 
           # Keybinds
           mappings = {
-            # Basics
             hover = "<leader>k";
             codeAction = "<leader>ca";
             format = "<leader>cf";
-            toggleFormatOnSave = "<leader>ltf";
-
-            # Diagnostics
-            nextDiagnostic = "<leader>lgn";
-            previousDiagnostic = "<leader>lgp";
-            openDiagnosticFloat = "<leader>le";
-
-            # Don't understand lol
-            renameSymbol = "<leader>ln";
-            signatureHelp = "<leader>ls";
-            goToDeclaration = "<leader>lgD";
-            goToDefinition = "<leader>lgd";
-            goToType = "<leader>lgt";
-            listDocumentSymbols = "<leader>lS";
-            listImplementations = "<leader>lgi";
-            listReferences = "<leader>lgr";
-            listWorkspaceFolders = "<leader>lwl";
-            listWorkspaceSymbols = "<leader>lws";
-          };
-
-          # Trouble diagnostics viewer
-          trouble = {
-            enable = true;
-            mappings = {
-              toggle = "<leader>xx";
-              documentDiagnostics = "<leader>ld";
-              workspaceDiagnostics = "<leader>lwd";
-              lspReferences = "<leader>lr";
-              quickfix = "<leader>xq";
-              locList = "<leader>xl";
-            };
           };
         };
 
         # File explorer
         filetree.nvimTree = {
           enable = true;
+          openOnSetup = false;
           mappings.toggle = "<C-n>";            # Toggle file explorer with Control + N
           setupOpts = {
             # Disable the default Neovim file explorer
@@ -157,6 +164,8 @@
 
             # Close file explorer upon opening a file and any window displaying a file when removing the file from the tree
             actions = {
+              change_dir.enable = true;
+              change_dir.global = false;
               use_system_clipboard = true;      # Use the system clipboard when copy/paste functions are invoked
               open_file.quit_on_open = true;    # Close file explorer upon opening a file
               remove_file.close_window = true;  # Close any window displaying a file when it's removed from the file tree
@@ -172,6 +181,7 @@
             filters = {
               dotfiles = false;                 # Show files starting with a fullstop
               git_ignored = true;               # Ignore files based on '.gitignore'
+              exclude = [ ];
             };
 
             # Git integration
@@ -276,11 +286,9 @@
             helpTags = "<leader>fh";
             liveGrep = "<leader>fg";
           };
-          setupOpts = {
-            defaults = {
-              color_devicons = true;
-              initial_mode = "normal";
-            };
+          setupOpts.defaults = {
+            color_devicons = true;
+            initial_mode = "normal";
           };
         };
 
@@ -290,7 +298,7 @@
           setupOpts = {
             logo = "auto";
             logo_tooltip = "The One True Text Editor";
-            main_image = "logo";
+            main_image = "language";
             show_time = true;
             auto_update = true;
             enable_line_number = false;
@@ -315,33 +323,18 @@
             enable = true;                          # Enable image support in Neovim
             setupOpts.backend = "kitty";            # "ueberzug" for other terminals than Kitty
           };
-          preview.markdownPreview = {
-            enable = true;
-            alwaysAllowPreview = true;
-            autoStart = true;
-            autoClose = true;
-            filetypes = [ "markdown" ];
-            lazyRefresh = true;
-          };
         };
         
         # Extra plugins
         extraPlugins = with pkgs.vimPlugins; {
           plenary.package = plenary-nvim;           # Required for some reason
-          barbar.package = barbar-nvim;             # Tabline
           lazygit.package = lazygit-nvim;           # TUI for Git
+          barbar.package = barbar-nvim;             # Tabline
 
           # Code folding
           nvim-ufo = {
             package = nvim-ufo;
-            setup = "
-              -- Keybinds
-              vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-              vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-
-              -- Setup Nvim UFO
-              require('ufo').setup()
-            ";
+            setup = "require('ufo').setup()";
           };
         };
       };
