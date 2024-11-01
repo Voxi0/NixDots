@@ -55,5 +55,4 @@
   };
 
   # Enable/Disable applications
-  enableEmacs = false;
 }

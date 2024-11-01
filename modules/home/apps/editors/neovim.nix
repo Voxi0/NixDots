@@ -256,6 +256,7 @@
           css.enable = true;
           ts.enable = true;
           markdown.enable = true;
+          lua.enable = true;
         };
 
         # Telescope
