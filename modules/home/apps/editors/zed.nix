@@ -9,7 +9,7 @@
     programs.zed-editor = {
       enable = true;
       package = pkgs.zed-editor;
-      extensions = [ "Nix" "NeoCMake" "GLSL" "GDScript" "Lua" "HTML" "LiveServer" "Assembly Syntax" ];
+      extensions = [ "nix" "neocmake" "glsl" "gdscript" "lua" "HTML" "live-server" "assembly" ];
       userSettings = {
         features.copilot = false;
         telemetry.metrics = false;
@@ -19,6 +19,7 @@
         ui_font_size = 16;
         buffer_font_size = 16;
       };
+      userKeymaps = {};
     };
   };
 }

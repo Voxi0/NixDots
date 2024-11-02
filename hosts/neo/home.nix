@@ -55,4 +55,6 @@
   };
 
   # Enable/Disable applications
+  enableEmacs = false;
+  enableVSCode = false;
 }

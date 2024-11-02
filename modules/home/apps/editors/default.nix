@@ -1,4 +1,4 @@
-_: {
+{ lib, ... }: {
   # Import Nix modules
   imports = [
     ./neovim.nix ./zed.nix ./vscode.nix ./emacs.nix
