@@ -25,12 +25,18 @@ window.Bar {
     }
 
     // Custom widgets
-    .Workspaces .focused label {
-        color: $accent;
-        border-color: $accent;
+    .Workspaces {
+        background-color: $bg;
+        border: 1px solid transparent;
+        border-radius: $borderRadius;
+        padding: 0px 8px;
+        margin: 2px;
+        .focused label {
+            color: $accent;
+            border-color: $accent;
+        }
     }
-    .Battery label {
-        padding-left: 0px;
-        margin-left: 0px;
+    .Time {
+        background-color: $bg;
     }
 }

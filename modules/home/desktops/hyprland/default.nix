@@ -22,7 +22,10 @@
   # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
-    plugins = [ ];
+		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+			hyprbars
+		];
     extraConfig = ''
       ${builtins.readFile ./hyprland.conf}
     '';

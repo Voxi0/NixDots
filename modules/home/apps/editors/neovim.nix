@@ -56,7 +56,7 @@
         options = {
           # Indentation
           "smartindent" = false;
-          "expandtab" = true;                   # Use spaces for indentation
+          "expandtab" = false;                  # Use spaces for indentation
 
           # Code folding
           "foldmethod" = "expr";

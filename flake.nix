@@ -16,6 +16,13 @@
     # System-wide colorscheming and typography
     stylix.url = "github:danth/stylix";
 
+		# Hyprland
+		hyprland.url = "github:hyprwm/Hyprland";
+		hyprland-plugins = {
+			url = "github:hyprwm/hyprland-plugins";
+			inputs.hyprland.follows = "hyprland";
+		};
+
     # Efficient animated wallpaper daemon for wayland, controlled at runtime
     swww.url = "github:LGFae/swww";
 

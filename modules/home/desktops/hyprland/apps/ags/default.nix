@@ -14,13 +14,13 @@
     # AGS configuration
     programs.ags = {
       enable = true;
-      configDir = ./dotfiles; # Leave as "null" if you don't want Home Manager to manage AGS dotfiles
+      configDir = null; # Leave as "null" if you don't want Home Manager to manage AGS dotfiles
 
       # Additional packages to add to GJS's runtime
       extraPackages = with pkgs; [
         gtksourceview webkitgtk accountsservice
       ] ++ (with inputs.ags.packages.${pkgs.system}; [
-        hyprland battery
+        hyprland battery tray
       ]);
     };
   };
