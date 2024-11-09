@@ -11,6 +11,8 @@
 
   # Configure AGS if it's enabled
   config = lib.mkIf config.enableAGS {
+		home.packages = [ pkgs.sassc ];
+
     # AGS configuration
     programs.ags = {
       enable = true;

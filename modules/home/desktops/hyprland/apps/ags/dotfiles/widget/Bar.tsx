@@ -20,25 +20,27 @@ function Workspaces() {
       .sort((a, b) => a.id - b.id)
       .map(ws => (
         <button
-          className = {bind(hypr, "focusedWorkspace").as(fw =>
-            ws === fw ? "focused" : "")}
-          onClicked = {() => ws.focus()}>
-          {ws.id}
+        className = {bind(hypr, "focusedWorkspace").as(fw =>
+          ws === fw ? "focused" : "")}
+        onClicked = {() => ws.focus()}>
+        {ws.id}
         </button>
       ))
     )}
   </box>
 }
 
-function Time({ format = "%H:%M" }) {
+function Time({format}) {
   const time = Variable<string>("").poll(1000, () =>
     GLib.DateTime.new_now_local().format(format)!)
 
-  return <label
+  return <button
+  onDestroy = {() => time.drop()}>
+    <label
     className = "Time"
-    onDestroy = {() => time.drop()}
     label = {time()}
-  />
+    />
+  </button>
 }
 
 export default function Bar(monitor: Gdk.Monitor) {
@@ -56,7 +58,7 @@ export default function Bar(monitor: Gdk.Monitor) {
       </box>
       <box hexpand halign = {Gtk.Align.END} >
         <BatteryLevel/>
-        <Time/>
+        <Time format = "%I:%M"/>
       </box>
     </centerbox>
   </window>
