@@ -36,6 +36,7 @@ _: {
   security = {
     polkit.enable = true;
     rtkit.enable = true;      # Optional but recommended
+		pam.services.hyprlock = {};
   };
 
   # Systemwide packages - Available to all users

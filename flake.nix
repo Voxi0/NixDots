@@ -22,10 +22,6 @@
 			url = "github:hyprwm/hyprland-plugins";
 			inputs.hyprland.follows = "hyprland";   # Sync with latest Hyprland version
 		};
-		Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      inputs.hyprland.follows = "hyprland";		# Sync with latest Hyprland version
-    };
 
     # Efficient animated wallpaper daemon for wayland, controlled at runtime
     swww.url = "github:LGFae/swww";

@@ -10,7 +10,7 @@
     inputs.swww.packages.${pkgs.system}.swww qt6Packages.qt6ct libnotify
 
     # Utilities
-    pamixer brightnessctl grim slurp feh udiskie
+    pamixer brightnessctl grim slurp feh udiskie hyprshade
   ];
 
   # Stop Stylix from using Hyprpaper to set the wallpaper - We want to use SWWW for wallpapers instead
@@ -23,14 +23,23 @@
   wayland.windowManager.hyprland = {
     enable = true;
 		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    plugins = [
-			inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-			inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+			hyprbars
 		];
     extraConfig = ''
       ${builtins.readFile ./hyprland.conf}
     '';
   };
+
+	# Hyprlock
+	programs.hyprlock = {
+		enable = true;
+		settings = {
+			background = [{
+				path = "~/Pictures/Wallpapers/lain.jpg";
+			}];
+		};
+	};
 
   # Session Environment Variables
   home.sessionVariables = {
