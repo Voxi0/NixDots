@@ -8,10 +8,13 @@
   config = {
     # Home
     home.shellAliases = {
+			"ff" = "fastfetch";
+
       "ls" = "eza";
       "ll" = "eza -l";
       "la" = "eza --all";
       "lla" = "eza --all -l";
+
       "update-switch" = "nh os switch -H";
       "update-boot" = "nh os boot -H";
       "update-test" = "nh os test -H";

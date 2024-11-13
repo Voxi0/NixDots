@@ -22,7 +22,7 @@
       extraPackages = with pkgs; [
         gtksourceview webkitgtk accountsservice
       ] ++ (with inputs.ags.packages.${pkgs.system}; [
-        hyprland battery tray
+        hyprland powerprofiles battery network wireplumber mpris notifd bluetooth tray
       ]);
     };
   };

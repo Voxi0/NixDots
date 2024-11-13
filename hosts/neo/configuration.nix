@@ -17,4 +17,7 @@
 
   # Boot - Use the Liquorix kernel. Suggested by a friend
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_lqx;
+
+	# Replace existing files rather than exit with an error
+	home-manager.backupFileExtension = "backup";
 }
