@@ -21,7 +21,7 @@ in pkgs.mkShellNoCC {
     fi
 
     # Generate 'hardware-configuration.nix' for the new system
-    if ! sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix --root /mnt; then
+    if ! sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix --no-filesystems --root /mnt; then
       echo "Failed to generate 'hardware-configuration.nix' for new system"; exit 1;
     fi
 

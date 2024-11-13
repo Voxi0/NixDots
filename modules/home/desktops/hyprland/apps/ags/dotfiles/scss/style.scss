@@ -1,18 +1,17 @@
-$bg: #000000;
-$fg: #FFFFFF;
-$borderRadius: 4px;
+$bg: rgb(0, 0, 0);
+$fg: rgb(255, 255, 255);
+$borderRadius: 6px;
 
 // Bar widget
 window.Bar {
     background-color: transparent;
     color: $fg;
     font-size: 16px;
-    font-weight: normal;
 
     // Bar elements
     button {all: unset;}
+    box {border-radius: $borderRadius;}
     label {
-        border: 1px solid transparent;
         border-radius: $borderRadius;
         padding: 0px 8px;
         margin: 2px;
@@ -21,7 +20,6 @@ window.Bar {
     // Custom widgets
     .Workspaces, .Time {background-color: $bg;}
     .Workspaces {
-        border-radius: $borderRadius;
         margin: 2px;
         .focused label {
             background-color: $fg;

@@ -13,6 +13,7 @@ function BatteryLevel() {
   </box>
 }
 
+// Workspaces widget
 function Workspaces() {
   const hypr = Hyprland.get_default()
   return <box className = "Workspaces">
@@ -30,6 +31,7 @@ function Workspaces() {
   </box>
 }
 
+// Clock
 function Time({format}) {
   const time = Variable<string>("").poll(1000, () =>
     GLib.DateTime.new_now_local().format(format)!)
@@ -54,11 +56,12 @@ export default function Bar(monitor: Gdk.Monitor) {
       <box hexpand halign = {Gtk.Align.START}>
         <Workspaces/>
       </box>
+
       <box>
+        <Time format = "%I:%M %p"/>
       </box>
+
       <box hexpand halign = {Gtk.Align.END} >
-        <BatteryLevel/>
-        <Time format = "%I:%M"/>
       </box>
     </centerbox>
   </window>

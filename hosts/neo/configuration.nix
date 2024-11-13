@@ -2,6 +2,7 @@
   # Import Nix modules
   imports = [
     ./../../hardware-configuration.nix
+		(import ../../disko.nix { device = "/dev/sda"; })
     ./../../modules/nixos
   ];
 

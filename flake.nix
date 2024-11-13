@@ -7,6 +7,12 @@
     # Nix package repository to use
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+		# Disko
+		disko = {
+			url = "github:nix-community/disko";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
     # Manages user dotfiles
     home-manager = {
       url = "github:nix-community/home-manager";

@@ -1,20 +1,19 @@
 window.Bar {
   background-color: transparent;
-  color: #FFFFFF;
-  font-size: 16px;
-  font-weight: normal; }
+  color: white;
+  font-size: 16px; }
   window.Bar button {
     all: unset; }
+  window.Bar box {
+    border-radius: 4px; }
   window.Bar label {
-    border: 1px solid transparent;
     border-radius: 4px;
     padding: 0px 8px;
     margin: 2px; }
   window.Bar .Workspaces, window.Bar .Time {
-    background-color: #000000; }
+    background-color: black; }
   window.Bar .Workspaces {
-    border-radius: 4px;
     margin: 2px; }
     window.Bar .Workspaces .focused label {
-      background-color: #FFFFFF;
-      color: #000000; }
+      background-color: white;
+      color: black; }

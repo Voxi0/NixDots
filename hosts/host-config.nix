@@ -5,6 +5,7 @@
   specialArgs = { inherit inputs username; };
   modules = [
     ./${hostname}/configuration.nix
+		inputs.disko.nixosModules.default
     inputs.home-manager.nixosModules.home-manager {
       home-manager = {
         useUserPackages = true;
@@ -12,9 +13,7 @@
         extraSpecialArgs = { inherit inputs; };
         users."${username}" = {
           # Import Home Manager modules
-          imports = [
-            ./${hostname}/home.nix
-          ];
+          imports = [ ./${hostname}/home.nix ];
 
           # User information
           home = {
