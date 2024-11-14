@@ -1,6 +1,6 @@
 # Disko manages the all the drives when installing NixOS e.g. partitioning
 { device ? throw "Set this to your disk device e.g. '/dev/sda'", ... }: {
-  disko.devices.disk.main = {
+  disko.devices.disk = {
     # Primary disk config - Holds the system
     primary = {
       inherit device;
@@ -8,12 +8,7 @@
       content = {
         type = "gpt";
         partitions = {
-          # Boot partition - MUST BE FAT32
-					boot = {
-						name = "boot";
-						size = "1M";
-						type = "EF02";
-					};
+          # Boot partition
           esp = {
             type = "EF00";
             size = "500M";
@@ -21,15 +16,6 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-            };
-          };
-
-          # Swap partition - Just for safety
-          swap = {
-            size = "4G";
-            content = {
-              type = "swap";
-              resumeDevice = true;
             };
           };
 

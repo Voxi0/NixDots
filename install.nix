@@ -21,13 +21,13 @@ in pkgs.mkShellNoCC {
     fi
 
     # Generate 'hardware-configuration.nix' for the new system
-    if ! sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix --no-filesystems --root /mnt; then
+    if ! sudo nixos-generate-config --show-hardware-config --no-filesystems --root /mnt > hardware-configuration.nix; then
       echo "Failed to generate 'hardware-configuration.nix' for new system"; exit 1;
     fi
 
     # Install NixOS
     echo "Installing NixOS..."
-    if ! sudo nixos-install --no-root-passwd --no-channel-copy --flake /mnt/etc/nixos/#neo; then
+    if ! sudo nixos-install --no-channel-copy --flake /mnt/etc/nixos/#neo; then
       echo "NixOS installation failed"; exit 1;
     fi
 
