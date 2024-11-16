@@ -5,7 +5,7 @@ tremendously. Feel free to use my config however you like.
 ### Installing NixOS with NixDots
 Just run this command while booted into the NixOS live ISO to fetch NixDots and run the installer - <br>
 ``` sh
-nix-shell -p git --run "git clone https://github.com/Voxi0/NixDots.git" && nix-shell ./NixDots/install.nix
+nix-shell -p git --run "git clone https://github.com/Voxi0/NixDots.git" && cd NixDots && nix-shell ./install.nix
 ```
 
 ### Showcase
