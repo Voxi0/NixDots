@@ -1,4 +1,4 @@
-_: {
+{ pkgs, ... }: {
   # Hardware
   hardware = {
     graphics.enable = true;
@@ -8,12 +8,16 @@ _: {
   # Console
   console.keyMap = "uk";
 
-  # Bootloader
-  boot.loader = {
-    # EFI and SystemD boot
-    efi.canTouchEfiVariables = true;
-    systemd-boot.enable = true;
-  };
+  # Boot
+  boot = {
+		kernelPackages = pkgs.linuxKernel.packages.linux_lqx;		# Use the Liquorix kernel - Suggested by a friend
+		kernelModules = [ "acpi" ];
+		loader = {
+			# EFI and SystemD boot
+			efi.canTouchEfiVariables = true;
+			systemd-boot.enable = true;
+		};
+	};
 
   # Time zone and internationalisation properties
   time.timeZone = "Europe/London";

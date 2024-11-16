@@ -1,29 +1,35 @@
 $bg: rgb(0, 0, 0);
 $fg: rgb(255, 255, 255);
-$borderRadius: 6px;
+$borderRadius: 12px;
 
 // Bar widget
 window.Bar {
-    background-color: transparent;
-    color: $fg;
-    font-size: 16px;
+  background-color: transparent;
+  color: $fg;
+  font-size: 16px;
 
-    // Bar elements
-    button {all: unset;}
-    box {border-radius: $borderRadius;}
-    label {
-        border-radius: $borderRadius;
-        padding: 0px 8px;
-        margin: 2px;
-    }
+  // Bar elements
+  button {all: unset;}
+  box {border-radius: $borderRadius;}
+  label {
+    border-radius: $borderRadius;
+    padding: 0px 8px;
+    margin: 2px;
+  }
 
-    // Custom widgets
-    .Workspaces, .Time {background-color: $bg;}
-    .Workspaces {
-        margin: 2px;
-        .focused label {
-            background-color: $fg;
-            color: $bg;
-        }
+  // Custom widgets
+  .MainMenu, .Workspaces, .Time, .WiFi, .Battery, .SysTray {
+    background-color: $bg;
+    margin: 2px;
+  }
+  .MainMenu icon {padding: 0px 6px;}
+  .Workspaces {
+    .focused label {
+      background-color: $fg;
+      color: $bg;
     }
+  }
+  .WiFi icon {margin-left: 8px; margin-right: -8px;}
+  .Battery icon {margin-left: 8px; margin-right: -8px;}
+  .SysTray icon {margin: 0px 4px;}
 }

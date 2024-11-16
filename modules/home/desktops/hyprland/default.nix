@@ -7,7 +7,7 @@
   # Base packages
   home.packages = with pkgs; [
     # Base
-    inputs.swww.packages.${pkgs.system}.swww qt6Packages.qt6ct libnotify
+    hyprpolkitagent inputs.swww.packages.${pkgs.system}.swww libsForQt5.qt5.qtwayland kdePackages.qtwayland qt6Packages.qt6ct libnotify
 
     # Utilities
     pamixer brightnessctl grim slurp feh udiskie hyprshade
@@ -22,24 +22,16 @@
   # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
+		xwayland.enable = true;
+		systemd.enable = false;
 		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
 			hyprbars
 		];
     extraConfig = ''
       ${builtins.readFile ./hyprland.conf}
     '';
   };
-
-	# Hyprlock
-	programs.hyprlock = {
-		enable = true;
-		settings = {
-			background = [{
-				path = "~/Pictures/Wallpapers/lain.jpg";
-			}];
-		};
-	};
 
   # Session Environment Variables
   home.sessionVariables = {

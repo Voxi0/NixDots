@@ -1,6 +1,13 @@
 { pkgs, ... }: {
   # Services
   services = {
+		# DBus
+		dbus.enable = true;
+
+		# Power
+		upower.enable = true;
+		acpid.enable = true;
+
     # Touchpad support
     libinput.enable = true;
 

@@ -10,6 +10,18 @@
 
     zsh.enable = true;      # Required to set ZSH as the default shell for the user
 
+		# Universal wayland session manager
+		uwsm = {
+			enable = true;
+			waylandCompositors = {
+				hyprland = {
+					prettyName = "Hyprland";
+					comment = "Hyprland managed by UWSM.";
+					binPath = "/run/current-system/sw/bin/Hyprland";
+				};
+			};
+		};
+
 		# Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
 		hyprland = {
 			enable = true;

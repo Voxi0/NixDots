@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{ systemDisk, ... }: {
   # Import Nix modules
   imports = [
     ./../../hardware-configuration.nix
-		(import ../../disko.nix { device = "/dev/sda"; })
+		(import ../../disko.nix { device = systemDisk; })
     ./../../modules/nixos
   ];
 
@@ -15,9 +15,6 @@
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
-
-  # Boot - Use the Liquorix kernel. Suggested by a friend
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_lqx;
 
 	# Replace existing files rather than exit with an error
 	home-manager.backupFileExtension = "backup";

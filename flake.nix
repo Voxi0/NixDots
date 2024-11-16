@@ -1,6 +1,6 @@
 {
   # Flake description
-  description = "Voxi0's NixOS Flake";
+  description = "NixDots";
 
   # Flake dependencies
   inputs = {
@@ -33,9 +33,9 @@
     swww.url = "github:LGFae/swww";
 
     # AGS - Widget library
-    ags.url = "github:aylur/ags/v2";
+		ags.url = "github:aylur/ags";
 
-    # NVF
+    # NVF - Neovim distro
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,11 +43,12 @@
   };
 
   # Flake outputs/actions - What to do after fetching all dependencies
-  outputs = { self, nixpkgs, ... }@inputs: let
+  outputs = { nixpkgs, ... }@inputs: let
     system = "x86_64-linux";
+		systemDisk = "/dev/sda";
     username = "voxi0";
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
-      inherit nixpkgs system hostname username inputs;
+      inherit nixpkgs system systemDisk hostname username inputs;
     };
   in {
     # NixOS configurations
