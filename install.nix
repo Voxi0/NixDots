@@ -8,30 +8,44 @@ in pkgs.mkShellNoCC {
       echo "This isn't NixOS or the distro info isn't available"; exit 1;
     fi
 
-		# Set some stuff
+		# Set username
 		while [[ -z "$username" ]]; do
 			read -p "Enter username (Cannot be empty): " username
 		done
-		sed -i "s/voxi0/$username/g" ./NixDots/flake.nix
+		sed -i "s/voxi0/$username/g" ./flake.nix ./chrootCommands.sh
 
 		# List available disks
 		echo "Listing available disks..."
 		disks=$(lsblk -d -o NAME,SIZE,MODEL | grep -v "loop" | grep -v "sr0")
 		echo "$disks"
 
-		# Prompt for disk selection
+		# Prompt the user to choose the disk to install NixOS/NixDots to
 		read -p "Enter the name of the disk to install NixDots to (e.g., /dev/sda): " installDisk
 
-		# Validate that the selected disk exists
-		if ! lsblk | grep -q "$installDisk"; then
-			echo "Error: The disk $installDisk does not exist. Exiting."
+		# Ensure the user entered the full path for the disk e.g. "/dev/sda", "/dev/sdb"
+		if [[ ! "$installDisk" =~ ^/dev/[^/]+$ ]]; then
+			echo "Error: The disk must be specified with the full path (e.g., /dev/sda, /dev/sdb). Exiting."
 			exit 1
 		fi
-		sed -i "s|/dev/sda|$installDisk|g" ./NixDots/flake.nix
+
+		# Validate that the selected disk exists and is a block device
+		if ! lsblk | grep -q "^$installDisk"; then
+			echo "Error: The disk $installDisk does not exist or is not a block device. Exiting."
+			exit 1
+		fi
+
+		# Ensure that the disk isn't a partition e.g. "/dev/sda1", "/dev/sdb1", etc.
+		if [[ "$installDisk" =~ [0-9]$ ]]; then
+			echo "Error: $installDisk appears to be a partition (e.g., /dev/sda1). Please select a whole disk (e.g., /dev/sda)."
+			exit 1
+		fi
+
+		# Set the install disk in the flake
+		sed -i "s|/dev/sda|$installDisk|g" ./flake.nix
 
     # Partition, format and mount disks using Disko - Disk configurations are defined in the 'disko.nix' file
     echo "Running Disko with the selected disk: $installDisk..."
-		sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko --device "$installDisk" "${diskoConfig}" || { echo "Disko failed"; exit 1; }
+    sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- -m disko --argstr device "$installDisk" "${diskoConfig}" || { echo "Disko failed"; exit 1; }
 
     # Move NixDots to the new system
     echo "Installing NixDots to new system..."
