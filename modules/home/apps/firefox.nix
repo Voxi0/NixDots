@@ -9,14 +9,16 @@
     # Firefox configuration
     programs.firefox = {
       enable = true;
+			package = pkgs.firefox;
       profiles = {
-        Voxi0 = {
+        "Voxi0" = {
           isDefault = true;
 
           # Browser settings
           settings = {
             "browser.fullscreen.autohide" = false;
             "ui.key.menuAccessKeyFocuses" = false;
+						"toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           };
 
           # Bookmarks - Add "tags" and "keyword" if necessary
@@ -27,22 +29,10 @@
               url = "https://github.com/nebunebu/nix-config";
             }
 
-            # Arch Linux maintenance guide
-            {
-              name = "How to Clean Arch Linux - Arch Maintenance";
-              url = "https://averagelinuxuser.com/clean-arch-linux/";
-            }
-
             # OSDev stuff
             {
               name = "BrokenThorn Entertainment";
               url = "http://www.brokenthorn.com/Resources/OSDevIndex.html";
-            }
-
-            # Fedora Workstation 40 - Post-Install guide
-            {
-              name = "Fedora 40 - Post Install Guide";
-              url = "https://github.com/devangshekhawat/Fedora-40-Post-Install-Guide";
             }
           ];
 
@@ -67,6 +57,9 @@
 
           # User Chrome CSS
           userChrome = ''
+						#titlebar { 
+							display: none !important; 
+						}
           '';
         };
       };

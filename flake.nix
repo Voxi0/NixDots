@@ -40,6 +40,9 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+		# Declarative Vencord plugins + options
+		nixcord.url = "github:kaylorben/nixcord";
   };
 
   # Flake outputs/actions - What to do after fetching all dependencies

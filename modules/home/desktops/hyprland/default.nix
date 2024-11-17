@@ -7,10 +7,11 @@
   # Base packages
   home.packages = with pkgs; [
     # Base
-    hyprpolkitagent inputs.swww.packages.${pkgs.system}.swww libsForQt5.qt5.qtwayland kdePackages.qtwayland qt6Packages.qt6ct libnotify
+    hyprpolkitagent inputs.swww.packages.${pkgs.system}.swww libnotify
+		libsForQt5.qt5.qtwayland kdePackages.qtwayland qt6Packages.qt6ct
 
     # Utilities
-    pamixer brightnessctl grim slurp feh udiskie hyprshade
+    pamixer brightnessctl grim slurp feh udiskie hyprwall hyprshade
   ];
 
   # Stop Stylix from using Hyprpaper to set the wallpaper - We want to use SWWW for wallpapers instead
