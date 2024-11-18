@@ -6,7 +6,7 @@
 
   # Module options
   options = {
-		enableStylix = lib.mkEnableOption "Enables Stylix";
+    enableStylix = lib.mkEnableOption "Enables Stylix";
   };
 
   # Stylix - Manges theme and fonts

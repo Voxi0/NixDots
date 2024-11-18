@@ -2,7 +2,7 @@
   imports = [
     ./system.nix
     ./services.nix
-    ./catppuccin.nix ./stylix.nix
+    ./stylix.nix
     ./user.nix
     ./pipewire.nix
     ./networking.nix
@@ -11,5 +11,4 @@
 
   # Default options
   enableStylix = lib.mkDefault true;
-	enableCatppuccin = lib.mkDefault true;
 }

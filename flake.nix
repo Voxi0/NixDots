@@ -5,7 +5,7 @@
   # Flake dependencies
   inputs = {
     # Nix package repository to use
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
 		# Disko
 		disko = {
@@ -19,8 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # stylix.url = "github:danth/stylix";				# System-wide colorscheming and typography
-		catppuccin.url = "github:catppuccin/nix"; # Catppuccin theme for NixOS
+    # System-wide colorscheming and typography
+    stylix.url = "github:danth/stylix";
 
 		# Hyprland
 		hyprland.url = "github:hyprwm/Hyprland";

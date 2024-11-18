@@ -57,5 +57,4 @@
   # Enable/Disable applications
   enableEmacs = false;
   enableVSCode = false;
-	enableZed = false;
 }
