@@ -18,4 +18,7 @@
 
 	# Replace existing files rather than exit with an error
 	home-manager.backupFileExtension = "backup";
+
+	# Enable/Disable Nix modules
+	enableStylix = false;
 }
