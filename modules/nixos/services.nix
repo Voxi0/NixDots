@@ -1,4 +1,15 @@
 { pkgs, ... }: {
+	# System-wide installed packages
+	environment.systemPackages = with pkgs; [(
+		# SDDM theme
+		catppuccin-sddm.override {
+			flavor = "mocha";
+			font  = "JetBrainsMono Nerd Font";
+			fontSize = "12";
+			loginBackground = true;
+		}
+	)];
+
   # Services
   services = {
 		# DBus
@@ -14,6 +25,8 @@
     # Display/Login manager
     displayManager.sddm = {
       enable = true;
+			package = pkgs.kdePackages.sddm;
+			theme = "catppuccin-mocha";
       enableHidpi = true;
       autoNumlock = true;
     };
