@@ -10,7 +10,7 @@
 
   # Boot
   boot = {
-		kernelPackages = pkgs.linuxKernel.packages.linux_lqx;		# Use the Liquorix kernel - Suggested by a friend
+		kernelPackages = pkgs.linuxPackages_latest;
 		kernelModules = [ "acpi" ];
 		loader = {
 			# EFI and SystemD boot

@@ -14,21 +14,24 @@
 		programs.nixcord = {
 			enable = true;
 			discord = {
-				openASAR.enable = true;															# Makes discord faster and includes more features
-				vencord = {
-					enable = true;
-					package = pkgs.vencord;
-				};
+				enable = true;
+				package = pkgs.discord;
+				openASAR.enable = true;
+				vencord.enable = true;
 			};
+
 			# quickCss = "";
 			config = {
 				frameless = true;
 
 				# Use QuickCSS or an online theme
 				useQuickCss = false;
-				themeLinks = [];
+				themeLinks = [
+					"https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/flavors/midnight-catppuccin-mocha.theme.css"
+				];
+				enabledThemes = [];
 
-				# Plugins
+				# Vencord plugins
 				plugins = {
 					# Essentials
 					fakeNitro.enable = true;
@@ -73,9 +76,6 @@
 					webScreenShareFixes.enable = true;
 				};
 			};
-
-			# Extra JSON config
-			extraConfig = {};
 		};
   };
 }

@@ -1,7 +1,7 @@
 { lib, ... }: {
   # Import Nix modules
   imports = [
-    ./shell.nix ./editors ./firefox.nix ./git.nix ./nixcord.nix
+    ./shell.nix ./editors ./firefox ./git.nix ./nixcord.nix
   ];
 
   # Enable all applications by default
