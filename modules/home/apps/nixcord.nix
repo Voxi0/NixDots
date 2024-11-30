@@ -52,7 +52,6 @@
 					noTypingAnimation.enable = true;
 					onePingPerDM.enable = true;
 					messageLogger.enable = true;
-					messageLatency.enable = true;
 					callTimer.enable = true;
 					friendsSince.enable = true;
 					relationshipNotifier.enable = true;

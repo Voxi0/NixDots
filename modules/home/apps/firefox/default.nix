@@ -40,7 +40,7 @@
 				};
 
 				# User Chrome CSS
-				userChrome = ''${builtins.readFile "./userchrome.css"}'';
+				userChrome = ''${builtins.readFile ./userchrome.css}'';
       };
     };
   };

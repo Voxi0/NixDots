@@ -36,21 +36,14 @@
 
   # Session Environment Variables
   home.sessionVariables = {
-    # Required if Cursor Keeps Disappearing
-    # WLR_NO_HARDWARE_CURSORS = "1";
+    # Set to "1" if Cursor Keeps Disappearing
+    WLR_NO_HARDWARE_CURSORS = "0";
 
-    # Cursor Size
-    XCURSOR_SIZE = "24";
-
-    # GTK Config
+		# Use Wayland
     GTK_USE_PORTAL = "1";
-
-    # Tell Apps to Use Wayland
     XDG_SESSION_TYPE = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
-    # ANKI_WAYLAND = "1";
     GDK_BACKEND = "wayland";
     SDL_VIDEODRIVER = "wayland";
-    # CLUTTER_BACKEND = "wayland";
   };
 }
