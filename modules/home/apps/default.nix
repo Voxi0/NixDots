@@ -1,7 +1,7 @@
 { lib, ... }: {
   # Import Nix modules
   imports = [
-    ./shell.nix ./editors ./git.nix ./nixcord.nix ./browsers
+    ./shell.nix ./editors ./git.nix ./nixcord.nix ./browsers ./obsidian.nix
   ];
 
   # Enable all applications by default
@@ -9,4 +9,5 @@
   enableKitty = lib.mkDefault true;
   enableGit = lib.mkDefault true;
   enableNixcord = lib.mkDefault true;
+	enableObsidian = lib.mkDefault true;
 }

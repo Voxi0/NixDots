@@ -16,7 +16,9 @@
 				DefaultDownloadDirectory = "\${home}/Downloads";
 			};
 			profiles."NixDots" = {
-				extensions = [];
+				name = "NixDots";
+				id = 0;
+				isDefault = true;
 			};
 		};
 	};

@@ -1,12 +1,6 @@
 { lib, ... }: {
   imports = [
-    ./system.nix
-    ./services.nix
-    ./stylix.nix
-    ./user.nix
-    ./pipewire.nix
-    ./networking.nix
-    ./programs.nix
+    ./system.nix ./services.nix ./stylix.nix ./user.nix ./pipewire.nix ./networking.nix ./programs.nix
   ];
 
   # Default options
