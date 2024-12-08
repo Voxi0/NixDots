@@ -197,8 +197,7 @@
           };
         };
 
-        # Auto indent, autocompletion, automatically pair characters e.g. "()"
-        autoindent = true;
+        # Autocompletion, automatically pair characters e.g. "()"
         autopairs.nvim-autopairs.enable = true;
         autocomplete.nvim-cmp = {
           enable = true;
