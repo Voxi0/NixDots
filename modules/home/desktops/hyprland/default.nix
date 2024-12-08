@@ -14,6 +14,12 @@
     pamixer brightnessctl grim slurp feh udiskie hyprwall hyprshade
   ];
 
+  # Playerctl
+  services.playerctld = {
+    enable = true;
+    package = pkgs.playerctl;
+  };
+
   # Stop Stylix from using Hyprpaper to set the wallpaper - We want to use SWWW for wallpapers instead
   stylix.targets = {
     hyprland.enable = false;  # Must be disabled in order to disable Hyprpaper without any conflicts
@@ -30,7 +36,13 @@
 			hyprbars
 		];
     extraConfig = ''
-      ${builtins.readDir ./conf}
+      ${builtins.readFile ./conf/hyprland.conf}
+      ${builtins.readFile ./conf/autostart.conf}
+      ${builtins.readFile ./conf/input.conf}
+      ${builtins.readFile ./conf/windows.conf}
+      ${builtins.readFile ./conf/looks.conf}
+      ${builtins.readFile ./conf/binds.conf}
+      ${builtins.readFile ./conf/plugins.conf}
     '';
   };
 
