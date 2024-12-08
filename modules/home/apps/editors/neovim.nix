@@ -31,22 +31,27 @@
         enableLuaLoader = true;
 
         # General
-        leaderKey = " ";
+        globals.mapleader = " ";
         lineNumberMode = "number";
         spellcheck.enable = true;
-        colourTerm = true;
-        updateTime = 100;
         preventJunkFiles = true;                # Prevent swapfile and backupfile from being created
         useSystemClipboard = true;              # Required to copy text from Neovim and paste it somewhere else and vice versa
-        wordWrap = false;                       # Don't let any text wrap around the screen
         disableArrows = false;                  # Prevent arrow keys from moving the cursor
+
+				# Options
+				options = {
+					termguicolors = true;
+					updateTime = 100;											# Make Neovim slightly faster
+					wordWrap = false;											# Don't let any text wrap around the screen
+				};
+
+				# Visuals
         visuals = {
-          enable = true;
-          nvimWebDevicons.enable = true;        # Icons
-          scrollBar.enable = true;              # Scrollbar and smooth scrolling
-          smoothScroll.enable = true;
-          indentBlankline.enable = true;
-          cellularAutomaton = {
+          nvim-web-devicons.enable = true;      # Icons
+          nvim-scrollbar.enable = true;         # Scrollbar and smooth scrolling
+          indent-blankline.enable = true;
+					cinnamon-nvim.enable = true;
+          cellular-automaton = {
             enable = true;
             mappings.makeItRain = "<leader>mir";
           };
@@ -129,14 +134,14 @@
           enable = true;
           formatOnSave = false;
 
-          lightbulb.enable = true;        # Show code suggestions
-          lspSignature.enable = true;     # Shows function signature when you type
-          lsplines.enable = true;         # Show LSP diagnostics using virtual lines on top of the real line of code
+          lightbulb.enable = true;							# Show code suggestions
+          lspSignature.enable = true;						# Shows function signature when you type
+          lsplines.enable = true;								# Show LSP diagnostics using virtual lines on top of the real line of code
 
           # VSCode like pictograms for Neovim LSP
           lspkind = {
             enable = true;
-            mode = "symbol_text";
+            setupOpts.mode = "symbol_text";
           };
 
           # Keybinds
@@ -193,11 +198,10 @@
         };
 
         # Auto indent, autocompletion, automatically pair characters e.g. "()"
-        autoIndent = true;
-        autopairs.enable = true;
-        autocomplete= {
+        autoindent = true;
+        autopairs.nvim-autopairs.enable = true;
+        autocomplete.nvim-cmp = {
           enable = true;
-          alwaysComplete = true;
           mappings = {
             close = "<C-e>";
             complete = "<C-Space>";
