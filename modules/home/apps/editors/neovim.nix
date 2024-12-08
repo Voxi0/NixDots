@@ -41,8 +41,8 @@
 				# Options
 				options = {
 					termguicolors = true;
-					updateTime = 100;											# Make Neovim slightly faster
-					wordWrap = false;											# Don't let any text wrap around the screen
+					updatetime = 100;											# Make Neovim slightly faster
+					wrap = false;											# Don't let any text wrap around the screen
 				};
 
 				# Visuals

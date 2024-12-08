@@ -38,6 +38,7 @@
 					# Homepage for the browser
 					# "browser.startup.homepage" = "https://nixos.org";
 				};
+				userChrome = "${builtins.readFile ./userChrome.css}";
 			};
 		};
 	};
