@@ -30,7 +30,7 @@
 			hyprbars
 		];
     extraConfig = ''
-      ${builtins.readFile ./hyprland.conf}
+      ${builtins.readDir ./conf}
     '';
   };
 

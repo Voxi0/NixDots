@@ -42,7 +42,7 @@
 				options = {
 					termguicolors = true;
 					updatetime = 100;											# Make Neovim slightly faster
-					wrap = false;											# Don't let any text wrap around the screen
+					wrap = false;													# Don't let any text wrap around the screen
 				};
 
 				# Visuals
@@ -60,8 +60,11 @@
         # Lua
         options = {
           # Indentation
+          "shiftwidth" = 2;
+          "tabstop" = 2;
+          "softtabstop" = 2;
           "smartindent" = false;
-          "expandtab" = false;                  # Use spaces for indentation
+          "expandtab" = true;										# Use spaces for indentation
 
           # Code folding
           "foldmethod" = "expr";

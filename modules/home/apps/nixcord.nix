@@ -41,6 +41,25 @@
 					readAllNotificationsButton.enable = true;
 					youtubeAdblock.enable = true;
 
+					# Custom rich presence
+					customRPC = {
+						enable = true;
+						appID = "1315354052594372740";
+						appName = "About Me";
+						details = ":P";
+						state = "Browsing the internet";
+						type = "playing";
+						timestampMode = "currentTime";
+						imageBig = "nix-snowflake-colors";
+						imageBigTooltip = "NixOS";
+
+						buttonOneText = "Website";
+						buttonOneURL = "https://voxi0.github.io/";
+
+						buttonTwoText = "Github";
+						buttonTwoURL = "https://github.com/Voxi0/";
+					};
+
 					# Spotify
 					spotifyCrack.enable = true;
 					spotifyControls.enable = true;
