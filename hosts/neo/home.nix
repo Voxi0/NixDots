@@ -55,6 +55,7 @@
   };
 
   # Enable/Disable applications
+	enableFirefox = false;
   enableEmacs = false;
 	enableZed = false;
 }
