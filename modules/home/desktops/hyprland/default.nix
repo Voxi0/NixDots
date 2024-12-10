@@ -83,7 +83,6 @@
 		systemd.enable = false;
 		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
-			hyprbars
 		];
     extraConfig = ''
       ${builtins.readFile ./conf/hyprland.conf}
