@@ -64,7 +64,7 @@
 
     # Home manager configurations
     homeConfigurations = {
-      neo = genHomeHostConfig { hostname = "neo"; };
+      voxi0 = genHomeHostConfig { hostname = "neo"; };
     };
   };
 }

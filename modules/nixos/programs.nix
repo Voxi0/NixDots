@@ -1,4 +1,9 @@
 { inputs, pkgs, ... }: {
+  # System-wide installed packages
+  environment.systemPackages = with pkgs; [
+    home-manager
+  ];
+
   # Programs
   programs = {
     # Some programs need SUID wrappers - Can be configured further or are started in user sessions
