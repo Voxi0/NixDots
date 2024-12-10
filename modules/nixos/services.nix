@@ -49,6 +49,9 @@
     # Udisks2 to automount removable media
     udisks2.enable = true;
 
+    # Bluetooth
+    blueman.enable = true;
+
     # CUPS to print documents
     printing.enable = true;
   };
