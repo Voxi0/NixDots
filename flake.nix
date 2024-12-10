@@ -50,13 +50,21 @@
     system = "x86_64-linux";
 		systemDisk = "/dev/sda";
     username = "voxi0";
-    genHostConfig = { hostname }: import ./hosts/host-config.nix {
+    genNixOSHostConfig = { hostname }: import ./hosts/nixos-host-config.nix {
       inherit nixpkgs system systemDisk hostname username inputs;
+    };
+    genHomeHostConfig = { hostname }: import ./hosts/home-host-config.nix {
+      inherit nixpkgs hostname username system inputs;
     };
   in {
     # NixOS configurations
     nixosConfigurations = {
-      neo = genHostConfig { hostname = "neo"; };
+      neo = genNixOSHostConfig { hostname = "neo"; };
+    };
+
+    # Home manager configurations
+    homeConfigurations = {
+      neo = genHomeHostConfig { hostname = "neo"; };
     };
   };
 }
