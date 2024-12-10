@@ -11,7 +11,7 @@
 
   # Configure AGS if it's enabled
   config = lib.mkIf config.enableAGS {
-		home.packages = with pkgs; [ sassc ];
+		home.packages = with pkgs; [ sassc dbus-glib ];
 
     # AGS configuration
     programs.ags = {
