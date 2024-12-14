@@ -2958,6 +2958,34 @@ declare module 'gi://HarfBuzz?version=0.0' {
              */
             NAG_MUNDARI,
             /**
+             * `Gara`, Since: 10.0.0
+             */
+            GARAY,
+            /**
+             * `Gukh`, Since: 10.0.0
+             */
+            GURUNG_KHEMA,
+            /**
+             * `Krai`, Since: 10.0.0
+             */
+            KIRAT_RAI,
+            /**
+             * `Onao`, Since: 10.0.0
+             */
+            OL_ONAL,
+            /**
+             * `Sunu`, Since: 10.0.0
+             */
+            SUNUWAR,
+            /**
+             * `Todr`, Since: 10.0.0
+             */
+            TODHRI,
+            /**
+             * `Tutg`, Since: 10.0.0
+             */
+            TULU_TIGALARI,
+            /**
              * No script set
              */
             INVALID,
@@ -3861,6 +3889,12 @@ declare module 'gi://HarfBuzz?version=0.0' {
          */
         function buffer_get_not_found_glyph(buffer: buffer_t): codepoint_t;
         /**
+         * See hb_buffer_set_not_found_variation_selector_glyph().
+         * @param buffer An #hb_buffer_t
+         * @returns The @buffer not-found-variation-selector #hb_codepoint_t
+         */
+        function buffer_get_not_found_variation_selector_glyph(buffer: buffer_t): codepoint_t;
+        /**
          * See hb_buffer_set_random_state().
          * @param buffer An #hb_buffer_t
          * @returns The @buffer random state
@@ -4223,6 +4257,22 @@ declare module 'gi://HarfBuzz?version=0.0' {
          */
         function buffer_set_not_found_glyph(buffer: buffer_t, not_found: codepoint_t): void;
         /**
+         * Sets the #hb_codepoint_t that replaces variation-selector characters not resolved
+         * in the font during shaping.
+         *
+         * The not-found-variation-selector glyph defaults to #HB_CODEPOINT_INVALID,
+         * in which case an unresolved variation-selector will be removed from the glyph
+         * string during shaping. This API allows for changing that and retaining a glyph,
+         * such that the situation can be detected by the client and handled accordingly
+         * (e.g. by using a different font).
+         * @param buffer An #hb_buffer_t
+         * @param not_found_variation_selector the not-found-variation-selector #hb_codepoint_t
+         */
+        function buffer_set_not_found_variation_selector_glyph(
+            buffer: buffer_t,
+            not_found_variation_selector: codepoint_t,
+        ): void;
+        /**
          * Sets the random state of the buffer. The state changes
          * every time a glyph uses randomness (eg. the `rand`
          * OpenType feature). This function together with
@@ -4564,8 +4614,9 @@ declare module 'gi://HarfBuzz?version=0.0' {
         /**
          * Variant of hb_face_create(), built for those cases where it is more
          * convenient to provide data for individual tables instead of the whole font
-         * data. With the caveat that hb_face_get_table_tags() does not currently work
-         * with faces created this way.
+         * data. With the caveat that hb_face_get_table_tags() would not work
+         * with faces created this way. You can address that by calling the
+         * hb_face_set_get_table_tags_func() function and setting the appropriate callback.
          *
          * Creates a new face object from the specified `user_data` and `reference_table_func,`
          * with the `destroy` callback.
@@ -4640,6 +4691,17 @@ declare module 'gi://HarfBuzz?version=0.0' {
          * @returns A pointer to the @tag table within @face
          */
         function face_reference_table(face: face_t, tag: tag_t): blob_t;
+        /**
+         * Sets the table-tag-fetching function for the specified face object.
+         * @param face A face object
+         * @param func The table-tag-fetching function
+         * @param destroy A callback to call when @func is not needed anymore
+         */
+        function face_set_get_table_tags_func(
+            face: face_t,
+            func: get_table_tags_func_t,
+            destroy?: destroy_func_t | null,
+        ): void;
         /**
          * Sets the glyph count for a face object to the specified value.
          *
@@ -7953,8 +8015,8 @@ declare module 'gi://HarfBuzz?version=0.0' {
         function shape_plan_get_shaper(shape_plan: shape_plan_t): string;
         /**
          * Searches variation axes of a #hb_font_t object for a specific axis first,
-         * if not set, then tries to get default style values from different
-         * tables of the font.
+         * if not set, first tries to get default style values in `STAT` table
+         * then tries to polyfill from different tables of the font.
          * @param font a #hb_font_t object.
          * @param style_tag a style tag.
          * @returns Corresponding axis or default value to a style tag.
@@ -8314,6 +8376,9 @@ declare module 'gi://HarfBuzz?version=0.0' {
                 palette_index: number,
                 foreground: color_t,
             ): void;
+        }
+        interface get_table_tags_func_t {
+            (face: face_t, start_offset: number): number;
         }
         interface paint_color_func_t {
             (funcs: paint_funcs_t, paint_data: any | null, is_foreground: bool_t, color: color_t): void;

@@ -1,40 +1,61 @@
+// Astal
+import { Variable, GLib, bind, exec } from "astal"
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
-import { Variable, GLib, bind } from "astal"
+
+// Astal libraries
 import AstalHyprland from "gi://AstalHyprland?version=0.1"
 import AstalBattery from "gi://AstalBattery?version=0.1"
 import AstalNetwork from "gi://AstalNetwork?version=0.1"
 import AstalTray from "gi://AstalTray?version=0.1"
-import Gio from "gi://Gio?version=2.0"
 
-// Menu
-function MainMenu() {
-	return <box className = "MainMenu">
+// Main menu button - Toggles main menu
+function MainMenuButton() {
+    return <box className = "MainMenuButton">
 		<button
-		onClickRelease = {() => {
-			try {
-				Gio.Subprocess.new(
-                    ['wofi', '--show', 'drun'],
-                    Gio.SubprocessFlags.NONE
-                )
-            } catch(err) {logError(err)}
-		}}>
+        onClickRelease = {() => {
+            App.toggle_window("main-menu")
+        }}>
 			<icon icon = "./assets/nix-snowflake-colours.svg"/>
 		</button>
 	</box>
 }
 
+// WiFi
+function WiFi() {
+	const { wifi } = AstalNetwork.get_default()
+    return <box className = "WiFi">
+		<icon icon = {bind(wifi, "iconName")}/>
+		<label label = {bind(wifi, "ssid").as(String)}/>
+	</box>
+}
+
+// Main menu
+export function MainMenu(monitor: Gdk.Monitor) {
+    return <window
+	name="main-menu"
+    className="MainMenu"
+    application={App}
+    gdkmonitor={monitor}
+    exclusivity={Astal.Exclusivity.NORMAL}
+    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
+    visible={false}>
+        <box>
+            <WiFi></WiFi>
+        </box>
+    </window>
+}
+
 // Hyprland workspaces
 function Workspaces() {
 	const hypr = AstalHyprland.get_default()
-	return <box className = "Workspaces">
+	return <box className="Workspaces">
 		{bind(hypr, "workspaces").as(wss => wss
 			.sort((a, b) => a.id - b.id)
 			.map(ws => (
 				<button
-					className = {bind(hypr, "focusedWorkspace").as(fw =>
-						ws === fw ? "focused" : "")}
-					onClicked = {() => ws.focus()}>
-					{ws.id}
+				className={bind(hypr, "focusedWorkspace").as(fw => ws === fw ? "focused" : "")}
+				onClicked={() => ws.focus()}>
+				{ws.id}
 				</button>
 			))
 		)}
@@ -47,15 +68,6 @@ function Time({format = "%I:%M %p"}) {
 	return <button onDestroy = {() => time.drop()}>
 		<label className = "Time" label = {time()}/>
 	</button>
-}
-
-// WiFi
-function WiFi() {
-	const { wifi } = AstalNetwork.get_default()
-    return <box className = "WiFi">
-		<icon icon = {bind(wifi, "iconName")}/>
-		<label label = {bind(wifi, "ssid").as(String)}/>
-	</box>
 }
 
 // Battery
@@ -83,32 +95,33 @@ function SysTray() {
             onClickRelease={self => {
                 menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
             }}>
-                <icon gIcon={bind(item, "gicon")} />
+                <icon gIcon={bind(item, "gicon")}/>
             </button>
         }))}
     </box>
 }
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
+export function Bar(monitor: Gdk.Monitor) {
     return <window
-    className = "Bar"
-    gdkmonitor = {gdkmonitor}
-    exclusivity = {Astal.Exclusivity.EXCLUSIVE}
-    anchor = {Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
-    application = {App}>
+	name="bar"
+    className="Bar"
+    application={App}
+    gdkmonitor={monitor}
+    exclusivity={Astal.Exclusivity.EXCLUSIVE}
+    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
+	visible={true}>
         <centerbox>
-			<box hexpand halign = {Gtk.Align.START}>
-				<MainMenu/>
+            <box hexpand halign = {Gtk.Align.START}>
+				<MainMenuButton/>
 				<Workspaces/>
 			</box>
 			<box hexpand halign = {Gtk.Align.CENTER}>
 				<Time format = "%I:%M %p"/>
 			</box>
 			<box hexpand halign = {Gtk.Align.END}>
-				<WiFi/>
 				<BatteryLevel/>
 				<SysTray/>
 			</box>
-		</centerbox>
-	</window>
+        </centerbox>
+    </window>
 }

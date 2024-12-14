@@ -8,23 +8,13 @@
       enableSSHSupport = true;
     };
 
-    zsh.enable = true;      # Required to set ZSH as the default shell for the user
-
-		# Universal wayland session manager
-		uwsm = {
-			enable = true;
-			waylandCompositors = {
-				hyprland = {
-					prettyName = "Hyprland";
-					comment = "Hyprland managed by UWSM.";
-					binPath = "/run/current-system/sw/bin/Hyprland";
-				};
-			};
-		};
+    # Required to set ZSH as the default shell for the user
+    zsh.enable = true;
 
 		# Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
 		hyprland = {
 			enable = true;
+      withUWSM = true;
 
 			# Set the flake package and sync the portal package
 			package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;

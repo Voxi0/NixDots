@@ -1,35 +1,79 @@
-$bg: rgb(0, 0, 0);
-$fg: rgb(255, 255, 255);
-$borderRadius: 12px;
+// Variables
+$bg: #1e1e2e;
+$fg: #cdd6f4;
+$accent: #f2cdcd;
+$fontSize: 16px;
+$borderRadius: 6px;
 
-// Bar widget
+// Bar window
 window.Bar {
-  background-color: transparent;
-  color: $fg;
-  font-size: 16px;
+  	background-color: transparent;
+  	color: $fg;
+  	font-size: $fontSize;
 
-  // Bar elements
-  button {all: unset;}
-  box {border-radius: $borderRadius;}
-  label {
+  	// Elements
+  	button {all: unset;}
+  	box {border-radius: $borderRadius;}
+  	icon {
+    	margin-left: 8px;
+    	margin-right: -8px;
+  	}
+  	label {
+    	border-radius: $borderRadius;
+    	padding: 0px 8px;
+    	margin: 2px;
+  	}
+
+  	// Custom widgets
+	// Global - Common styles between all custom widgets
+  	.MainMenuButton, .Workspaces, .Time, .Battery, .SysTray {
+    	background-color: $bg;
+    	margin: 2px;
+  	}
+
+	// Main menu button - To toggle main menu
+	.MainMenuButton icon {margin: unset; padding: 0px 6px;}
+
+	// System tray
+  	.SysTray icon {margin: 0px 4px;}
+
+	// Workspaces
+	.Workspaces {
+		button {
+			label {transition-duration: 0.2s;}
+			&:hover label {
+				background-color: $accent;
+				color: $bg;
+			}
+		}
+		.focused label {
+			background-color: $fg;
+			color: $bg;
+		}
+  	}
+}
+
+// Main menu window
+window.MainMenu {
+    background-color: transparent;
+    color: $fg;
+	font-size: $fontSize;
     border-radius: $borderRadius;
-    padding: 0px 8px;
-    margin: 2px;
-  }
 
-  // Custom widgets
-  .MainMenu, .Workspaces, .Time, .WiFi, .Battery, .SysTray {
-    background-color: $bg;
-    margin: 2px;
-  }
-  .MainMenu icon {padding: 0px 6px;}
-  .Workspaces {
-    .focused label {
-      background-color: $fg;
-      color: $bg;
-    }
-  }
-  .WiFi icon {margin-left: 8px; margin-right: -8px;}
-  .Battery icon {margin-left: 8px; margin-right: -8px;}
-  .SysTray icon {margin: 0px 4px;}
+	box {
+		background-color: transparent;
+		margin-left: 1px;
+		border-radius: $borderRadius;
+
+		// Elements
+		button {
+			all: unset;
+		}
+
+		// Custom widgets
+		.WiFi {
+			background-color: $bg;
+			padding: 0px 6px;
+		}
+	}
 }

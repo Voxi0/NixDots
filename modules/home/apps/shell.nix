@@ -30,26 +30,27 @@
       ])
     else []);
 
-    # ZSH configuration
-    programs.zsh = lib.mkIf config.enableZSH {
-      enable = true;
-      enableCompletion = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-
-      # Command history
-      history.size = 1000;
-
-      # Oh-My-ZSH
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "thefuck" "fzf" ];
-        theme = "lambda";
-      };
-    };
-
-    # Kitty terminal configuration
+    # Configure shell, the terminal emulator and everything else e.g. Fastfetch
     programs = {
+      # ZSH - Extended Bourne shell with many improvements
+      zsh = lib.mkIf config.enableZSH {
+        enable = true;
+        enableCompletion = true;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
+
+        # Command history
+        history.size = 1000;
+
+        # Oh-My-ZSH
+        oh-my-zsh = {
+          enable = true;
+          plugins = [ "git" "thefuck" "fzf" ];
+          theme = "lambda";
+        };
+      };
+
+      # Kitty - Terminal emulator
 			kitty = lib.mkIf config.enableKitty {
 				enable = true;
 				settings = {
@@ -82,6 +83,14 @@
 					"--colour=always"
 				];
 			};
+
+      # Zellij - Terminal multiplexer
+      zellij = {
+        enable = true;
+        package = pkgs.zellij;
+        enableZshIntegration = config.enableZSH;
+        settings = {};
+      };
 
 			# Fetch script configurations
 			# Fastfetch
