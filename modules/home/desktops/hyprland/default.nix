@@ -1,4 +1,32 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, ... }: let
+  # Scripts for Hyprland
+  # Playerctl toggle shuffle
+  playerctlShuffleToggle = pkgs.writeShellScriptBin "playerctlShuffleToggle" ''
+    #!/bin/sh
+    playerctl shuffle toggle
+    notify-send "Playerctl Shuffle" "$(playerctl shuffle)"
+  '';
+
+  # Toggle between the 3 playerctl loop modes - "None", "Track" and "Playlist"
+  playerctlLoopToggle = pkgs.writeShellScriptBin "playerctlLoopToggle" ''
+    #!/bin/sh
+
+    # Get the current loop state
+    currentState=$(playerctl loop)
+
+    # Cycle through the states: "None", "Track", "Playlist"
+    if [ "$currentState" = "None" ]; then
+      playerctl loop track
+      notify-send "Playerctl Loop" "Track"
+    elif [ "$currentState" = "Track" ]; then
+      playerctl loop playlist
+      notify-send "Playerctl Loop" "Playlist"
+    else
+      playerctl loop none
+      notify-send "Playerctl Loop" "None"
+    fi
+  '';
+in {
   # Import Nix modules
   imports = [
     ./apps
@@ -15,53 +43,6 @@
       # Utilities
       pamixer brightnessctl playerctl grim slurp feh udiskie hyprwall hyprshade
     ];
-
-    # Scripts for Hyprland
-    file = {
-      # Toggle shuffle
-      ".config/hypr/scripts/playerctl-shuffle-toggle" = {
-        executable = true;
-        text = ''
-          #!/usr/bin/env bash
-
-          # Get the current shuffle state
-          currentState=$(playerctl shuffle)
-
-          if [ "$currentState" = "On" ]; then
-            playerctl shuffle off
-            notify-send "Playerctl Shuffle" "Off"
-          else
-            playerctl shuffle on
-            notify-send "Playerctl Shuffle" "On"
-          fi
-
-          wait $notificationID
-        '';
-      };
-
-      # There's 3 loop modes, this script toggles between each - "None", "Track" and "Playlist"
-      ".config/hypr/scripts/playerctl-loop-toggle" = {
-        executable = true;
-        text = ''
-          #!/usr/bin/env bash
-
-          # Get the current loop state
-          currentState=$(playerctl loop)
-
-          # Cycle through the states: "None", "Track", "Playlist"
-          if [ "$currentState" = "None" ]; then
-              playerctl loop Track
-              notify-send "Playerctl Loop" "Track"
-          elif [ "$currentState" = "Track" ]; then
-              playerctl loop Playlist
-              notify-send "Playerctl Loop" "Playlist"
-          else
-              playerctl loop None
-              notify-send "Playerctl Loop" "None"
-          fi
-        '';
-      };
-    };
   };
 
   # Playerctl
@@ -89,17 +70,27 @@
       ### MONITORS ###
       ################
       "monitor" = ",preferred,auto,auto";
+
       #############################
       ### ENVIRONMENT VARIABLES ###
       #############################
       env = [
+        # Set to "1" if the cursor keeps disappearing
+        "WLR_NO_HARDWARE_CURSORS,0"
+
+        # Use Wayland
         "NIXOS_OZONE_WL,1"
         "QT_QPA_PLATFORM,wayland"
+        "GTK_USE_PORTAL,1"
+        "MOZ_ENABLE_WAYLAND,1"
+        "GDK_BACKEND,wayland"
+        "SDL_VIDEODRIVER,wayland"
       ];
+
       #################
       ### VARIABLES ###
       #################
-      "$mainMod" = "ALT";
+      "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$menu" = "wofi --show drun";
 
@@ -131,7 +122,7 @@
 
         # Touchpad
         touchpad = {
-            natural_scroll = true;
+            natural_scroll = false;
         };
       };
 
@@ -304,8 +295,8 @@
         "$mainMod SHIFT, SPACE, exec, playerctl play-pause"
         "$mainMod SHIFT, Right, exec, playerctl position 10+"
         "$mainMod SHIFT, Left, exec, playerctl position 10-"
-        "$mainMod SHIFT, S, exec, ~/.config/hypr/scripts/playerctl-shuffle-toggle"
-        "$mainMod SHIFT, L, exec, ~/.config/hypr/scripts/playerctl-loop-toggle"
+        "$mainMod SHIFT, S, exec, ${playerctlShuffleToggle}/bin/playerctlShuffleToggle"
+        "$mainMod SHIFT, L, exec, ${playerctlLoopToggle}/bin/playerctlLoopToggle"
 
         # Window layout specific binds
         # Dwindle
@@ -330,7 +321,7 @@
               "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
             ]
           )
-        9)
+        10)
       );
 
       bindel = [
@@ -357,18 +348,5 @@
         "$mainMod, mouse:273, resizewindow"
       ];
     };
-  };
-
-  # Session Environment Variables
-  home.sessionVariables = {
-    # Set to "1" if Cursor Keeps Disappearing
-    WLR_NO_HARDWARE_CURSORS = "0";
-
-		# Use Wayland
-    GTK_USE_PORTAL = "1";
-    XDG_SESSION_TYPE = "wayland";
-    MOZ_ENABLE_WAYLAND = "1";
-    GDK_BACKEND = "wayland";
-    SDL_VIDEODRIVER = "wayland";
   };
 }
