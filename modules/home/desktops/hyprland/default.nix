@@ -261,7 +261,7 @@ in {
 
       # Commands to use for screenshots - For the entire screen or selected area
       "$fullscreenScreenshotCmd" = "grim";
-      "$selectedAreaScreenshotCmd" = "grim -g '$(slurp)'";
+      "$selectedAreaScreenshotCmd" = ''grim -g "$(slurp)"'';
 
       ###################
       ### KEYBINDINGS ###
