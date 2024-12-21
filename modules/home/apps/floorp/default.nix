@@ -19,6 +19,7 @@
 				name = "NixDots";
 				id = 0;
 				isDefault = true;
+        userChrome = "${builtins.readFile ./userChrome.css}";
 				settings = {
 					# Make sure the 'Alt' key doesn't bring up that weird menu at the top of the browser
 					# I'm using that key as my mod key in my window manager configuration because of my weird keyboard
@@ -38,7 +39,11 @@
 					# Homepage for the browser
 					# "browser.startup.homepage" = "https://nixos.org";
 				};
-				userChrome = "${builtins.readFile ./userChrome.css}";
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          sidebery
+          ublock-origin
+          darkreader
+        ];
 			};
 		};
 	};

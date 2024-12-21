@@ -1,8 +1,8 @@
 # This function allows you to easily create new NixOS configurations in the system flake
 # This way, you can avoid repeating code and make it much more readable
-{ nixpkgs, inputs, system, hostname, username, ... }: nixpkgs.lib.nixosSystem {
+{ nixpkgs, pkgs, inputs, system, hostname, username, ... }: nixpkgs.lib.nixosSystem {
   inherit system;
-  specialArgs = { inherit inputs username; };
+  specialArgs = { inherit inputs pkgs username; };
   modules = [
     ./${hostname}/configuration.nix
 		inputs.disko.nixosModules.default

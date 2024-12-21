@@ -6,6 +6,6 @@
 
 	# Configure Spotify if it's enabled
 	config = lib.mkIf config.enableSpotify {
-		home.packages = [ pkgs.spotify ];
+		home.packages = [ pkgs.spotube ];
 	};
 }

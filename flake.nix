@@ -19,6 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Nix User Repository (NUR)
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # System-wide colorscheming and typography
     stylix.url = "github:danth/stylix";
 
@@ -50,8 +56,13 @@
     system = "x86_64-linux";
 		systemDisk = "/dev/sda";
     username = "voxi0";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      overlays = [ inputs.nur.overlays.default ];
+    };
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
-      inherit nixpkgs system systemDisk hostname username inputs;
+      inherit nixpkgs pkgs system systemDisk hostname username inputs;
     };
   in {
     # NixOS configurations
