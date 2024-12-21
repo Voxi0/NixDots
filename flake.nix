@@ -49,6 +49,12 @@
 
 		# Declarative Vencord plugins + options
 		nixcord.url = "github:kaylorben/nixcord";
+
+    # Spicetify - Multiplatform CLI tool to customize the official Spotify client
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Flake outputs/actions - What to do after fetching all dependencies
