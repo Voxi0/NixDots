@@ -84,14 +84,6 @@
 				];
 			};
 
-      # Zellij - Terminal multiplexer
-      zellij = {
-        enable = true;
-        package = pkgs.zellij;
-        enableZshIntegration = config.enableZSH;
-        settings = {};
-      };
-
 			# Fetch script configurations
 			# Fastfetch
 			fastfetch = {
