@@ -11,12 +11,17 @@
 
 	# Configure Spotify if it's enabled
 	config = lib.mkIf config.enableSpotify {
+    # Spicetify
     programs.spicetify = let
       spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
     in {
       enable = true;
       enabledExtensions = with spicePkgs.extensions; [
         adblock
+        autoSkipVideo
+        playlistIcons
+        betterGenres
+        beautifulLyrics
         hidePodcasts
         shuffle
       ];

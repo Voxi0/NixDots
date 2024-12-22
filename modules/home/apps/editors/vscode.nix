@@ -17,14 +17,6 @@
         # Nix
         jnoortheen.nix-ide
         jeff-hykin.better-nix-syntax
-
-        # C/C++
-        ms-vscode.cpptools
-        twxs.cmake
-        ms-vscode.cmake-tools
-
-        # Web development
-        ritwickdey.liveserver
       ];
     };
   };
