@@ -10,6 +10,7 @@
       enable = true;
       userName = "Voxi0";
       userEmail = "alif200099@gmail.com";
+      extraConfig.init.defaultBranch = "main";
     };
     programs.lazygit = {
       enable = true;
