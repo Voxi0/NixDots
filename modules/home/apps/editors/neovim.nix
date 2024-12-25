@@ -257,6 +257,7 @@
 
           nix.enable = true;
           clang.enable = true;
+          zig.enable = true;
           rust.enable = true;
           html.enable = true;
           css.enable = true;

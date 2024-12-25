@@ -91,60 +91,82 @@
 				package = pkgs.fastfetch;
 				settings = {
 					logo = {
-						type = "kitty";
-						source = ./../Pictures/Fastfetch/pochita.png;
-						width = 25;
-						height = 12;
+						type = "kitty-direct";
+            source = ../Pictures/Fastfetch/42willow.gif;
+            width = 42;
+            height = 18;
+            padding = {
+              top = 1;
+              left = 2;
+            };
 					};
 
-					display.separator = " > ";
+          display.separator = "";
 
-					modules = [
-						# OS, Kernel, Packages and Display
-						{
-							type = "os";
-							paddingLeft = 4;
-							key = "\t OS";
-							keyColor = "red";
-							format = "{name} {version}";}
-						{
-							type = "kernel";
-							paddingLeft = 4;
-							key = "\t Kernel";
-							keyColor = "red";}
-						{
-							type = "packages";
-							paddingLeft = 4;
-							key = "\t Packages";
-							keyColor = "green";}
-						{
-							type = "display";
-							paddingLeft = 4;
-							key = "\t󰍹 Display";
-							keyColor = "green";
-							format = "{width}x{height}";}
+          modules = [
+            {
+              type = "custom";
+              format = "╔══════════════════════════════════════════════════════╗";}
+            {
+              type = "os";
+              key = "  󰣇  OS        ║";
+              format = " {3}";}
+            {
+              type = "kernel";
+              key = "    Kernel    ║ ";
+              format = "{1} {2}";}
+            {
+              type = "uptime";
+              key = "    Uptime    ║ ";
+              format = "{2} hours, {3} mins";}
+            {
+              type = "packages";
+              key = "  󰏗  Packages  ║ ";
+              format = "{2} (pacman){?3}[{3}]{?}";}
+            {
+              type = "shell";
+              key = "    Shell     ║ ";
+              format = "{6}";}
+            {
+              type = "terminal";
+              key = "    Terminal  ║ ";
+              format = "{5}";}
+            {
+              type = "custom";
+              format = "╚══════════════════════════════════════════════════════╝";}
 
-						# User, WM, Terminal and Uptime
-						{
-							type = "title";
-							paddingLeft = 4;
-							key = "\t";}
-						{
-							type = "wm";
-							paddingLeft = 4;
-							key = "\t󱂬 WM";
-							keyColor = "yellow";}
-						{
-							type = "terminal";
-							paddingLeft = 4;
-							key = "\t Terminal";
-							keyColor = "yellow";}
-						{
-							type = "uptime";
-							paddingLeft = 4;
-							key = "\t󱫐 Uptime";
-							keyColor = "red";}
-					];
+            { type = "break"; }
+
+            {
+              type = "colors";
+              paddingLeft = "20";
+              symbol = "circle";}
+
+            { type = "break"; }
+
+            {
+              type = "custom";
+              format = "╔══════════════════════════════════════════════════════╗";}
+            {
+              type = "display";
+              key = "  󰍹  Display   ║ ";
+              format = "{1}x{2}";}
+            {
+              type = "cpu";
+              key = "    CPU       ║ ";
+              format = "{1}";}
+            {
+              type = "gpu";
+              key = "  󰊴  GPU       ║ ";
+              format = "{2}";}
+            {
+              type = "memory";
+              key = "    Memory    ║ ";
+              format = "{1} / {2} ({3})";}
+            {
+              type = "custom";
+              format = "╚══════════════════════════════════════════════════════╝";}
+          ];
 				};
 			};
     };
