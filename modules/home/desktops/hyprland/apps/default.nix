@@ -1,11 +1,11 @@
 { lib, ... }: {
   # Import Nix modules
   imports = [
-    ./wofi ./ags ./mako.nix
+    ./wofi ./hyprpanel.nix ./mako.nix
   ];
 
   # Enable all applications by default
   enableWofi = lib.mkDefault true;
-  enableAGS = lib.mkDefault true;
+  enableHyprpanel = lib.mkDefault true;
   enableMako = lib.mkDefault true;
 }
