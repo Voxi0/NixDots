@@ -40,7 +40,6 @@
 
     # AGS - Widget library
 		ags.url = "github:aylur/ags";
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
     # NVF - Neovim distro
     nvf = {
@@ -66,10 +65,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = with inputs; [
-        nur.overlays.default
-        hyprpanel.overlay
-      ];
+      overlays = [ inputs.nur.overlays.default ];
     };
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
       inherit nixpkgs pkgs system systemDisk hostname username inputs;
