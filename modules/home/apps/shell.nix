@@ -91,7 +91,7 @@
 				package = pkgs.fastfetch;
 				settings = {
 					logo = {
-						type = "kitty";
+						type = "kitty-direct";
             source = ../Pictures/Fastfetch/42willow.gif;
             width = 42;
             height = 18;
