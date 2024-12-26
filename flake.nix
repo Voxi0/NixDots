@@ -39,10 +39,8 @@
     swww.url = "github:LGFae/swww";
 
     # AGS - Widget library
-		hyprpanel = {
-      url = "github:jas-singhfsu/hyprpanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+		ags.url = "github:aylur/ags";
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
     # NVF - Neovim distro
     nvf = {
