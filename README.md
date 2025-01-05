@@ -8,9 +8,10 @@ nix-shell -p git --run "git clone https://github.com/Voxi0/NixDots.git" && cd Ni
 ### Specs
 - **Kernel** - Linux 6.12
 - **DE/WM** - Hyprland
-- **Bar** - Aylur's GTK Shell V2 (AGS V2)
+- **Shell** - Nushell
 - **Terminal** - Kitty
-- **Editor** - Neovim and VSCode
+- **Bar** - Aylur's GTK Shell (AGS)
+- **Editor** - Neovim/VSCode
 - **Browser** - Floorp
 ### Showcase
 ![Desktop](./assets/desktop.png "Neo Host")
