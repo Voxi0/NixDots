@@ -41,7 +41,7 @@ in {
       libsForQt5.qt5.qtwayland kdePackages.qtwayland qt6Packages.qt6ct
 
       # Utilities
-      pamixer brightnessctl playerctl grim slurp feh udiskie hyprwall hyprshade
+      pamixer brightnessctl playerctl grim slurp feh udiskie hyprshade
     ];
   };
 
@@ -99,7 +99,7 @@ in {
       #################
       exec-once = [
         "swww-daemon && swww restore"
-        "ags run"
+        "ags run --gtk4"
         "udiskie --automount --smart-tray --terminal=$terminal"
         "hyprshade on vibrance"
       ];
@@ -178,7 +178,7 @@ in {
 
       decoration = {
         # Radius of rounded window corners
-        rounding = 2;
+        rounding = 8;
 
         # Change transparency of focused and unfocused windows
         active_opacity = 1.0;

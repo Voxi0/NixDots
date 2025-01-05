@@ -8,9 +8,6 @@
       enableSSHSupport = true;
     };
 
-    # Required to set ZSH as the default shell for the user
-    zsh.enable = true;
-
 		# Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
 		hyprland = {
 			enable = true;

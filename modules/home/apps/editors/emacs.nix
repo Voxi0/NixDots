@@ -12,7 +12,9 @@
       extraPackages = epkgs: with epkgs; [
         magit
       ];
-      extraConfig = '''';
+      extraConfig = ''
+        (setq standard-indent 2)
+      '';
     };
   };
 }

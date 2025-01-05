@@ -1,174 +1,165 @@
-{ pkgs, lib, config, ... }: {
-  # Module options
-  options = {
-    enableZSH = lib.mkEnableOption "Enables ZSH";
-    enableKitty = lib.mkEnableOption "Enables Kitty";
+{ pkgs, ... }: {
+  # Home
+  home = {
+    # Extra CLI packages/tools
+    packages = with pkgs; [
+      nh btop
+    ];
   };
 
-  config = {
-    # Home
-    home.shellAliases = {
-			"ff" = "fastfetch";
+  # Configure the shell, terminal emulator and everything else e.g. a fetch script
+  programs = {
+    # Nushell
+    nushell = {
+      enable = true;
+      package = pkgs.nushell;
+      plugins = with pkgs.nushellPlugins; [
+        highlight
+      ];
+      shellAliases = {
+        ff = "fastfetch";
 
-      "ls" = "eza";
-      "ll" = "eza -l";
-      "la" = "eza --all";
-      "lla" = "eza --all -l";
-
-      "update-switch" = "nh os switch -H";
-      "update-boot" = "nh os boot -H";
-      "update-test" = "nh os test -H";
-      "clean" = "nh clean all";
+        update-switch = "nh os switch -H";
+        update-boot = "nh os boot -H";
+        update-test = "nh os test -H";
+        clean = "nh clean all";
+      };
+      extraConfig = "
+        $env.config.show_banner = false
+      ";
     };
 
-    # Install ZSH packages
-    home.packages = with pkgs; [
-      nh lf btop
-    ] ++ (if config.enableZSH then
-      (with pkgs; [
-        oh-my-zsh thefuck fzf
-      ])
-    else []);
+    # Kitty - Terminal emulator
+    kitty = {
+      enable = true;
+      settings = {
+        # Disable popup confirmation window when closing Kitty terminal
+        confirm_os_window_close = 0;
 
-    # Configure shell, the terminal emulator and everything else e.g. Fastfetch
-    programs = {
-      # ZSH - Extended Bourne shell with many improvements
-      zsh = lib.mkIf config.enableZSH {
-        enable = true;
-        enableCompletion = true;
-        autosuggestion.enable = true;
-        syntaxHighlighting.enable = true;
+        # Font
+        font_size = "11.0";
 
-        # Command history
-        history.size = 1000;
+        # Cursor
+        cursor_shape = "beam";
+        cursor_beam_thickness = "1.0";
+        cursor_blink_interval = 0;
 
-        # Oh-My-ZSH
-        oh-my-zsh = {
-          enable = true;
-          plugins = [ "git" "thefuck" "fzf" ];
-          theme = "lambda";
+        # Performance tuning
+        sync_to_monitor = true;
+
+        # Terminal bell
+        enable_audio_bell = true;
+        window_alert_on_bell = true;
+      };
+    };
+
+    # Minimal, blazing-fast, and infinitely customizable prompt for any shell
+    starship = {
+      enable = true;
+      enableNushellIntegration = true;
+      package = pkgs.starship;
+
+      # Fish shell only
+      enableInteractive = false;
+      enableTransience = false;
+
+      # Settings
+      settings = {
+        add_newline = false;
+        character = {
+          success_symbol = "[->](bold green)";
+          error_symbol = "[->](bold red)";
         };
       };
+    };
 
-      # Kitty - Terminal emulator
-			kitty = lib.mkIf config.enableKitty {
-				enable = true;
-				settings = {
-					# Disable popup confirmation window when closing Kitty terminal
-					confirm_os_window_close = 0;
+    # Use the shell we prefer inside of Nix shells instead of Bash
+    nix-your-shell = {
+      enable = true;
+      enableNushellIntegration = true;
+      package = pkgs.nix-your-shell;
+    };
 
-					# Font
-					font_size = "11.0";
+    # Corrects errors in previous commands
+    thefuck = {
+      enable = true;
+      enableNushellIntegration = true;
+      enableInstantMode = false;
+      package = pkgs.thefuck;
+    };
 
-					# Cursor
-					cursor_shape = "beam";
-					cursor_beam_thickness = "1.0";
-					cursor_blink_interval = 0;
+    # Smarter 'cd' command
+    zoxide = {
+      enable = true;
+      enableNushellIntegration = true;
+      package = pkgs.zoxide;
+    };
 
-					# Performance tuning
-					sync_to_monitor = true;
+    # TUI file manager
+    yazi = {
+      enable = true;
+      enableNushellIntegration = true;
+      package = pkgs.yazi;
+      settings = {
+        manager = {
+          show_hidden = true;
+          sort_by = "alphabetical";
+          sort_reverse = false;
+          sort_dir_first = true;
+        };
+      };
+    };
 
-					# Terminal bell
-					enable_audio_bell = true;
-					window_alert_on_bell = true;
-				};
-			};
+    # Fetch script
+    fastfetch = {
+      enable = true;
+      package = pkgs.fastfetch;
+      settings = {
+        logo = {
+          source = "nixos_small";
+          padding.right = 2;
+        };
 
-			# Eza - A modern alternative to 'ls'
-			eza = {
-				enable = true;
-				icons = "auto";
-				git = true;
-				extraOptions = [
-					"--colour=always"
-				];
-			};
+        display = {
+          color = "red";
+          separator = "";
+        };
 
-			# Fetch script configurations
-			# Fastfetch
-			fastfetch = {
-				enable = true;
-				package = pkgs.fastfetch;
-				settings = {
-					logo = {
-						type = "kitty-direct";
-            source = ../Pictures/Fastfetch/42willow.gif;
-            width = 42;
-            height = 18;
-            padding = {
-              top = 1;
-              left = 2;
-            };
-					};
+        modules = [
+          # Username and hostname
+          {
+            type = "title";
+            # To display host name next to username - {at-symbol-colored}{host-name-colored}
+            key = " ";
+            format = "{user-name}";}
 
-          display.separator = "";
+          # Distro name, kernel
+          {
+            type = "os";
+            key = " ";
+            format = "{3}";}
+          {
+            type = "kernel";
+            key = " ";
+            format = "{1} {2}";}
 
-          modules = [
-            {
-              type = "custom";
-              format = "╔══════════════════════════════════════════════════════╗";}
-            {
-              type = "os";
-              key = "  󰣇  OS        ║";
-              format = " {3}";}
-            {
-              type = "kernel";
-              key = "    Kernel    ║ ";
-              format = "{1} {2}";}
-            {
-              type = "uptime";
-              key = "    Uptime    ║ ";
-              format = "{2} hours, {3} mins";}
-            {
-              type = "packages";
-              key = "  󰏗  Packages  ║ ";
-              format = "{2} (pacman){?3}[{3}]{?}";}
-            {
-              type = "shell";
-              key = "    Shell     ║ ";
-              format = "{6}";}
-            {
-              type = "terminal";
-              key = "    Terminal  ║ ";
-              format = "{5}";}
-            {
-              type = "custom";
-              format = "╚══════════════════════════════════════════════════════╝";}
-
-            { type = "break"; }
-
-            {
-              type = "colors";
-              paddingLeft = "20";
-              symbol = "circle";}
-
-            { type = "break"; }
-
-            {
-              type = "custom";
-              format = "╔══════════════════════════════════════════════════════╗";}
-            {
-              type = "display";
-              key = "  󰍹  Display   ║ ";
-              format = "{1}x{2}";}
-            {
-              type = "cpu";
-              key = "    CPU       ║ ";
-              format = "{1}";}
-            {
-              type = "gpu";
-              key = "  󰊴  GPU       ║ ";
-              format = "{2}";}
-            {
-              type = "memory";
-              key = "    Memory    ║ ";
-              format = "{1} / {2} ({3})";}
-            {
-              type = "custom";
-              format = "╚══════════════════════════════════════════════════════╝";}
-          ];
-				};
-			};
+          # Shell, Window Manager (WM) / Desktop Environment (DE) and terminal
+          {
+            type = "shell";
+            key = " ";
+            format = "{6}";}
+          {
+            key = " ";
+            type = "wm";}
+          {
+            key = "󱂬 ";
+            type = "de";}
+          {
+            type = "terminal";
+            key = " ";
+            format = "{5}";}
+        ];
+      };
     };
   };
 }

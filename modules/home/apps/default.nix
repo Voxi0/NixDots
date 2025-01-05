@@ -5,8 +5,6 @@
   ];
 
   # Enable all applications by default
-  enableZSH = lib.mkDefault true;
-  enableKitty = lib.mkDefault true;
   enableGit = lib.mkDefault true;
   enableFloorp = lib.mkDefault true;
   enableNixcord = lib.mkDefault true;
