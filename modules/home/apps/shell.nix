@@ -3,7 +3,7 @@
   home = {
     # Extra CLI packages/tools
     packages = with pkgs; [
-      nh btop
+      nh btop superfile
     ];
   };
 
@@ -93,21 +93,6 @@
       enable = true;
       enableNushellIntegration = true;
       package = pkgs.zoxide;
-    };
-
-    # TUI file manager
-    yazi = {
-      enable = true;
-      enableNushellIntegration = true;
-      package = pkgs.yazi;
-      settings = {
-        manager = {
-          show_hidden = true;
-          sort_by = "alphabetical";
-          sort_reverse = false;
-          sort_dir_first = true;
-        };
-      };
     };
 
     # Fetch script
