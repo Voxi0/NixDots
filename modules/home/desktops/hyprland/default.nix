@@ -37,7 +37,7 @@ in {
     # Base/Required packages
     packages = with pkgs; [
       # Base
-      hyprpolkitagent inputs.swww.packages.${pkgs.system}.swww libnotify
+      hyprpolkitagent libnotify inputs.swww.packages.${pkgs.system}.swww
       libsForQt5.qt5.qtwayland kdePackages.qtwayland qt6Packages.qt6ct
 
       # Utilities
@@ -55,16 +55,20 @@ in {
   stylix.targets = {
     hyprland.enable = false;  # Must be disabled in order to disable Hyprpaper without any conflicts
     hyprpaper.enable = false;
+    hyprlock.enable = false;  # So we can set a custom background for Hyprlock
   };
 
   # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
 		xwayland.enable = true;
-		systemd.enable = false;
-		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
-		];
+    systemd = {
+      enable = false;
+      variables = ["--all"];
+    };
+
+    # Plugins and settings
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [];
     settings = {
       ################
       ### MONITORS ###
@@ -98,9 +102,11 @@ in {
       ### AUTOSTART ###
       #################
       exec-once = [
-        "swww-daemon && swww restore"
-        "ags run --gtk4"
-        "udiskie --automount --smart-tray --terminal=$terminal"
+        "systemctl --user enable --now hyprpolkitagent.service"
+        "uwsm app -- swww-daemon"
+        "swww restore"
+        "uwsm app -- ags run --gtk4"
+        "uwsm app -- udiskie --automount --smart-tray --terminal=$terminal"
         "hyprshade on vibrance"
       ];
 
@@ -121,9 +127,7 @@ in {
         sensitivity = 0;
 
         # Touchpad
-        touchpad = {
-            natural_scroll = false;
-        };
+        touchpad.natural_scroll = false;
       };
 
       # Touchpad gestures
@@ -144,13 +148,11 @@ in {
       ];
 
       # Window layouts
+      master.new_status = "master";
       dwindle = {
         # Master switch for pseudotiling. Enabling is bound to mainMod + P
         pseudotile = true;
         preserve_split = true;                 # You probably want this
-      };
-      master = {
-        new_status = "master";
       };
 
       #####################
@@ -175,15 +177,15 @@ in {
         # Window layout style to use
         layout = "dwindle";
       };
-
       decoration = {
         # Radius of rounded window corners
-        rounding = 8;
+        rounding = 6;
 
         # Change transparency of focused and unfocused windows
         active_opacity = 1.0;
         inactive_opacity = 1.0;
 
+        # Drop shadow
         shadow = {
           enabled = true;
           range = 4;
@@ -191,6 +193,7 @@ in {
           color = "rgba(1a1a1aee)";
         };
 
+        # Blur
         blur = {
           enabled = true;
           size = 3;
@@ -198,7 +201,6 @@ in {
           vibrancy = 0.1696;
         };
       };
-
       animations = {
         # Enable/Disable animations
         enabled = true;
@@ -249,6 +251,10 @@ in {
       ################
       ### COMMANDS ###
       ################
+      # Command to lock the screen or bring up the logout menu
+      "$lockscreenCmd" = "hyprlock";
+      "$logoutMenuCmd" = "wlogout";
+
       # Commands to control volume
       "$increaseVolumeCmd" = "pamixer -i 5";
       "$decreaseVolumeCmd" = "pamixer -d 5";
@@ -273,7 +279,8 @@ in {
         "$mainMod, F, fullscreen"
         "$mainMod, V, togglefloating"
         "$mainMod, Q, killactive"
-        "$mainMod SHIFT, E, exit"
+        "$mainMod, L, exec, $lockscreenCmd"
+        "$mainMod SHIFT, E, exec, $logoutMenuCmd"
 
         # Brightness
         "$mainMod CONTROL, Up, exec, $increaseBrightnessCmd"
@@ -348,5 +355,136 @@ in {
         "$mainMod, mouse:273, resizewindow"
       ];
     };
+  };
+
+  # Hyprlock
+  home.file.".config/hypr/background.png".source = ../../Pictures/Wallpapers/night_city.png;
+  programs.hyprlock = {
+    enable = true;
+    package = pkgs.hyprlock;
+    settings = {
+      background = [{
+        path = "~/.config/hypr/background.png";
+        blur_passes = 1;
+        blur_size = 4;
+      }];
+
+      # General
+      general = {
+        hide_cursor = true;
+        no_fade_in = true;
+        no_fade_out = true;
+        disable_loading_bar = true;
+        ignore_empty_input = true;
+        immediate_render = false;
+        grace = 0;
+        text_trim = true;
+        fractional_scaling = 2;
+      };
+      
+      # Authentication - Configure fingerprint
+      auth.fingerprint = {
+        enabled = true;
+        ready_message = "Scan Fingerprint to Unlock";
+        present_message = "Scanning Fingerprint";
+      };
+
+      # Password input field
+      input-field = [{
+        # Z-Index - Can be used to position the input field on top of or on the bottom of another widget
+        zindex = 0;
+
+        # Box style
+        size = "200,50";
+        outline_thickness = 0;
+        rounding = 6;
+        position = "0, -100";
+        halign = "center";
+        valign = "center";
+
+        # Colors
+        font_color = "rgb(255, 255, 255)";
+        inner_color = "rgb(0, 0, 0)";
+        outer_color = "rgb(0, 0, 0)";
+        fail_color = "rgba(150, 0, 0, 1.0)";
+        capslock_color = "rgba(0, 150, 0, 1.0)";
+
+        # When input field is empty
+        fade_on_empty = false;
+        placeholder_text = ''<i>Password</i>'';
+
+        # Password is displayed as dots
+        hide_input = false;
+        dots_size = "0.15";
+        dots_center = true;
+        dots_rounding = "-1";
+
+        # Wrong password
+        fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
+        fail_timeout = "3000";
+      }];
+
+      # Widgets
+      label = [
+        {
+          monitor = "DP-2";
+          text = "$TIME";
+          color = "rgb(255, 255, 255)";
+          font_size = 95;
+          font_family = "JetBrains Mono";
+          position = "0, 300";
+          halign = "center";
+          valign = "center";
+        }
+        {
+
+          monitor = "DP-2";
+          text = ''cmd[update:1000] echo $(date +"%A, %B %d")'';
+          color = "rgb(255, 255, 255)";
+          font_size = 22;
+          font_family = "JetBrains Mono";
+          position = "0, 200";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+    };
+  };
+
+  # Wlogout - Wayland logout menu
+  programs.wlogout = {
+    enable = true;
+    package = pkgs.wlogout;
+    layout = [
+      {
+        label = "shutdown";
+        action = "systemctl poweroff";
+        text = "Shutdown";
+        keybind = "s";
+      }
+      {
+        label = "reboot";
+        action = "systemctl reboot";
+        text = "Restart";
+        keybind = "r";
+      }
+      {
+        label = "lockscreen";
+        action = "hyprlock";
+        text = "Lock Screen";
+        keybind = "l";
+      }
+    ];
+    style = ''
+      button {
+        background-color: #000000;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        margin: 0px 6px;
+        transition-duration: 0.2s;
+      }
+      button:hover {background-color: #091059;}
+    '';
   };
 }

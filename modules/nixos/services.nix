@@ -22,6 +22,9 @@
     # Touchpad support
     libinput.enable = true;
 
+    # Required for handling fingerprint authentications
+    fprintd.enable = true;
+
     # Display/Login manager
     displayManager.sddm = {
       enable = true;
