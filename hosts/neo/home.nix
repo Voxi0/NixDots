@@ -8,17 +8,12 @@
   # Required for non NixOS systems
   # targets.genericLinux.enable = true;
 
-  # Allow unfree software - Must be defined here, not just "configuration.nix"
-  nixpkgs.config.allowUnfree = true;
-
-  # Home
-  home = {
-    # Files
-    file = {
-      "Pictures/Wallpapers" = {
-        source = ./../../modules/home/Pictures/Wallpapers;
-        recursive = true;
-      };
+  # Files in the user home directory
+  home.file = {
+    # Wallpapers
+    "Pictures/Wallpapers" = {
+      source = ./../../modules/home/Pictures/Wallpapers;
+      recursive = true;
     };
   };
 
@@ -33,12 +28,8 @@
     };
 
     # Extra config for GTK3 and GTK4
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };
 
   # QT - Ensure that we have proper QT styling

@@ -62,13 +62,8 @@
     system = "x86_64-linux";
 		systemDisk = "/dev/sda";
     username = "voxi0";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [ inputs.nur.overlays.default ];
-    };
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
-      inherit nixpkgs pkgs system systemDisk hostname username inputs;
+      inherit nixpkgs system systemDisk hostname username inputs;
     };
   in {
     # NixOS configurations

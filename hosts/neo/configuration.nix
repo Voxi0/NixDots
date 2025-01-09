@@ -1,4 +1,4 @@
-{ systemDisk, ... }: {
+{ systemDisk, inputs, ... }: {
   # Import Nix modules
   imports = [
     ./../../hardware-configuration.nix
@@ -19,6 +19,14 @@
 			trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
 		};
 	};
+
+  # Nix packages
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [
+      inputs.nur.overlays.default
+    ];
+  };
 
 	# Replace existing files rather than exit with an error
 	home-manager.backupFileExtension = "backup";
