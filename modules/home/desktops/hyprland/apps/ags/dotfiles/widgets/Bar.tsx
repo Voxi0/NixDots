@@ -1,127 +1,115 @@
-// Astal
-import { Variable, GLib, bind, exec } from "astal"
-import { App, Astal, Gtk, Gdk } from "astal/gtk3"
+// TODO - System tray buttons are useless right now
 
-// Astal libraries
+// Astal
+import { App, Astal, Gtk, Gdk } from "astal/gtk4"
+import { Variable, GLib, bind } from "astal"
+
+// Astgl libraries
 import AstalHyprland from "gi://AstalHyprland?version=0.1"
 import AstalBattery from "gi://AstalBattery?version=0.1"
 import AstalNetwork from "gi://AstalNetwork?version=0.1"
 import AstalTray from "gi://AstalTray?version=0.1"
 
-// Main menu button - Toggles main menu
-function MainMenuButton() {
-    return <box className = "MainMenuButton">
-		<button
-        onClickRelease = {() => {
-            App.toggle_window("main-menu")
-        }}>
-			<icon icon = "./assets/nix-snowflake-colours.svg"/>
-		</button>
-	</box>
-}
-
-// WiFi
-function WiFi() {
-	const { wifi } = AstalNetwork.get_default()
-    return <box className = "WiFi">
-		<icon icon = {bind(wifi, "iconName")}/>
-		<label label = {bind(wifi, "ssid").as(String)}/>
-	</box>
-}
-
-// Main menu
-export function MainMenu(monitor: Gdk.Monitor) {
-    return <window
-	name="main-menu"
-    className="MainMenu"
-    application={App}
-    gdkmonitor={monitor}
-    exclusivity={Astal.Exclusivity.NORMAL}
-    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
-    visible={false}>
-        <box>
-            <WiFi></WiFi>
-        </box>
-    </window>
+// Dashboard button - Toggles the dashboard
+function DashboardButton() {
+    return <box cssClasses={["DashboardButton"]}>
+        <button onClicked={() => App.toggle_window("dashboard")}>
+            <image iconName={"nix-snowflake-colours"}/>
+        </button>
+    </box>
 }
 
 // Hyprland workspaces
 function Workspaces() {
-	const hypr = AstalHyprland.get_default()
-	return <box className="Workspaces">
-		{bind(hypr, "workspaces").as(wss => wss
-			.sort((a, b) => a.id - b.id)
-			.map(ws => (
-				<button
-				className={bind(hypr, "focusedWorkspace").as(fw => ws === fw ? "focused" : "")}
+    const hypr = AstalHyprland.get_default()
+    return <box cssClasses={["Workspaces"]}>
+        {bind(hypr, "workspaces").as(ws => ws
+            .filter(ws => !(ws.id >= -99 && ws.id <= -2)) // Filter out special workspaces
+            .sort((a, b) => a.id - b.id)
+            .map(ws => (
+                <button
+                cssClasses={bind(hypr, "focusedWorkspace").as(fw => ws === fw ? ["focused"] : [""])}
 				onClicked={() => ws.focus()}>
-				{ws.id}
-				</button>
-			))
-		)}
-	</box>
+				    {ws.id}
+                </button>
+            ))
+        )}
+    </box>
 }
 
 // Clock
-function Time({format = "%I:%M %p"}) {
+function Time({format="%I:%M %p"}) {
 	const time = Variable<string>("").poll(1000, () => GLib.DateTime.new_now_local().format(format)!)
 	return <button onDestroy = {() => time.drop()}>
-		<label className = "Time" label = {time()}/>
+		<label cssClasses={["Time"]} label = {time()}/>
 	</button>
 }
 
+// Network
+function WiFi() {
+    const { wifi } = AstalNetwork.get_default()
+    return <box cssClasses={["WiFi"]}>
+        <image iconName={bind(wifi, "iconName")}/>
+        <label label={bind(wifi, "ssid").as(String)}/>
+    </box>
+}
+
 // Battery
-function BatteryLevel() {
-	const bat = AstalBattery.get_default()
-	return <box
-	className = "Battery"
-	visible = {bind(bat, "isPresent")}>
-		<icon icon = {bind(bat, "batteryIconName")}/>
-		<label label = {bind(bat, "percentage").as(p => `${Math.floor(p * 100)}%`)}/>
-	</box>
+function Battery() {
+    const bat = AstalBattery.get_default()
+    return <box
+    visible={bind(bat, "isPresent")}
+    cssClasses={["Battery"]}>
+        <image iconName={bind(bat, "batteryIconName")}/>
+        <label label = {bind(bat, "percentage").as(p => `${Math.floor(p * 100)}%`)}/>
+    </box>
 }
 
 // System tray
 function SysTray() {
     const tray = AstalTray.get_default()
-    return <box className = "SysTray">
+    return <box cssClasses={["SysTray"]}>
         {bind(tray, "items").as(items => items.map(item => {
+            // Add application icon
             if(item.iconThemePath) App.add_icons(item.iconThemePath)
-            const menu = item.create_menu()
 
+            // System tray icon button
             return <button
-            tooltipMarkup={bind(item, "tooltipMarkup")}
-            onDestroy={() => menu?.destroy()}
-            onClickRelease={self => {
-                menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
-            }}>
-                <icon gIcon={bind(item, "gicon")}/>
+            tooltipMarkup={bind(item, "tooltipMarkup")}>
+                <image gicon={bind(item, "gicon")}/>
             </button>
         }))}
     </box>
 }
 
-export function Bar(monitor: Gdk.Monitor) {
+// Bar
+export default function Bar(monitor: Gdk.Monitor) {
+    // Window anchors and GTK widget alignment
+    const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
+    const { START, CENTER, END } = Gtk.Align;
+
+    // Window
     return <window
-	name="bar"
-    className="Bar"
+    visible
+    name={"bar"}
+    cssClasses={["Bar"]}
     application={App}
     gdkmonitor={monitor}
-    exclusivity={Astal.Exclusivity.EXCLUSIVE}
-    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
-	visible={true}>
+    anchor={TOP | LEFT | RIGHT}
+    exclusivity={Astal.Exclusivity.EXCLUSIVE}>
         <centerbox>
-            <box hexpand halign = {Gtk.Align.START}>
-				<MainMenuButton/>
-				<Workspaces/>
-			</box>
-			<box hexpand halign = {Gtk.Align.CENTER}>
-				<Time format = "%I:%M %p"/>
-			</box>
-			<box hexpand halign = {Gtk.Align.END}>
-				<BatteryLevel/>
-				<SysTray/>
-			</box>
+            <box hexpand halign={START}>
+                <DashboardButton/>
+                <Workspaces/>
+            </box>
+            <box hexpand halign={CENTER}>
+                <Time format="%I:%M %p"/>
+            </box>
+            <box hexpand halign={END}>
+                <WiFi/>
+                <Battery/>
+                <SysTray/>
+            </box>
         </centerbox>
     </window>
 }

@@ -1,0 +1,6 @@
+{
+    "name": "astal-shell",
+    "dependencies": {
+        "astal": "/home/voxi0/.local/share/ags"
+    }
+}

@@ -1,6 +1,6 @@
-/// <reference path="./glib-2.0.d.ts" />
 /// <reference path="./gio-2.0.d.ts" />
 /// <reference path="./gobject-2.0.d.ts" />
+/// <reference path="./glib-2.0.d.ts" />
 /// <reference path="./gmodule-2.0.d.ts" />
 /// <reference path="./gdk-4.0.d.ts" />
 /// <reference path="./cairo-1.0.d.ts" />
@@ -24,9 +24,9 @@
 
 declare module 'gi://Astal?version=4.0' {
     // Module dependencies
-    import type GLib from 'gi://GLib?version=2.0';
     import type Gio from 'gi://Gio?version=2.0';
     import type GObject from 'gi://GObject?version=2.0';
+    import type GLib from 'gi://GLib?version=2.0';
     import type GModule from 'gi://GModule?version=2.0';
     import type Gdk from 'gi://Gdk?version=4.0';
     import type cairo from 'gi://cairo?version=1.0';
@@ -105,6 +105,106 @@ declare module 'gi://Astal?version=4.0' {
             LEFT,
             BOTTOM,
         }
+        module Box {
+            // Constructor properties interface
+
+            interface ConstructorProps extends Gtk.Box.ConstructorProps {
+                vertical: boolean;
+                children: Gtk.Widget[];
+                child: Gtk.Widget;
+            }
+        }
+
+        class Box extends Gtk.Box {
+            static $gtype: GObject.GType<Box>;
+
+            // Properties
+
+            /**
+             * Corresponds to [property`Gtk`.Orientable :orientation].
+             */
+            get vertical(): boolean;
+            set vertical(val: boolean);
+            get children(): Gtk.Widget[];
+            set children(val: Gtk.Widget[]);
+            get child(): Gtk.Widget;
+            set child(val: Gtk.Widget);
+
+            // Constructors
+
+            constructor(properties?: Partial<Box.ConstructorProps>, ...args: any[]);
+
+            _init(...args: any[]): void;
+
+            static ['new'](): Box;
+
+            // Methods
+
+            get_vertical(): boolean;
+            set_vertical(value: boolean): void;
+            get_children(): Gtk.Widget[];
+            set_children(value: Gtk.Widget[]): void;
+            get_child(): Gtk.Widget | null;
+            set_child(value?: Gtk.Widget | null): void;
+        }
+
+        module Slider {
+            // Constructor properties interface
+
+            interface ConstructorProps extends Gtk.Scale.ConstructorProps {
+                value: number;
+                min: number;
+                max: number;
+                step: number;
+            }
+        }
+
+        class Slider extends Gtk.Scale {
+            static $gtype: GObject.GType<Slider>;
+
+            // Properties
+
+            /**
+             * Value of this slider. Defaults to `0`.
+             */
+            get value(): number;
+            set value(val: number);
+            /**
+             * Minimum possible value of this slider. Defaults to `0`.
+             */
+            get min(): number;
+            set min(val: number);
+            /**
+             * Maximum possible value of this slider. Defaults to `1`.
+             */
+            get max(): number;
+            set max(val: number);
+            /**
+             * Size of step increments. Defaults to `0.05`.
+             */
+            get step(): number;
+            set step(val: number);
+
+            // Constructors
+
+            constructor(properties?: Partial<Slider.ConstructorProps>, ...args: any[]);
+
+            _init(...args: any[]): void;
+
+            static ['new'](): Slider;
+
+            // Methods
+
+            get_value(): number;
+            set_value(value: number): void;
+            get_min(): number;
+            set_min(value: number): void;
+            get_max(): number;
+            set_max(value: number): void;
+            get_step(): number;
+            set_step(value: number): void;
+        }
+
         module Window {
             // Constructor properties interface
 
@@ -774,6 +874,24 @@ declare module 'gi://Astal?version=4.0' {
             block_signal_handler(id: number): any;
             unblock_signal_handler(id: number): any;
             stop_emission_by_name(detailedName: string): any;
+        }
+
+        type BoxClass = typeof Box;
+        abstract class BoxPrivate {
+            static $gtype: GObject.GType<BoxPrivate>;
+
+            // Constructors
+
+            _init(...args: any[]): void;
+        }
+
+        type SliderClass = typeof Slider;
+        abstract class SliderPrivate {
+            static $gtype: GObject.GType<SliderPrivate>;
+
+            // Constructors
+
+            _init(...args: any[]): void;
         }
 
         type WindowClass = typeof Window;

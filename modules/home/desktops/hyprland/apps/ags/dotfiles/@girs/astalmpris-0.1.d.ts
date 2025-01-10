@@ -152,8 +152,8 @@ declare module 'gi://AstalMpris?version=0.1' {
                 canRaise: boolean;
                 identity: string;
                 entry: string;
-                supported_uri_schemas: string[];
-                supportedUriSchemas: string[];
+                supported_uri_schemes: string[];
+                supportedUriSchemes: string[];
                 supported_mime_types: string[];
                 supportedMimeTypes: string[];
                 loop_status: Loop;
@@ -274,15 +274,15 @@ declare module 'gi://AstalMpris?version=0.1' {
              * This can be viewed as protocols supported by the player in almost all cases. Almost every media player will include support for the "file
              * " scheme. Other common schemes are "http" and "rtsp".
              */
-            get supported_uri_schemas(): string[];
-            set supported_uri_schemas(val: string[]);
+            get supported_uri_schemes(): string[];
+            set supported_uri_schemes(val: string[]);
             /**
              * The URI schemes supported by the media player.
              * This can be viewed as protocols supported by the player in almost all cases. Almost every media player will include support for the "file
              * " scheme. Other common schemes are "http" and "rtsp".
              */
-            get supportedUriSchemas(): string[];
-            set supportedUriSchemas(val: string[]);
+            get supportedUriSchemes(): string[];
+            set supportedUriSchemes(val: string[]);
             /**
              * The mime-types supported by the player.
              */
@@ -550,7 +550,7 @@ declare module 'gi://AstalMpris?version=0.1' {
              */
             play(): void;
             /**
-             * uri scheme should be an element of [property`AstalMpris`.Player:supported_uri_schemas] and the mime-type should match one of the elements
+             * uri scheme should be an element of [property`AstalMpris`.Player:supported_uri_schemes] and the mime-type should match one of the elements
              * of [property`AstalMpris`.Player:supported_mime_types].
              * @param uri Uri of the track to load.
              */
@@ -576,7 +576,7 @@ declare module 'gi://AstalMpris?version=0.1' {
             get_can_raise(): boolean;
             get_identity(): string;
             get_entry(): string;
-            get_supported_uri_schemas(): string[];
+            get_supported_uri_schemes(): string[];
             get_supported_mime_types(): string[];
             get_loop_status(): Loop;
             set_loop_status(value: Loop | null): void;

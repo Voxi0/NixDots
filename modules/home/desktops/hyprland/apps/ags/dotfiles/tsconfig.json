@@ -9,14 +9,6 @@
         // "checkJs": true,
         // "allowJs": true,
         "jsx": "react-jsx",
-        "jsxImportSource": "/home/voxi0/.local/share/ags/gtk3",
-        "paths": {
-            "astal": [
-                "/home/voxi0/.local/share/ags"
-            ],
-            "astal/*": [
-                "/home/voxi0/.local/share/ags/*"
-            ]
-        },
+        "jsxImportSource": "astal/gtk4",
     }
 }

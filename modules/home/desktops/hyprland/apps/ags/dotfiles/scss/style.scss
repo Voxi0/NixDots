@@ -1,6 +1,6 @@
 // Variables
-$bg: #1e1e2e;
-$fg: #cdd6f4;
+$bg: #000000;
+$fg: #ffffff;
 $accent: #f2cdcd;
 $fontSize: 16px;
 $borderRadius: 6px;
@@ -14,7 +14,7 @@ window.Bar {
   	// Elements
   	button {all: unset;}
   	box {border-radius: $borderRadius;}
-  	icon {
+  	image {
     	margin-left: 8px;
     	margin-right: -8px;
   	}
@@ -26,16 +26,18 @@ window.Bar {
 
   	// Custom widgets
 	// Global - Common styles between all custom widgets
-  	.MainMenuButton, .Workspaces, .Time, .Battery, .SysTray {
+  	.DashboardButton, .Workspaces,
+    .Time,
+    .WiFi, .Battery, .SysTray {
     	background-color: $bg;
     	margin: 2px;
   	}
 
-	// Main menu button - To toggle main menu
-	.MainMenuButton icon {margin: unset; padding: 0px 6px;}
+	// Dashboard button - To toggle dashboard
+	.DashboardButton image {margin: unset; padding: 0px 6px;}
 
 	// System tray
-  	.SysTray icon {margin: 0px 4px;}
+  	.SysTray image {margin: 0px 4px;}
 
 	// Workspaces
 	.Workspaces {
@@ -53,8 +55,8 @@ window.Bar {
   	}
 }
 
-// Main menu window
-window.MainMenu {
+// Dashboard window
+window.Dashboard {
     background-color: transparent;
     color: $fg;
 	font-size: $fontSize;
@@ -66,14 +68,6 @@ window.MainMenu {
 		border-radius: $borderRadius;
 
 		// Elements
-		button {
-			all: unset;
-		}
-
-		// Custom widgets
-		.WiFi {
-			background-color: $bg;
-			padding: 0px 6px;
-		}
+		button {all: unset;}
 	}
 }

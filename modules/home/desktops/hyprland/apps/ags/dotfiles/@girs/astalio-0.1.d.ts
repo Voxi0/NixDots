@@ -229,9 +229,7 @@ declare module 'gi://AstalIO?version=0.1' {
 
             _init(...args: any[]): void;
 
-            static subprocessv(cmd: string[]): Process;
-
-            static ['new'](): Process;
+            static ['new'](cmd: string[]): Process;
 
             // Signals
 
@@ -247,6 +245,12 @@ declare module 'gi://AstalIO?version=0.1' {
 
             // Static methods
 
+            /**
+             * Start a new subprocess with the given command.
+             * The first element of the vector is executed with the remaining elements as the argument list.
+             * @param cmd
+             */
+            static subprocessv(cmd: string[]): Process;
             /**
              * Start a new subprocess with the given command which is parsed using [func`GLib`.shell_parse_argv].
              * @param cmd
