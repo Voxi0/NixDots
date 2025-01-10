@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   # Hardware
   hardware = {
+    # Graphics/Video
     graphics = {
       enable = true;
       enable32Bit = false;
@@ -11,6 +12,8 @@
         libvdpau-va-gl
       ];
     };
+
+    # Bluetooth
     bluetooth = {
       enable = true;
       powerOnBoot = false;
@@ -65,5 +68,5 @@
   # Determines the NixOS release from which the default settings for stateful data on your system were taken
   # Perfectly fine and recommended to leave this value at the release version of the first install of this system
   # Before changing this value, read the docs for this option
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }

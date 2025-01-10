@@ -1,4 +1,4 @@
-{ lib, config, inputs, pkgs, ... }: {
+{ lib, config, inputs, ... }: {
 	# Import Nix modules
 	imports = [
 		inputs.nixcord.homeManagerModules.nixcord
@@ -13,12 +13,7 @@
   config = lib.mkIf config.enableNixcord {
 		programs.nixcord = {
 			enable = true;
-			discord = {
-				enable = true;
-				package = pkgs.discord;
-				openASAR.enable = true;
-				vencord.enable = true;
-			};
+      discord.vencord.unstable = true;
 
 			# quickCss = "";
 			config = {
