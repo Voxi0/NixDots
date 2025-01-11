@@ -32,12 +32,10 @@
     # Kitty - Terminal emulator
     kitty = {
       enable = true;
+      package = pkgs.kitty;
       settings = {
         # Disable popup confirmation window when closing Kitty terminal
         confirm_os_window_close = 0;
-
-        # Font
-        font_size = "11.0";
 
         # Cursor
         cursor_shape = "beam";
@@ -49,6 +47,9 @@
 
         # Performance tuning
         sync_to_monitor = true;
+
+        # Number of lines of history to keep in memory for scrolling back
+        scrollback_lines = 1000;
 
         # Tab bar position, style and alignment
         tab_bar_edge = "top";
@@ -68,6 +69,10 @@
         active_tab_font_style = "bold";
         inactive_tab_font_style = "normal";
 
+        # Window layouts
+        enabled_layouts = "splits:split_axis=horizontal,*";
+        window_margin_width = "2";
+
         # Terminal bell
         enable_audio_bell = false;
         window_alert_on_bell = true;
@@ -78,6 +83,28 @@
         underline_hyperlinks = "always";
         url_style = "curly";
         open_url_with = "default";
+      };
+
+      # Keybindings
+      keybindings = {
+        # For the split layout
+        # Move the active window in the indicated direction
+        "shift+up" = "move_window up";
+        "shift+left" = "move_window left";
+        "shift+right" = "move_window right";
+        "shift+down" = "move_window down";
+
+        # Move the active window to the indicated screen edge
+        "ctrl+shift+up" = "layout_action move_to_screen_edge top";
+        "ctrl+shift+left" = "layout_action move_to_screen_edge left";
+        "ctrl+shift+right" = "layout_action move_to_screen_edge right";
+        "ctrl+shift+down" = "layout_action move_to_screen_edge bottom";
+
+        # Switch focus to the neighboring window in the indicated direction
+        "ctrl+alt+left" = "neighboring_window left";
+        "ctrl+alt+right" = "neighboring_window right";
+        "ctrl+alt+up" = "neighboring_window up";
+        "ctrl+alt+down" = "neighboring_window down";
       };
     };
 
