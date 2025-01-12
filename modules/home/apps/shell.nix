@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, config, pkgs, ... }: {
   # TODO: Install extra packages for "bat" when they aren't broken anymore
   # Extra CLI tools
   home.packages = with pkgs; [
@@ -23,17 +23,44 @@
       plugins = with pkgs.nushellPlugins; [
         highlight
       ];
+
+      # Shell alises to shorten useful commands
       shellAliases = {
         ff = "fastfetch";
-
-        update-switch = "nh os switch -H";
-        update-boot = "nh os boot -H";
-        update-test = "nh os test -H";
-        clean = "nh clean all";
       };
-      extraConfig = "
-        $env.config.show_banner = false
-      ";
+
+      # Environment variables
+      environmentVariables = lib.mkIf config.programs.nvf.enable {
+        EDITOR = "nvim";
+        MANPAGER = "nvim +Man!";
+      };
+
+      # The login file to be used for Nushell upon logging in
+      loginFile.text = ''
+        uwsm start select
+      '';
+
+      # The configuration file to be used for Nushell
+      configFile.text = ''
+        let carapace_completer = {|spans|
+          carapace $spans.0 nushell $spans | from json
+        }
+
+        $env.config = {
+          show_banner: false,
+          completions: {
+            case_sensitive: false,
+            quick: true,
+            partial: true,
+            algorithm: "fuzzy",
+            external: {
+              enable: true
+              completer: $carapace_completer
+              max_results: 50
+            },
+          },
+        }
+      '';
     };
 
     # Kitty - Terminal emulator
@@ -135,6 +162,13 @@
           error_symbol = "[->](bold red)";
         };
       };
+    };
+
+    # Multi-shell completion library
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+      package = pkgs.carapace;
     };
 
     # Use the shell we prefer inside of Nix shells instead of Bash

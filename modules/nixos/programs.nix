@@ -8,19 +8,6 @@
       enableSSHSupport = true;
     };
 
-    # UWSM - Universal Wayland Session Manager
-    uwsm = {
-      enable = true;
-      package = pkgs.uwsm;
-      waylandCompositors = {
-        hyprland = {
-          prettyName = "Hyprland";
-          comment = "Hyprland compositor managed by UWSM";
-          binPath = "/run/current-system/sw/bin/Hyprland";
-        };
-      };
-    };
-
 		# Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
 		hyprland = {
 			enable = true;

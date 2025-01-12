@@ -43,6 +43,9 @@ in {
       # Utilities
       pamixer brightnessctl playerctl grim slurp feh udiskie hyprshade
     ];
+
+    # Hyprcursor
+    pointerCursor.hyprcursor.enable = true;
   };
 
   # Playerctl
@@ -95,8 +98,26 @@ in {
       ### VARIABLES ###
       #################
       "$mainMod" = "SUPER";
-      "$terminal" = "kitty";
-      "$menu" = "wofi --show drun";
+      "$terminal" = "uwsm app -- kitty";
+      "$menu" = "uwsm app -- $(wofi --show drun --define=drun-print_desktop_file=true)";
+
+      # Command to lock the screen or bring up the logout menu
+      "$lockscreenCmd" = "uwsm app -- hyprlock";
+      "$logoutMenuCmd" = "uwsm app -- wlogout";
+
+      # Commands to control volume
+      "$increaseVolumeCmd" = "pamixer -i 5";
+      "$decreaseVolumeCmd" = "pamixer -d 5";
+      "$toggleAudioMuteCmd" = "pamixer --toggle-mute";
+      "$toggleMicMuteCmd" = "pamixer --default-source -t";
+
+      # Commands to control screen brightness
+      "$increaseBrightnessCmd" = "brightnessctl s +5%";
+      "$decreaseBrightnessCmd" = "brightnessctl s 5%-";
+
+      # Commands to use for screenshots - For the entire screen or selected area
+      "$fullscreenScreenshotCmd" = "grim";
+      "$selectedAreaScreenshotCmd" = ''grim -g "$(slurp)"'';
 
       #################
       ### AUTOSTART ###
@@ -247,27 +268,6 @@ in {
         force_default_wallpaper = false;
         vfr = true;                            # Lowers the amount of sent frames when nothing is happening on-screen
       };
-
-      ################
-      ### COMMANDS ###
-      ################
-      # Command to lock the screen or bring up the logout menu
-      "$lockscreenCmd" = "hyprlock";
-      "$logoutMenuCmd" = "wlogout";
-
-      # Commands to control volume
-      "$increaseVolumeCmd" = "pamixer -i 5";
-      "$decreaseVolumeCmd" = "pamixer -d 5";
-      "$toggleAudioMuteCmd" = "pamixer --toggle-mute";
-      "$toggleMicMuteCmd" = "pamixer --default-source -t";
-
-      # Commands to control screen brightness
-      "$increaseBrightnessCmd" = "brightnessctl s +5%";
-      "$decreaseBrightnessCmd" = "brightnessctl s 5%-";
-
-      # Commands to use for screenshots - For the entire screen or selected area
-      "$fullscreenScreenshotCmd" = "grim";
-      "$selectedAreaScreenshotCmd" = ''grim -g "$(slurp)"'';
 
       ###################
       ### KEYBINDINGS ###

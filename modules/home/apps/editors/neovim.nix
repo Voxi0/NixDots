@@ -11,7 +11,7 @@
 
   # Configure Neovim if it's enabled
   config = lib.mkIf config.enableNeovim {
-    # Extra packages required
+    # Extra packages that are required
     home.packages = with pkgs; [
       wl-clipboard ripgrep
     ];
@@ -25,7 +25,7 @@
         vimAlias = true;
 
         # Follow editorconfig rules in current directory
-        enableEditorconfig = true;
+        globals.editorconfig = true;
 
         # Enable experimental Lua module loader to speed up the start process
         enableLuaLoader = true;

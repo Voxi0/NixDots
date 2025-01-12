@@ -1,42 +1,19 @@
 { pkgs, ... }: {
-	# System-wide installed packages
-	environment.systemPackages = with pkgs; [(
-		# SDDM theme
-		catppuccin-sddm.override {
-			flavor = "mocha";
-			font  = "JetBrainsMono Nerd Font";
-			fontSize = "12";
-			loginBackground = true;
-		}
-	)];
-
   # Services
   services = {
-		# DBus
-		dbus.enable = true;
-
-		# Power
-		upower.enable = true;
-		acpid.enable = true;
-
-    # Touchpad support
-    libinput.enable = true;
-
-    # Required for handling fingerprint authentications
-    fprintd.enable = true;
-
-    # Display/Login manager
-    displayManager.sddm = {
-      enable = true;
-			package = pkgs.kdePackages.sddm;
-			theme = "catppuccin-mocha";
-      enableHidpi = true;
-      autoNumlock = true;
-    };
+		dbus.enable = true;     # Message bus system that allows different processes to communicate with each other
+		upower.enable = true;   # Abstraction for enumerating power devices
+		acpid.enable = true;    # Flexible and extensible daemon for delivering ACPI events
+    libinput.enable = true; # Touchpad support
+    fprintd.enable = true;  # Handles fingerprint authentications
+    openssh.enable = true;  # OpenSSH daemon
+    udisks2.enable = true;  # Automounts removable media
+    blueman.enable = true;  # Bluetooth manager
+    printing.enable = true; # CUPS to print documents
 
     # X11 windowing system
     xserver = {
-      enable = true;
+      enable = false;
       excludePackages = [ pkgs.xterm ];
 
       # Keymap
@@ -45,17 +22,5 @@
 	      variant = "";
       };
     };
-
-    # OpenSSH daemon
-    openssh.enable = true;
-
-    # Udisks2 to automount removable media
-    udisks2.enable = true;
-
-    # Bluetooth
-    blueman.enable = true;
-
-    # CUPS to print documents
-    printing.enable = true;
   };
 }
