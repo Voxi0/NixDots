@@ -49,5 +49,4 @@
   services.mpris-proxy.enable = true;
 
   # Enable/Disable applications
-  enableEmacs = false;
 }

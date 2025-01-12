@@ -1,11 +1,18 @@
 { pkgs, ... }: {
-  # Home
-  home = {
-    # Extra CLI packages/tools
-    packages = with pkgs; [
-      nh btop superfile
-    ];
-  };
+  # TODO: Install extra packages for "bat" when they aren't broken anymore
+  # Extra CLI tools
+  home.packages = with pkgs; [
+    nh          # Nix helper
+    trashy      # System trash manager
+    superfile   # Fancy TUI file manager
+    binsider    # Analyze ELF binaries like a boss 😼🕵️
+    vhs         # Tool for generating terminal GIFs with code
+    television  # Fuzzy file finder
+    btop        # System monitor
+    tealdeer    # A simpler version of the traditional Man pages
+    hyperfine   # Benchmarking tool
+    tokei       # Shows the number of lines of comments, code etc in projects
+  ];
 
   # Configure the shell, terminal emulator and everything else e.g. a fetch script
   programs = {
@@ -33,6 +40,8 @@
     kitty = {
       enable = true;
       package = pkgs.kitty;
+
+      # Settings
       settings = {
         # Disable popup confirmation window when closing Kitty terminal
         confirm_os_window_close = 0;
@@ -88,17 +97,17 @@
       # Keybindings
       keybindings = {
         # For the split layout
-        # Move the active window in the indicated direction
-        "shift+up" = "move_window up";
-        "shift+left" = "move_window left";
-        "shift+right" = "move_window right";
-        "shift+down" = "move_window down";
-
         # Move the active window to the indicated screen edge
-        "ctrl+shift+up" = "layout_action move_to_screen_edge top";
-        "ctrl+shift+left" = "layout_action move_to_screen_edge left";
-        "ctrl+shift+right" = "layout_action move_to_screen_edge right";
-        "ctrl+shift+down" = "layout_action move_to_screen_edge bottom";
+        "shift+alt+up" = "layout_action move_to_screen_edge top";
+        "shift+alt+left" = "layout_action move_to_screen_edge left";
+        "shift+alt+right" = "layout_action move_to_screen_edge right";
+        "shift+alt+down" = "layout_action move_to_screen_edge bottom";
+
+        # Move the active window in the indicated direction
+        "ctrl+shift+alt+up" = "move_window up";
+        "ctrl+shift+alt+left" = "move_window left";
+        "ctrl+shift+alt+right" = "move_window right";
+        "ctrl+shift+alt+down" = "move_window down";
 
         # Switch focus to the neighboring window in the indicated direction
         "ctrl+alt+left" = "neighboring_window left";
@@ -148,6 +157,13 @@
       enable = true;
       enableNushellIntegration = true;
       package = pkgs.zoxide;
+    };
+
+    # A clone of the "cat" command with syntax highlighting and Git integration etc
+    bat = {
+      enable = true;
+      package = pkgs.bat;
+      extraPackages = with pkgs.bat-extras; [];
     };
 
     # Fetch script
