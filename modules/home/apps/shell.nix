@@ -24,36 +24,31 @@
       # Shell alises to shorten useful commands
       shellAliases.ff = "fastfetch";
 
+      # The login file to be used for Nushell upon logging in
+      loginFile.text = ''
+        # Displays a menu from which you can choose the Wayland compositor that's registered for UWSM to use
+        uwsm start select
+      '';
+
       # Environment variables
       environmentVariables = lib.mkIf config.programs.nvf.enable {
         EDITOR = "nvim";
         MANPAGER = "nvim +Man!";
       };
-
-      # The login file to be used for Nushell upon logging in
-      loginFile.text = ''
-        uwsm start select
+      envFile.text = ''
+        # Carapace
+        $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+        mkdir ~/.cache/carapace
+        carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
       '';
 
       # The configuration file to be used for Nushell
       configFile.text = ''
-        let carapace_completer = {|spans|
-          carapace $spans.0 nushell $spans | from json
-        }
+        # Initialize Carapace
+        source ~/.cache/carapace/init.nu
 
         $env.config = {
           show_banner: false,
-          completions: {
-            case_sensitive: false,
-            quick: true,
-            partial: true,
-            algorithm: "fuzzy",
-            external: {
-              enable: true
-              completer: $carapace_completer
-              max_results: 50
-            },
-          },
         }
       '';
     };
