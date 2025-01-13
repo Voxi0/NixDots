@@ -19,15 +19,10 @@
     # Nushell
     nushell = {
       enable = true;
-      package = pkgs.nushell;
-      plugins = with pkgs.nushellPlugins; [
-        highlight
-      ];
+      plugins = with pkgs.nushellPlugins; [ highlight ];
 
       # Shell alises to shorten useful commands
-      shellAliases = {
-        ff = "fastfetch";
-      };
+      shellAliases.ff = "fastfetch";
 
       # Environment variables
       environmentVariables = lib.mkIf config.programs.nvf.enable {
@@ -66,7 +61,6 @@
     # Kitty - Terminal emulator
     kitty = {
       enable = true;
-      package = pkgs.kitty;
 
       # Settings
       settings = {
@@ -148,7 +142,6 @@
     starship = {
       enable = true;
       enableNushellIntegration = true;
-      package = pkgs.starship;
 
       # Fish shell only
       enableInteractive = false;
@@ -168,14 +161,12 @@
     carapace = {
       enable = true;
       enableNushellIntegration = true;
-      package = pkgs.carapace;
     };
 
     # Use the shell we prefer inside of Nix shells instead of Bash
     nix-your-shell = {
       enable = true;
       enableNushellIntegration = true;
-      package = pkgs.nix-your-shell;
     };
 
     # Corrects errors in previous commands
@@ -183,27 +174,23 @@
       enable = true;
       enableNushellIntegration = true;
       enableInstantMode = false;
-      package = pkgs.thefuck;
     };
 
     # Smarter 'cd' command
     zoxide = {
       enable = true;
       enableNushellIntegration = true;
-      package = pkgs.zoxide;
     };
 
     # A clone of the "cat" command with syntax highlighting and Git integration etc
     bat = {
       enable = true;
-      package = pkgs.bat;
       extraPackages = with pkgs.bat-extras; [];
     };
 
     # Fetch script
     fastfetch = {
       enable = true;
-      package = pkgs.fastfetch;
       settings = {
         logo = {
           source = "nixos_small";

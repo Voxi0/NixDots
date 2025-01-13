@@ -28,9 +28,7 @@
   '';
 in {
   # Import Nix modules
-  imports = [
-    ./apps
-  ];
+  imports = [ ./apps ];
 
   # Home
   home = {
@@ -48,11 +46,8 @@ in {
     pointerCursor.hyprcursor.enable = true;
   };
 
-  # Playerctl
-  services.playerctld = {
-    enable = true;
-    package = pkgs.playerctl;
-  };
+  # Playerctl - Mpris media player CLI controller for VLC, Spotify, CMus etc
+  services.playerctld.enable = true;
 
   # Stop Stylix from using Hyprpaper to set the wallpaper - We want to use SWWW for wallpapers instead
   stylix.targets = {
@@ -361,7 +356,6 @@ in {
   home.file.".config/hypr/background.png".source = ../../Pictures/Wallpapers/night_city.png;
   programs.hyprlock = {
     enable = true;
-    package = pkgs.hyprlock;
     settings = {
       background = [{
         path = "~/.config/hypr/background.png";
@@ -454,7 +448,6 @@ in {
   # Wlogout - Wayland logout menu
   programs.wlogout = {
     enable = true;
-    package = pkgs.wlogout;
     layout = [
       {
         label = "shutdown";

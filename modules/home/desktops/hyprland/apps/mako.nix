@@ -1,8 +1,6 @@
 { lib, config, ... }: {
   # Module options
-  options = {
-    enableMako = lib.mkEnableOption true;
-  };
+  options.enableMako = lib.mkEnableOption true;
 
   # Configure Mako if it's enabled
   config = lib.mkIf config.enableMako {

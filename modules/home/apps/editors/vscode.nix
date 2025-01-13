@@ -1,8 +1,6 @@
 { lib, config, pkgs, ... }: {
   # Module options
-  options = {
-    enableVSCode = lib.mkEnableOption "Enables VSCode";
-  };
+  options.enableVSCode = lib.mkEnableOption "Enables VSCode";
 
   # Configure VSCode if it's enabled
   config = lib.mkIf config.enableVSCode {

@@ -1,13 +1,9 @@
 { lib, config, inputs, pkgs, ... }: {
   # Import Nix modules
-  imports = [
-    inputs.ags.homeManagerModules.default
-  ];
+  imports = [ inputs.ags.homeManagerModules.default ];
 
   # Module options
-  options = {
-    enableAGS = lib.mkEnableOption "Enables AGS";
-  };
+  options.enableAGS = lib.mkEnableOption "Enables AGS";
 
   # Configure AGS if it's enabled
   config = lib.mkIf config.enableAGS {

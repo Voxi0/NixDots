@@ -8,11 +8,15 @@ in pkgs.mkShellNoCC {
       echo "This isn't NixOS or the distro info isn't available"; exit 1;
     fi
 
-		# Set username
+		# Set username and email
 		while [[ -z "$username" ]]; do
 			read -p "Enter username (Cannot be empty): " username
 		done
 		sed -i "s/voxi0/$username/g" ./flake.nix ./chrootCommands.sh
+		while [[ -z "$useremail" ]]; do
+			read -p "Enter email (Cannot be empty - Used for configuring Git): " username
+		done
+		sed -i "s/alif200099@gmail.com/$useremail/g" ./flake.nix ./chrootCommands.sh
 
 		# List available disks
 		echo "Listing available disks..."

@@ -1,20 +1,14 @@
 { lib, config, inputs, pkgs, ... }: {
   # Import Nix modules
-  imports = [
-    inputs.nvf.homeManagerModules.default
-  ];
+  imports = [ inputs.nvf.homeManagerModules.default ];
 
   # Module options
-  options = {
-    enableNeovim = lib.mkEnableOption "Enables Neovim"; 
-  };
+  options.enableNeovim = lib.mkEnableOption "Enables Neovim"; 
 
   # Configure Neovim if it's enabled
   config = lib.mkIf config.enableNeovim {
     # Extra packages that are required
-    home.packages = with pkgs; [
-      wl-clipboard ripgrep
-    ];
+    home.packages = with pkgs; [ wl-clipboard ripgrep ];
 
     # NVF configuration
     programs.nvf = {

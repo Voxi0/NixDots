@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }: {
 	# Module options
-	options = {
-		enableObsidian = lib.mkEnableOption "Enables Obsidian";
-	};
+	options.enableObsidian = lib.mkEnableOption "Enables Obsidian";
 
 	# Configure Obsidian (A note taking software) if enabled
 	config = lib.mkIf config.enableObsidian {

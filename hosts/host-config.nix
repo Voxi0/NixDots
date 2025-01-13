@@ -1,6 +1,6 @@
 # This function allows you to easily create new NixOS configurations in the system flake
 # This way, you can avoid repeating code and make it much more readable
-{ nixpkgs, inputs, system, hostname, username, ... }: nixpkgs.lib.nixosSystem {
+{ nixpkgs, inputs, system, hostname, username, email, ... }: nixpkgs.lib.nixosSystem {
   inherit system;
   specialArgs = { inherit inputs username; };
   modules = [
@@ -10,7 +10,7 @@
       home-manager = {
         useUserPackages = true;
         useGlobalPkgs = true;
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs username email; };
         users."${username}" = {
           # Import Home Manager modules
           imports = [ ./${hostname}/home.nix ];

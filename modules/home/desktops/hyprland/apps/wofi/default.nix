@@ -1,8 +1,6 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, ... }: {
   # Module options
-  options = {
-    enableWofi = lib.mkEnableOption "Enables Wofi";
-  };
+  options.enableWofi = lib.mkEnableOption "Enables Wofi";
 
   # Configure Wofi if it's enabled
   config = lib.mkIf config.enableWofi {
@@ -12,7 +10,7 @@
     # Wofi configuration
     programs.wofi = {
       enable = true;
-      package = pkgs.wofi;
+      style = ''${builtins.readFile ./style.css}'';
       settings = {
         mode = "drun";
         allow_images = true;
@@ -20,7 +18,6 @@
         width = 440;
         height = 240;
       };
-      style = ''${builtins.readFile ./style.css}'';
     };
   };
 }

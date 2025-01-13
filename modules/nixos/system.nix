@@ -1,11 +1,14 @@
 { pkgs, ... }: {
   # Hardware
   hardware = {
+    # Enable all firmware regardless of license and support for most hardware
+    enableAllHardware = true;
+    enableAllFirmware = true;
+
     # Graphics/Video
     graphics = {
       enable = true;
       enable32Bit = false;
-      extraPackages32 = [];
       extraPackages = with pkgs; [
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
         intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (Older but works better for Firefox/Chromium)
@@ -21,6 +24,18 @@
         Enable = "Source,Sink,Media,Socket";
         Experimental = true;
       };
+    };
+
+    # Logitech wireless devices
+    logitech.wireless = {
+      enable = true;
+      enableGraphical = true;
+    };
+
+    # Graphics tablet
+    opentabletdriver = {
+      enable = true;
+      daemon.enable = true;
     };
   };
 
@@ -58,11 +73,11 @@
   # Security
   security = {
     polkit.enable = true;
-    rtkit.enable = true;      # Optional but recommended
-		pam.services.hyprlock = {};
+    rtkit.enable = true;                    # Optional but recommended
+		pam.services.hyprlock = {};             # Required for Hyprlock
   };
 
-  # Systemwide packages - Available to all users
+  # System-wide packages - Available to all users
   environment.systemPackages = [ ];
 
   # Determines the NixOS release from which the default settings for stateful data on your system were taken

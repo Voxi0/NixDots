@@ -1,13 +1,9 @@
 { lib, config, inputs, ... }: {
 	# Import Nix modules
-	imports = [
-		inputs.nixcord.homeManagerModules.nixcord
-	];
+	imports = [ inputs.nixcord.homeManagerModules.nixcord ];
 
   # Module options
-  options = {
-    enableNixcord = lib.mkEnableOption "Enables Nixcord";
-  };
+  options.enableNixcord = lib.mkEnableOption "Enables Nixcord";
 
   # Configure Vesktop only if it's enabled
   config = lib.mkIf config.enableNixcord {
@@ -21,10 +17,10 @@
 
 				# Use QuickCSS or an online theme
 				useQuickCss = false;
-				themeLinks = [
+				enabledThemes = [];
+        themeLinks = [
 					"https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/flavors/midnight-catppuccin-mocha.theme.css"
 				];
-				enabledThemes = [];
 
 				# Vencord plugins
 				plugins = {

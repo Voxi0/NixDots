@@ -1,14 +1,11 @@
 { lib, config, pkgs, ... }: {
 	# Module options
-	options = {
-		enableFloorp = lib.mkEnableOption "Enables Floorp Browser";
-	};
+	options.enableFloorp = lib.mkEnableOption "Enables Floorp Browser";
 
 	# Configure Floorp browser if it's enabled
 	config = lib.mkIf config.enableFloorp {
 		programs.floorp = {
 			enable = true;
-			package = pkgs.floorp;
 			enableGnomeExtensions = false;
 			languagePacks = [ "en-GB" "en-US" ];
 			policies = {
@@ -22,8 +19,6 @@
         userChrome = "${builtins.readFile ./userChrome.css}";
 				settings = {
 					# Make sure the 'Alt' key doesn't bring up that weird menu at the top of the browser
-					# I'm using that key as my mod key in my window manager configuration because of my weird keyboard
-					# Pressing the mod key brings up this weird menu and it's annoying
 					"ui.key.menuAccessKeyFocuses" = false;
 
 					# Don't hide the tab bar thingy when Floorp is fullscreen
@@ -40,9 +35,9 @@
 					# "browser.startup.homepage" = "https://nixos.org";
 				};
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          sidebery
-          ublock-origin
-          darkreader
+          sidebery          # Vertical tabs - REQUIRED
+          ublock-origin     # Very efficient and lightweight ad blocker
+          darkreader        # For reading sites that are too bright
         ];
 			};
 		};

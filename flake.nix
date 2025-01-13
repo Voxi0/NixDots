@@ -7,7 +7,7 @@
     # Nix package repository to use
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-		# Disko
+		# Disko - Declaratively partition and format disks using Nix
 		disko = {
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -62,8 +62,9 @@
     system = "x86_64-linux";
 		systemDisk = "/dev/sda";
     username = "voxi0";
+    email = "alif200099@gmail.com";
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
-      inherit nixpkgs system systemDisk hostname username inputs;
+      inherit nixpkgs system systemDisk hostname username email inputs;
     };
   in {
     # NixOS configurations
