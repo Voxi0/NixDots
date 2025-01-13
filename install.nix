@@ -2,21 +2,28 @@
   diskoConfig = ./disko.nix;
 in pkgs.mkShellNoCC {
   shellHook = ''
+    #!/bin/bash
+
     # Ensure that the installer is being run from NixOS
     echo "Verifying that the installer is being run from NixOS..."
     if ! [ -n "$(grep -i nixos < /etc/os-release)" ]; then
       echo "This isn't NixOS or the distro info isn't available"; exit 1;
     fi
 
-		# Set username and email
+		# Set host name (Which NixDots to install e.g. `Neo`), username and email
+    while [[ -z "$hostname" ]]; do
+			read -p "Enter hostname (Cannot be empty): " hostname
+		done
+
 		while [[ -z "$username" ]]; do
 			read -p "Enter username (Cannot be empty): " username
 		done
 		sed -i "s/voxi0/$username/g" ./flake.nix ./chrootCommands.sh
+
 		while [[ -z "$useremail" ]]; do
-			read -p "Enter email (Cannot be empty - Used for configuring Git): " username
+			read -p "Enter email (Cannot be empty - Used for configuring Git): " useremail
 		done
-		sed -i "s/alif200099@gmail.com/$useremail/g" ./flake.nix ./chrootCommands.sh
+		sed -i "s/alif200099@gmail.com/$useremail/g" ./modules/home/apps/git.nix
 
 		# List available disks
 		echo "Listing available disks..."
@@ -65,17 +72,9 @@ in pkgs.mkShellNoCC {
 
     # Install NixOS
     echo "Installing NixOS..."
-    if ! sudo nixos-install --no-channel-copy --flake /mnt/etc/nixos/#neo; then
+    if ! sudo nixos-install --no-channel-copy --flake /mnt/etc/nixos/$hostname; then
       echo "NixOS installation failed"; exit 1;
     fi
-
-    # Chroot into the new installation to run extra commands
-    echo "Entering chroot environment..."
-    sudo cp ./chrootCommands.sh /mnt/
-    if ! sudo nixos-enter -- bash -c './chrootCommands.sh'; then
-      echo "Failed to enter chroot environment"; exit 1;
-    fi
-    sudo rm /mnt/chrootCommands.sh
 
     # Installation complete
     echo "Installation complete! The system will power off now."

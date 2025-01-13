@@ -1,4 +1,4 @@
-{ lib, config, username, email, ... }: {
+{ lib, config, username, ... }: {
   # Module options
   options.enableGit = lib.mkEnableOption "Enables Git";
 
@@ -8,7 +8,7 @@
     programs.git = {
       enable = true;
       userName = username;
-      userEmail = email;
+      userEmail = "alif200099@gmail.com";
       extraConfig.init.defaultBranch = "main";
     };
 
