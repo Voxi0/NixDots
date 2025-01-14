@@ -35,20 +35,18 @@
         EDITOR = "nvim";
         MANPAGER = "nvim +Man!";
       };
-      envFile.text = ''
-        # Carapace
-        $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
-        mkdir ~/.cache/carapace
-        carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
-      '';
 
       # The configuration file to be used for Nushell
       configFile.text = ''
-        # Initialize Carapace
-        source ~/.cache/carapace/init.nu
-
+        # Configure Nushell
         $env.config = {
           show_banner: false,
+          completions: {
+            case_sensitive: false # Case-sensitive completions
+            quick: true           # Set to false to prevent auto-selecting completions
+            partial: true         # Set to false to prevent partial filling of the prompt
+            algorithm: "fuzzy"    # "prefix" or "fuzzy"
+          }
         }
       '';
     };
@@ -152,23 +150,10 @@
       };
     };
 
-    # Multi-shell completion library
-    carapace = {
-      enable = true;
-      enableNushellIntegration = true;
-    };
-
     # Use the shell we prefer inside of Nix shells instead of Bash
     nix-your-shell = {
       enable = true;
       enableNushellIntegration = true;
-    };
-
-    # Corrects errors in previous commands
-    thefuck = {
-      enable = true;
-      enableNushellIntegration = true;
-      enableInstantMode = false;
     };
 
     # Smarter 'cd' command
@@ -180,7 +165,9 @@
     # A clone of the "cat" command with syntax highlighting and Git integration etc
     bat = {
       enable = true;
-      extraPackages = with pkgs.bat-extras; [];
+      extraPackages = with pkgs.bat-extras; [
+        prettybat batpipe batgrep batdiff
+      ];
     };
 
     # Fetch script

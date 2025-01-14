@@ -32,25 +32,6 @@
 					readAllNotificationsButton.enable = true;
 					youtubeAdblock.enable = true;
 
-					# Custom rich presence
-					customRPC = {
-						enable = true;
-						appID = "1315354052594372740";
-						appName = "About Me";
-						details = ":P";
-						state = "Browsing the internet";
-						type = "playing";
-						timestampMode = "currentTime";
-						imageBig = "nix-snowflake-colors";
-						imageBigTooltip = "NixOS";
-
-						buttonOneText = "Website";
-						buttonOneURL = "https://voxi0.github.io/";
-
-						buttonTwoText = "Github";
-						buttonTwoURL = "https://github.com/Voxi0/";
-					};
-
 					# Spotify
 					spotifyCrack.enable = true;
 					spotifyControls.enable = true;
@@ -62,11 +43,8 @@
 					noTypingAnimation.enable = true;
 					onePingPerDM.enable = true;
 					messageLogger.enable = true;
-					callTimer.enable = true;
 					friendsSince.enable = true;
 					relationshipNotifier.enable = true;
-					implicitRelationships.enable = true;
-					gifPaste.enable = true;
 					customIdle = {
 						enable = true;
 						remainInIdle = true;														# Remain idle until you confirm to go back online
