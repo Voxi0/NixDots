@@ -25,6 +25,7 @@
 				settings = {
 					"ui.key.menuAccessKeyFocuses" = false;  # Stop the 'Alt' key from toggling the menu
 					"browser.fullscreen.autohide" = false;  # Don't hide the tab bar when fullscreen
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true; # Allow external stylesheets
 				};
 
         # Useful extensions to be installed by default with browser
