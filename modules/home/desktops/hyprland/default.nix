@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: let
+{ lib, inputs, pkgs, ... }: let
   # Scripts for Hyprland
   # Playerctl toggle shuffle
   playerctlShuffleToggle = pkgs.writeShellScriptBin "playerctlShuffleToggle" ''
@@ -124,6 +124,7 @@ in {
         "uwsm app -- ags run --gtk4"
         "uwsm app -- udiskie --automount --smart-tray --terminal=$terminal"
         "hyprshade on vibrance"
+        (lib.mkIf (pkgs.mpdscribble != null) "uwsm app -- mpdscribble")
       ];
 
       #############

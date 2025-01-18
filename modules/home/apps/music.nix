@@ -10,6 +10,9 @@
 
 	# Configure enabled music players
 	config = {
+    # MPD scrobbler - Sends scrobbling information to scrobbling services e.g. LastFM (Required for NCMPCPP)
+    home.packages = lib.mkIf config.enableNcmpcpp [ pkgs.mpdscribble ];
+
     # Services
     services = lib.mkIf config.enableNcmpcpp {
       # Music Player Daemon (MPD) - A free and open-source music player server (Required for NCMPCPP)
