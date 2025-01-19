@@ -53,7 +53,7 @@
         };
       };
 
-      # An implementation of the MPRIS protocol for MPD (Required for playerctl to work)
+      # An implementation of the MPRIS protocol for MPD (Required for Playerctl to work)
       mpd-mpris.enable = true;
     };
 
@@ -117,7 +117,7 @@
 
           # Lyrics
           store_lyrics_in_song_dir = false;
-          lyrics_directory = "${config.xdg.music}/.lyrics";
+          lyrics_directory = "${config.services.mpd.musicDirectory}/.lyrics";
           fetch_lyrics_for_current_song_in_background = true;
           follow_now_playing_lyrics = true;
 
