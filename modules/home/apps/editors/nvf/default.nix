@@ -1,4 +1,4 @@
-{ lib, config, inputs, pkgs, ... }: {
+{ lib, config, inputs, ... }: {
   # Import Nix modules
   imports = [
     inputs.nvf.homeManagerModules.default
@@ -9,31 +9,8 @@
   # Module options
   options.enableNeovim = lib.mkEnableOption "Enables Neovim"; 
 
-  # Configure Neovim if it's enabled
+  # Configure Neovim if it's enabled - Just enable NVF, configuration is in the other files
   config = lib.mkIf config.enableNeovim {
-    # Extra packages that are required
-    home.packages = with pkgs; [ wl-clipboard ripgrep ];
-
-    # NVF configuration
-    programs.nvf = {
-      enable = true;
-      settings.vim = {
-        # Keybinds
-        binds.cheatsheet.enable = true;
-        maps = {
-          normal = {
-            # LazyGit
-            "<C-g>" = {
-              silent = true;
-              action = "<cmd>LazyGit<CR>";
-            };
-
-            # Nvim UFO
-            "zR".action = "require('ufo').openAllFolds";
-            "zM".action = "require('ufo').closeAllFolds";
-          };
-        };
-      };
-    };
+    programs.nvf.enable = true;
   };
 }

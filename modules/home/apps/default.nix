@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   # Import Nix modules
   imports = [
     ./shell.nix ./editors ./git.nix ./nixcord.nix ./browser ./obsidian.nix ./music.nix
@@ -11,4 +11,7 @@
 	enableObsidian = lib.mkDefault true;
 	enableSpotify = lib.mkDefault true;
   enableNcmpcpp = lib.mkDefault true;
+
+  # Additional useful software
+  home.packages = with pkgs; [ wl-clipboard ];
 }

@@ -1,7 +1,8 @@
-_: {
+{ pkgs, ... }: {
   #################
   ### Telescope ###
   #################
+  home.packages = with pkgs; [ ripgrep ];
   programs.nvf.settinvs.vim.telescope = {
     enable = true;
     setupOpts.defaults = {
