@@ -1,5 +1,5 @@
 _: {
-  settings.vim = {
+  programs.nvf.settings.vim = {
     # Open Neovim whenever "vi" or "vim" command is executed
     viAlias = true;
     vimAlias = true;
@@ -45,14 +45,6 @@ _: {
       # File encoding
       "encoding" = "utf-8";
       "fileencoding" = "utf-8";
-    };
-
-    # Theme
-    theme = {
-      enable = true;
-      name = "catppuccin";
-      style = "mocha";
-      transparent = false;
     };
   };
 }

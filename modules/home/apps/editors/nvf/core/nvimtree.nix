@@ -1,6 +1,6 @@
 _: {
   # File explorer
-  settings.vim.filetree.nvimTree = {
+  programs.nvf.settings.vim.filetree.nvimTree = {
     enable = true;
     openOnSetup = false;
     mappings.toggle = "<C-n>";            # Toggle file explorer with Control + N

@@ -2,7 +2,7 @@ _: {
   #################
   ### Utilities ###
   #################
-  settings.vim = {
+  programs.nvf.settings.vim = {
     autopairs.nvim-autopairs.enable = true;
     autocomplete.nvim-cmp = {
       enable = true;

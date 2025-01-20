@@ -2,12 +2,8 @@
   # Import Nix modules
   imports = [
     inputs.nvf.homeManagerModules.default
-    ./settings.nix
-    ./ui.nix
-    ./language.nix
-    ./nvimtree.nix
-    ./utilities.nix
-    ./extraplugins.nix
+    ./core    # Essential settings and plugins
+    ./extra   # Super useful plugins
   ];
 
   # Module options
