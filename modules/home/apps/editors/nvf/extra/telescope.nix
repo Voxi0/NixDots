@@ -3,7 +3,7 @@
   ### Telescope ###
   #################
   home.packages = with pkgs; [ ripgrep ];
-  programs.nvf.settinvs.vim.telescope = {
+  programs.nvf.settings.vim.telescope = {
     enable = true;
     setupOpts.defaults = {
       color_devicons = true;

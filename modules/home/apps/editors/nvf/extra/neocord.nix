@@ -2,7 +2,7 @@ _: {
   ###############
   ### Neocord ###
   ###############
-  programs.nvf.settinvs.vim.presence.neocord = {
+  programs.nvf.settings.vim.presence.neocord = {
     enable = true;
     setupOpts = {
       logo = "auto";
