@@ -26,7 +26,7 @@
 
         # General
         globals.mapleader = " ";
-        lineNumberMode = "number";
+        lineNumberMode = "relative";
         spellcheck.enable = true;
         preventJunkFiles = true;                # Prevent swapfile and backupfile from being created
         useSystemClipboard = true;              # Required to copy text from Neovim and paste it somewhere else and vice versa
