@@ -1,5 +1,5 @@
-return {
-  -- Syntax highlighting
+-- Syntax highlighting
+{
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
@@ -14,4 +14,4 @@ return {
       },
     })
   end,
-}
+},
