@@ -20,7 +20,7 @@
     -- Set up Mason LSP config
     require("mason-lspconfig").setup({
       automatic_installation = true,
-      ensure_installed = { "nix" },
+      ensure_installed = { "nil_ls", "lua_ls" },
     })
 
     -- Automatically set up LSPs installed via Mason

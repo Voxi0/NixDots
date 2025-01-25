@@ -13,5 +13,5 @@
   enableNcmpcpp = lib.mkDefault true;
 
   # Additional useful software
-  home.packages = with pkgs; [ wl-clipboard ];
+  home.packages = with pkgs; [ wl-clipboard unzip ];
 }

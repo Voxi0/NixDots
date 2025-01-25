@@ -7,6 +7,10 @@
 
   # Configure NVChad if it's enabled
   config = lib.mkIf config.enableNVChad {
+    # Extra packages
+    home.packages = with pkgs; [ cargo ];
+
+    # NVChad
     programs.nvchad = {
       enable = true;
       hm-activation = true;
