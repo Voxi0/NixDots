@@ -14,22 +14,9 @@
       extraPackages = with pkgs; [];
       extraPlugins = ''
         return {
-          -- Lazygit
-          {
-            "kdheepak/lazygit.nvim",
-            dependencies = { "nvim-lua/plenary.nvim" },
-            lazy = true,
-            cmd = {
-              "LazyGit",
-              "LazyGitConfig",
-              "LazyGitCurrentFile",
-              "LazyGitFilter",
-              "LazyGitFilterCurrentFile",
-            },
-            keys = {
-              { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-            },
-          },
+          ${builtins.readFile ./plugins/treesitter.lua}
+          ${builtins.readFile ./plugins/lsp.lua}
+          ${builtins.readFile ./plugins/useful.lua}
         }
       '';
       extraConfig = ''
