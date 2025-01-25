@@ -41,9 +41,9 @@
     # AGS - Widget library
 		ags.url = "github:aylur/ags";
 
-    # NVF - Neovim distro
-    nvf = {
-      url = "github:notashelf/nvf";
+    # NVChad - Neovim distro
+    nvchad4nix = {
+      url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

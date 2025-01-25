@@ -31,7 +31,7 @@
       '';
 
       # Environment variables
-      environmentVariables = lib.mkIf config.programs.nvf.enable {
+      environmentVariables = lib.mkIf config.programs.nvchad.enable {
         EDITOR = "nvim";
         MANPAGER = "nvim +Man!";
       };

@@ -1,11 +1,11 @@
 { lib, ... }: {
   # Import Nix modules
   imports = [
-    ./nvf ./vscode.nix ./emacs.nix
+    ./nvchad.nix ./vscode.nix ./emacs.nix
   ];
 
   # Enable all editors by default
-  enableNeovim = lib.mkDefault true;
+  enableNVChad = lib.mkDefault true;
   enableVSCode = lib.mkDefault true;
   enableEmacs = lib.mkDefault true;
 }
