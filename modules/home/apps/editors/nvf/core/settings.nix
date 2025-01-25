@@ -32,7 +32,7 @@ _: {
       "tabstop" = 2;
       "softtabstop" = 2;
       "smartindent" = false;
-      "expandtab" = true;										# Use spaces for indentation
+      "expandtab" = false;									# Use tabs for indentation
 
       # Code folding
       "foldmethod" = "expr";

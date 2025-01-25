@@ -30,6 +30,7 @@ _: {
       css.enable = true;
       ts.enable = true;
       markdown.enable = true;
+      assembly.enable = true;
     };
     lsp = {
       enable = true;
