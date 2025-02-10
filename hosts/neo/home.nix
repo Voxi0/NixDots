@@ -1,42 +1,13 @@
 { pkgs, ... }: {
   # Import Nix modules
-  imports = [
-    ./../../modules/home/desktops
-    ./../../modules/home/apps
-  ];
+  imports = [ ../../modules/home ];
 
-  # Required for non NixOS systems
-  # targets.genericLinux.enable = true;
-
-  # Files in the user home directory
-  home.file = {
-    # Wallpapers
-    "Pictures/Wallpapers" = {
-      source = ./../../modules/home/Pictures/Wallpapers;
-      recursive = true;
-    };
-  };
-
-  # GTK - Stylix already handles theme and cursor, so only the icon theme is set here
+  # GTK and QT
+  qt.enable = true;
   gtk = {
     enable = true;
-
-    # Icon theme
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
-    };
-
-    # Extra config for GTK3 and GTK4
-    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
-  };
-
-  # QT - Ensure that we have proper QT styling
-  qt = {
-    enable = true;
-    style.name = "adwaita-dark";
-    platformTheme.name = "gtk3";
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
   # XDG user directories
@@ -45,8 +16,20 @@
     createDirectories = true;
   };
 
-  # Allows using bluetooth headset buttons to control media player
-  services.mpris-proxy.enable = true;
+  # Manage user files
+  home.file = {
+    # Wallpapers
+    "Pictures/Wallpapers" = {
+      source = ./../../modules/home/Pictures/Wallpapers;
+      recursive = true;
+    };
+  };
 
-  # Enable/Disable applications
+  # Enable/Disable Home Manager modules
+  enableKitty = true;
+  enableFirefox = true;
+  enableGit = true;
+  enableNixcord = true;
+  enableSpotify = true;
+  enableNcmpcpp = true;
 }

@@ -1,25 +1,41 @@
-# This function allows you to easily create new NixOS configurations in the system flake
-# This way, you can avoid repeating code and make it much more readable
-{ nixpkgs, inputs, system, hostname, username, ... }: nixpkgs.lib.nixosSystem {
+# Function to easily create new NixOS configurations in the system flake
+{ nixpkgs, system, inputs, hostname, username, ... }: nixpkgs.lib.nixosSystem {
   inherit system;
-  specialArgs = { inherit inputs username; };
+  specialArgs = { inherit inputs hostname username; };
   modules = [
-    ./${hostname}/configuration.nix
-		inputs.disko.nixosModules.default
+    ./${hostname}/configuration.nix {
+      # Nix packages
+      nixpkgs.config.allowUnfree = true;
+
+      # Nix
+      nix = {
+        optimise.automatic = true;
+        settings = {
+          experimental-features = [ "nix-command" "flakes" ];
+          auto-optimise-store = true;
+        };
+      };
+    }
     inputs.home-manager.nixosModules.home-manager {
       home-manager = {
-        useUserPackages = true;
         useGlobalPkgs = true;
-        extraSpecialArgs = { inherit inputs username; };
-        users."${username}" = {
+        useUserPackages = true;
+        extraSpecialArgs = { inherit system inputs username; };
+        backupFileExtension = "bak";
+
+        # User
+        users.${username} = {
           # Import Home Manager modules
           imports = [ ./${hostname}/home.nix ];
 
-          # User information
+          # Home Manager
           home = {
-            username = "${username}";
+            # User information
+            inherit username;
             homeDirectory = "/home/${username}";
-            stateVersion = "25.05";
+
+            # Don't change this value even if you update Home Manager
+            stateVersion = "24.11";
           };
 
           # Let Home Manager install and manage itself

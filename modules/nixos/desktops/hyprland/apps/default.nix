@@ -1,6 +1,6 @@
 _: {
   # Import Nix modules
   imports = [
-    ./stylix.nix ./fish.nix ./desktops
+    ./wofi ./ags ./mako.nix ./wlogout.nix
   ];
 }

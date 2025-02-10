@@ -1,16 +1,18 @@
-{ lib, config, inputs, pkgs, ... }: {
-  # Import Nix modules
-  imports = [
-    inputs.stylix.nixosModules.stylix
-  ];
+{ inputs, lib, config, username, pkgs, ... }: {
+   # Import Nix modules
+  imports = [ inputs.stylix.nixosModules.stylix ];
 
   # Module options
-  options = {
-    enableStylix = lib.mkEnableOption "Enables Stylix";
+  options.enableStylix = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+    example = true;
+    description = "Enable Stylix";
   };
 
-  # Stylix - Manges theme and fonts
+  # Configuration
   config = lib.mkIf config.enableStylix {
+    # Stylix
     stylix = {
       # Enable/Disable Stylix
       enable = true;
@@ -24,7 +26,7 @@
       # Force light/dark when generating a theme using the wallpaper
       polarity = "dark";
 
-      # Base16 theme
+      # Base16 application theme
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
       # Cursor
@@ -61,13 +63,23 @@
           popups = 10;
         };
       };
-    
+
       # Opacity/Transparency of various applications
       opacity = {
         desktop = 1.0;
         applications = 1.0;
         terminal = 1.0;
         popups = 1.0;
+      };
+    };
+
+    # Extra Stylix configuration for Home Manager
+    home-manager.users.${username}.stylix = {
+      iconTheme = {
+        enable = true;
+        package = pkgs.papirus-icon-theme;
+        light = "Papirus-Light";
+        dark = "Papirus-Dark";
       };
     };
   };

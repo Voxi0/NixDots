@@ -1,16 +1,36 @@
-# Don't modify this file - Modify 'configuration.nix' instead
-{ config, lib, modulesPath, ... }: {
-	# Import Nix modules
+# Don't modify this file
+{ config, lib, pkgs, modulesPath, ... }: {
+  # Import Nix modules
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+  # Boot
   boot = {
-		initrd = {
-			availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
-			kernelModules = [ ];
-		};
-		kernelModules = [ "kvm-intel" ];
-		extraModulePackages = [ ];
-	};
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
+      kernelModules = [ ];
+    };
+
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+  };
+
+  # File systems
+  fileSystems = {
+    # Boot partition
+    "/boot" = {
+      device = "/dev/disk/by-uuid/90AD-E06E";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+    # Root partition
+    "/" = {
+      device = "/dev/disk/by-uuid/7ea58352-88b4-469d-8f35-d4bd15421241";
+      fsType = "ext4";
+    };
+  };
+
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -2,16 +2,10 @@
   # Flake description
   description = "NixDots";
 
-  # Flake dependencies
+  # Flake inputs/dependencies
   inputs = {
-    # Nix package repository to use
+    # Nix packages repository
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-		# Disko - Declaratively partition and format disks using Nix
-		disko = {
-			url = "github:nix-community/disko";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
 
     # Manages user dotfiles
     home-manager = {
@@ -19,20 +13,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix User Repository (NUR)
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # System-wide colorscheming and typography
+    # System-wide theming and typography
     stylix.url = "github:danth/stylix";
 
-		# Hyprland
+    # Hyprland
 		hyprland.url = "github:hyprwm/Hyprland";
 		hyprland-plugins = {
 			url = "github:hyprwm/hyprland-plugins";
-			inputs.hyprland.follows = "hyprland";   # Sync with latest Hyprland version
+			inputs.hyprland.follows = "hyprland";
 		};
 
     # Efficient animated wallpaper daemon for wayland, controlled at runtime
@@ -41,29 +29,34 @@
     # AGS - Widget library
 		ags.url = "github:aylur/ags";
 
-    # NVChad - Neovim distro
-    nvchad4nix = {
-      url = "github:nix-community/nix4nvchad";
+    # Firefox extensions
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		# Declarative Vencord plugins + options
-		nixcord.url = "github:kaylorben/nixcord";
+    # My Neovim configuration
+    NixNvim = {
+      url = "github:Voxi0/NixNvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # Spicetify - Multiplatform CLI tool to customize the official Spotify client
+    # Manage Vencord settings and plugins declaratively with Nix
+    nixcord.url = "github:kaylorben/nixcord";
+
+    #Multiplatform CLI tool to customize the official Spotify client
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  # Flake outputs/actions - What to do after fetching all dependencies
+  # Flake actions - What to do with the flake inputs/dependencies
   outputs = { nixpkgs, ... }@inputs: let
     system = "x86_64-linux";
-		systemDisk = "/dev/sda";
     username = "voxi0";
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
-      inherit nixpkgs system systemDisk hostname username inputs;
+      inherit nixpkgs system inputs hostname username;
     };
   in {
     # NixOS configurations
