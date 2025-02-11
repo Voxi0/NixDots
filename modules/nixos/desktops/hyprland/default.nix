@@ -42,15 +42,24 @@
           hyprpolkitagent libnotify inputs.swww.packages.${pkgs.system}.swww
 
           # Utilities
-          pamixer brightnessctl wl-clipboard unzip playerctl grim slurp feh udiskie hyprshade
+          wl-clipboard unzip grim slurp feh udiskie hyprshade
         ];
 
         # Hyprcursor
         pointerCursor.hyprcursor.enable = true;
       };
 
-      # Playerctl - Mpris media player CLI controller for VLC, Spotify, CMus etc
-      services.playerctld.enable = true;
+      # Services
+      services = {
+        # Mpris media player CLI controller for VLC, Spotify, CMus etc
+        playerctld.enable = true;
+
+        # On Screen Display (OSD)
+        swayosd = {
+          enable = true;
+          topMargin = 0.1;
+        };
+      };
 
       # Stop Stylix from using Hyprpaper to set the wallpaper - We want to use SWWW for wallpapers instead
       stylix.targets = {
@@ -136,14 +145,13 @@
           "$logoutMenuCmd" = (lib.mkIf (options.enableWlogout) ("uwsm app -- wlogout"));
 
           # Commands to control volume
-          "$increaseVolumeCmd" = "pamixer -i 5";
-          "$decreaseVolumeCmd" = "pamixer -d 5";
-          "$toggleAudioMuteCmd" = "pamixer --toggle-mute";
-          "$toggleMicMuteCmd" = "pamixer --default-source -t";
+          "$increaseVolumeCmd" = "swayosd-client --output-volume +5 --max-volume 100";
+          "$decreaseVolumeCmd" = "swayosd-client --output-volume -5 --max-volume 100";
+          "$toggleAudioMuteCmd" = "swayosd-client --output-volume mute-toggle";
 
           # Commands to control screen brightness
-          "$increaseBrightnessCmd" = "brightnessctl s +5%";
-          "$decreaseBrightnessCmd" = "brightnessctl s 5%-";
+          "$increaseBrightnessCmd" = "swayosd-client --brightness +5";
+          "$decreaseBrightnessCmd" = "swayosd-client --brightness -5";
 
           # Commands to use for screenshots - For the entire screen or selected area
           "$fullscreenScreenshotCmd" = "grim";
@@ -383,12 +391,6 @@
             "$mainMod, mouse:273, resizewindow"
           ];
         };
-      };
-
-      # SwayOSD (On Screen Display)
-      services.swayosd = {
-        enable = true;
-        topMargin = 0.2;
       };
     };
   };
