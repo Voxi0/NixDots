@@ -154,8 +154,8 @@
           "$decreaseBrightnessCmd" = "swayosd-client --brightness -5";
 
           # Commands to use for screenshots - For the entire screen or selected area
-          "$fullscreenScreenshotCmd" = "grim";
-          "$selectedAreaScreenshotCmd" = ''grim -g "$(slurp)"'';
+          "$fullscreenScreenshotCmd" = "grim - | wl-copy";
+          "$selectedAreaScreenshotCmd" = ''grim -g "$(slurp)" - | wl-copy'';
 
           #################
           ### AUTOSTART ###

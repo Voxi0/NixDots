@@ -1,6 +1,19 @@
 # NixDots
 This repository houses my personal [NixOS](https://nixos.org/) configuration/dotfiles with [Home Manager](https://github.com/nix-community/home-manager). Feel free to use my configuration however you wish.
 
+**NOTE:** The initial password for a user is "nixos". Change it with `passwd <username>`. Change hostname and username in `flake.nix`.
+
+## Info
+- Kernel: Linux Latest
+- Shell: Fish
+- Terminal: Kitty
+- Editor: [Neovim](https://github.com/Voxi0/NvimDots) (NixCats)
+- DE/WM:
+  - Hyprland
+  - Sway (Bare Minimum, Recommended to Use Hyprland Instead)
+- Widgets - Aylur's GTK Shell (AGS)
+- Browser - Firefox
+
 ## Showcase
 ![Desktop](./assets/desktop.png)
 ![Neovim](./assets/neovim.png)
