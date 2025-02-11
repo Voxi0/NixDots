@@ -133,7 +133,7 @@
           "$menu" = "uwsm app -- $(wofi --show drun --define=drun-print_desktop_file=true)";
 
           # Command to bring up the logout menu
-          (lib.mkIf (options.enableWlogout) "$logoutMenuCmd" = "uwsm app -- wlogout";)
+          "$logoutMenuCmd" = (lib.mkIf (options.enableWlogout) ("uwsm app -- wlogout"));
 
           # Commands to control volume
           "$increaseVolumeCmd" = "pamixer -i 5";
@@ -156,7 +156,7 @@
             "systemctl --user enable --now hyprpolkitagent.service"
             "uwsm app -- swww-daemon"
             "swww restore"
-            (lib.mkIf (options.enableAGS) "uwsm app -- ags run --gtk4")
+            (lib.mkIf options.enableAGS "uwsm app -- ags run --gtk4")
             "uwsm app -- udiskie --automount --smart-tray --terminal=$terminal"
             "hyprshade on vibrance"
             (lib.mkIf (pkgs.mpdscribble != null) "uwsm app -- mpdscribble")
@@ -352,12 +352,10 @@
           ] ++ (
             # Workspaces
             builtins.concatLists (builtins.genList
-              (i: let ws = i + 1;
-                in [
-                  "$mainMod, code:1${toString i}, workspace, ${toString ws}"
-                  "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-                ]
-              )
+              (i: let ws = i + 1; in [
+                "$mainMod, code:1${toString i}, workspace, ${toString ws}"
+                "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+              ])
             numWorkspaces)
           );
 
@@ -385,6 +383,12 @@
             "$mainMod, mouse:273, resizewindow"
           ];
         };
+      };
+
+      # SwayOSD (On Screen Display)
+      services.swayosd = {
+        enable = true;
+        topMargin = 0.2;
       };
     };
   };

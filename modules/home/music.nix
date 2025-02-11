@@ -68,7 +68,6 @@
     };
 
     # Programs
-    stylix.targets.cava.rainbow.enable = true;
     programs = {
       # Spicetify - Powerful CLI tool to take control of the Spotify client
       spicetify = lib.mkIf config.enableSpotify {
