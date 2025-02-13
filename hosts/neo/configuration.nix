@@ -25,6 +25,7 @@
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
+        # For hardware video acceleration
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
         intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (Older but works better for Firefox/Chromium)
         libvdpau-va-gl
