@@ -4,7 +4,9 @@ This repository houses my personal [NixOS](https://nixos.org/) configuration/dot
 **NOTE:** The initial password for a user is "nixos". Change it with `passwd <username>`. Change hostname and username in `flake.nix`.
 
 <div align="center">
-  <button href="./docs/TODO.md">TODO</button>
+  <button>
+    <a href="./docs/TODO.md">TODO</a>
+  </button>
 </div>
 
 ## Info
