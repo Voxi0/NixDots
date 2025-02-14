@@ -3,22 +3,16 @@ This repository houses my personal [NixOS](https://nixos.org/) configuration/dot
 
 **NOTE:** The initial password for a user is "nixos". Change it with `passwd <username>`. Change hostname and username in `flake.nix`.
 
-<div align="center">
-  <a href="./docs/TODO.md" style="display: inline-block; padding: 10px 20px; border: 1px solid white; border-radius: 4px; text-decoration: none; background-color: #007bff; color: white;">
-    TODO
-  </a>
-</div>
-
 ## Info
-- Kernel: Linux Latest
-- Shell: Fish
-- Terminal: Kitty
-- Editor: [Neovim](https://github.com/Voxi0/NvimDots) (NixCats)
+- Kernel: [Linux (Latest)](https://www.kernel.org/)
+- Shell: [Fish](https://fishshell.com/)
+- Terminal: [Kitty](https://sw.kovidgoyal.net/kitty/)
+- Editor: [Neovim](https://github.com/Voxi0/NvimDots) ([NixCats](https://nixcats.org/))
 - DE/WM:
-  - Hyprland
-  - Sway (Bare Minimum, Recommended to Use Hyprland Instead)
-- Widgets - Aylur's GTK Shell (AGS)
-- Browser - Firefox
+  - [Hyprland](https://hyprland.org/)
+  - [Sway](https://swaywm.org/) (Bare Minimum, Recommended to Use Hyprland Instead)
+- Widgets - [Aylur's GTK Shell (AGS)](https://github.com/Aylur/ags) or more specifically, [Astal](https://github.com/Aylur/Astal)
+- Browser - [Firefox](https://www.mozilla.org/en-US/firefox/)
 
 ## Showcase
 ![Desktop](./assets/desktop.png)
