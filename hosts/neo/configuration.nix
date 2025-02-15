@@ -1,7 +1,8 @@
-{ pkgs, hostname, username, ... }: {
+{ systemDisk, pkgs, hostname, username, ... }: {
   # Import Nix modules	
   imports = [
     ./../../hardware-configuration.nix
+    (import ../../disko.nix { device = systemDisk; })
     ./../../modules/nixos
   ];
   
@@ -25,6 +26,7 @@
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
+        # For hardware video acceleration
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
         intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (Older but works better for Firefox/Chromium)
         libvdpau-va-gl
