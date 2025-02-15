@@ -33,4 +33,8 @@ poweroff
 ```
 
 ## Post-Installation
-The default password is set to `nixos`, change it with `passwd <your_username`.
+The default password is set to `nixos`, change it with `passwd <your_username`. You should also consider moving NixDots somewhere else rather than keeping it in `/etc/nixos` because then you can modify NixDots which you will definitely want. You could however, change the ownership of `/etc/nixos` or allow yourself write permissions but why bother? Just move it man, since we're using flakes it really doesn't matter where you keep NixDots. You can just rebuild the system by passing the flake to your command.
+
+I'm using the Nix Helper CLI because it looks really cool and is just nice in general. `cd` into NixDots and run `nh os switch -H <hostname> --flake ./` to rebuild NixOS and switch to the new generation. You could just pass the flake to your command as well to run this command from anywhere. You can also use `nh os boot` and `nh os test`. I recommend using `nh os test` when you're experimenting as it avoids polluting your system by creating new generations.
+
+You may also want to update your system to have the latest everything as I usually don't make commits for system updates. Just pass the `--update` flag to the commands I showed above for rebuilding NixOS to update the flake.
