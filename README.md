@@ -1,11 +1,13 @@
 # NixDots
 This repository houses my personal [NixOS](https://nixos.org/) configuration/dotfiles with [Home Manager](https://github.com/nix-community/home-manager). Feel free to use my configuration however you wish.
 
-**NOTE:** The initial password for a user is "nixos". Change it with `passwd <username>`. Change hostname and username in `flake.nix`.
+- [Getting Started](./docs/getting-started.md)
+- [TODO](./docs/TODO.md)
 
 ## Info
 - Kernel: [Linux (Latest)](https://www.kernel.org/)
 - Shell: [Fish](https://fishshell.com/)
+- Theming: [Stylix](https://github.com/danth/stylix)
 - Terminal: [Kitty](https://sw.kovidgoyal.net/kitty/)
 - Editor: [Neovim](https://github.com/Voxi0/NvimDots) ([NixCats](https://nixcats.org/))
 - DE/WM:

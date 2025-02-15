@@ -1,7 +1,8 @@
-{ pkgs, hostname, username, ... }: {
+{ systemDisk, pkgs, hostname, username, ... }: {
   # Import Nix modules	
   imports = [
     ./../../hardware-configuration.nix
+    (import ../../disko.nix { device = systemDisk; })
     ./../../modules/nixos
   ];
   

@@ -53,6 +53,7 @@
 
   # Flake actions - What to do with the flake inputs/dependencies
   outputs = { nixpkgs, ... }@inputs: let
+    systemDisk = "/dev/sda";
     system = "x86_64-linux";
     username = "voxi0";
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
