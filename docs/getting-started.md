@@ -26,7 +26,7 @@ sudo mkdir -p /mnt/etc/nixos
 sudo cp -r ./* /mnt/etc/nixos/
 
 # Install NixOS - Replace `<hostname>` with the actual host to install e.g. `neo`
-sudo nixos-install --no-channel-copy --flake /mnt/etc/nixos/<hostname>
+sudo nixos-install --flake /mnt/etc/nixos/<hostname>
 
 # Installation is complete! Power off and remove the installation media
 poweroff

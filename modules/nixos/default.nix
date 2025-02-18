@@ -1,6 +1,6 @@
 _: {
   # Import Nix modules
   imports = [
-    ./stylix.nix ./fish.nix ./desktops
+    ./stylix.nix ./fish.nix ./desktops ./gaming.nix
   ];
 }

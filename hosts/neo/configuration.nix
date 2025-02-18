@@ -114,6 +114,7 @@
     xserver = {
       enable = false;
       excludePackages = [ pkgs.xterm ];
+      videoDrivers = [ "amdgpu" "nvidia" ];
       xkb = {
         layout = "gb";
 	      variant = "";
