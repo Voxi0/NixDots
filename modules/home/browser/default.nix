@@ -21,7 +21,7 @@
         DisableFirefoxStudies = true;
         DisablePocket = true;
         DisableTelemetry = true;
-        DisableFirefoxAccounts = true;
+        DisableFirefoxAccounts = false;
         FirefoxHome = {
           Search = true;
           Pocket = false;
@@ -39,9 +39,9 @@
         # Search engines
         search = {
           force = true;
-          default = "DuckDuckGo";
-          privateDefault = "DuckDuckGo";
-          order = [ "DuckDuckGo" "Google" ];
+          default = "Google";
+          privateDefault = "Google";
+          order = [ "Google" ];
         };
 
         # Style and settings
@@ -126,7 +126,7 @@
         };
 
         # Useful extensions to be installed by default with browser
-        extensions = with inputs.firefox-addons.packages.${system}; [
+        extensions.packages = with inputs.firefox-addons.packages.${system}; [
           ublock-origin # Very efficient and lightweight ad blocker
           decentraleyes # Protects you against tracking
           clearurls     # Removes tracking elements from URLs

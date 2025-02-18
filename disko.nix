@@ -1,5 +1,5 @@
 # Declarative disk partitioning and formatting using Nix
-{ device ? throw "Set this to your disk device e.g. '/dev/sda'", ... }: {
+{ device ? throw "Set this to your disk device e.g. `dev/sda`", ... }: {
   disko.devices.disk = {
     # Primary disk config - Where the OS will be installed
     primary = {

@@ -3,6 +3,7 @@
   inherit system;
   specialArgs = { inherit inputs hostname username; };
   modules = [
+    inputs.disko.nixosModules.default
     ./${hostname}/configuration.nix {
       # Nix packages
       nixpkgs.config.allowUnfree = true;
