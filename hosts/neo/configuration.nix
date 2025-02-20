@@ -9,6 +9,7 @@
   # Enable NixOS modules
   enableStylix = true;      # System-wide theming and typography
   enableFish = true;        # Fish shell (Not POSIX compliant)
+  enableGaming = true;
 
   # Enable window managers / desktop environments
   enableHyprland = true;
