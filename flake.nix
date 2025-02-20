@@ -29,9 +29,6 @@
 			inputs.hyprland.follows = "hyprland";
 		};
 
-    # Efficient animated wallpaper daemon for wayland, controlled at runtime
-    swww.url = "github:LGFae/swww";
-
     # AGS - Widget library
 		ags.url = "github:aylur/ags";
 

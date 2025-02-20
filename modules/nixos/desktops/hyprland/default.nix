@@ -39,7 +39,7 @@
         # Base/Required packages
         packages = with pkgs; [
           # Base
-          hyprpolkitagent libnotify inputs.swww.packages.${pkgs.system}.swww
+          hyprpolkitagent libnotify swww
 
           # Utilities
           wl-clipboard unzip grim slurp feh udiskie hyprshade
