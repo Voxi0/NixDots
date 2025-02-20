@@ -1,5 +1,4 @@
 # NixDots
-This repository houses my personal  configuration/dotfiles with . Feel free to use my configuration however you wish.
 This is my personal [NixOS](https://nixos.org/) configuration/dotfiles using [Flakes](https://nixos.wiki/wiki/flakes) and [Home Manager](https://github.com/nix-community/home-manager). I'm also making use of [Disko](https://github.com/nix-community/disko) to declaratively partition and format my disks using Nix. Feel free to use my configuration as you wish. Any contributions would be greatly appreciated!
 
 - [Getting Started](./docs/getting-started.md)
