@@ -39,10 +39,10 @@
         # Base/Required packages
         packages = with pkgs; [
           # Base
-          hyprpolkitagent libnotify inputs.swww.packages.${pkgs.system}.swww
+          hyprpolkitagent nwg-displays libnotify swww waypaper
 
           # Utilities
-          wl-clipboard unzip grim slurp feh udiskie hyprshade
+          wl-clipboard grim slurp feh udiskie hyprshade
         ];
 
         # Hyprcursor
@@ -112,12 +112,11 @@
 
         # Plugins and settings
         plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [];
+        extraConfig = ''
+          source = ~/.config/hypr/monitors.conf
+          source = ~/.config/hypr/workspaces.conf
+        '';
         settings = {
-          ################
-          ### MONITORS ###
-          ################
-          "monitor" = ",preferred,auto,auto";
-
           #############################
           ### ENVIRONMENT VARIABLES ###
           #############################

@@ -17,11 +17,17 @@
   };
 
   # Manage user files
-  home.file = {
-    # Wallpapers
-    "Pictures/Wallpapers" = {
-      source = ./../../modules/home/Pictures/Wallpapers;
-      recursive = true;
+  home = {
+    # Default packages that should be installed
+    packages = with pkgs; [ unzip mpv wget curl ];
+
+    # User files
+    file = {
+      # Wallpapers
+      "Pictures/Wallpapers" = {
+        source = ./../../modules/home/Pictures/Wallpapers;
+        recursive = true;
+      };
     };
   };
 
