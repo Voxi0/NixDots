@@ -19,7 +19,7 @@
     }
     inputs.home-manager.nixosModules.home-manager {
       home-manager = {
-        useGlobalPkgs = true;
+        useGlobalPkgs = false;
         useUserPackages = true;
         extraSpecialArgs = { inherit system inputs username; };
         backupFileExtension = "bak";
