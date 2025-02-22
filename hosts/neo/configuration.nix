@@ -9,7 +9,11 @@
   # Enable NixOS modules
   enableStylix = true;      # System-wide theming and typography
   enableFish = true;        # Fish shell (Not POSIX compliant)
-  enableGaming = true;
+  gaming = {
+    enable = true;
+    enableSteam = true;
+    enableLutris = true;
+  };
 
   # Enable window managers / desktop environments
   enableHyprland = true;
@@ -26,6 +30,7 @@
     # Graphics
     graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
         # For hardware video acceleration
         intel-media-driver # LIBVA_DRIVER_NAME=iHD

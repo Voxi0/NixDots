@@ -1,11 +1,6 @@
 { lib, config, ... }: {
   # Module options
-  options.enableWofi = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Wofi";
-  };
+  options.enableWofi = lib.mkEnableOption "Wofi (App launcher)";
 
   # Configuration
   config = lib.mkIf config.enableWofi {

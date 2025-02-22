@@ -1,11 +1,6 @@
 { lib, config, username, inputs, pkgs, xkbLayout, ... }: {
   # Module options
-  options.enableHyprland = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Hyprland";
-  };
+  options.enableHyprland = lib.mkEnableOption "Hyprland"
 
   # Configuration
   config = lib.mkIf config.enableHyprland {

@@ -3,12 +3,7 @@
   imports = [ inputs.ags.homeManagerModules.default ];
 
   # Module options
-  options.enableAGS = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enables AGS";
-  };
+  options.enableAGS = lib.mkEnableOption "AGS (Widgets)";
 
   # Configuration
   config = lib.mkIf config.enableAGS {

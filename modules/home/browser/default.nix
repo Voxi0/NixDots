@@ -1,11 +1,6 @@
 { lib, config, inputs, system, ... }: {
   # Module options
-  options.enableFirefox = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Firefox";
-  };
+  options.enableFirefox = lib.mkEnableOption "Firefox";
 
   # Configuration
   config = lib.mkIf config.enableFirefox {

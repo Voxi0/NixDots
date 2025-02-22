@@ -3,12 +3,7 @@
   imports = [ inputs.stylix.nixosModules.stylix ];
 
   # Module options
-  options.enableStylix = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Stylix";
-  };
+  options.enableStylix = lib.mkEnableOption "Stylix";
 
   # Configuration
   config = lib.mkIf config.enableStylix {
