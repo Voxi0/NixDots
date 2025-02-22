@@ -1,4 +1,4 @@
-{ lib, config, username, inputs, pkgs, ... }: {
+{ lib, config, username, inputs, pkgs, xkbLayout, ... }: {
   # Module options
   options.enableHyprland = lib.mkOption {
     type = lib.types.bool;
@@ -174,7 +174,7 @@
           #############
           input = {
             # Keyboard
-            kb_layout = "gb";
+            kb_layout = xkbLayout;
             # kb_variant =
             # kb_model =
             # kb_options =

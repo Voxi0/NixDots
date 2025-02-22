@@ -58,9 +58,15 @@
   outputs = { nixpkgs, ... }@inputs: let
     systemDisk = "/dev/sda";
     system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
     username = "voxi0";
+    locale = "en_GB.UTF-8";
+    timezone = "Europe/London";
+    keymap = "uk";
+    xkbLayout = "gb";
+
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
-      inherit nixpkgs system inputs hostname username;
+      inherit nixpkgs system inputs username locale timezone keymap xkbLayout;
     };
   in {
     # NixOS configurations

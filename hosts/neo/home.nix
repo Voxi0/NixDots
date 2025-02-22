@@ -19,7 +19,13 @@
   # Manage user files
   home = {
     # Default packages that should be installed
-    packages = with pkgs; [ unzip mpv wget curl ];
+    packages = with pkgs; [
+      # Useful utilities
+      unzip mpv wget curl
+
+      # Applications
+      obsidian
+    ];
 
     # User files
     file = {
