@@ -34,7 +34,11 @@
         # Base/Required packages
         packages = with pkgs; [
           # Base
+<<<<<<< HEAD
           hyprpolkitagent nwg-displays libnotify swww waypaper
+=======
+          hyprpolkitagent libnotify swww
+>>>>>>> main
 
           # Utilities
           wl-clipboard grim slurp feh udiskie hyprshade
