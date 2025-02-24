@@ -4,18 +4,8 @@
 
 	# Module options
 	options = {
-    enableSpotify = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-      description = "Enable Spotify";
-    };
-    enableNcmpcpp = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-      description = "Enable NCMPCPP";
-    };
+    enableSpotify = lib.mkEnableOption "Spotify";
+    enableNcmpcpp = lib.mkEnableOption "NCMPCPP (CLI music player)";
   };
 
 	# Configure enabled music players

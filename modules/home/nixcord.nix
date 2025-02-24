@@ -3,12 +3,7 @@
   imports = [ inputs.nixcord.homeManagerModules.nixcord ];
 
   # Module options
-  options.enableNixcord = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enables Nixcord";
-  };
+  options.enableNixcord = lib.mkEnableOption "Nixcord (Discord)";
 
   # Configuration
   config = lib.mkIf config.enableNixcord {

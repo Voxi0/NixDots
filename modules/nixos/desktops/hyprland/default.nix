@@ -1,11 +1,6 @@
-{ lib, config, username, inputs, pkgs, ... }: {
+{ lib, config, username, inputs, pkgs, xkbLayout, ... }: {
   # Module options
-  options.enableHyprland = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Hyprland";
-  };
+  options.enableHyprland = lib.mkEnableOption "Hyprland"
 
   # Configuration
   config = lib.mkIf config.enableHyprland {
@@ -39,10 +34,14 @@
         # Base/Required packages
         packages = with pkgs; [
           # Base
+<<<<<<< HEAD
+          hyprpolkitagent nwg-displays libnotify swww waypaper
+=======
           hyprpolkitagent libnotify swww
+>>>>>>> main
 
           # Utilities
-          wl-clipboard unzip grim slurp feh udiskie hyprshade
+          wl-clipboard grim slurp feh udiskie hyprshade
         ];
 
         # Hyprcursor
@@ -112,12 +111,11 @@
 
         # Plugins and settings
         plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [];
+        extraConfig = ''
+          source = ~/.config/hypr/monitors.conf
+          source = ~/.config/hypr/workspaces.conf
+        '';
         settings = {
-          ################
-          ### MONITORS ###
-          ################
-          "monitor" = ",preferred,auto,auto";
-
           #############################
           ### ENVIRONMENT VARIABLES ###
           #############################
@@ -175,7 +173,7 @@
           #############
           input = {
             # Keyboard
-            kb_layout = "gb";
+            kb_layout = xkbLayout;
             # kb_variant =
             # kb_model =
             # kb_options =

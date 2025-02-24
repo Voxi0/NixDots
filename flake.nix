@@ -7,6 +7,12 @@
     # Nix packages repository
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Secure boot
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Manages user dotfiles
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -59,8 +65,13 @@
     systemDisk = "/dev/sda";
     system = "x86_64-linux";
     username = "voxi0";
+    locale = "en_GB.UTF-8";
+    timezone = "Europe/London";
+    keymap = "uk";
+    xkbLayout = "gb";
+
     genHostConfig = { hostname }: import ./hosts/host-config.nix {
-      inherit nixpkgs system inputs hostname username;
+      inherit nixpkgs system inputs hostname username locale timezone keymap xkbLayout;
     };
   in {
     # NixOS configurations

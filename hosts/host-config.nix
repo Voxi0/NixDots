@@ -1,7 +1,7 @@
 # Function to easily create new NixOS configurations in the system flake
-{ nixpkgs, system, inputs, hostname, username, ... }: nixpkgs.lib.nixosSystem {
+{ nixpkgs, system, inputs, hostname, username, locale, timezone, keymap, xkbLayout, ... }: nixpkgs.lib.nixosSystem {
   inherit system;
-  specialArgs = { inherit inputs hostname username; };
+  specialArgs = { inherit inputs hostname username locale timezone keymap xkbLayout; };
   modules = [
     inputs.disko.nixosModules.default
     ./${hostname}/configuration.nix {
@@ -19,7 +19,7 @@
     }
     inputs.home-manager.nixosModules.home-manager {
       home-manager = {
-        useGlobalPkgs = true;
+        useGlobalPkgs = false;
         useUserPackages = true;
         extraSpecialArgs = { inherit system inputs username; };
         backupFileExtension = "bak";
@@ -28,6 +28,9 @@
         users.${username} = {
           # Import Home Manager modules
           imports = [ ./${hostname}/home.nix ];
+
+          # Nix packages
+          nixpkgs.config.allowUnfree = true;
 
           # Home Manager
           home = {

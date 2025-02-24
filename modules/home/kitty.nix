@@ -1,11 +1,6 @@
 { lib, config, pkgs, ... }: {
   # Module options
-  options.enableKitty = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Kitty";
-  };
+  options.enableKitty = lib.mkEnableOption "Kitty (Terminal emulator)";
 
   # Configuration
   config = lib.mkIf config.enableKitty {

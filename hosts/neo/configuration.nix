@@ -1,4 +1,4 @@
-{ systemDisk, pkgs, hostname, username, ... }: {
+{ systemDisk, pkgs, hostname, username, keymap, timezone, locale, xkbLayout, ... }: {
   # Import Nix modules	
   imports = [
     ./../../hardware-configuration.nix
@@ -9,6 +9,11 @@
   # Enable NixOS modules
   enableStylix = true;      # System-wide theming and typography
   enableFish = true;        # Fish shell (Not POSIX compliant)
+  gaming = {
+    enable = true;
+    enableSteam = true;
+    enableLutris = true;
+  };
 
   # Enable window managers / desktop environments
   enableHyprland = true;
@@ -25,6 +30,7 @@
     # Graphics
     graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
         # For hardware video acceleration
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
@@ -64,22 +70,22 @@
   };
 
   # Console
-  console.keyMap = "uk";
+  console.keyMap = keymap;
 
   # Time zone and internationalisation properties
-  time.timeZone = "Europe/London";
+  time.timeZone = timezone;
   i18n = {
-    defaultLocale = "en_GB.UTF-8";
+    defaultLocale = locale;
     extraLocaleSettings = {
-      LC_ADDRESS = "en_GB.UTF-8";
-      LC_IDENTIFICATION = "en_GB.UTF-8";
-      LC_MEASUREMENT = "en_GB.UTF-8";
-      LC_MONETARY = "en_GB.UTF-8";
-      LC_NAME = "en_GB.UTF-8";
-      LC_NUMERIC = "en_GB.UTF-8";
-      LC_PAPER = "en_GB.UTF-8";
-      LC_TELEPHONE = "en_GB.UTF-8";
-      LC_TIME = "en_GB.UTF-8";
+      LC_ADDRESS = locale;
+      LC_IDENTIFICATION = locale;
+      LC_MEASUREMENT = locale;
+      LC_MONETARY = locale;
+      LC_NAME = locale;
+      LC_NUMERIC = locale;
+      LC_PAPER = locale;
+      LC_TELEPHONE = locale;
+      LC_TIME = locale;
     };
   };
 
@@ -114,8 +120,9 @@
     xserver = {
       enable = false;
       excludePackages = [ pkgs.xterm ];
+      videoDrivers = [ "amdgpu" "nvidia" ];
       xkb = {
-        layout = "gb";
+        layout = xkbLayout;
 	      variant = "";
       };
     };

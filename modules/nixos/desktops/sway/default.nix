@@ -1,11 +1,6 @@
 { lib, config, username, pkgs, ... }: {
   # Module options
-  options.enableSway = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Sway";
-  };
+  options.enableSway = lib.mkEnableOption "SwayWM";
 
   # Configuration
   config = lib.mkIf config.enableSway {

@@ -1,11 +1,6 @@
 { lib, config, pkgs, ... }: {
   # Module options
-  options.enableGit = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Git and LazyGit";
-  };
+  options.enableGit = lib.mkEnableOption "Git (Version Control System (VCS))";
 
   # Configuration
   config = lib.mkIf config.enableGit {

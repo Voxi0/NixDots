@@ -1,11 +1,6 @@
 { lib, config, ... }: {
   # Module options
-  options.enableWlogout = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Wlogout";
-  };
+  options.enableWlogout = lib.mkEnableOption "Wlgout (Wayland logout menu)";
 
   # Configuration
   config = lib.mkIf config.enableWlogout {
@@ -33,6 +28,7 @@
         }
       ];
       style = ''
+        button:hover {background-color: #091059;}
         button {
           background-color: #000000;
           color: #ffffff;
@@ -41,7 +37,6 @@
           margin: 0px 6px;
           transition-duration: 0.2s;
         }
-        button:hover {background-color: #091059;}
       '';
     };
   };

@@ -1,11 +1,6 @@
 { lib, config, ... }: {
   # Module options
-  options.enableMako = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    example = true;
-    description = "Enable Mako";
-  };
+  options.enableMako = lib.mkEnableOption "Mako (Notification daemon)";
 
   # Configuration
   config = lib.mkIf config.enableMako {
