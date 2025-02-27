@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -23,5 +26,3 @@ jobs:
         with:
           publish_dir: ./docs/book
           publish_branch: gh-pages
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
