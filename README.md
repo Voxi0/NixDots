@@ -46,8 +46,8 @@ Here's a couple of reasons why I considered using NixOS and eventually moved to 
 [18]: https://www.mozilla.org/en-US/firefox "Firefox"
 
 ## Showcase
-![Desktop](./assets/desktop.png)
-![Neovim](./assets/neovim.png)
+![Desktop](./docs/src/assets/desktop.png)
+![Neovim](./docs/src/assets/neovim.png)
 
 ## Contributors
 <a href="https://github.com/voxi0/NixDots/graphs/contributors">
