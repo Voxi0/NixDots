@@ -44,3 +44,14 @@ Here's a couple of reasons why I considered using NixOS and eventually moved to 
 [16]: https://github.com/Aylur/ags "Aylur's GTK Shell (AGS)"
 [17]: https://github.com/Aylur/Astal "Astal"
 [18]: https://www.mozilla.org/en-US/firefox "Firefox"
+
+## Showcase
+![Desktop](./assets/desktop.png)
+![Neovim](./assets/neovim.png)
+
+## Contributors
+<a href="https://github.com/voxi0/NixDots/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=voxi0/NixDots&max=100&columns=12&anon=0"/>
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).

@@ -1,17 +1,5 @@
 [book]
-title = "NixDots Docs"
-description = "Documentation for NixDots"
-authors = [ "Voxi0" ]
+authors = ["Voxi0"]
 language = "en"
-text-direction = "ltr"
 multilingual = false
 src = "src"
-
-[build]
-build-dir = "book"
-create-missing = true
-use-default-preprocessors = true
-extra-watch-dirs = []
-
-[output.html]
-additional-js = [ "js/open-links-in-new-tab.js" ]
