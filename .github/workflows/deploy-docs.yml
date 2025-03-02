@@ -1,26 +1,35 @@
+# Name of the workflow
 name: Deploy Documentation
 
+# When to run the workflow
 on:
   push:
-    branches:
-      - main
+    paths:
+      # Only run the workflow if the documentation is modified
+      # This saves the limited CI/CD time that Github offers us
+      - 'docs/**'
 
+# What the workflow does
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Clone the repository into a workflow's runner to do interact with it
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Install the latest prebuilt version of mdBook
       - name: Install mdBook
         run: |
           LATEST=$(curl -s https://api.github.com/repos/rust-lang/mdBook/releases/latest | jq -r '.tag_name')
           curl -sSL "https://github.com/rust-lang/mdBook/releases/download/$LATEST/mdbook-$LATEST-x86_64-unknown-linux-gnu.tar.gz" | tar -xz
           sudo mv mdbook /usr/local/bin/
 
+      # Build the documentation/book
       - name: Build mdBook
         run: mdbook build docs
 
+      # Push the built documentation to the `gh-pages` branch
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
