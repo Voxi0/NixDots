@@ -1,6 +1,6 @@
 { lib, config, username, inputs, pkgs, xkbLayout, ... }: {
   # Module options
-  options.enableHyprland = lib.mkEnableOption "Hyprland"
+  options.enableHyprland = lib.mkEnableOption "Enable Hyprland";
 
   # Configuration
   config = lib.mkIf config.enableHyprland {
@@ -34,11 +34,7 @@
         # Base/Required packages
         packages = with pkgs; [
           # Base
-<<<<<<< HEAD
           hyprpolkitagent nwg-displays libnotify swww waypaper
-=======
-          hyprpolkitagent libnotify swww
->>>>>>> main
 
           # Utilities
           wl-clipboard grim slurp feh udiskie hyprshade

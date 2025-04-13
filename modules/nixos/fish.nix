@@ -1,6 +1,6 @@
 { lib, config, username, pkgs, ... }: {
   # Module options
-  options.enableFish = lib.mkEnableOption "Fish shell"
+  options.enableFish = lib.mkEnableOption "Fish shell";
 
   # Configuration
   config = lib.mkIf config.enableFish {
