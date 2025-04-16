@@ -4,6 +4,9 @@
 
   # Configuration
   config = lib.mkIf config.enableFirefox {
+    # Stylix - List all Firefox profiles here as well because Stylix can't detect it
+    stylix.targets.firefox.profileNames = [ "NixDots" ];
+
     # Firefox
     programs.firefox = {
       enable = true;
@@ -34,9 +37,9 @@
         # Search engines
         search = {
           force = true;
-          default = "Google";
-          privateDefault = "Google";
-          order = [ "Google" ];
+          default = "google";
+          privateDefault = "google";
+          order = [ "google" ];
         };
 
         # Style and settings
