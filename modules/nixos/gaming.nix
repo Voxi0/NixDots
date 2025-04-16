@@ -1,14 +1,25 @@
-{ lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, ... }: {
+  # Import Nix modules
+  imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
+
   # Module options
   options.gaming = {
     enable = lib.mkEnableOption "gaming related stuff";
-    enableSteam = lib.mkEnableOption "Steam";
-    enableLutris = lib.mkEnableOption "Lutris game launcher";
-    enableHeroic = lib.mkEnableOption "Heroic game launcher";
+    enableSteam = lib.mkEnableOption "Enable Steam";
+    enableRoblox = lib.mkEnableOption "Enable Sober for playing Roblox";
+    enableLutris = lib.mkEnableOption "Enable Lutris game launcher";
+    enableHeroic = lib.mkEnableOption "Enable Heroic game launcher";
   };
 
   # Configuration
   config = lib.mkIf config.gaming.enable {
+    # Install Sober Flatpak
+    services.flatpak = lib.mkIf config.gaming.enableRoblox {
+      enable = true;
+      update.auto.enable = false;
+      packages = [ "org.vinegarhq.Sober" ];
+    };
+
     # Extra packages
     environment = {
       # ProtonGE Installation path - Used by the `protonup` command

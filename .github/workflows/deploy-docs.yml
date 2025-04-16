@@ -1,24 +1,23 @@
-# Name of the workflow
+# Workflow name
 name: Deploy Documentation
 
-# When to run the workflow
+# Workflow triggers - What triggers it to run
 on:
   push:
     paths:
-      # Only run the workflow if the documentation is modified
-      # This saves the limited CI/CD time that Github offers us
+      # Only run the workflow if the documentation is modified to stop unncessary runs
       - 'docs/**'
 
-# What the workflow does
+# Workflow actions
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Clone the repository into a workflow's runner to do interact with it
+      # Clone the repository into a workflow's runner
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Install the latest prebuilt version of mdBook
+      # Install the latest prebuilt version of mdBook rather than compiling from scratch to save time
       - name: Install mdBook
         run: |
           LATEST=$(curl -s https://api.github.com/repos/rust-lang/mdBook/releases/latest | jq -r '.tag_name')

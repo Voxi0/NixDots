@@ -12,7 +12,9 @@
   gaming = {
     enable = true;
     enableSteam = true;
-    enableLutris = true;
+    enableRoblox = true;
+    enableLutris = false;
+    enableHeroic = false;
   };
 
   # Enable window managers / desktop environments
