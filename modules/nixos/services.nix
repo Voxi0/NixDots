@@ -1,4 +1,4 @@
-{ _ }: {
+{ lib, config, xkbLayout, pkgs, ... }: {
   services = {
     libinput.enable = true; # Touchpad support
     blueman.enable = true;  # Bluetooth manager

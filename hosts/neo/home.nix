@@ -2,6 +2,14 @@
   # Import Nix modules
   imports = [ ../../modules/home ];
 
+	# Enable/Disable our custom Home Manager modules
+  enableKitty = true;
+  enableFirefox = true;
+  enableGit = true;
+  enableNixcord = true;
+  enableSpotify = true;
+  enableNcmpcpp = true;
+
   # GTK and QT
   qt.enable = true;
   gtk = {
@@ -36,12 +44,4 @@
       };
     };
   };
-
-  # Enable/Disable our custom Home Manager modules
-  enableKitty = true;
-  enableFirefox = true;
-  enableGit = true;
-  enableNixcord = true;
-  enableSpotify = true;
-  enableNcmpcpp = true;
 }

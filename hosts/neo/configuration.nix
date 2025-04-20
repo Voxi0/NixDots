@@ -4,7 +4,6 @@
     ./../../hardware-configuration.nix
     (import ../../disko.nix { device = systemDisk; })
     ./../../modules/nixos
-		./../../modules/nixos/lanzaboote.nix
   ];
   
   # Enable/Disable our custom system modules
@@ -62,9 +61,6 @@
     description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
   };
-
-  # Fonts
-  fonts.fontDir.enable = true;
 
   # Programs
   programs = {
