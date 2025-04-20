@@ -1,12 +1,11 @@
 {
-  # Flake description
+  # Description
   description = "NixDots";
 
-  # Flake inputs/dependencies
+  # Dependencies
   inputs = {
-    # Nix packages repository and Flatpak
+    # Nix packages repository
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     # Secure boot
     lanzaboote = {
@@ -45,6 +44,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Declarative Flatpak manager for NixOS
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
     # My Neovim configuration
     NixNvim = {
       url = "github:Voxi0/NixNvim";
@@ -54,14 +56,14 @@
     # Manage Vencord settings and plugins declaratively with Nix
     nixcord.url = "github:kaylorben/nixcord";
 
-    #Multiplatform CLI tool to customize the official Spotify client
+    # Multiplatform CLI tool to customize the official Spotify client
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  # Flake actions - What to do with the flake inputs/dependencies
+  # Actions - Executed after fetching all dependencies
   outputs = { nixpkgs, ... }@inputs: let
     systemDisk = "/dev/sda";
     system = "x86_64-linux";

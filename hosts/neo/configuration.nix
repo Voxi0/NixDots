@@ -4,10 +4,14 @@
     ./../../hardware-configuration.nix
     (import ../../disko.nix { device = systemDisk; })
     ./../../modules/nixos
+		./../../modules/nixos/lanzaboote.nix
   ];
   
-  # Enable NixOS modules
+  # Enable/Disable our custom system modules
+	enableSecureBoot = true;	# Lanzaboote for secure boot
   enableStylix = true;      # System-wide theming and typography
+	enableHyprland = true;
+  enableSway = false;
   enableFish = true;        # Fish shell (Not POSIX compliant)
   gaming = {
     enable = true;
@@ -15,38 +19,6 @@
     enableRoblox = true;
     enableLutris = false;
     enableHeroic = false;
-  };
-
-  # Enable window managers / desktop environments
-  enableHyprland = true;
-  enableSway = false;
-
-  # Hardware
-  hardware = {
-    bluetooth.enable = true;           # Bluetooth
-
-    # Enable all firmware regardless of license and support for most hardware
-    enableAllFirmware = true;
-    enableAllHardware = true;
-
-    # Graphics
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        # For hardware video acceleration
-        intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (Older but works better for Firefox/Chromium)
-        libvdpau-va-gl
-      ];
-    };
-
-    # Nvidia
-    nvidia = {
-      open = false;                   # Use proprietary drivers
-      modesetting.enable = true;      # Most Wayland compositors requires this
-      powerManagement.enable = true;  # For Hyprland on Nvidia
-    };
   };
 
   # Security
@@ -59,14 +31,10 @@
   boot = {
     # Kernel
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ]; # For Hyprland on Nvidia
 
     # Bootloader
     loader = {
-      # EFI
       efi.canTouchEfiVariables = true;
-
-      # SystemD Boot
       systemd-boot.enable = true;
     };
   };
@@ -74,22 +42,9 @@
   # Console
   console.keyMap = keymap;
 
-  # Time zone and internationalisation properties
+  # Time zone and locales
   time.timeZone = timezone;
-  i18n = {
-    defaultLocale = locale;
-    extraLocaleSettings = {
-      LC_ADDRESS = locale;
-      LC_IDENTIFICATION = locale;
-      LC_MEASUREMENT = locale;
-      LC_MONETARY = locale;
-      LC_NAME = locale;
-      LC_NUMERIC = locale;
-      LC_PAPER = locale;
-      LC_TELEPHONE = locale;
-      LC_TIME = locale;
-    };
-  };
+  i18n.defaultLocale = locale;
 
   # Networking
   networking = {
@@ -122,7 +77,6 @@
     xserver = {
       enable = false;
       excludePackages = [ pkgs.xterm ];
-      videoDrivers = [ "amdgpu" "nvidia" ];
       xkb = {
         layout = xkbLayout;
 	      variant = "";

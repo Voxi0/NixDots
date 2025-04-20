@@ -9,16 +9,8 @@
   config = lib.mkIf config.enableStylix {
     # Stylix
     stylix = {
-      # Enable/Disable Stylix
       enable = true;
-
-      # Enable/Disable setting Stylix themes for various apps automatically
       autoEnable = true;
-
-      # Force light/dark when generating a theme using the wallpaper
-      polarity = "dark";
-
-      # Base16 application theme
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
       # Cursor

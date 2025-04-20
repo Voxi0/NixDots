@@ -17,7 +17,9 @@
     services.flatpak = lib.mkIf config.gaming.enableRoblox {
       enable = true;
       update.auto.enable = false;
-      packages = [ "org.vinegarhq.Sober" ];
+      packages = [
+        { appId = "org.vinegarhq.Sober"; origin = "flathub"; }
+      ];
     };
 
     # Extra packages

@@ -37,7 +37,7 @@
     };
   };
 
-  # Enable/Disable Home Manager modules
+  # Enable/Disable our custom Home Manager modules
   enableKitty = true;
   enableFirefox = true;
   enableGit = true;
