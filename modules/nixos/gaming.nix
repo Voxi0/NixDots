@@ -17,20 +17,18 @@
     services.flatpak = lib.mkIf config.gaming.enableRoblox {
       enable = true;
       update.auto.enable = false;
-      packages = [
-        { appId = "org.vinegarhq.Sober"; origin = "flathub"; }
-      ];
+      packages = [ { appId = "org.vinegarhq.Sober"; origin = "flathub"; } ];
     };
 
     # Extra packages
     environment = {
-      # ProtonGE Installation path - Used by the `protonup` command
+			# Where to install Proton and other compatibility stuff for Steam
       sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/user/.steam/root/compatibilitytools.d";
 
       # Extra packages
       systemPackages = with pkgs; [
-        protonup  # Allows you to install ProtonGE, imperatively
-        mangohud  # Monitor game FPS and stuff
+        protonup  # Imperatively install ProtonGE
+        mangohud  # Monitor game performance
       ] ++ (if config.gaming.enableLutris then
         [ pkgs.lutris ]
       else []) ++ (if config.gaming.enableHeroic then
@@ -40,13 +38,13 @@
 
     # Programs
     programs = {
-      # A daemon that greatly improves game performance by requesting a set of optimizations to be temporarily applied to the OS and the game process
+			# Daemon that temporarily applies a set of optimizations to the OS and the game to greatly increase performance
       gamemode.enable = true;
 
       # Steam
       steam = lib.mkIf config.gaming.enableSteam {
         enable = true;
-        gamescopeSession.enable = true; # Optimized micro-compositor that may helps with upscaling and resolution issues
+        gamescopeSession.enable = true; # Optimized micro-compositor that may help with upscaling and resolution issues
       };
     };
   };

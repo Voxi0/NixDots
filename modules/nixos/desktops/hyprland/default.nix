@@ -10,6 +10,9 @@
       trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
 
+		# For NVidia
+		boot.kernelParams = lib.mkIf config.enableNVidia [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+
     # Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
     programs.hyprland = {
       enable = true;
