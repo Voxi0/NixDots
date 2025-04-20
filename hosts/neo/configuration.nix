@@ -62,16 +62,6 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  # Programs
-  programs = {
-    # Some programs need SUID wrappers - Can be configured further or are started in user sessions
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
-
   # Systemwide packages
   environment.systemPackages = with pkgs; [ pavucontrol networkmanagerapplet ];
 
