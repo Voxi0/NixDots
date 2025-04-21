@@ -4,7 +4,6 @@
     # Extra CLI tools
     packages = with pkgs; [
       nh          # Nix CLI helper
-      superfile   # Fancy TUI file manager
       binsider    # Analyze ELF binaries like a boss 😼🕵️
       television  # Fuzzy file finder
       btop        # System monitor
@@ -21,7 +20,7 @@
   # Programs
   programs = {
     nix-your-shell.enable = true; # Use the shell we prefer instead of Bash in Nix shells
-    zoxide.enable = true;         # Smarter `cd` command
+    zoxide.enable = true;         # Smarter `cd` command which is super handy check it out
 
     # A clone of `cat` with syntax highlighting, Git integration etc
     bat = {

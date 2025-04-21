@@ -28,15 +28,11 @@
     # System-wide theming and typography
     stylix.url = "github:danth/stylix";
 
-    # Hyprland
-		hyprland.url = "github:hyprwm/Hyprland";
-		hyprland-plugins = {
-			url = "github:hyprwm/hyprland-plugins";
-			inputs.hyprland.follows = "hyprland";
+		# My Hyprland configuration
+		NixDotsHyprland = {
+			url = "github:Voxi0/NixDots-Hyprland";
+			inputs.nixpkgs.follows = "nixpkgs";
 		};
-
-    # AGS - Widget library
-		ags.url = "github:aylur/ags";
 
     # Firefox extensions
     firefox-addons = {

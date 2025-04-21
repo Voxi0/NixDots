@@ -6,5 +6,9 @@
       enable = true;
       enableSSHSupport = true;
     };
+
+		# Thunar file manager for XFCE
+		thunar.enable = true;
+		xfconf.enable = true;
   };
 }

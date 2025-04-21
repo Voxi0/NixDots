@@ -59,6 +59,9 @@
           "sidebar.verticalTab" = true;
           "sidebar.revamp" = true;
 
+					# Enable XDG desktop portal file picker
+          "widget.use-xdg-desktop-portal.file-picker" = true;
+
           # Disable irritating first-run stuff
           "browser.disableResetPrompt" = true;
           "browser.download.panel.shown" = true;

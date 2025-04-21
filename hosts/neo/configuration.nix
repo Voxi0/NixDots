@@ -1,6 +1,7 @@
-{ systemDisk, pkgs, hostname, username, keymap, timezone, locale, xkbLayout, ... }: {
+{ inputs, systemDisk, pkgs, hostname, username, keymap, timezone, locale, ... }: {
   # Import Nix modules	
   imports = [
+		inputs.NixDotsHyprland.nixosModules.default
     ./../../hardware-configuration.nix
     (import ../../disko.nix { device = systemDisk; })
     ./../../modules/nixos
@@ -11,7 +12,6 @@
 	enableNVidia = false;
 	enableSecureBoot = true;	# Lanzaboote for secure boot
   enableStylix = true;      # System-wide theming and typography
-	enableHyprland = true;
   enableSway = false;
   enableFish = true;        # Fish shell (Not POSIX compliant)
   gaming = {
