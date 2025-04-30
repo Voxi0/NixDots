@@ -1,13 +1,15 @@
-{ inputs, pkgs, xkbLayout, ... }: {
+{ inputs, pkgs, ... }: {
   # Import Nix modules
   imports = [
     inputs.NixDotsHyprland.homeManagerModules.default
 		../../modules/home
 	];
 
-	nixdots-hyprland.xkbLayout = "gb";
-
 	# Enable/Disable our custom Home Manager modules
+	nixDotsHyprland = {
+		kbLayout = "gb";
+		enableAGS = true;
+	};
   enableKitty = true;
   enableFirefox = true;
   enableGit = true;

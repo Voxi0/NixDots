@@ -12,7 +12,6 @@
 	enableNVidia = false;
 	enableSecureBoot = true;	# Lanzaboote for secure boot
   enableStylix = true;      # System-wide theming and typography
-  enableSway = false;
   enableFish = true;        # Fish shell (Not POSIX compliant)
   gaming = {
     enable = true;
