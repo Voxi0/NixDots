@@ -1,6 +1,6 @@
 { inputs, lib, config, ... }: {
   # Import Nix modules
-  imports = [ inputs.nixcord.homeManagerModules.nixcord ];
+  imports = [ inputs.nixcord.homeModules.nixcord ];
 
   # Module options
   options.enableNixcord = lib.mkEnableOption "Nixcord (Discord)";

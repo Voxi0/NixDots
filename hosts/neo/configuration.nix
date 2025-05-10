@@ -4,6 +4,7 @@
 		inputs.NixDotsHyprland.nixosModules.default
     ./../../hardware-configuration.nix
     (import ../../disko.nix { device = systemDisk; })
+		./../../cachix.nix
     ./../../modules/nixos
   ];
   
