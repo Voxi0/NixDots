@@ -60,7 +60,7 @@
           "sidebar.revamp" = true;
 
 					# Enable XDG desktop portal file picker
-          "widget.use-xdg-desktop-portal.file-picker" = true;
+          "widget.use-xdg-desktop-portal.file-picker" = 0;
 
           # Disable irritating first-run stuff
           "browser.disableResetPrompt" = true;

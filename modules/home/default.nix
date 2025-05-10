@@ -5,7 +5,7 @@
   ];
 
   # LazyVim
-  home.packages = [ pkgs.cachix inputs.NixNvim.packages.${system}.nvim ];
+  home.packages = [ inputs.NixNvim.packages.${system}.nvim ];
 
   # OBS studio
   programs.obs-studio = {
