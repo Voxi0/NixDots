@@ -11,16 +11,13 @@
     ];
 
     # Shell alises to shorten useful commands
-    shellAliases = {
-      "spf" = "superfile";
-      "ff" = "fastfetch";
-    };
+    shellAliases."ff" = "fastfetch";
   };
 
   # Programs
   programs = {
     nix-your-shell.enable = true; # Use the shell we prefer instead of Bash in Nix shells
-    zoxide.enable = true;         # Smarter `cd` command which is super handy check it out
+    zoxide.enable = true;         # Smarter `cd` command which is super handy
 
     # A clone of `cat` with syntax highlighting, Git integration etc
     bat = {

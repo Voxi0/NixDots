@@ -2,7 +2,7 @@
 	# Module options
 	options = {
 		enableIntel = lib.mkEnableOption "Enables Intel hardware support";
-		enableNVidia = lib.mkEnableOption "Enables NVidia hardware support";
+		enableNvidia = lib.mkEnableOption "Enables Nvidia hardware support";
 	};
 
 	# Configuration
@@ -27,7 +27,7 @@
 			) else []);
 		};
 
-		# NVidia - Look into `https://nixos.wiki/wiki/Nvidia` for further information
+		# Nvidia - Look into `https://nixos.wiki/wiki/Nvidia` for further information
 		nvidia = lib.mkIf config.enableNVidia {
 			modesetting.enable = true;	# REQUIRED
 			nvidiaSettings = true;			# Settings menu accessible via `nvidia-settings`
@@ -35,13 +35,11 @@
 			# You may need to select the appropriate driver version for your specific GPU
 			package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-			# Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-			# Enable this if you have graphical corruption issues or application crashes after waking
-			# up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
-			# of just the bare essentials.
+			# Power management - Experimental and can cause sleep/suspend to fail
+			# Enable if you have graphical corruption issues or app crashes after waking from sleep
 			powerManagement.enable = false;
 
-			# Fine-grained power management - Turns off GPU when not in use
+			# Fine-grained power management - Turns off the GPU when not in use
 			# Experimental and only works on modern Nvidia GPUs (Turing or newer)
 			powerManagement.finegrained = false;
 

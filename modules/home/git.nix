@@ -1,6 +1,6 @@
 { lib, config, pkgs, ... }: {
   # Module options
-  options.enableGit = lib.mkEnableOption "Git (Version Control System (VCS))";
+  options.enableGit = lib.mkEnableOption "Enable Git (Version Control System (VCS))";
 
   # Configuration
   config = lib.mkIf config.enableGit {

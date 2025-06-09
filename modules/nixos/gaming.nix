@@ -38,7 +38,7 @@
 
     # Programs
     programs = {
-			# Daemon that temporarily applies a set of optimizations to the OS and the game to greatly increase performance
+			# Daemon that temporarily applies a set of optimizations to the OS and the game to greatly improve performance
       gamemode.enable = true;
 
       # Steam

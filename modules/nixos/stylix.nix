@@ -1,12 +1,12 @@
-{ inputs, lib, config, username, pkgs, ... }: {
-   # Import Nix modules
-  imports = [ inputs.stylix.nixosModules.stylix ];
+{ lib, config, inputs, pkgs, username, ... }: {
+	# Import Nix modules
+	imports = [ inputs.stylix.nixosModules.stylix ];
 
-  # Module options
-  options.enableStylix = lib.mkEnableOption "Stylix";
+	# Module options
+	options.enableStylix = lib.mkEnableOption "Enable Stylix";
 
-  # Configuration
-  config = lib.mkIf config.enableStylix {
+	# Configuration
+	config = lib.mkIf config.enableStylix {
     # Stylix
     stylix = {
       enable = true;

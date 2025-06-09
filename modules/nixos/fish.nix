@@ -1,6 +1,6 @@
 { lib, config, username, pkgs, ... }: {
   # Module options
-  options.enableFish = lib.mkEnableOption "Fish shell";
+  options.enableFish = lib.mkEnableOption "Enable Fish shell";
 
   # Configuration
   config = lib.mkIf config.enableFish {
@@ -18,43 +18,40 @@
     programs.fish.enable = true;
 
     # Home Manager
-    home-manager.users.${username} = {
-      # Programs
-      programs = {
-        # Fish shell
-        fish = {
-          enable = true;
-          generateCompletions = true;
-          interactiveShellInit = ''
-            # Disable greeting
-            set fish_greeting
-          '';
-        };
+    home-manager.users.${username}.programs = {
+			# Fish shell
+			fish = {
+				enable = true;
+				generateCompletions = true;
+				interactiveShellInit = ''
+					# Disable greeting
+					set fish_greeting
+				'';
+			};
 
-        # Minimal, blazing-fast, and infinitely customizable prompt for any shell
-        starship = {
-          enable = true;
-          enableFishIntegration = true;
+			# Minimal, blazingly-fast, and infinitely customizable shell prompt
+			starship = {
+				enable = true;
+				enableFishIntegration = true;
 
-          # Fish shell only
-          enableInteractive = true;
-          enableTransience = true;
+				# Fish shell only
+				enableInteractive = true;
+				enableTransience = true;
 
-          # Settings
-          settings = {
-            add_newline = false;
-            character = {
-              success_symbol = "[->](bold green)";
-              error_symbol = "[->](bold red)";
-            };
-          };
-        };
+				# Settings
+				settings = {
+					add_newline = false;
+					character = {
+						success_symbol = "[->](bold green)";
+						error_symbol = "[->](bold red)";
+					};
+				};
+			};
 
-        # Shell integrations
-        kitty.shellIntegration.enableFishIntegration = true;
-        nix-your-shell.enableFishIntegration = true;
-        zoxide.enableFishIntegration = true;
-      };
-    };
+			# Shell integrations
+			kitty.shellIntegration.enableFishIntegration = true;
+			nix-your-shell.enableFishIntegration = true;
+			zoxide.enableFishIntegration = true;
+		};
   };
 }

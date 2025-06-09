@@ -1,7 +1,7 @@
 _: {
-  # Import Nix modules
-  imports = [
-    ./hardware.nix ./lanzaboote.nix ./services.nix
-		./stylix.nix ./programs.nix ./fish.nix ./gaming.nix
-  ];
+	# Import Nix modules
+	imports = [
+		./hardware.nix ./services.nix ./programs.nix
+		./stylix.nix ./fish.nix ./gaming.nix
+	];
 }

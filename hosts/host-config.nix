@@ -1,7 +1,7 @@
 # Function to easily create new NixOS configurations in the system flake
-{ nixpkgs, system, inputs, hostname, username, locale, timezone, keymap, xkbLayout, ... }: nixpkgs.lib.nixosSystem {
+{ nixpkgs, system, inputs, hostname, username, locale, timezone, keymap, kbLayout, ... }: nixpkgs.lib.nixosSystem {
   inherit system;
-  specialArgs = { inherit inputs hostname username locale timezone keymap xkbLayout; };
+  specialArgs = { inherit inputs hostname username locale timezone keymap kbLayout; };
   modules = [
     inputs.disko.nixosModules.default
     ./${hostname}/configuration.nix {
@@ -39,7 +39,7 @@
             homeDirectory = "/home/${username}";
 
             # Don't change this value even if you update Home Manager
-            stateVersion = "24.11";
+            stateVersion = "25.05";
           };
 
           # Let Home Manager install and manage itself

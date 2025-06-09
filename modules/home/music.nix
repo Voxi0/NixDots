@@ -4,8 +4,8 @@
 
 	# Module options
 	options = {
-    enableSpotify = lib.mkEnableOption "Spotify";
-    enableNcmpcpp = lib.mkEnableOption "NCMPCPP (CLI music player)";
+    enableSpotify = lib.mkEnableOption "Enable Spotify (Spicetify)";
+    enableNcmpcpp = lib.mkEnableOption "Enable NCMPCPP (CLI music player)";
   };
 
 	# Configure enabled music players
