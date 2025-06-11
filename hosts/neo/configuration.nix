@@ -1,7 +1,7 @@
-{ systemDisk, system, hostname, username, timezone, locale, keymap, pkgs, ... }: {
+{ systemDisk, system, hostname, username, timezone, locale, keymap, config, pkgs, ... }: {
   # Import Nix modules
   imports = [
-		(import ../../disko.nix { device = systemDisk; })
+		# (import ../../disko.nix { device = systemDisk; })
 		./../../hardware-configuration.nix
 		./../../modules/nixos
 	];
@@ -31,6 +31,7 @@
   # Bootloader
   boot = {
 		kernelPackages = pkgs.linuxPackages_latest;
+		kernelParams = [ ];
 		loader = {
     	systemd-boot.enable = true;
     	efi.canTouchEfiVariables = true;
@@ -53,7 +54,7 @@
     isNormalUser = true;
     initialPassword = "nixos";
     description = "${username}";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "cdrom" ];
   };
 
 	# XDG desktop portals
@@ -63,7 +64,7 @@
 	};
 
 	# System-wide packages
-  environment.systemPackages = with pkgs; [ pavucontrol networkmanagerapplet ];
+  environment.systemPackages = with pkgs; [ pavucontrol networkmanagerapplet kdePackages.k3b dvdplusrwtools ];
 
   # Unnecessary to change this value
   system.stateVersion = "25.05";
