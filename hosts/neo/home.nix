@@ -1,6 +1,9 @@
 { inputs, pkgs, ... }: {
   # Import Nix modules
-  imports = [ ../../modules/home ];
+  imports = [
+		inputs.NixDotsHyprland.homeManagerModules.default
+		../../modules/home
+	];
 
 	# Enable/Disable our custom Home Manager modules
   enableKitty = true;

@@ -27,6 +27,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+		# My personal Hyprland configuration
+		NixDotsHyprland = {
+			url = "github:Voxi0/NixDots-Hyprland";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
 		# Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";

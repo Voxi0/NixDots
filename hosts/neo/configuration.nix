@@ -1,7 +1,8 @@
-{ systemDisk, system, hostname, username, timezone, locale, keymap, config, pkgs, ... }: {
+{ systemDisk, system, hostname, username, timezone, locale, keymap, config, inputs, pkgs, ... }: {
   # Import Nix modules
   imports = [
-		# (import ../../disko.nix { device = systemDisk; })
+		inputs.NixDotsHyprland.nixosModules.default
+		(import ../../disko.nix { device = systemDisk; })
 		./../../hardware-configuration.nix
 		./../../modules/nixos
 	];
