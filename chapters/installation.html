@@ -153,6 +153,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<h2 id="fresh-install"><a class="header" href="#fresh-install">Fresh Install</a></h2>
 <ul>
 <li>Prepare a NixOS installation media and boot into it.</li>
 <li>Open the terminal and run the following commands. Read thoroughly before running each command.</li>
@@ -179,6 +180,23 @@ passwd &lt;your_username&gt;  # Definitely change your password from `nixos` to 
 
 # Installation is complete! Power off and remove the installation media
 poweroff
+</code></pre>
+<h2 id="on-existing-nixos-installation"><a class="header" href="#on-existing-nixos-installation">On Existing NixOS Installation</a></h2>
+<pre><code class="language-bash"># Fetch NixDots and `cd` into it
+nix-shell -p git --run "git clone https://github.com/Voxi0/NixDots.git"
+cd NixDots
+
+# Set your username and configure other stuff in `flake.nix`
+# Nano is installed by default but you can whatever editor you desire
+nano ./flake.nix
+
+# Rebuild the system - Update the flake if you desire but it might break stuff
+# sudo nix flake update
+sudo nix-collect-garbage -d
+sudo nixos-rebuild boot --flake ./#&lt;hostname&gt;
+
+# Reboot your system
+reboot
 </code></pre>
 
                     </main>
