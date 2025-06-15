@@ -1,7 +1,7 @@
 { inputs, system, pkgs, ... }: {
 	# Import Nix modules
 	imports = [
-		./kitty.nix ./cli.nix ./git.nix ./browser ./music.nix
+		./kitty.nix ./cli.nix ./git.nix ./browser ./music.nix ./discord.nix
 	];
 
 	# My personal Neovim configuration

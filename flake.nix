@@ -39,6 +39,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+		# Declaratively configure Vencord and it's plugins
+		nixcord.url = "github:kaylorben/nixcord";
+
 		# Multiplatform CLI tool to customize the official Spotify client
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";

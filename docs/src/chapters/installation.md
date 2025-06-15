@@ -37,9 +37,13 @@ cd NixDots
 # Nano is installed by default but you can whatever editor you desire
 nano ./flake.nix
 
+# !!IMPORTANT!!
+# Move your `hardware-configuration.nix` to the NixDots directory
+# Or generate a new `hardware-configuration.nix` file with the following command
+nixos-generate-config --show-hardware-config > hardware-configuration.nix
+
 # Rebuild the system - Update the flake if you desire but it might break stuff
 # sudo nix flake update
-sudo nix-collect-garbage -d
 sudo nixos-rebuild boot --flake ./#<hostname>
 
 # Reboot your system
