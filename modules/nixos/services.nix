@@ -20,18 +20,10 @@
     };
 
     # X11 windowing system
-    displayManager.defaultSession = "xfce";
     xserver = {
-      enable = true;
+      enable = false;
 			excludePackages = [ pkgs.xterm ];
 			videoDrivers = lib.mkIf config.enableNvidia [ "nvidia" ];
-      desktopManager.xfce = {
-				enable = true;
-				enableXfwm = true;
-				enableWaylandSession = false;
-				enableScreensaver = true;
-				noDesktop = false;
-      };
       xkb = {
         layout = kbLayout;
         variant = "";

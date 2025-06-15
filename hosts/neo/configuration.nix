@@ -7,6 +7,13 @@
 		./../../modules/nixos
 	];
 
+	# Enable the Hyprland cachix to avoid rebuilding large software from scratch
+	nix.settings = {
+		substituters = [ "https://hyprland.cachix.org" ];
+		trusted-substituters = [ "https://hyprland.cachix.org" ];
+		trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+	};
+
 	# Enable/Disable our custom system modules
 	enableIntel = true;
 	enableNvidia = false;
@@ -33,6 +40,8 @@
   boot = {
 		kernelPackages = pkgs.linuxPackages_latest;
 		kernelParams = [ ];
+		extraModulePackages = with config.boot.kernelPackages; [ ];
+		initrd.kernelModules = [ ];
 		loader = {
     	systemd-boot.enable = true;
     	efi.canTouchEfiVariables = true;
