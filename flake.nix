@@ -15,12 +15,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		# Declarative disk partitioning and formatting using Nix
-    disko = {
-      url = "github:nix-community/disko/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
 		# System-wide theming and typography
 		stylix = {
       url = "github:danth/stylix";

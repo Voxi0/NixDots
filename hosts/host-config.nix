@@ -3,11 +3,7 @@
   inherit system;
   specialArgs = { inherit inputs hostname username locale timezone kbLayout; };
   modules = [
-    inputs.disko.nixosModules.default
     ./${hostname}/configuration.nix {
-			# Import Nix modules
-			imports = [ (import ../disko.nix { device = systemDisk; }) ];
-
       # Nix packages
       nixpkgs.config.allowUnfree = true;
 
