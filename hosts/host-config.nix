@@ -19,13 +19,6 @@
 					];
         };
       };
-			nixpkgs.overlays = [
-				(final: prev: {
-					rtl8852au = prev.callPackage ../pkgs/rtl8852au.nix {
-						kernel = config.boot.kernelPackages.kernel;
-					};
-				})
-			];
     }
     inputs.home-manager.nixosModules.home-manager {
       home-manager = {

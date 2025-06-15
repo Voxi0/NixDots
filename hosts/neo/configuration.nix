@@ -37,7 +37,7 @@
 		kernelPackages = pkgs.linuxPackages_latest;
 		kernelParams = [ ];
 		extraModulePackages = with config.boot.kernelPackages; [ ];
-		initrd.kernelModules = [ ];
+		kernelModules = [ ];
 		loader = {
     	systemd-boot.enable = true;
     	efi.canTouchEfiVariables = true;
