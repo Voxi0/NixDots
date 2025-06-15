@@ -3,10 +3,10 @@
 	imports = [ inputs.nixcord.homeModules.nixcord ];
 
 	# Module options
-	options.enableNixcord = lib.mkEnableOption "Enable Discord";
+	options.enableDiscord = lib.mkEnableOption "Enable Discord";
 
 	# Configuration
-	config = lib.mkIf config.enableNixcord {
+	config = lib.mkIf config.enableDiscord {
 		programs.nixcord = {
 			enable = true;
 

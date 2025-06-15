@@ -11,6 +11,7 @@
   enableGit = true;
   enableSpotify = true;
   enableNcmpcpp = true;
+	enableDiscord = true;
 
   # GTK and QT
   qt.enable = true;

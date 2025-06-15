@@ -17,7 +17,7 @@
 	enableIntel = true;
 	enableNvidia = false;
 	enableStylix = true;
-  enableFish = true;        # Fish shell (Not POSIX compliant)
+  enableFish = true;
   gaming = {
     enable = true;
     enableSteam = true;
