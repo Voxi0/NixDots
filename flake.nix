@@ -60,10 +60,9 @@
 		username = "voxi0";
 		locale = "en_GB.UTF-8";
     timezone = "Europe/London";
-    keymap = "uk";
     kbLayout = "gb";
 		genHostConfig = { hostname }: import ./hosts/host-config.nix {
-			inherit nixpkgs system inputs hostname username locale timezone keymap kbLayout;
+			inherit nixpkgs systemDisk system inputs hostname username locale timezone kbLayout;
 		};
   in {
     nixosConfigurations = {

@@ -1,8 +1,7 @@
-{ systemDisk, system, hostname, username, timezone, locale, keymap, config, inputs, pkgs, ... }: {
+{ system, hostname, username, timezone, locale, kbLayout, config, inputs, pkgs, ... }: {
   # Import Nix modules
   imports = [
 		inputs.NixDotsHyprland.nixosModules.default
-		(import ../../disko.nix { device = systemDisk; })
 		./../../hardware-configuration.nix
 		./../../modules/nixos
 	];
@@ -33,9 +32,6 @@
 		rtkit.enable = true;	# Optional but recommended
 	};
 
-  # Configure console keymap
-  console.keyMap = keymap;
-
   # Bootloader
   boot = {
 		kernelPackages = pkgs.linuxPackages_latest;
@@ -59,7 +55,7 @@
     firewall.enable = true;
   };
 
-	# Users - Don't forget to set a password with `passwd`
+	# Users - Remember to set a password with `passwd`
   users.users.${username} = {
     isNormalUser = true;
     initialPassword = "nixos";

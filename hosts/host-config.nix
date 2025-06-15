@@ -1,10 +1,13 @@
 # Function to easily create new NixOS configurations in the system flake
-{ nixpkgs, system, inputs, hostname, username, locale, timezone, keymap, kbLayout, ... }: nixpkgs.lib.nixosSystem {
+{ nixpkgs, systemDisk, system, inputs, hostname, username, locale, timezone, kbLayout, ... }: nixpkgs.lib.nixosSystem {
   inherit system;
-  specialArgs = { inherit inputs hostname username locale timezone keymap kbLayout; };
+  specialArgs = { inherit inputs hostname username locale timezone kbLayout; };
   modules = [
     inputs.disko.nixosModules.default
     ./${hostname}/configuration.nix {
+			# Import Nix modules
+			imports = [ (import ../disko.nix { device = systemDisk; }) ];
+
       # Nix packages
       nixpkgs.config.allowUnfree = true;
 

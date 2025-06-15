@@ -1,4 +1,5 @@
 # Installation
+## Fresh Install
 - Prepare a NixOS installation media and boot into it.
 - Open the terminal and run the following commands. Read thoroughly before running each command.
 ```bash
@@ -24,4 +25,23 @@ passwd <your_username>  # Definitely change your password from `nixos` to someth
 
 # Installation is complete! Power off and remove the installation media
 poweroff
+```
+
+## On Existing NixOS Installation
+```bash
+# Fetch NixDots and `cd` into it
+nix-shell -p git --run "git clone https://github.com/Voxi0/NixDots.git"
+cd NixDots
+
+# Set your username and configure other stuff in `flake.nix`
+# Nano is installed by default but you can whatever editor you desire
+nano ./flake.nix
+
+# Rebuild the system - Update the flake if you desire but it might break stuff
+# sudo nix flake update
+sudo nix-collect-garbage -d
+sudo nixos-rebuild boot --flake ./#<hostname>
+
+# Reboot your system
+reboot
 ```

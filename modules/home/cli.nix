@@ -5,13 +5,16 @@
     packages = with pkgs; [
       nh          # Nix CLI helper
       binsider    # Analyze ELF binaries like a boss 😼🕵️
-      television  # Fuzzy file finder
       btop        # System monitor
       tokei       # Shows the number of lines of comments, code etc in projects
+			astroterm		# Terminal based star map written in C
     ];
 
     # Shell alises to shorten useful commands
-    shellAliases."ff" = "fastfetch";
+    shellAliases = {
+			"ff" = "fastfetch";
+			"starmap" = "astroterm -f 60 -c -u";
+		};
   };
 
   # Programs
@@ -23,7 +26,7 @@
     bat = {
       enable = true;
       extraPackages = with pkgs.bat-extras; [
-        prettybat batpipe batgrep batdiff
+        prettybat batman batpipe batgrep batdiff
       ];
     };
 
