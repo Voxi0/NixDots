@@ -1,7 +1,6 @@
 { system, hostname, username, timezone, locale, kbLayout, config, inputs, pkgs, ... }: {
   # Import Nix modules
   imports = [
-		inputs.NixDotsHyprland.nixosModules.default
 		./../../hardware-configuration.nix
 		./../../modules/nixos
 	];

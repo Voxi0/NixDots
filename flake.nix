@@ -21,11 +21,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		# My personal Hyprland configuration
-		NixDotsHyprland = {
-			url = "github:Voxi0/NixDots-Hyprland";
-			inputs.nixpkgs.follows = "nixpkgs";
+		# Hyprland
+		hyprland.url = "github:hyprwm/Hyprland";
+		hyprland-plugins = {
+			url = "github:hyprwm/hyprland-plugins";
+			inputs.hyprland.follows = "hyprland";
 		};
+
+		# AGS - Widget library
+		ags.url = "github:aylur/ags";
 
 		# Firefox extensions
     firefox-addons = {

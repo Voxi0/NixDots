@@ -9,25 +9,13 @@
 	config = lib.mkIf config.enableDiscord {
 		programs.nixcord = {
 			enable = true;
-
-			# Lightweight alternative to Discord client
+			openASAR.enable = true;
 			dorion = {
 				enable = true;
-
-				# General/System
-				openOnStartup = false;
-				autoClearCache = true;
-      	disableHardwareAccel = false;
+				cacheCss = true;
+				clientMods = [ "Vencord" "Shelter" ];
 				desktopNotifications = true;
-
-				# Appearance
-				theme = "dark";
-				zoom = "1.1";
-				blur = "acrylic";
-
-				# RPC
-				rpcServer = true;
-				rpcProcessScanner = true;
+				sysTray = true;
 			};
 
 			# Styling and plugins
@@ -54,6 +42,15 @@
 					spotifyControls.enable = true;
 					spotifyShareCommands.enable = true;
 
+					# LastFM
+					lastFMRichPresence = {
+						enable = true;
+						hideWithSpotify = false;
+						username = "voxi0";
+						shareUsername = true;
+						useListeningStatus = true;
+					};
+
 					# Cool
           noTypingAnimation.enable = true;
 					alwaysTrust.enable = true;
@@ -70,6 +67,7 @@
 					# More stuff
 					petpet.enable = true;
 					webKeybinds.enable = true;
+					clearURLs.enable = true;
 
 					# Fixes
 					fixSpotifyEmbeds.enable = true;

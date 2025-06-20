@@ -1,0 +1,45 @@
+window.Bar {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 16px; }
+  window.Bar button {
+    all: unset; }
+  window.Bar box {
+    border-radius: 6px; }
+  window.Bar image {
+    margin-left: 8px;
+    margin-right: -8px; }
+  window.Bar label {
+    border-radius: 6px;
+    padding: 0px 8px;
+    margin: 2px; }
+  window.Bar .DashboardButton, window.Bar .Workspaces,
+  window.Bar .Time,
+  window.Bar .WiFi, window.Bar .Battery, window.Bar .SysTray {
+    background-color: #000000;
+    margin: 2px; }
+  window.Bar .DashboardButton image {
+    margin: unset;
+    padding: 0px 6px; }
+  window.Bar .SysTray image {
+    margin: 0px 4px; }
+  window.Bar .Workspaces button label {
+    transition-duration: 0.2s; }
+  window.Bar .Workspaces button:hover label {
+    background-color: #f2cdcd;
+    color: #000000; }
+  window.Bar .Workspaces .focused label {
+    background-color: #ffffff;
+    color: #000000; }
+
+window.Dashboard {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 6px; }
+  window.Dashboard box {
+    background-color: transparent;
+    margin-left: 1px;
+    border-radius: 6px; }
+    window.Dashboard box button {
+      all: unset; }

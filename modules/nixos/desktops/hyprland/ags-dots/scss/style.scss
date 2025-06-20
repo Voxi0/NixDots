@@ -1,0 +1,73 @@
+// Variables
+$bg: #000000;
+$fg: #ffffff;
+$accent: #f2cdcd;
+$fontSize: 16px;
+$borderRadius: 6px;
+
+// Bar window
+window.Bar {
+  	background-color: transparent;
+  	color: $fg;
+  	font-size: $fontSize;
+
+  	// Elements
+  	button {all: unset;}
+  	box {border-radius: $borderRadius;}
+  	image {
+    	margin-left: 8px;
+    	margin-right: -8px;
+  	}
+  	label {
+    	border-radius: $borderRadius;
+    	padding: 0px 8px;
+    	margin: 2px;
+  	}
+
+  	// Custom widgets
+	// Global - Common styles between all custom widgets
+  	.DashboardButton, .Workspaces,
+    .Time,
+    .WiFi, .Battery, .SysTray {
+    	background-color: $bg;
+    	margin: 2px;
+  	}
+
+	// Dashboard button - To toggle dashboard
+	.DashboardButton image {margin: unset; padding: 0px 6px;}
+
+	// System tray
+  	.SysTray image {margin: 0px 4px;}
+
+	// Workspaces
+	.Workspaces {
+		button {
+			label {transition-duration: 0.2s;}
+			&:hover label {
+				background-color: $accent;
+				color: $bg;
+			}
+		}
+		.focused label {
+			background-color: $fg;
+			color: $bg;
+		}
+  	}
+}
+
+// Dashboard window
+window.Dashboard {
+    background-color: transparent;
+    color: $fg;
+	font-size: $fontSize;
+    border-radius: $borderRadius;
+
+	box {
+		background-color: transparent;
+		margin-left: 1px;
+		border-radius: $borderRadius;
+
+		// Elements
+		button {all: unset;}
+	}
+}
