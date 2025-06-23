@@ -9,7 +9,7 @@
 	config = lib.mkIf config.enableDiscord {
 		programs.nixcord = {
 			enable = true;
-			openASAR.enable = true;
+			discord.openASAR.enable = true;
 			dorion = {
 				enable = true;
 				cacheCss = true;
