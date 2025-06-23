@@ -28,8 +28,11 @@
 			inputs.hyprland.follows = "hyprland";
 		};
 
-		# AGS - Widget library
-		ags.url = "github:aylur/ags";
+		# Widget library
+		quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
 		# Firefox extensions
     firefox-addons = {

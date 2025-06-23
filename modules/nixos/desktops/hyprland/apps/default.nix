@@ -1,6 +1,6 @@
 { lib, config, pkgs, ... }: {
   # Import Nix modules
   imports = [
-    ./wofi ./ags.nix ./swaync.nix ./wlogout.nix
+    ./wofi ./quickshell.nix ./swaync.nix ./wlogout.nix
   ];
 }

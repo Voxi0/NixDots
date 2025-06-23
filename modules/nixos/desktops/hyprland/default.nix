@@ -24,9 +24,6 @@
 
 				# Utilities
 				wl-clipboard grim slurp feh udiskie hyprshade
-
-				# For AGS (REQUIRED)
-				sassc
 			];
 
 			# Hyprcursor
