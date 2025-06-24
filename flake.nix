@@ -28,12 +28,6 @@
 			inputs.hyprland.follows = "hyprland";
 		};
 
-		# Widget library
-		quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
 		# Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
