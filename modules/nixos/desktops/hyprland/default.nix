@@ -15,20 +15,17 @@
 		# Import Home Manager modules
 		imports = [ ./apps ];
 
-		# Home
-		home = {
-			# Base/Required packages
-			packages = with pkgs; [
-				hyprpolkitagent	# Polkit GUI authentication daemon
-				nwg-displays		# Manage monitors
-				swww						# Efficient wallpaper daemon that supports animated wallpapers
-				wl-clipboard		# System clipboard
-				grim						# To take screenshots
-				slurp						# To snip a part of the screen as selection
-				feh							# Simple image viewer
-				udiskie					# Automatically mounts and manages removable media
-			];
-		};
+		# Very useful packages
+		home.packages = with pkgs; [
+			hyprpolkitagent	# Polkit GUI authentication daemon
+			nwg-displays		# Manage monitors
+			swww						# Efficient wallpaper daemon that supports animated wallpapers
+			wl-clipboard		# System clipboard
+			grim						# To take screenshots
+			slurp						# To snip a part of the screen as selection
+			feh							# Simple image viewer
+			udiskie					# Automatically mounts and manages removable media
+		];
 
 		# Services
 		services = {
@@ -86,44 +83,8 @@
 			systemd.enable = false;
 			plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [];
 			settings = {
-				#############################
-				### ENVIRONMENT VARIABLES ###
-				#############################
-				env = [
-					# Set to "1" if the cursor keeps disappearing
-					"WLR_NO_HARDWARE_CURSORS,0"
-
-					# Use Wayland
-					"NIXOS_OZONE_WL,1"
-					"QT_QPA_PLATFORM,wayland"
-					"GTK_USE_PORTAL,1"
-					"MOZ_ENABLE_WAYLAND,1"
-					"GDK_BACKEND,wayland"
-					"SDL_VIDEODRIVER,wayland"
-				];
-
-				#################
-				### VARIABLES ###
-				#################
-				"$mainMod" = "SUPER";
-				"$terminal" = "uwsm app -- kitty";
-				"$menu" = "uwsm app -- $(wofi --show drun --define=drun-print_desktop_file=true)";
-
-				# Command to bring up the logout menu
-				"$logoutMenuCmd" = "uwsm app -- wlogout";
-
-				# Commands to control volume
-				"$increaseVolumeCmd" = "swayosd-client --output-volume +5 --max-volume 100";
-				"$decreaseVolumeCmd" = "swayosd-client --output-volume -5 --max-volume 100";
-				"$toggleAudioMuteCmd" = "swayosd-client --output-volume mute-toggle";
-
-				# Commands to control screen brightness
-				"$increaseBrightnessCmd" = "swayosd-client --brightness +5";
-				"$decreaseBrightnessCmd" = "swayosd-client --brightness -5";
-
-				# Commands to use for screenshots - For the entire screen or selected area
-				"$fullscreenScreenshotCmd" = "grim";
-				"$selectedAreaScreenshotCmd" = ''grim -g "$(slurp)"'';
+				(import ./hypr/variables.nix)
+				input = (import ./hypr/inputs.nix { inherit kbLayout; })
 
 				#################
 				### AUTOSTART ###
@@ -137,26 +98,6 @@
 					"uwsm app -- swaync"
 					(lib.optional (pkgs ? mpdscribble) "uwsm app -- mpdscribble")
 				];
-
-				#############
-				### INPUT ###
-				#############
-				input = {
-					# Keyboard
-					kb_layout = kbLayout;
-					# kb_variant =
-					# kb_model =
-					# kb_options =
-					# kb_rules =
-					numlock_by_default = true;
-					follow_mouse = 1;
-
-					# Mouse acceleration
-					sensitivity = 0;
-
-					# Touchpad
-					touchpad.natural_scroll = false;
-				};
 
 				# Touchpad gestures
 				gestures = {
