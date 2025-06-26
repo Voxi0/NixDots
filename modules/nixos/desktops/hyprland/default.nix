@@ -135,7 +135,7 @@
 					"uwsm app -- quickshell"
 					"uwsm app -- udiskie --automount --smart-tray --terminal=$terminal"
 					"uwsm app -- swaync"
-					(lib.optional (pkgs ? mpdscribble) "uwsm app -- mpdscribble")
+					(lib.optionalString (pkgs ? mpdscribble) "uwsm app -- mpdscribble")
 				];
 
 				#############
@@ -218,7 +218,6 @@
 						enabled = true;
 						range = 4;
 						render_power = 3;
-						color = "rgba(1a1a1aee)";
 					};
 
 					# Blur
