@@ -19,33 +19,33 @@
 		home = {
 			# Base/Required packages
 			packages = with pkgs; [
-				# Base
-				hyprpolkitagent nwg-displays libnotify swww waypaper
-
-				# Utilities
-				wl-clipboard grim slurp feh udiskie hyprshade
+				hyprpolkitagent	# Polkit GUI authentication daemon
+				nwg-displays		# Manage monitors
+				swww						# Efficient wallpaper daemon that supports animated wallpapers
+				wl-clipboard		# System clipboard
+				grim						# To take screenshots
+				slurp						# To snip a part of the screen as selection
+				feh							# Simple image viewer
+				udiskie					# Automatically mounts and manages removable media
 			];
-
-			# Hyprcursor
-			pointerCursor.hyprcursor.enable = true;
 		};
 
 		# Services
 		services = {
-			# Mpris media player CLI controller for VLC, Spotify, CMus etc
+			# To control active media players via the CLI
 			playerctld.enable = true;
 
-			# On Screen Display (OSD)
+			# On Screen Display (OSD) - Shows a simple volume/brightness level bar
 			swayosd = {
 				enable = true;
 				topMargin = 0.1;
 			};
 		};
 
-		# Stop Stylix from using Hyprpaper to set the wallpaper - We want to use SWWW for wallpapers instead
-		stylix.targets = {
-			hyprland.enable = false;  # Must be disabled in order to disable Hyprpaper without any conflicts
-			hyprpaper.enable = false;
+		# XDG desktop portals
+		xdg.portal = {
+  		enable = true;
+  		extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 		};
 
 		# Hyprland
@@ -84,8 +84,6 @@
 			enable = true;
 			xwayland.enable = true;
 			systemd.enable = false;
-
-			# Plugins and settings
 			plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [];
 			settings = {
 				#############################
@@ -137,7 +135,7 @@
 					"uwsm app -- quickshell"
 					"uwsm app -- udiskie --automount --smart-tray --terminal=$terminal"
 					"uwsm app -- swaync"
-					(lib.mkIf (pkgs.mpdscribble != null) "uwsm app -- mpdscribble")
+					(lib.optional (pkgs ? mpdscribble) "uwsm app -- mpdscribble")
 				];
 
 				#############
@@ -180,16 +178,16 @@
 				# Window layouts
 				master.new_status = "master";
 				dwindle = {
-					# Master switch for pseudotiling. Enabling is bound to mainMod + P
+					# Master switch for pseudotiling - Enable with `mainMod + P`
 					pseudotile = true;
-					preserve_split = true;                 # You probably want this
+					preserve_split = true;
 				};
 
 				#####################
 				### LOOK AND FEEL ###
 				#####################
 				general = {
-					# Gap amount between windows / between window and screen edge
+					# Gap amount between windows / window and screen edge
 					gaps_in = 5;
 					gaps_out = 10;
 
@@ -198,20 +196,20 @@
 					# "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
 					# "col.inactive_border" = "rgba(595959aa)";
 
-					# Set to true enable resizing windows by clicking and dragging on borders and gaps
+					# Enable/Disable resizing windows by clicking and dragging on borders and gaps
 					resize_on_border = false;
 
 					# Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
 					allow_tearing = false;
 
-					# Window layout style to use
+					# Default window layout
 					layout = "dwindle";
 				};
 				decoration = {
 					# Radius of rounded window corners
 					rounding = 6;
 
-					# Change transparency of focused and unfocused windows
+					# Transparency of focused/unfocused windows
 					active_opacity = 1.0;
 					inactive_opacity = 1.0;
 
@@ -232,11 +230,7 @@
 					};
 				};
 				animations = {
-					# Enable/Disable animations
 					enabled = true;
-
-					# Default animations
-					# Beziers
 					bezier = [
 						"easeOutQuint,0.23,1,0.32,1"
 						"easeInOutCubic,0.65,0.05,0.36,1"
@@ -244,8 +238,6 @@
 						"almostLinear,0.5,0.5,0.75,1.0"
 						"quick,0.15,0,0.1,1"
 					];
-
-					# Animations
 					animation = [
 						"global, 1, 10, default"
 						"border, 1, 5.39, easeOutQuint"
@@ -275,7 +267,9 @@
 				misc = {
 					disable_hyprland_logo = true;
 					force_default_wallpaper = false;
-					vfr = true;                            # Lowers the amount of sent frames when nothing is happening on-screen
+
+					# Lower the amount of frames sent when nothing is happening on-screen to improve performance
+					vfr = true;
 				};
 
 				###################
@@ -299,7 +293,6 @@
 					"$mainMod SHIFT, Up, exec, $increaseVolumeCmd"
 					"$mainMod SHIFT, Down, exec, $decreaseVolumeCmd"
 					"$mainMod SHIFT, M, exec, $toggleAudioMuteCmd"
-					"$mainMod CONTROL, M, exec, $toggleMicMuteCmd"
 
 					# Screenshot
 					"$mainMod SHIFT, Insert, exec, $fullscreenScreenshotCmd"
@@ -328,16 +321,15 @@
 					# Scroll through existing workspaces using $mainMod key and scroll
 					"$mainMod, mouse_down, workspace, e+1"
 					"$mainMod, mouse_up, workspace, e-1"
-
-					# Miscellaneous
-					",CAPSLOCK, exec, swayosd-client --caps-lock"
 				] ++ (
 					# Workspaces
-					builtins.concatLists (builtins.genList
-						(i: let ws = i + 1; in [
-							"$mainMod, code:1${toString i}, workspace, ${toString ws}"
-							"$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-						])
+					builtins.concatLists (
+						builtins.genList (
+							i: let ws = i + 1; in [
+								"$mainMod, ${toString ws}, workspace, ${toString ws}"
+								"$mainMod SHIFT, ${toString ws}, movetoworkspace, ${toString ws}"
+							]
+						)
 					numWorkspaces)
 				);
 
@@ -350,7 +342,6 @@
 					",XF86AudioRaiseVolume, exec, $increaseVolumeCmd"
 					",XF86AudioLowerVolume, exec, $decreaseVolumeCmd"
 					",XF86AudioMute, exec, $toggleAudioMuteCmd"
-					",XF86AudioMicMute, exec, $toggleMicMuteCmd"
 
 					# Playerctl - Mpris media player command-line controller
 					",XF86AudioNext, exec, playerctl next"
