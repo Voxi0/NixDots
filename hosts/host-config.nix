@@ -14,9 +14,7 @@
           experimental-features = [ "nix-command" "flakes" ];
           auto-optimise-store = true;
 					trusted-public-keys = [];
-					substituters = [
-						"https://cache.nixos.org/"
-					];
+					substituters = [ "https://cache.nixos.org" ];
         };
       };
     }

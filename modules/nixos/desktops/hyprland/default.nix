@@ -325,8 +325,8 @@
 					builtins.concatLists (
 						builtins.genList (
 							i: let ws = i + 1; in [
-								"$mainMod, ${toString ws}, workspace, ${toString ws}"
-								"$mainMod SHIFT, ${toString ws}, movetoworkspace, ${toString ws}"
+								"$mainMod, code:1${toString i}, workspace, ${toString ws}"
+								"$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
 							]
 						)
 					numWorkspaces)
