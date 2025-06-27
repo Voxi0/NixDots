@@ -54,7 +54,7 @@
   outputs = { nixpkgs, ... }@inputs: let
 		systemDisk = "/dev/sda";
     system = "x86_64-linux";
-		hostname = "neo";
+		hostname = "nixos";
 		username = "voxi0";
 		locale = "en_GB.UTF-8";
     timezone = "Europe/London";
@@ -64,7 +64,8 @@
 		};
   in {
     nixosConfigurations = {
-      neo = genHostConfig { hostname = "neo"; };
+			# laptop = genHostConfig { hostname = "laptop"; };
+      desktop = genHostConfig { hostname = "desktop"; };
     };
   };
 }

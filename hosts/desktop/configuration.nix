@@ -1,7 +1,7 @@
 { system, hostname, username, timezone, locale, kbLayout, config, inputs, pkgs, ... }: {
   # Import Nix modules
   imports = [
-		./../../hardware-configuration.nix
+		./hardware-configuration.nix
 		./../../modules/nixos
 	];
 
