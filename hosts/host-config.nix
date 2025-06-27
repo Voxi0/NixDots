@@ -1,13 +1,11 @@
 # Function to easily create new NixOS configurations in the system flake
-{ nixpkgs, systemDisk, system, inputs, hostname, username, locale, timezone, kbLayout, ... }: nixpkgs.lib.nixosSystem {
+{ nixpkgs, system, inputs, hostname, username, locale, timezone, kbLayout, ... }: nixpkgs.lib.nixosSystem {
   inherit system;
   specialArgs = { inherit inputs hostname username locale timezone kbLayout; };
   modules = [
     ./${hostname}/configuration.nix {
-      # Nix packages
+      # Nix/Nixpkgs
       nixpkgs.config.allowUnfree = true;
-
-      # Nixpkgs/Nix
       nix = {
         optimise.automatic = true;
         settings = {

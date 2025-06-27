@@ -58,7 +58,7 @@
     timezone = "Europe/London";
     kbLayout = "gb";
 		genHostConfig = { hostname }: import ./hosts/host-config.nix {
-			inherit nixpkgs systemDisk system inputs hostname username locale timezone kbLayout;
+			inherit nixpkgs system inputs hostname username locale timezone kbLayout;
 		};
   in {
     nixosConfigurations = {
