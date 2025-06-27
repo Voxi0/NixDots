@@ -52,9 +52,7 @@
 
   # Actions to perform after fetching all dependencies
   outputs = { nixpkgs, ... }@inputs: let
-		systemDisk = "/dev/sda";
     system = "x86_64-linux";
-		hostname = "nixos";
 		username = "voxi0";
 		locale = "en_GB.UTF-8";
     timezone = "Europe/London";
@@ -64,7 +62,7 @@
 		};
   in {
     nixosConfigurations = {
-			# laptop = genHostConfig { hostname = "laptop"; };
+			laptop = genHostConfig { hostname = "laptop"; };
       desktop = genHostConfig { hostname = "desktop"; };
     };
   };
