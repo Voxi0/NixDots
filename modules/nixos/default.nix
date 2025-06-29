@@ -1,7 +1,7 @@
 _: {
 	# Import Nix modules
 	imports = [
-		./hardware.nix ./services.nix ./programs.nix
+		./hardware.nix ./services.nix ./programs.nix ./android.nix
 		./stylix.nix ./desktops/hyprland ./fish.nix ./gaming.nix
 	];
 }

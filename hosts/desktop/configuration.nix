@@ -17,6 +17,7 @@
 	enableNvidia = false;
 	enableStylix = true;
   enableFish = true;
+	enableAndroid = true;
   gaming = {
     enable = true;
     enableSteam = true;
