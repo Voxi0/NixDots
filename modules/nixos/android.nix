@@ -1,6 +1,6 @@
 { lib, config, username, pkgs, ... }: {
 	# Module options
-	options.enableAndroid = "Install Android Development Tools";
+	options.enableAndroid = lib.mkEnableOption "Install Android Development Tools";
 
 	# Configuration
 	config = {
