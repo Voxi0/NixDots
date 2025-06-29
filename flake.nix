@@ -3,10 +3,8 @@
 
   # Dependencies
   inputs = {
-    # Nix packages repository
+    # Nix packages repository and declarative Flatpak manager
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-		# Declarative Flatpak manager for NixOS
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
 		# Manages user-level configuration
@@ -44,10 +42,7 @@
 		nixcord.url = "github:kaylorben/nixcord";
 
 		# Multiplatform CLI tool to customize the official Spotify client
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+		spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   # Actions to perform after fetching all dependencies
