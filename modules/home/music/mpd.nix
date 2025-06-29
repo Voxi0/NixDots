@@ -1,6 +1,6 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, pkgs, username, ... }: {
 	# Module options
-	options.enableMPD = "Enable Music Player Daemon (MPD)";
+	options.enableMPD = lib.mkEnableOption "Enable Music Player Daemon (MPD)";
 
 	# Configuration
 	config = lib.mkIf config.enableMPD {
@@ -49,5 +49,5 @@
         };
       };
     };
-	}
+	};
 }

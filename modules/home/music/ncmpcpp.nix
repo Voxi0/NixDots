@@ -1,9 +1,9 @@
-{ lib, config, pkgs, username, ... }: {
+{ lib, config, pkgs, ... }: {
 	# Module options
 	options.enableNcmpcpp = lib.mkEnableOption "Enable NCMPCPP (MPD client - CLI music player)";
 
 	# Configuration
-	config = lib.mkIf config.enableNcmpcpp && lib.mkIf config.enableMPD {
+	config = lib.mkIf (config.enableNcmpcpp && config.enableMPD) {
 		# NCMPCPP - Featureful Ncurses based MPD client (Music player)
 		programs.ncmpcpp = {
 			enable = true;

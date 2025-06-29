@@ -7,6 +7,7 @@
   enableFirefox = true;
   enableGit = true;
   enableSpotify = true;
+	enableMPD = true;
   enableNcmpcpp = true;
 	enableDiscord = true;
 
