@@ -4,7 +4,6 @@
 
   # Configuration
   config = lib.mkIf config.enableKitty {
-    # Kitty - Terminal emulator
     programs.kitty = {
       enable = true;
       settings = {

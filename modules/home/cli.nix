@@ -3,17 +3,18 @@
   home = {
     # Extra CLI tools
     packages = with pkgs; [
-      nh          # Nix CLI helper
-      binsider    # Analyze ELF binaries like a boss 😼🕵️
-      btop        # System monitor
-      tokei       # Shows the number of lines of comments, code etc in projects
-			astroterm		# Terminal based star map written in C
+      nh				# Nix CLI helper
+			btop			# System monitor
+			cbonsai		# Bonsai tree generator written in C using Ncurses
+			genact		# A nonsense activity generator
+			cmatrix		# Terminal based "The Matrix" like implementation
+			astroterm	# Terminal based star map written in C displaying real time positions of stars, planets, constellations etc
     ];
 
-    # Shell alises to shorten useful commands
+    # Shell alises to shorten frequently used commands
     shellAliases = {
 			"ff" = "fastfetch";
-			"starmap" = "astroterm -f 60 -c -u";
+			"starmap" = "astroterm --fps=120 --unicode --color";
 		};
   };
 
@@ -21,14 +22,6 @@
   programs = {
     nix-your-shell.enable = true; # Use the shell we prefer instead of Bash in Nix shells
     zoxide.enable = true;         # Smarter `cd` command which is super handy
-
-    # A clone of `cat` with syntax highlighting, Git integration etc
-    bat = {
-      enable = true;
-      extraPackages = with pkgs.bat-extras; [
-        prettybat batman batpipe batgrep batdiff
-      ];
-    };
 
     # Fetch script
     fastfetch = {

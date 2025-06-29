@@ -1,13 +1,11 @@
 { lib, config, pkgs, ... }: {
   # Module options
-  options.enableGit = lib.mkEnableOption "Enable Git (Version Control System (VCS))";
+  options.enableGit = lib.mkEnableOption "Enable Git";
 
   # Configuration
   config = lib.mkIf config.enableGit {
-    # Git
+    # Git and LazyGIT (Beautiful TUI for Git with keybinds to make using Git super fast and easy)
     home.packages = with pkgs; [ git ];
-
-    # LazyGit - Simple and beautiful TUI for Git
     programs.lazygit = {
       enable = true;
       settings = {
