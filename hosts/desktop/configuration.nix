@@ -18,6 +18,7 @@
 	enableStylix = true;
   enableFish = true;
 	enableAndroid = true;
+	enableVirtualization = true;
   gaming = {
     enable = true;
     enableSteam = true;
@@ -53,14 +54,6 @@
     hostName = "NixOS-Desktop";
     networkmanager.enable = true;
     firewall.enable = true;
-  };
-
-	# Users - Remember to set a password with `passwd`
-  users.users.${username} = {
-    isNormalUser = true;
-    initialPassword = "nixos";
-    description = "${username}";
-    extraGroups = [ "networkmanager" "wheel" "cdrom" ];
   };
 
 	# XDG desktop portals

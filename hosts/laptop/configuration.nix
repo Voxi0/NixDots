@@ -17,6 +17,8 @@
 	enableNvidia = false;
 	enableStylix = true;
   enableFish = true;
+	enableAndroid = false;
+	enableVirtualization = true;
   gaming = {
     enable = false;
     enableSteam = false;
@@ -52,14 +54,6 @@
     hostName = "NixOS-Laptop";
     networkmanager.enable = true;
     firewall.enable = true;
-  };
-
-	# Users - Remember to set a password with `passwd`
-  users.users.${username} = {
-    isNormalUser = true;
-    initialPassword = "nixos";
-    description = "${username}";
-    extraGroups = [ "networkmanager" "wheel" "cdrom" ];
   };
 
 	# System-wide packages

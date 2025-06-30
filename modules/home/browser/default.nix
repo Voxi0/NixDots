@@ -72,7 +72,6 @@
         extensions.packages = with inputs.firefox-addons.packages.${system}; [
           ublock-origin # Very efficient and lightweight ad blocker
           darkreader    # For reading sites that are too bright
-          h264ify       # Makes YouTube stream H.264 videos instead of VP8/VP9 videos
         ];
 			};
 		};
