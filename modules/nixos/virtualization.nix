@@ -7,7 +7,13 @@
 		# Add user to the proper groups for KVM and all
 		users.users.${username}.extraGroups = [ "kvm" "libvirtd" ];
 
-		# Abstraction layer to manage virtual machines
-		virtualisation.libvirtd.enable = true;
+		# Virtualization
+		virtualisation = {
+			libvirtd.enable = true;	# Abstraction layer to manage virtual machines
+			vmVariant.virtualisation = {
+				graphics = true;			# Run QEMU with a graphics window
+				cores = 2;						# Number of cores the guest is permitted to use
+			};
+		};
 	};
 }
