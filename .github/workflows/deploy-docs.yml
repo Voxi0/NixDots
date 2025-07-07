@@ -1,6 +1,12 @@
 # Workflow name
 name: Deploy Documentation
 
+# Allow this workflow to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 # Workflow triggers - What triggers it to run
 on:
   push:
