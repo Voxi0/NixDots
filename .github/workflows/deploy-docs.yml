@@ -9,13 +9,13 @@ permissions:
 
 # Workflow triggers - What triggers it to run
 on:
+  # Only run the workflow if the documentation is modified to avoid unnecessary runs
   push:
-    # Only run the workflow if the documentation is modified to avoid unnecessary runs
     paths:
       - 'docs/**'
 
-    # Allows you to run this workflow manually from the Actions tab on GitHub.
-    workflow_dispatch:
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
 
 # Workflow actions
 jobs:
