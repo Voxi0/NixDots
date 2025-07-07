@@ -24,16 +24,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download the Git repo
-        id: build
         uses: actions/checkout@v4
       - name: Install, build, and upload your site output
-        id: build
         uses: withastro/action@v4
         with:
           path: ./docs
           package-manager: pnpm@latest
       - name: Upload static files as artifact
-        id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
           name: gh-pages
