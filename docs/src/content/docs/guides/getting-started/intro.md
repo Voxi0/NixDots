@@ -31,11 +31,8 @@ software repository in existence as of now, even larger than the mighty [Arch Us
 - **Cursor Theme** - [Bibata Modern Ice][14]
 
 ## Showcase
-
-import { base } from 'astro:assets';
-
-![Desktop 1](`${base}/showcase/desktop1.png`)
-![Desktop 2](`${base}/showcase/desktop2.png`)
+![Desktop](./showcase/desktop1.png)
+![Neovim](./showcase/desktop2.png)
 
 ## Contributors
 Made with [contrib.rocks](https://contrib.rocks).
