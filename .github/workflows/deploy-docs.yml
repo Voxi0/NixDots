@@ -4,34 +4,40 @@ name: Deploy Documentation
 # Workflow triggers - What triggers it to run
 on:
   push:
+    # Only run the workflow if the documentation is modified to avoid unnecessary runs
     paths:
-      # Only run the workflow if the documentation is modified to stop unncessary runs
       - 'docs/**'
+
+    # Allows you to run this workflow manually from the Actions tab on GitHub.
+    workflow_dispatch:
 
 # Workflow actions
 jobs:
-  deploy:
+  # Build the site
+  build:
     runs-on: ubuntu-latest
     steps:
-      # Clone the repository into a workflow's runner
-      - name: Checkout repository
+      - name: Checkout your repository using git
         uses: actions/checkout@v4
+      - name: Install, build, and upload your site output
+        uses: withastro/action@v4
+        with:
+          path: ./docs
+          package-manager: pnpm@latest
 
-      # Install the latest prebuilt version of mdBook rather than compiling from scratch to save time
-      - name: Install mdBook
-        run: |
-          LATEST=$(curl -s https://api.github.com/repos/rust-lang/mdBook/releases/latest | jq -r '.tag_name')
-          curl -sSL "https://github.com/rust-lang/mdBook/releases/download/$LATEST/mdbook-$LATEST-x86_64-unknown-linux-gnu.tar.gz" | tar -xz
-          sudo mv mdbook /usr/local/bin/
-
-      # Build the documentation/book
-      - name: Build mdBook
-        run: mdbook build docs
-
+  # Publish the site
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       # Push the built documentation to the `gh-pages` branch
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: actions/deploy-pages@v4
+        id: deployment
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/book
+          publish_dir: ./docs/build
           publish_branch: gh-pages
