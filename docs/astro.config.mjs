@@ -9,6 +9,8 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: "NixDots",
+			contentDir: "./docs",
+  		routePrefix: "/",
 			social: [
 				{ icon: "github", label: "GitHub", href: "https://github.com/Voxi0/NixDots/" }
 			],
