@@ -42,5 +42,3 @@ jobs:
       # Push the built documentation to the `gh-pages` branch
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: gh-pages
