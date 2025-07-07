@@ -5,7 +5,7 @@ import starlight from "@astrojs/starlight";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://voxi0.github.io",
-	base: "NixDots",
+	base: "/NixDots",
 	integrations: [
 		starlight({
 			title: "NixDots",
