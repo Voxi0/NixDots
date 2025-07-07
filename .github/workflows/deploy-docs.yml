@@ -23,27 +23,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Download the Git repo
         uses: actions/checkout@v4
       - name: Install, build, and upload your site output
         uses: withastro/action@v4
         with:
           path: ./docs
           package-manager: pnpm@latest
+      - name: Upload static files as artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: gh-pages
+          path: ./docs/dist
 
   # Publish the site
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: gh-pages
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       # Push the built documentation to the `gh-pages` branch
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-        id: deployment
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/build
-          publish_branch: gh-pages
