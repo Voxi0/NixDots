@@ -40,6 +40,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       # Push the built documentation to the `gh-pages` branch
       - name: Deploy to GitHub Pages
