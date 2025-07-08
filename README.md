@@ -1,4 +1,13 @@
+<div align="center">
+
 # NixDots
+
+</div>
+<p align="center">
+    <img src="https://img.shields.io/github/license/Voxi0/NixDots?style=flat-square&logo=Github&label=License&labelColor=black&color=white" alt="License">
+    <img src="https://img.shields.io/github/languages/code-size/Voxi0/NixDots?style=flat-square&logo=Files&label=Size&labelColor=black&color=white" alt="Repo Size">
+</p>
+
 [NixDots](https://github.com/Voxi0/NixDots) is my personal [NixOS][1] + [Home Manager][2] configuration. Feel free to go through my configuration
 and use it as you wish. And kindly star the repo to show support, any contributions are greatly appreciated :)
 
