@@ -4,6 +4,10 @@ description: How to install NixDots
 sidebar:
     order: 2
 ---
+:::caution
+Read the instructions very carefully as messing up something could cause a bunch of rather serious issues.
+:::
+
 ### Fresh Install
 - Download [NixOS](https://nixos.org/download/) and flash it to the installation media e.g. a USB drive.
 I recommend using [Ventoy](https://www.ventoy.net/en/index.html) for making a bootable USB drive.
@@ -50,6 +54,10 @@ poweroff
 ```
 
 ### On An Existing NixOS Installation
+:::note
+Always backup your current configuration and keep previous generations just in case you don't like NixDots
+:::
+
 ```bash
 # Fetch NixDots and `cd` into it
 nix-shell -p git --run "git clone https://github.com/Voxi0/NixDots.git"
