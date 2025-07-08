@@ -4,7 +4,7 @@ description: How to install NixDots
 sidebar:
     order: 2
 ---
-:::caution
+:::danger
 Read the instructions very carefully as messing up something could cause a bunch of rather serious issues.
 :::
 
