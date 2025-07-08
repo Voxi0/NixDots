@@ -1,8 +1,10 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import QtQuick.Layouts
 import "root:/"
 import "Components"
+import "Components/Clock"
 
 Item {
 	id: root
@@ -11,7 +13,7 @@ Item {
 		PanelWindow {
 			property var modelData
 			screen: modelData
-			implicitHeight: 30
+			implicitHeight: Globals.barHeight
 			color: Globals.barColor
 			anchors {
 				top: true
@@ -19,8 +21,9 @@ Item {
 				right: true
 			}
 
-			// Clock
-			Clock { anchors.centerIn: parent }
+			// Bar components
+			Workspaces { }
+			Clock { anchors.centerIn: parent; }
 		}
 	}
 }
