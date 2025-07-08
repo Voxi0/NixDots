@@ -10,7 +10,7 @@ export default defineConfig({
   integrations: [
 		starlight({
 			title: "NixDots",
-			logo: {src: "./src/assets/logo.svg", replacesTitle: false},
+			logo: {src: "./src/content/assets/logo.svg", replacesTitle: false},
 			customCss: ["./src/styles/global.css"],
 			editLink: {baseUrl: "https://github.com/Voxi0/NixDots/tree/main/docs/"},
 			social: [
@@ -20,7 +20,7 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: "Getting Started",
-					autogenerate: { directory: "guides/getting-started", collapsed: true },
+					autogenerate: { directory: "getting-started", collapsed: true },
 					collapsed: false,
 				},
 			],

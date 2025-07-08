@@ -5,9 +5,9 @@ template: splash
 hero:
   tagline: My personal NixOS + Home Manager configuration
   image:
-    file: /src/assets/logo.svg
+    file: ../assets/logo.svg
   actions:
     - text: Get Started
-      link: ./guides/getting-started/intro
+      link: ./getting-started/intro
       icon: right-arrow
 ---

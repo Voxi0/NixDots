@@ -4,8 +4,6 @@ description: Introduction to NixDots
 sidebar:
     order: 1
 ---
-import { base } from 'astro:assets';
-
 [NixDots](https://github.com/Voxi0/NixDots) is my personal [NixOS][1] + [Home Manager][2] configuration. Feel free to go through my configuration
 and use it as you wish. And kindly star the repo to show support, any contributions are greatly appreciated :)
 
@@ -33,8 +31,8 @@ software repository in existence as of now, even larger than the mighty [Arch Us
 - **Cursor Theme** - [Bibata Modern Ice][14]
 
 ## Showcase
-<img src={`${base}/src/assets/showcase/desktop1.png`} alt="Desktop 1"/>
-<img src={`${base}/src/assets/showcase/desktop2.png`} alt="Desktop 2"/>
+![Desktop 1](../../assets/showcase/desktop1.png)
+![Desktop 2](../../assets/showcase/desktop2.png)
 
 ## Contributors
 Made with [contrib.rocks](https://contrib.rocks).
@@ -43,7 +41,7 @@ Made with [contrib.rocks](https://contrib.rocks).
   <img src="https://contrib.rocks/image?repo=voxi0/NixDots&max=100&columns=12&anon=0"/>
 </a>
 
-{/* Reference links */}
+<!-- Reference links -->
 [1]: https://nixos.org/ "NixOS"
 [2]: https://github.com/nix-community/home-manager/ "Home Manager"
 [3]: https://github.com/NixOS/nixpkgs/ "Nixpkgs"
