@@ -31,8 +31,8 @@ software repository in existence as of now, even larger than the mighty [Arch Us
 - **Cursor Theme** - [Bibata Modern Ice][14]
 
 ## Showcase
-![Desktop 1](../../../../../public/showcase/desktop1.png)
-![Desktop 2](../../../../../public/showcase/desktop2.png)
+![Desktop 1](/src/assets/showcase/desktop1.png)
+![Desktop 2](/src/assets/showcase/desktop2.png)
 
 ## Contributors
 Made with [contrib.rocks](https://contrib.rocks).
