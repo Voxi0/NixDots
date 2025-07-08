@@ -1,5 +1,5 @@
 # Workflow name
-name: Deploy Documentation
+name: Deploy Docs
 
 # Allow this workflow to clone the repo and create a page deployment
 permissions:
