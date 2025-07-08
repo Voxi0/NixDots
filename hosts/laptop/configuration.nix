@@ -27,6 +27,15 @@
     enableHeroic = false;
   };
 
+	# Services
+	enableX11 = false;
+	enableAudio = true;
+	enableBluetooth = true;
+	enableLaptopSupport = true;
+	enableSSH = true;
+	enablePrinting = false;
+	enableFingerprint = false;
+
 	# Security
 	security = {
 		polkit.enable = true;	# Required
