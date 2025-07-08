@@ -15,7 +15,7 @@
 	};
 
 	# Services
-  services = {
+  config.services = {
     udisks2.enable = true;																		# For automatically mounting removable drives
 		openssh.enable = lib.mkIf config.enableSSH true;					# Suite of secure networking utilities
 		printing.enable = lib.mkIf config.enablePrinting true;		# CUPS for printing

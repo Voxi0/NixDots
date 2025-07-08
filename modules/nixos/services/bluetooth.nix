@@ -11,6 +11,6 @@
 		};
 
 		# Bluetooth manager
-		blueman.enable = true;
-	}
+		services.blueman.enable = true;
+	};
 }

@@ -4,7 +4,7 @@
 	options.enableLaptopSupport = lib.mkEnableOption "Enable laptop support services e.g. Upower for power management";
 
 	# Configuration
-	config = lib.mkIf config.enableLaptopSupport {
+	config.services = lib.mkIf config.enableLaptopSupport {
 		# Touchpad support
 		libinput.enable = true;
 
@@ -18,5 +18,5 @@
       allowRiskyCriticalPowerAction = false;
       criticalPowerAction = "PowerOff";
     };
-	}
+	};
 }

@@ -4,7 +4,7 @@
 	options.enableAudio = lib.mkEnableOption "Enable Pipewire for audio";
 
 	# Configuration
-	config = lib.mkIf config.enableAudio {
+	config.services = lib.mkIf config.enableAudio {
 		pulseaudio.enable = false;
 		pipewire = {
 			enable = true;
