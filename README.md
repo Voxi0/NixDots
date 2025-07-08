@@ -18,7 +18,7 @@ software repository in existence as of now, even larger than the mighty [Arch Us
 - **Kernel** - [Linux (Latest)][5]
 - **Shell** - [Fish][6]
 - **Terminal** - [Kitty][7]
-- **Editor** - [Neovim][8] (Using [NixCats][9])
+- **Editor** - [Neovim][8] (Using [nixCats][9])
 - **DE/WM** - [Hyprland][10]
 - **Widgets** - [Quickshell][11]
 - **App Theme** - [Catppuccin Mocha][12]
