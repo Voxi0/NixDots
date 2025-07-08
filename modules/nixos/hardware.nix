@@ -7,8 +7,6 @@
 
 	# Configuration
 	config.hardware = {
-		bluetooth.enable = true;
-
 		# Enable all firmware regardless of license and support for most hardware
 		enableAllFirmware = true;
 		enableAllHardware = true;
