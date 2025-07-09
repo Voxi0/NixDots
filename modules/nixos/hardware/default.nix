@@ -1,4 +1,10 @@
 { lib, config, pkgs, ... }: {
+	# Import Nix modules
+	imports = [
+		./intel.nix		# Intel GPU support
+		./nvidia.nix	# Nvidia GPU support
+	];
+
 	# Module options
 	options = {
 		enableGraphics = lib.mkEnableOption "Enable graphics drivers";
