@@ -4,12 +4,12 @@ description: Things to do after installing NixDots
 sidebar:
     order: 3
 ---
-### Basics
+## Basics
 - **Update the system**: [Nix Helper CLI](https://github.com/nix-community/nh) is installed by default.
 Update the system with `nh os boot <path to NixDots> -H <hostname> --update`. The `--update` flag updates the flake.
 Check out the [Github repo](https://github.com/nix-community/nh) to learn more.
 
-### Gaming
+## Gaming
 Run `protonup` to install the latest version of Proton GE which can be used in Steam to play just about every game on
 there.
 
