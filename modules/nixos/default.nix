@@ -1,7 +1,7 @@
 _: {
 	# Import Nix modules
 	imports = [
-		./hardware.nix				# Hardware specific configuration e.g. for NVidia GPUs
+		./hardware						# Hardware specific configuration e.g. graphics drivers
 		./stylix.nix					# System-wide theming and typography
 		./users.nix						# Configure user groups and such
 		./services						# System services

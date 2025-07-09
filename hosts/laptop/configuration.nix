@@ -13,6 +13,8 @@
 	};
 
 	# Enable/Disable our custom system modules
+	enableGraphics = true;
+	enableGraphics32Bit = true;
 	enableIntel = true;
 	enableNvidia = false;
 	enableStylix = true;

@@ -3,7 +3,7 @@
 	imports = [ inputs.stylix.nixosModules.stylix ];
 
 	# Module options
-	options.enableStylix = lib.mkEnableOption "Enable Stylix";
+	options.enableStylix = lib.mkEnableOption "Enable Stylix for system-wide theming and typography";
 
 	# Configuration
 	config = lib.mkIf config.enableStylix {
