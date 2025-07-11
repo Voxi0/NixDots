@@ -3,19 +3,12 @@
   home = {
     # Extra CLI tools
     packages = with pkgs; [
-      nh				# Nix CLI helper
-			btop			# System monitor
-			cbonsai		# Bonsai tree generator written in C using Ncurses
-			genact		# A nonsense activity generator
-			cmatrix		# Terminal based "The Matrix" like implementation
-			astroterm	# Terminal based star map written in C displaying real time positions of stars, planets, constellations etc
+      nh													# Nix CLI helper
+			btop												# System monitor
     ];
 
     # Shell alises to shorten frequently used commands
-    shellAliases = {
-			"ff" = "fastfetch";
-			"starmap" = "astroterm --fps=120 --unicode --color";
-		};
+    shellAliases."ff" = "fastfetch";
   };
 
   # Programs
