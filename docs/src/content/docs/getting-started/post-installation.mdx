@@ -1,0 +1,18 @@
+---
+title: Post Installation
+description: Things to do after installing NixDots
+sidebar:
+    order: 3
+---
+{/* Import everything */}
+import { Steps } from '@astrojs/starlight/components';
+
+## Basics
+<Steps>
+	1. **Update the system**: [Nix Helper CLI](https://github.com/nix-community/nh) is installed by default.
+		Update the system with `nh os boot <path to NixDots> -H <hostname> --update`. The `--update` flag updates the flake.
+		Check out the [Github repo](https://github.com/nix-community/nh) to learn more.
+	2. **Gaming**: Install Proton GE with the `protonup` command  to make most Steam titles playable and run `flatpak update`
+		to update [Sober](https://sober.vinegarhq.org/) which is the Roblox client I'm using here. It's only available as a Flatpak
+		on Flathub sadly.
+</Steps>
