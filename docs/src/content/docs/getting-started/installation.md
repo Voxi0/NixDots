@@ -38,7 +38,7 @@ sudo nixos-generate-config --show-hardware-config --root /mnt > hardware-configu
 mkdir -p /home/NixDots
 cp -r ./* /home/NixDots/
 
-# Install NixOS - Replace `<hostname>` with the name of the host to install
+# Install NixOS - Replace `<hostname>` with the name of the host folder in `hosts/` to install
 sudo nixos-install \
   --flake /mnt/etc/nixos/#<hostname> \
   --option extra-binary-caches https://hyprland.cachix.org \
@@ -74,6 +74,7 @@ nano ./flake.nix
 nixos-generate-config --show-hardware-config > hardware-configuration.nix
 
 # Rebuild the system - Update the flake if you desire but it may or may not break stuff
+# Replace `<hostname>` with the name of the host folder in `hosts/`
 # sudo nix flake update
 sudo nixos-rebuild boot \
     --flake ./#<hostname> \

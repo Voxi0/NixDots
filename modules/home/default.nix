@@ -1,12 +1,12 @@
 { inputs, system, pkgs, ... }: {
 	# Import Nix modules
 	imports = [
-		./kitty.nix			# Terminal emulator
-		./cli.nix				# CLI applications and such
-		./git.nix				# Git (Version Control System (VCS)) and LazyGit
-		./browser				# Web browser
-		./music					# Music related stuff e.g. Spotify and MPD
-		./discord.nix		# Discord
+		./kitty.nix										# Terminal emulator
+		./cli.nix											# CLI applications and such
+		./git.nix											# Git (Version Control System (VCS)) and LazyGit
+		./browser											# Web browser
+		./music												# Music related stuff e.g. Spotify and MPD
+		./discord.nix									# Discord
 	];
 
 	# GTK and QT
@@ -27,11 +27,11 @@
   home = {
     # Default packages that should be installed
     packages = with pkgs; [
-      unzip			# To unzip zip files
-			mpv				# Media player
-			wget			# To download files
-			curl			# To make HTTP requests
-      obsidian	# Free and open source Markdown note taking application
+      unzip												# To unzip zip files
+			mpv													# Media player
+			wget												# To download files
+			curl												# To make HTTP requests
+      obsidian										# Free and open source Markdown note taking application
     ] ++ [ inputs.NixNvim.packages.${system}.nvim ];
 
     # User files
@@ -48,12 +48,10 @@
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-      obs-backgroundremoval
-      obs-pipewire-audio-capture
-			obs-vaapi
-      obs-gstreamer
-      obs-vkcapture
+      wlrobs											# Lets you capture from Wlroots based Wayland compositors e.g. Sway
+      obs-pipewire-audio-capture	# Pipewire audio capturing
+			obs-vaapi										# GStreamer based VAAPI encoder implementation - Supports H.264, H.265 and AV1
+      obs-vkcapture								# For Vulkan/OpenGL game capture on Linux
     ];
   };
 }
