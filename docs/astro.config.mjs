@@ -9,7 +9,6 @@ export default defineConfig({
 	vite: {plugins: [tailwindcss()]},
   integrations: [
 		starlight({
-			favicon: "src/content/assets/logo.svg",
 			title: "NixDots",
 			logo: {src: "./src/content/assets/logo.svg", replacesTitle: false},
 			customCss: ["./src/styles/global.css"],
