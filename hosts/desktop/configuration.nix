@@ -1,4 +1,4 @@
-{ system, username, timezone, locale, kbLayout, config, inputs, pkgs, ... }: {
+{ system, username, locale, kbLayout, config, inputs, pkgs, ... }: {
   # Import Nix modules
   imports = [
 		./hardware-configuration.nix
@@ -56,8 +56,7 @@
   	};
 	};
 
-  # Timezone and internationalisation properties
-  time.timeZone = timezone;
+  # Internationalisation properties
   i18n.defaultLocale = locale;
 
 	# Networking
