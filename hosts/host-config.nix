@@ -16,35 +16,5 @@
         };
       };
     }
-    inputs.home-manager.nixosModules.home-manager {
-      home-manager = {
-        useGlobalPkgs = false;
-        useUserPackages = true;
-        extraSpecialArgs = { inherit system inputs username; };
-        backupFileExtension = "bak";
-
-        # User
-        users.${username} = {
-          # Import Home Manager modules
-          imports = [ ./${hostname}/home.nix ];
-
-          # Nix packages
-          nixpkgs.config.allowUnfree = true;
-
-          # Home Manager
-          home = {
-            # User information
-            inherit username;
-            homeDirectory = "/home/${username}";
-
-            # Don't change this value even if you update Home Manager
-            stateVersion = "25.05";
-          };
-
-          # Let Home Manager install and manage itself
-          programs.home-manager.enable = true;
-        };
-      };
-    }
   ];
 }

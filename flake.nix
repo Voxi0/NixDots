@@ -48,6 +48,7 @@
   # Actions to perform after fetching all dependencies
   outputs = { nixpkgs, ... }@inputs: let
     system = "x86_64-linux";
+		hostname = "desktop";
 		username = "voxi0";
 		locale = "en_GB.UTF-8";
     kbLayout = "gb";
@@ -59,5 +60,12 @@
 			laptop = genHostConfig { hostname = "laptop"; };
       desktop = genHostConfig { hostname = "desktop"; };
     };
+		homeConfigurations.${username} = inputs.home-manager.lib.homeManagerConfiguration {
+			inherit system username;
+			homeDirectory = "/home/${username}";
+			backupFileExtension = "bak";
+			configuration = ./hosts/${hostname}/home.nix;
+			extraSpecialArgs = { inherit system inputs username; };
+		};
   };
 }
