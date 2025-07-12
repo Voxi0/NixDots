@@ -1,18 +1,21 @@
 # Pipewire for audio
-{ lib, config, ... }: {
+{ lib, config, pkgs, ... }: {
 	# Module options
 	options.enableAudio = lib.mkEnableOption "Enable Pipewire for audio";
 
 	# Configuration
-	config.services = lib.mkIf config.enableAudio {
-		pulseaudio.enable = false;
-		pipewire = {
-			enable = true;
-			wireplumber.enable = true;
-			alsa.enable = true;
-			alsa.support32Bit = true;
-			pulse.enable = true;
-			jack.enable = true;
+	config = lib.mkIf config.enableAudio {
+		environment.systemPackages = [ pkgs.pavucontrol ];
+		services = {
+			pulseaudio.enable = false;
+			pipewire = {
+				enable = true;
+				wireplumber.enable = true;
+				alsa.enable = true;
+				alsa.support32Bit = true;
+				pulse.enable = true;
+				jack.enable = true;
+			};
 		};
 	};
 }
