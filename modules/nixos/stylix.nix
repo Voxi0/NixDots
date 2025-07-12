@@ -57,14 +57,14 @@
       };
     };
 
-    # # Extra Stylix configuration for Home Manager
-    # home-manager.users.${username}.stylix = {
-    #   iconTheme = {
-    #     enable = true;
-    #     package = pkgs.papirus-icon-theme;
-    #     light = "Papirus-Light";
-    #     dark = "Papirus-Dark";
-    #   };
-    # };
+    # Extra Stylix configuration for Home Manager
+    home-manager.users.${username}.stylix = {
+      iconTheme = {
+        enable = true;
+        package = pkgs.papirus-icon-theme;
+        light = "Papirus-Light";
+        dark = "Papirus-Dark";
+      };
+    };
   };
 }

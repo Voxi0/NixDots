@@ -4,9 +4,6 @@
 
 	# Configuration
 	config = lib.mkIf (config.enableGraphics && config.enableNvidia) {
-		# Required for Hyprland
-		boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-
 		# Look at `https://nixos.wiki/wiki/Nvidia` for further information
 		hardware.nvidia = lib.mkIf config.enableNVidia {
 			modesetting.enable = true;	# REQUIRED
