@@ -2,6 +2,9 @@
 	# NVidia specific
 	boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
+	# For automatically mounting removable drives
+	services.udisks2.enable = true;
+
 	# Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
 	programs.hyprland = {
 		enable = true;
@@ -29,9 +32,6 @@
 
 		# Services
 		services = {
-			# For automatically mounting removable drives
-			udisks2.enable = true;
-
 			# To control active media players via the CLI
 			playerctld.enable = true;
 

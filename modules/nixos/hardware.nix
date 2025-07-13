@@ -19,7 +19,7 @@
 
 		# Enable Intel GPU support
 		(lib.mkIf (config.enableGraphics && config.enableIntel) {
-			hardware.graphics.extraPackages = with pkgs; [
+			graphics.extraPackages = with pkgs; [
 				# vaapiIntel				# For Intel Gen7 or older (Sandy/Ivy/Haswell)
 				intel-media-driver	# For Intel Gen8+ (Broadwell and newer)
 				vpl-gpu-rt  				# For Intel Gen9+ (Skylake and newer)
@@ -29,7 +29,7 @@
 		# Enable Nvidia GPU support
 		(lib.mkIf (config.enableGraphics && config.enableNvidia) {
 			# Look at `https://nixos.wiki/wiki/Nvidia` for further information
-			hardware.nvidia = lib.mkIf config.enableNVidia {
+			nvidia = lib.mkIf config.enableNVidia {
 				modesetting.enable = true;	# REQUIRED
 				nvidiaSettings = true;			# Settings menu accessible via `nvidia-settings`
 

@@ -2,9 +2,9 @@
 	# Import Nix modules
 	imports = [
 		./hardware.nix				# Hardware specific configuration e.g. graphics drivers
+		./services.nix				# System services
 		./stylix.nix					# System-wide theming and typography
 		./desktops/hyprland		# Desktop environment / Window manager
-		./services.nix				# System services
 		./fish.nix						# Fancy shell
 		./gaming.nix					# Gaming related stuff
 	];
