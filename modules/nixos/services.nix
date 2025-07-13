@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, kbLayout, pkgs, ... }: {
 	# Module options
 	options = {
 		enableX11 = lib.mkEnableOption "Enable X11 display server";
@@ -14,20 +14,20 @@
   config = lib.mkMerge [
 		# Handy utilities
 		# Suite of secure networking utilities
-		(lib.mkIf config.enableSSH) {services.openssh.enable = true;}
+		(lib.mkIf config.enableSSH {services.openssh.enable = true;})
 
 		# CUPS for printing
-		(lib.mkIf config.enablePrinting) {services.printing.enable = true;}
+		(lib.mkIf config.enablePrinting {services.printing.enable = true;})
 
 		# Fingerprint daemon to support consumer fingerprint readers
-		(lib.mkIf config.enableFingerprint) {services.fprintd.enable = true;}
+		(lib.mkIf config.enableFingerprint {services.fprintd.enable = true;})
 
 		# X11/Xorg windowing system
 		(lib.mkIf config.enableX11 {
 			services.xserver = {
 				enable = true;
 				excludePackages = [ pkgs.xterm ];
-				videoDrivers = lib.mkIf config.enableNvidia [ "nvidia" ];
+				videoDrivers = [ ] ++ lib.optional config.enableNvidia "nvidia";
 				xkb = {
 					layout = kbLayout;
 					variant = "";
