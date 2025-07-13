@@ -1,10 +1,10 @@
 { lib, config, locale, username, pkgs, ... }: {
 	# Import Nix modules
 	imports = [
-		./hardware						# Hardware specific configuration e.g. graphics drivers
+		./hardware.nix				# Hardware specific configuration e.g. graphics drivers
 		./stylix.nix					# System-wide theming and typography
 		./desktops/hyprland		# Desktop environment / Window manager
-		./services						# System services
+		./services.nix				# System services
 		./fish.nix						# Fancy shell
 		./gaming.nix					# Gaming related stuff
 	];
