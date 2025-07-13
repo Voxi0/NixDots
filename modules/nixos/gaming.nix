@@ -4,7 +4,7 @@
 
   # Module options
   options.gaming = {
-    enable = lib.mkEnableOption "gaming related stuff";
+    enable = lib.mkEnableOption "Enable gaming related stuff";
     enableSteam = lib.mkEnableOption "Enable Steam";
     enableRoblox = lib.mkEnableOption "Enable Sober for playing Roblox";
     enableLutris = lib.mkEnableOption "Enable Lutris game launcher";
@@ -13,7 +13,7 @@
 
   # Configuration
   config = lib.mkIf config.gaming.enable {
-    # Install Sober Flatpak
+    # Install Sober (Roblox) - Only available as a Flatpak for now
     services.flatpak = lib.mkIf config.gaming.enableRoblox {
       enable = true;
       update.auto.enable = false;
@@ -22,18 +22,16 @@
 
     # Extra packages
     environment = {
-			# Where to install Proton and other compatibility stuff for Steam
+			# Where to install Proton GE and other compatibility tools for Steam
       sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/user/.steam/root/compatibilitytools.d";
 
       # Extra packages
       systemPackages = with pkgs; [
         protonup  # Imperatively install ProtonGE
         mangohud  # Monitor game performance
-      ] ++ (if config.gaming.enableLutris then
-        [ pkgs.lutris ]
-      else []) ++ (if config.gaming.enableHeroic then
-        [ pkgs.heroic ]
-      else []);
+      ]
+			++ (if config.gaming.enableLutris then [ pkgs.lutris ] else [])
+			++ (if config.gaming.enableHeroic then [ pkgs.heroic ] else []);
     };
 
     # Programs
@@ -44,7 +42,9 @@
       # Steam
       steam = lib.mkIf config.gaming.enableSteam {
         enable = true;
-        gamescopeSession.enable = true; # Optimized micro-compositor that may help with upscaling and resolution issues
+
+				# Optimized micro-compositor that may help with upscaling and resolution issues
+        gamescopeSession.enable = true;
       };
     };
   };

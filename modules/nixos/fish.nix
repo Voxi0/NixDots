@@ -4,8 +4,8 @@
 
   # Configuration
   config = lib.mkIf config.enableFish {
-    # Keeping Bash as the system shell but having it start Fish when run interactively
-    # Launches Fish unless the parent process is already Fish
+    # Keep Bash as the system shell but have it start Fish when running interactively
+    # Launch Fish unless the parent process is already Fish
     programs.bash.interactiveShellInit = ''
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       then
@@ -14,7 +14,7 @@
       fi
     '';
 
-    # To get full completion
+    # For full autocompletion
     programs.fish.enable = true;
 
     # Home Manager
