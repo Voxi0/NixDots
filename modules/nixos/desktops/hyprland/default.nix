@@ -15,23 +15,23 @@
 		# Import Home Manager modules
 		imports = [ ./apps ];
 
-		# Home
-		home = {
-			# Base/Required packages
-			packages = with pkgs; [
-				hyprpolkitagent	# Polkit GUI authentication daemon
-				nwg-displays		# Manage monitors
-				swww						# Efficient wallpaper daemon that supports animated wallpapers
-				wl-clipboard		# System clipboard
-				grim						# To take screenshots
-				slurp						# To snip a part of the screen as selection
-				feh							# Simple image viewer
-				udiskie					# Automatically mounts and manages removable media
-			];
-		};
+		# Required packages
+		home.packages = with pkgs; [
+			hyprpolkitagent	# Polkit GUI authentication daemon
+			nwg-displays		# Manage monitors
+			swww						# Efficient wallpaper daemon that supports animated wallpapers
+			wl-clipboard		# System clipboard
+			grim						# To take screenshots
+			slurp						# To snip a part of the screen as selection
+			feh							# Simple image viewer
+			udiskie					# Automatically mounts and manages removable media
+		];
 
 		# Services
 		services = {
+			# For automatically mounting removable drives
+			udisks2.enable = true;
+
 			# To control active media players via the CLI
 			playerctld.enable = true;
 
