@@ -13,7 +13,7 @@
 	# Home Manager specific configuration
 	home-manager.users.${username} = {
 		# Import Home Manager modules
-		imports = [ ./apps ./playerctl.nix ];
+		imports = [ ./hypr ./apps ./playerctl.nix ];
 
 		# Required packages
 		home.packages = with pkgs; [
@@ -53,22 +53,6 @@
 			systemd.enable = false;
 			plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [];
 			settings = {
-				#############################
-				### ENVIRONMENT VARIABLES ###
-				#############################
-				env = [
-					# Set to "1" if the cursor keeps disappearing
-					"WLR_NO_HARDWARE_CURSORS,0"
-
-					# Use Wayland
-					"NIXOS_OZONE_WL,1"
-					"QT_QPA_PLATFORM,wayland"
-					"GTK_USE_PORTAL,1"
-					"MOZ_ENABLE_WAYLAND,1"
-					"GDK_BACKEND,wayland"
-					"SDL_VIDEODRIVER,wayland"
-				];
-
 				#################
 				### VARIABLES ###
 				#################
@@ -92,63 +76,6 @@
 				"$fullscreenScreenshotCmd" = "grim";
 				"$selectedAreaScreenshotCmd" = ''grim -g "$(slurp)"'';
 
-				#################
-				### AUTOSTART ###
-				#################
-				exec-once = [
-					"uwsm app -- hyprpolkitagent"
-					"uwsm app -- swww-daemon"
-					"swww restore"
-					"uwsm app -- quickshell"
-					"uwsm app -- swaync"
-					(lib.optionalString (pkgs ? mpdscribble) "uwsm app -- mpdscribble")
-				];
-
-				#############
-				### INPUT ###
-				#############
-				input = {
-					# Keyboard
-					kb_layout = kbLayout;
-					# kb_variant =
-					# kb_model =
-					# kb_options =
-					# kb_rules =
-					numlock_by_default = true;
-					follow_mouse = 1;
-
-					# Mouse acceleration
-					sensitivity = 0;
-
-					# Touchpad
-					touchpad.natural_scroll = false;
-				};
-
-				# Touchpad gestures
-				gestures = {
-					workspace_swipe = true;
-					workspace_swipe_forever = true;
-				};
-
-				##############################
-				### WINDOWS AND WORKSPACES ###
-				##############################
-				windowrulev2 = [
-					# Ignore maximize requests from apps. You'll probably like this.
-					"suppressevent maximize, class:.*"
-
-					# Fix some dragging issues with XWayland
-					"nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-				];
-
-				# Window layouts
-				master.new_status = "master";
-				dwindle = {
-					# Master switch for pseudotiling - Enable with `mainMod + P`
-					pseudotile = true;
-					preserve_split = true;
-				};
-
 				#####################
 				### LOOK AND FEEL ###
 				#####################
@@ -165,11 +92,8 @@
 					# Enable/Disable resizing windows by clicking and dragging on borders and gaps
 					resize_on_border = false;
 
-					# Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
+					# Please see `https://wiki.hyprland.org/Configuring/Tearing/` before you turn this on
 					allow_tearing = false;
-
-					# Default window layout
-					layout = "dwindle";
 				};
 				decoration = {
 					# Radius of rounded window corners

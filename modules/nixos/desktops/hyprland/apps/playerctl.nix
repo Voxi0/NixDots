@@ -26,8 +26,7 @@ in {
 	# Player controller daemon - To control active media players via the CLI
 	services.playerctld.enable = true;
 	wayland.windowManager.hyprland.settings = {
-		bind = lib.concatLists [
-			(config.wayland.windowManager.hyprland.settings.bind or [])
+		bind = builtins.concatLists [
 			[
 				# Playerctl - Mpris media player command-line controller
 				"$mainMod SHIFT, N, exec, playerctl next"
@@ -39,8 +38,7 @@ in {
 				"$mainMod SHIFT, L, exec, ${playerctlLoopToggle}/bin/playerctlLoopToggle"
 			]
 		];
-		bindel = lib.concatLists [
-			(config.wayland.windowManager.hyprland.settings.bindel or [])
+		bindel = builtins.concatLists [
 			[
 				# Playerctl - Mpris media player command-line controller
 				",XF86AudioNext, exec, playerctl next"
