@@ -21,7 +21,7 @@
       home-manager = {
 				useGlobalPkgs = true;
         useUserPackages = true;
-        extraSpecialArgs = { inherit system inputs username; };
+        extraSpecialArgs = { inherit system inputs kbLayout username; };
         backupFileExtension = "bak";
 
         # User
