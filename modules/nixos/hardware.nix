@@ -28,7 +28,7 @@
 
 		# Enable Nvidia GPU support
 		(lib.mkIf (config.enableGraphics && config.enableNvidia) {
-			# Look at `https://nixos.wiki/wiki/Nvidia` for further information
+			boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 			nvidia = lib.mkIf config.enableNVidia {
 				modesetting.enable = true;	# REQUIRED
 				nvidiaSettings = true;			# Settings menu accessible via `nvidia-settings`

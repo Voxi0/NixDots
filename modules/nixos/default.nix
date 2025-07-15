@@ -34,8 +34,8 @@
 
 			# Security
 			security = {
-				polkit.enable = true;
-				rtkit.enable = true;
+				polkit.enable = true;	# Controls system-wide privileges - Necessary for authentication
+				rtkit.enable = true;	# Make Pipewire realtime capable - Optional but recommended
 			};
 
 			# Internationalisation properties

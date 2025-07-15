@@ -1,10 +1,4 @@
 { lib, config, kbLayout, inputs, username, pkgs, ... }: {
-	# NVidia specific
-	boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-
-	# For automatically mounting removable drives
-	services.udisks2.enable = true;
-
 	# Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
 	programs.hyprland = {
 		enable = true;
@@ -13,10 +7,13 @@
 		portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 	};
 
+	# Udisks2 - D-Bus service to access and manipulate storage devices
+	services.udisks2.enable = true;
+
 	# Home Manager specific configuration
 	home-manager.users.${username} = {
 		# Import Home Manager modules
-		imports = [ ./apps ];
+		imports = [ ./apps ./playerctl.nix ];
 
 		# Required packages
 		home.packages = with pkgs; [
@@ -27,13 +24,11 @@
 			grim						# To take screenshots
 			slurp						# To snip a part of the screen as selection
 			feh							# Simple image viewer
-			udiskie					# Automatically mounts and manages removable media
 		];
 
 		# Services
 		services = {
-			# To control active media players via the CLI
-			playerctld.enable = true;
+			udiskie.enable = true;		# To automount removable drives using Udisks2
 
 			# On Screen Display (OSD) - Shows a simple volume/brightness level bar
 			swayosd = {
@@ -42,7 +37,7 @@
 			};
 		};
 
-		# XDG desktop portals
+		# XDG desktop portals - D-Bus service allowing apps to interact with the desktop safely
 		xdg.portal = {
   		enable = true;
   		extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -52,34 +47,6 @@
 		wayland.windowManager.hyprland = let
 			# Total number of workspaces to generate keybinds for
 			numWorkspaces = 10;
-
-			# Scripts for Hyprland
-			# Playerctl toggle shuffle
-			playerctlShuffleToggle = pkgs.writeShellScriptBin "playerctlShuffleToggle" ''
-				#!/bin/sh
-				playerctl shuffle toggle
-				notify-send "Playerctl Shuffle" "$(playerctl shuffle)"
-			'';
-
-			# Toggle between the 3 playerctl loop modes - "None", "Track" and "Playlist"
-			playerctlLoopToggle = pkgs.writeShellScriptBin "playerctlLoopToggle" ''
-				#!/bin/sh
-
-				# Get the current loop state
-				currentState=$(playerctl loop)
-
-				# Cycle through the states: "None", "Track", "Playlist"
-				if [ "$currentState" = "None" ]; then
-					playerctl loop track
-					notify-send "Playerctl Loop" "Track"
-				elif [ "$currentState" = "Track" ]; then
-					playerctl loop playlist
-					notify-send "Playerctl Loop" "Playlist"
-				else
-					playerctl loop none
-					notify-send "Playerctl Loop" "None"
-				fi
-			'';
 		in {
 			enable = true;
 			xwayland.enable = true;
@@ -129,11 +96,10 @@
 				### AUTOSTART ###
 				#################
 				exec-once = [
-					"systemctl --user enable --now hyprpolkitagent.service"
+					"uwsm app -- hyprpolkitagent"
 					"uwsm app -- swww-daemon"
 					"swww restore"
 					"uwsm app -- quickshell"
-					"uwsm app -- udiskie --automount --smart-tray --terminal=$terminal"
 					"uwsm app -- swaync"
 					(lib.optionalString (pkgs ? mpdscribble) "uwsm app -- mpdscribble")
 				];
@@ -297,15 +263,6 @@
 					"$mainMod SHIFT, Insert, exec, $fullscreenScreenshotCmd"
 					"$mainMod CONTROL, Insert, exec, $selectedAreaScreenshotCmd"
 
-					# Playerctl - Mpris media player command-line controller
-					"$mainMod SHIFT, N, exec, playerctl next"
-					"$mainMod SHIFT, P, exec, playerctl previous"
-					"$mainMod SHIFT, SPACE, exec, playerctl play-pause"
-					"$mainMod SHIFT, Right, exec, playerctl position 10+"
-					"$mainMod SHIFT, Left, exec, playerctl position 10-"
-					"$mainMod SHIFT, S, exec, ${playerctlShuffleToggle}/bin/playerctlShuffleToggle"
-					"$mainMod SHIFT, L, exec, ${playerctlLoopToggle}/bin/playerctlLoopToggle"
-
 					# Window layout specific binds
 					# Dwindle
 					"$mainMod, P, pseudo"
@@ -341,12 +298,6 @@
 					",XF86AudioRaiseVolume, exec, $increaseVolumeCmd"
 					",XF86AudioLowerVolume, exec, $decreaseVolumeCmd"
 					",XF86AudioMute, exec, $toggleAudioMuteCmd"
-
-					# Playerctl - Mpris media player command-line controller
-					",XF86AudioNext, exec, playerctl next"
-					",XF86AudioPrev, exec, playerctl previous"
-					",XF86AudioPause, exec, playerctl play-pause"
-					",XF86AudioPlay, exec, playerctl play-pause"
 				];
 
 				bindm = [
