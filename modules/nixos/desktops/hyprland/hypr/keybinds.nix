@@ -2,10 +2,33 @@
 	# Total number of workspaces to generate keybinds for
 	numWorkspaces = 10;
 in {
-	###################
-	### KEYBINDINGS ###
-	###################
 	wayland.windowManager.hyprland.settings = {
+		#################
+		### VARIABLES ###
+		#################
+		"$mainMod" = "SUPER";
+		"$terminal" = "uwsm app -- kitty";
+		"$menu" = "uwsm app -- $(wofi --show drun --define=drun-print_desktop_file=true)";
+
+		# Command to bring up the logout menu
+		"$logoutMenuCmd" = "uwsm app -- wlogout";
+
+		# Commands to control volume
+		"$increaseVolumeCmd" = "swayosd-client --output-volume +5 --max-volume 100";
+		"$decreaseVolumeCmd" = "swayosd-client --output-volume -5 --max-volume 100";
+		"$toggleAudioMuteCmd" = "swayosd-client --output-volume mute-toggle";
+
+		# Commands to control screen brightness
+		"$increaseBrightnessCmd" = "swayosd-client --brightness +5";
+		"$decreaseBrightnessCmd" = "swayosd-client --brightness -5";
+
+		# Commands to use for screenshots - For the entire screen or selected area
+		"$fullscreenScreenshotCmd" = "grim";
+		"$selectedAreaScreenshotCmd" = ''grim -g "$(slurp)"'';
+
+		###################
+		### KEYBINDINGS ###
+		###################
 		bind = [
 			# Basics
 			"$mainMod, RETURN, exec, $terminal"
