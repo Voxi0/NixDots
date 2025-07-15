@@ -8,10 +8,10 @@
 	};
 
 	# Configuration
-	config.hardware = lib.mkMerge [
+	config = lib.mkMerge [
 		# Graphics
 		{
-			graphics = lib.mkIf config.enableGraphics {
+			hardware.graphics = lib.mkIf config.enableGraphics {
 				enable = true;
 				enable32Bit = lib.mkIf config.enableGraphics32Bit true;
 			};
@@ -19,7 +19,7 @@
 
 		# Enable Intel GPU support
 		(lib.mkIf (config.enableGraphics && config.enableIntel) {
-			graphics.extraPackages = with pkgs; [
+			hardware.graphics.extraPackages = with pkgs; [
 				# vaapiIntel				# For Intel Gen7 or older (Sandy/Ivy/Haswell)
 				intel-media-driver	# For Intel Gen8+ (Broadwell and newer)
 				vpl-gpu-rt  				# For Intel Gen9+ (Skylake and newer)
@@ -28,8 +28,8 @@
 
 		# Enable Nvidia GPU support
 		(lib.mkIf (config.enableGraphics && config.enableNvidia) {
-			# Look at `https://nixos.wiki/wiki/Nvidia` for further information
-			nvidia = lib.mkIf config.enableNVidia {
+			boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+			hardware.nvidia = lib.mkIf config.enableNVidia {
 				modesetting.enable = true;	# REQUIRED
 				nvidiaSettings = true;			# Settings menu accessible via `nvidia-settings`
 

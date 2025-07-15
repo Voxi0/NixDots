@@ -1,6 +1,14 @@
 {
   description = "NixDots";
 
+	# Nix
+	nixConfig = {
+		experimental-features = [ "nix-command" "flakes" ];
+		auto-optimise-store = true;
+		extra-substituters = [ "https://hyprland.cachix.org" ];
+		extra-trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+	};
+
   # Dependencies
   inputs = {
     # Nix packages repository and declarative Flatpak manager
@@ -55,6 +63,8 @@
 			inherit nixpkgs system inputs hostname username locale kbLayout;
 		};
   in {
+		nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home;
     nixosConfigurations = {
 			laptop = genHostConfig { hostname = "laptop"; };
       desktop = genHostConfig { hostname = "desktop"; };
