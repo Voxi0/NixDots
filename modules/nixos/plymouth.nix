@@ -16,8 +16,8 @@
 			# Plymouth
 			plymouth = {
 				enable = true;
-				theme = "rings";
-				themePackages = [(pkgs.adi1090x-plymouth-themes.override {
+				theme = lib.mkIf (!config.enableStylix) "rings";
+				themePackages = lib.mkIf (!config.enableStylix) [(pkgs.adi1090x-plymouth-themes.override {
 					selected_themes = [ "rings" ];
 				})];
 			};
