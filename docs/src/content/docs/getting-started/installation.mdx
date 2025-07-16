@@ -32,10 +32,9 @@ Read the instructions very carefully as messing up something could cause a bunch
 		sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- -m disko --argstr device "<disk label/name>" ./disko.nix
 
 		# !!IMPORTANT!!
-		# Remove the existing `hardware-configuration.nix` file from the host you wish to use in `hosts/<host you wanna use>`
-		# Now generate a new `hardware-configuration.nix` to replace it
 		# Skipping this step will cause data loss among other not very nice things
 		sudo nixos-generate-config --show-hardware-config --root /mnt > hardware-configuration.nix
+		mv hardware-configuration.nix hosts/<hostname>
 
 		# Copy NixDots to the new system
 		# Can be wherever you want, here we move it to just `/home` where all user home folders live
@@ -43,6 +42,7 @@ Read the instructions very carefully as messing up something could cause a bunch
 		cp -r ./* /mnt/home/NixDots/
 
 		# Install NixOS - Replace `<hostname>` with the name of the host folder in `hosts/` to install
+		# Just spam press `y` to accept everything e.g. binary caches and such - Without them installation will take hours
 		sudo nixos-install --flake /mnt/home/NixDots/#<hostname>
 
 		# Chroot into the new system to run additional commands like changing your password
@@ -71,18 +71,14 @@ Always backup your current configuration and keep previous generations just in c
 		nano ./flake.nix
 
 		# !!IMPORTANT!!
-		# Remove the existing `hardware-configuration.nix` file from the host you wish to use in `hosts/<host you wanna use>`
-		# Now generate a new `hardware-configuration.nix` to replace it
 		# Skipping this step will cause data loss among other not very nice things
-		nixos-generate-config --show-hardware-config > hardware-configuration.nix
+		sudo nixos-generate-config --show-hardware-config --root /mnt > hardware-configuration.nix
+		mv hardware-configuration.nix hosts/<hostname>
 
 		# Rebuild the system - Update the flake if you desire but it may or may not break stuff
 		# Replace `<hostname>` with the name of the host folder in `hosts/`
 		# sudo nix flake update
-		sudo nixos-rebuild boot \
-				--flake ./#<hostname> \
-				--option extra-binary-caches https://hyprland.cachix.org \
-				--option extra-trusted-public-keys hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=
+		sudo nixos-rebuild boot --flake <path to NixDots>/#<hostname>
 
 		# Reboot your system
 		systemctl reboot
