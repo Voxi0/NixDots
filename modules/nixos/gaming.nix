@@ -36,9 +36,6 @@
 
     # Extra packages
     environment = {
-			# Where to install Proton GE and other compatibility tools for Steam
-      sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/user/.steam/root/compatibilitytools.d";
-
       # Extra packages
       systemPackages = with pkgs; [
         mangohud  # Monitor game performance
@@ -50,12 +47,16 @@
     };
 
     # Configure Steam and other stuff to improve game performance
+		hardware.steam-hardware.enable = true;
     programs = {
       gamemode.enable = true;
+			gamescope = {
+				enable = true;
+				capSysNice = true;
+			};
       steam = lib.mkIf config.gaming.enableSteam {
         enable = true;
 				platformOptimizations.enable = true;
-        gamescopeSession.enable = true;
 				extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
     };
