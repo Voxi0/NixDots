@@ -49,8 +49,10 @@
           "browser.fullscreen.autohide" = false;
 
 					# Vertical tabs
-          "sidebar.verticalTab" = true;
-          "sidebar.revamp" = true;
+					"sidebar.revamp" = true;
+          "sidebar.verticalTabs" = true;
+					"sidebar.visibility" = "always-show";
+					"sidebar.main.tools" = "syncedtabs,history,bookmarks";
 
 					# Disable irritating first-run stuff
           "browser.disableResetPrompt" = true;
