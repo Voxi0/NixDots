@@ -22,7 +22,7 @@
 		{
 			# Boot
 			boot = {
-				kernelPackages = pkgs.linuxPackages_latest;
+				kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
 				kernelParams = [ ];
 				extraModulePackages = with config.boot.kernelPackages; [ ];
 				kernelModules = [ ];

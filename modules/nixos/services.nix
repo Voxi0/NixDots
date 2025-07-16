@@ -2,7 +2,7 @@
 	# Module options
 	options = {
 		enableX11 = lib.mkEnableOption "Enable X11 display server";
-		enableAudio = lib.mkEnableOption "Enable Pipewire for audio";
+		enablePipewire = lib.mkEnableOption "Enable Pipewire for audio";
 		enableBluetooth = lib.mkEnableOption "Enable Bluetooth support";
 		enableLaptopSupport = lib.mkEnableOption "Enable laptop support services e.g. Upower for power management";
 		enableSSH = lib.mkEnableOption "Enable OpenSSH";
@@ -36,7 +36,7 @@
 		})
 
 		# Pipewire for audio
-		(lib.mkIf config.enableAudio {
+		(lib.mkIf config.enablePipewire {
 			environment.systemPackages = [ pkgs.pavucontrol ];
 			services = {
 				pulseaudio.enable = false;

@@ -3,10 +3,11 @@
 
 	# Nix
 	nixConfig = {
-		experimental-features = [ "nix-command" "flakes" ];
-		auto-optimise-store = true;
-		extra-substituters = [ "https://hyprland.cachix.org" ];
-		extra-trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+		extra-substituters = [ "https://hyprland.cachix.org" "https://nix-gaming.cachix.org" ];
+		extra-trusted-public-keys = [
+			"hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="		# Hyprland
+			"nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="	# Nix gaming
+		];
 	};
 
   # Dependencies
@@ -45,6 +46,9 @@
       url = "github:Voxi0/NixNvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+		# Gaming related stuff
+		nix-gaming.url = "github:fufexan/nix-gaming";
 
 		# Declaratively configure Vencord and it's plugins
 		nixcord.url = "github:kaylorben/nixcord";

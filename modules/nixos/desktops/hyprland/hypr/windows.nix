@@ -15,7 +15,7 @@ _: {
 		general.layout = "dwindle";		# Default window layout
 		master.new_status = "master";
 		dwindle = {
-			# Enable/disable pseudotiling - Toggle `mainMod + P`
+			# Enable/Disable pseudotiling - Toggle `mainMod + P`
 			pseudotile = true;
 			preserve_split = true;
 		};
