@@ -1,10 +1,13 @@
-{ lib, config, kbLayout, inputs, username, pkgs, ... }: {
+{ lib, config, system, kbLayout, inputs, username, pkgs, ... }: let
+	hyprlandPkgs = inputs.hyprland.packages.${system};
+	hyprlandPluginsPkgs = inputs.hyprland-plugins.packages.${system};
+in {
 	# Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
 	programs.hyprland = {
 		enable = true;
 		withUWSM = true;
-		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-		portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+		package = hyprlandPkgs.hyprland;
+		portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
 	};
 
 	# Udisks2 - D-Bus service to access and manipulate storage devices
@@ -49,9 +52,11 @@
 		# Hyprland
 		wayland.windowManager.hyprland = {
 			enable = true;
+			package = hyprlandPkgs.hyprland;
+			portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
 			xwayland.enable = true;
 			systemd.enable = false;
-			plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [];
+			plugins = with hyprlandPluginsPkgs; [];
 			settings = {
 				############
 				### FEEL ###
