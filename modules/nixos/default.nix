@@ -3,6 +3,7 @@
 	imports = [
 		./hardware.nix				# Hardware specific configuration e.g. graphics drivers
 		./services.nix				# System services
+		./plymouth.nix				# Graphical splash screen during boot/poweroff
 		./stylix.nix					# System-wide theming and typography
 		./desktops/hyprland		# Desktop environment / Window manager
 		./fish.nix						# Fancy shell
