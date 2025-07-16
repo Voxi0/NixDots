@@ -17,6 +17,8 @@ _: {
     enable = true;
     enableSteam = true;
     enableRoblox = true;
+		enableOsu = true;
+		enableOsuLazer = false;
     enableLutris = false;
     enableHeroic = false;
   };
@@ -27,7 +29,7 @@ _: {
 
 	# Services
 	enableX11 = false;
-	enableAudio = true;
+	enablePipewire = true;
 	enableBluetooth = true;
 	enableLaptopSupport = false;
 	enableSSH = true;

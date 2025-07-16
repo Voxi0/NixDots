@@ -17,7 +17,6 @@
 
 		# Required packages
 		home.packages = with pkgs; [
-			hyprpolkitagent	# Polkit GUI authentication daemon
 			nwg-displays		# Manage monitors
 			swww						# Efficient wallpaper daemon that supports animated wallpapers
 			wl-clipboard		# System clipboard
@@ -28,6 +27,9 @@
 
 		# Services
 		services = {
+			# Polkit GUI authentication daemon
+			hyprpolkitagent.enable = true;
+
 			# Automounts removable drives using Udisks2
 			udiskie.enable = true;
 

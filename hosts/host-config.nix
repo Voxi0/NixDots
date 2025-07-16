@@ -9,10 +9,11 @@
 			nixpkgs.config.allowUnfree = true;
       nix = {
         optimise.automatic = true;
-        settings = {
-          experimental-features = [ "nix-command" "flakes" ];
-          auto-optimise-store = true;
-        };
+				settings = {
+					trusted-users = [ "root" "${username}" ];
+					experimental-features = [ "nix-command" "flakes" ];
+					auto-optimise-store = true;
+				};
       };
     }
 

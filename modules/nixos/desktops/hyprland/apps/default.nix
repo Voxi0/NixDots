@@ -1,6 +1,10 @@
-{ lib, config, pkgs, ... }: {
+_: {
   # Import Nix modules
   imports = [
-    ./playerctl.nix ./wofi ./quickshell.nix ./swaync.nix ./wlogout.nix
+    ./playerctl.nix		# To control media players via commands
+		./wofi						# App launcher
+		./quickshell.nix	# For widgets
+		./swaync.nix			# Sway notification centre
+		./wlogout.nix			# Logout menu
   ];
 }
