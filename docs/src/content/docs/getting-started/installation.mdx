@@ -22,7 +22,7 @@ Read the instructions very carefully as messing up something could cause a bunch
 		nix-shell -p git --run "git clone https://github.com/Voxi0/NixDots.git"
 		cd NixDots
 
-		# Configure some stuff like username, timezone, keyboard layout etc.
+		# Configure some stuff e.g. username and keyboard layout
 		# Nano is installed by default, use another editor if you want
 		nano ./flake.nix
 
@@ -39,14 +39,11 @@ Read the instructions very carefully as messing up something could cause a bunch
 
 		# Copy NixDots to the new system
 		# Can be wherever you want, here we move it to just `/home` where all user home folders live
-		mkdir -p /home/NixDots
-		cp -r ./* /home/NixDots/
+		sudo mkdir -p /mnt/home/NixDots
+		cp -r ./* /mnt/home/NixDots/
 
 		# Install NixOS - Replace `<hostname>` with the name of the host folder in `hosts/` to install
-		sudo nixos-install \
-			--flake /mnt/etc/nixos/#<hostname> \
-			--option extra-binary-caches https://hyprland.cachix.org \
-			--option extra-trusted-public-keys hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=
+		sudo nixos-install --flake /mnt/home/NixDots/#<hostname>
 
 		# Chroot into the new system to run additional commands like changing your password
 		# Default password for any user is `nixos`

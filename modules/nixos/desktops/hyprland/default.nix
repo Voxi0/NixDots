@@ -20,12 +20,13 @@ in {
 
 		# Required packages
 		home.packages = with pkgs; [
-			nwg-displays		# Manage monitors
-			swww						# Efficient wallpaper daemon that supports animated wallpapers
-			wl-clipboard		# System clipboard
-			grim						# To take screenshots
-			slurp						# To snip a part of the screen as selection
-			feh							# Simple image viewer
+			nwg-displays	# Manage monitors
+			swww					# Efficient wallpaper daemon that supports animated wallpapers
+			wl-clipboard	# System clipboard
+			grim					# To take screenshots
+			slurp					# To snip a part of the screen as selection
+			feh						# Simple image viewer
+			xfce.thunar		# GUI file explorer
 		];
 
 		# Services
