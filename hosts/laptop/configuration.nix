@@ -25,6 +25,7 @@ _: {
 
 	# Hardware
 	enableIntel = true;
+	enableAmd = false;
 	enableNvidia = false;
 
 	# Services

@@ -4,6 +4,7 @@
 		enableGraphics = lib.mkEnableOption "Enable graphics drivers";
 		enableGraphics32Bit = lib.mkEnableOption "Enable 32-bit graphics drivers";
 		enableIntel = lib.mkEnableOption "Enable Intel GPU support";
+		enableAmd = lib.mkEnableOption "Enable AMD GPU support";
 		enableNvidia = lib.mkEnableOption "Enables Nvidia GPU support";
 	};
 
@@ -24,6 +25,23 @@
 				intel-media-driver	# For Intel Gen8+ (Broadwell and newer)
 				vpl-gpu-rt  				# For Intel Gen9+ (Skylake and newer)
 			];
+		})
+
+		# Enable AMD GPU support
+		(lib.mkIf (config.enableGraphics && config.enableAmd) {
+			# Force Mesa RADV drivers when possible since AMDVLK could have noticeable performance issues
+			environment.variables.AMD_VULKAN_ICD = "RADV";
+			hardware.graphics = {
+				extraPackages = [ pkgs.amdvlk ];
+				extraPackages32 = lib.mkIf config.enableGraphics32Bit [ pkgs.driversi686Linux.amdvlk ];
+			};
+
+			# Linux AMDGPU Controller (LACT) - Allows overclocking, undervolting and setting fans curves of AMD GPUs
+			environment.systemPackages = [ pkgs.lact ];
+			systemd = {
+				packages = [ pkgs.lact ];
+				services.lactd.wantedBy = [ "multi-user.target" ];
+			};
 		})
 
 		# Enable Nvidia GPU support
