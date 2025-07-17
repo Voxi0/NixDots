@@ -51,7 +51,6 @@
 					# Vertical tabs
 					"sidebar.revamp" = true;
           "sidebar.verticalTabs" = true;
-					"sidebar.visibility" = "always-show";
 					"sidebar.main.tools" = "syncedtabs,history,bookmarks";
 
 					# Disable irritating first-run stuff
