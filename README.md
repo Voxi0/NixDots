@@ -11,7 +11,8 @@
 [NixDots](https://github.com/Voxi0/NixDots) is my personal [NixOS][1] + [Home Manager][2] configuration. Feel free to go through my configuration
 and use it as you wish. And kindly star the repo to show support, any contributions are greatly appreciated :)
 
-## Why NixOS?
+<details>
+    <summary>Why NixOS?</summary>
 [NixOS][1] is a unique Linux distribution unlike no other that's built around the Nix package manager. It has a very steep learning curve because
 of how different it is from traditional distributions but for me it's worth it for many reasons. For me it's worth it but it may be different for
 you, don't bother spending time on [NixOS][1] if it's benefits are unnecessary for your use case.
@@ -22,6 +23,7 @@ to an older version/generation of the system if the new one is broken. It's diff
 rebuilding the system using that configuration.
 - **Huge Package Repository**: [Nixpkgs][3] has over 100,000 software packages that you can install with the Nix package manager. It's the largest
 software repository in existence as of now, even larger than the mighty [Arch User Repository (AUR)][4]
+</details>
 
 ## Specs
 - **Kernel** - [Linux (Latest)][5]
