@@ -20,8 +20,8 @@
   # Module options
   options = {
     enableNetworking = lib.mkEnableOption "Enable networking";
-    enableXdgPortals = lib.mkEnableOption "Enable XDG portals (Service that allows apps to interact with the desktop safely)";
-    enableVirtualization = lib.mkEnableOption "Enable virtualization support";
+    enableXdgPortals = lib.mkEnableOption "Enable XDG portals - Service that allows apps to interact with the desktop safely";
+    enableVirtualization = lib.mkEnableOption "Enable virtualization support e.g. QEMU";
   };
 
   # Configuration
@@ -30,10 +30,7 @@
     {
       # Boot
       boot = {
-        kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-        kernelParams = [];
-        extraModulePackages = with config.boot.kernelPackages; [];
-        kernelModules = [];
+        kernelPackages = pkgs.linuxPackages_latest;
         loader = {
           systemd-boot.enable = true;
           efi.canTouchEfiVariables = true;
@@ -94,8 +91,11 @@
       virtualisation = {
         libvirtd.enable = true; # Abstraction layer to manage virtual machines
         vmVariant.virtualisation = {
-          graphics = true; # Run QEMU in a graphics window
-          cores = 2; # Number of cores the guest is permitted to use
+          # Run QEMU in a graphical window
+          graphics = true;
+
+          # Number of cores that the virtual machine can use
+          cores = 2;
         };
       };
     })
