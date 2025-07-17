@@ -34,6 +34,13 @@
       obsidian										# Free and open source Markdown note taking application
     ] ++ [ inputs.NixNvim.packages.${system}.nvim ];
 
+		# Make Neovim the default editor
+		sessionVariables = {
+  		EDITOR = "nvim";
+  		VISUAL = "nvim";
+		};
+
+
     # User files
     file = {
       # Wallpapers
