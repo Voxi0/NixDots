@@ -13,18 +13,16 @@ and use it as you wish. And kindly star the repo to show support, any contributi
 
 <details>
     <summary>Why NixOS?</summary>
+[NixOS][1] is a unique Linux distribution unlike no other that's built around the Nix package manager. It has a very steep learning curve because
+of how different it is from traditional distributions but for me it's worth it for many reasons. For me it's worth it but it may be different for
+you, don't bother spending time on [NixOS][1] if it's benefits are unnecessary for your use case.
 
-    [NixOS][1] is a unique Linux distribution unlike no other that's built around the Nix package manager. It has a very steep learning curve because
-    of how different it is from traditional distributions but for me it's worth it for many reasons. For me it's worth it but it may be different for
-    you, don't bother spending time on [NixOS][1] if it's benefits are unnecessary for your use case.
-
-    - **Reliability** - Thanks to declarative configuration, [NixOS][1] is able to have atomic upgrades and system rollbacks so the user can go back
-    to an older version/generation of the system if the new one is broken. It's difficult to break this distro
-    - **Reproducibility**: Declarative configuration means that the same configuration can be used to create identical [NixOS][1] systems just by
-    rebuilding the system using that configuration.
-    - **Huge Package Repository**: [Nixpkgs][3] has over 100,000 software packages that you can install with the Nix package manager. It's the largest
-    software repository in existence as of now, even larger than the mighty [Arch User Repository (AUR)][4]
-
+- **Reliability** - Thanks to declarative configuration, [NixOS][1] is able to have atomic upgrades and system rollbacks so the user can go back
+to an older version/generation of the system if the new one is broken. It's difficult to break this distro
+- **Reproducibility**: Declarative configuration means that the same configuration can be used to create identical [NixOS][1] systems just by
+rebuilding the system using that configuration.
+- **Huge Package Repository**: [Nixpkgs][3] has over 100,000 software packages that you can install with the Nix package manager. It's the largest
+software repository in existence as of now, even larger than the mighty [Arch User Repository (AUR)][4]
 </details>
 
 ## Specs
