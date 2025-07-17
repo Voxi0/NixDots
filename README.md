@@ -24,6 +24,7 @@ and use it as you wish. And kindly star the repo to show support, any contributi
     rebuilding the system using that configuration.
     - **Huge Package Repository**: [Nixpkgs][3] has over 100,000 software packages that you can install with the Nix package manager. It's the largest
     software repository in existence as of now, even larger than the mighty [Arch User Repository (AUR)][4]
+
 </details>
 
 ## Specs
