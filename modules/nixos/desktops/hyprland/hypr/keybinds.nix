@@ -1,4 +1,4 @@
-{lib, ...}: let
+_: let
   # Total number of workspaces to generate keybinds for
   numWorkspaces = 10;
 in {

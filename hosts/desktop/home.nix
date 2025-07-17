@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   # Import Nix modules
   imports = [../../modules/home];
 

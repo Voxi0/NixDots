@@ -60,6 +60,7 @@
   # Actions to perform after fetching all dependencies
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
     username = "voxi0";
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
@@ -68,9 +69,22 @@
         inherit nixpkgs system inputs hostname username locale kbLayout;
       };
   in {
-    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
+    # Devtools - For working with NixDots, use command `nix develop` to start the devshell
+    formatter.${system} = pkgs.alejandra;
+    devShells.${system}.default = pkgs.mkShell {
+      buildInputs = with pkgs; [
+        inputs.NixNvim.packages.${system}.nvim # My custom Neovim configuration made with Nix and nixCats
+        git # Version control system
+        deadnix # Catches unused/dead Nix code
+        statix # Lints and suggestions for the Nix language
+      ];
+    };
+
+    # Export all custom NixOS/Home Manager modules so they can be used by other flakes
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home;
+
+    # NixOS hosts
     nixosConfigurations = {
       laptop = genHostConfig {hostname = "laptop";};
       desktop = genHostConfig {hostname = "desktop";};

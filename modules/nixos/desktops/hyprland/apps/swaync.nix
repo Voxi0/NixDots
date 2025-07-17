@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   # Sway notification center
   services.swaync = {
     enable = true;

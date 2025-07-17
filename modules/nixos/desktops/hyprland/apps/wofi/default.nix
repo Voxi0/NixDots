@@ -1,4 +1,4 @@
-{...}: {
+_: {
   # Application launcher
   # Don't let Stylix style Wofi
   stylix.targets.wofi.enable = false;
