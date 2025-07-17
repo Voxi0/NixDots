@@ -8,7 +8,6 @@
 		nix-gaming.nixosModules.ntsync
 		nix-gaming.nixosModules.pipewireLowLatency
 		nix-gaming.nixosModules.platformOptimizations
-		nix-gaming.nixosModules.steamCompat
 	];
 
   # Module options
