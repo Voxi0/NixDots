@@ -33,8 +33,7 @@ Read the instructions very carefully as messing up something could cause a bunch
 
 		# !!IMPORTANT!!
 		# Skipping this step will cause data loss among other not very nice things
-		sudo nixos-generate-config --show-hardware-config --root /mnt > hardware-configuration.nix
-		mv hardware-configuration.nix hosts/<hostname>
+		sudo nixos-generate-config --show-hardware-config --root /mnt > hosts/<hostname>/hardware-configuration.nix
 
 		# Copy NixDots to the new system
 		# Can be wherever you want, here we move it to just `/home` where all user home folders live
@@ -72,8 +71,7 @@ Always backup your current configuration and keep previous generations just in c
 
 		# !!IMPORTANT!!
 		# Skipping this step will cause data loss among other not very nice things
-		sudo nixos-generate-config --show-hardware-config --root /mnt > hardware-configuration.nix
-		mv hardware-configuration.nix hosts/<hostname>
+		sudo nixos-generate-config --show-hardware-config --root /mnt > hosts/<hostname>/hardware-configuration.nix
 
 		# Rebuild the system - Update the flake if you desire but it may or may not break stuff
 		# Replace `<hostname>` with the name of the host folder in `hosts/`
