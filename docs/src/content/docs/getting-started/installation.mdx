@@ -35,21 +35,17 @@ Read the instructions very carefully as messing up something could cause a bunch
 		# Skipping this step will cause data loss among other not very nice things
 		sudo nixos-generate-config --show-hardware-config --root /mnt > hosts/<hostname>/hardware-configuration.nix
 
-		# Copy NixDots to the new system
-		# Can be wherever you want, here we move it to just `/home` where all user home folders live
-		sudo mkdir -p /mnt/home/NixDots
-		cp -r ./* /mnt/home/NixDots/
-
-		# Install NixOS - Replace `<hostname>` with the name of the host folder in `hosts/` to install
-		# Just spam press `y` to accept everything e.g. binary caches and such - Without them installation will take hours
-		sudo nixos-install --flake /mnt/home/NixDots/#<hostname>
+		# Install NixOS
+		# Press `y` to say "yes" to all questions e.g. binary caches and such - Without them installation will take hours
+		# sudo nix flake update --experimental-features 'nix-command flakes'
+		sudo nixos-install --flake ./#<hostname>
 
 		# Chroot into the new system to run additional commands like changing your password
 		# Default password for any user is `nixos`
 		sudo nixos-enter
 		passwd <your_username>
 
-		# Installation is complete! Power off and remove the installation media
+		# Installation complete! Power off and remove the installation media
 		systemctl poweroff
 		```
 </Steps>
@@ -65,16 +61,15 @@ Always backup your current configuration and keep previous generations just in c
 		nix-shell -p git --run "git clone https://github.com/Voxi0/NixDots.git"
 		cd NixDots
 
-		# Configure some stuff like username, timezone, keyboard layout etc.
+		# Configure some stuff like username and keyboard layout
 		# Nano is installed by default, use another editor if you want
 		nano ./flake.nix
 
 		# !!IMPORTANT!!
 		# Skipping this step will cause data loss among other not very nice things
-		sudo nixos-generate-config --show-hardware-config --root /mnt > hosts/<hostname>/hardware-configuration.nix
+		sudo nixos-generate-config --show-hardware-config > hosts/<hostname>/hardware-configuration.nix
 
 		# Rebuild the system - Update the flake if you desire but it may or may not break stuff
-		# Replace `<hostname>` with the name of the host folder in `hosts/`
 		# sudo nix flake update
 		sudo nixos-rebuild boot --flake <path to NixDots>/#<hostname>
 
