@@ -1,13 +1,23 @@
-{ inputs, pkgs, ... }: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   # Import Nix modules
-  imports = [ ../../modules/home ];
+  imports = [../../modules/home];
 
-	# Enable/Disable our custom Home Manager modules
+  # Enable/Disable our Home Manager modules
   enableKitty = true;
   enableFirefox = true;
   enableGit = true;
   enableSpotify = true;
-	enableMPD = true;
+  enableMPD = true;
   enableNcmpcpp = true;
-	enableDiscord = true;
+  enableDiscord = true;
+  cli = {
+    enableNixHelper = true;
+    enableFastfetch = true;
+    enableBtop = true;
+    enableYazi = true;
+  };
 }

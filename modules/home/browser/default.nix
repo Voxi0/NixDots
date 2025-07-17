@@ -1,17 +1,23 @@
-{ lib, config, inputs, system, ... }: {
-	# Module options
-	options.enableFirefox = lib.mkEnableOption "Enable Firefox";
+{
+  lib,
+  config,
+  inputs,
+  system,
+  ...
+}: {
+  # Module options
+  options.enableFirefox = lib.mkEnableOption "Enable Firefox";
 
-	# Configuration
-	config = lib.mkIf config.enableFirefox {
-		# Stylix - List all Firefox profiles here as well because Stylix can't detect it
-    stylix.targets.firefox.profileNames = [ "NixDots" ];
+  # Configuration
+  config = lib.mkIf config.enableFirefox {
+    # Stylix - List all Firefox profiles here as well because Stylix can't detect it
+    stylix.targets.firefox.profileNames = ["NixDots"];
 
-		# Firefox
-		programs.firefox = {
-			enable = true;
-			enableGnomeExtensions = false;
-      languagePacks = [ "en-GB" "en-US" ];
+    # Firefox
+    programs.firefox = {
+      enable = true;
+      enableGnomeExtensions = false;
+      languagePacks = ["en-GB" "en-US"];
       policies = {
         BlockAboutConfig = false;
         DisableFirefoxStudies = true;
@@ -25,35 +31,35 @@
           TopSites = false;
           Highlights = false;
         };
-			};
+      };
 
-			# Default profile
-			profiles."NixDots" = {
-				name = "NixDots";
-				isDefault = true;
+      # Default profile
+      profiles."NixDots" = {
+        name = "NixDots";
+        isDefault = true;
 
-				# Search engines
-				search = {
+        # Search engines
+        search = {
           force = true;
           default = "google";
           privateDefault = "google";
-          order = [ "google" ];
+          order = ["google"];
         };
 
-				# Settings
-				settings = {
-					# New tab page
+        # Settings
+        settings = {
+          # New tab page
           "browser.startup.homepage" = "about:home";
 
           # Don't hide the tab bar when fullscreen
           "browser.fullscreen.autohide" = false;
 
-					# Vertical tabs
-					"sidebar.revamp" = true;
+          # Vertical tabs
+          "sidebar.revamp" = true;
           "sidebar.verticalTabs" = true;
-					"sidebar.main.tools" = "syncedtabs,history,bookmarks";
+          "sidebar.main.tools" = "syncedtabs,history,bookmarks";
 
-					# Disable irritating first-run stuff
+          # Disable irritating first-run stuff
           "browser.disableResetPrompt" = true;
           "browser.download.panel.shown" = true;
           "browser.feeds.showFirstRunUI" = false;
@@ -67,14 +73,14 @@
           "trailhead.firstrun.didSeeAboutWelcome" = true;
           "browser.bookmarks.restore_default_bookmarks" = false;
           "browser.bookmarks.addedImportButton" = true;
-				};
+        };
 
-				# Useful Firefox extensions to be installed by default
+        # Useful Firefox extensions to be installed by default
         extensions.packages = with inputs.firefox-addons.packages.${system}; [
           ublock-origin # Very efficient and lightweight ad blocker
-          darkreader    # For reading sites that are too bright
+          darkreader # For reading sites that are too bright
         ];
-			};
-		};
-	};
+      };
+    };
+  };
 }

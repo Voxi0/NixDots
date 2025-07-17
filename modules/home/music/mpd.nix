@@ -1,17 +1,23 @@
-{ lib, config, pkgs, username, ... }: {
-	# Module options
-	options.enableMPD = lib.mkEnableOption "Enable Music Player Daemon (MPD)";
+{
+  lib,
+  config,
+  pkgs,
+  username,
+  ...
+}: {
+  # Module options
+  options.enableMPD = lib.mkEnableOption "Enable Music Player Daemon (MPD)";
 
-	# Configuration
-	config = lib.mkIf config.enableMPD {
-		# MPD scrobbler - Sends scrobbling information to scrobbling services e.g. LastFM
-		home.packages = [ pkgs.mpdscribble ];
+  # Configuration
+  config = lib.mkIf config.enableMPD {
+    # MPD scrobbler - Sends scrobbling information to scrobbling services e.g. LastFM
+    home.packages = [pkgs.mpdscribble];
 
-		# Services
+    # Services
     services = {
-			mpd-mpris.enable = true;	# Required for Playerctl to work
+      mpd-mpris.enable = true; # Required for Playerctl to work
 
-			# Music Player Daemon (MPD) - Free and open-source music player server
+      # Music Player Daemon (MPD) - Free and open-source music player server
       mpd = {
         enable = true;
         musicDirectory = "/home/${username}/Music";
@@ -19,7 +25,7 @@
           startWhenNeeded = true;
           listenAddress = "any";
         };
-        extraArgs = [ ];
+        extraArgs = [];
         extraConfig = ''
           # Audio outputs
           audio_output {
@@ -49,5 +55,5 @@
         };
       };
     };
-	};
+  };
 }
