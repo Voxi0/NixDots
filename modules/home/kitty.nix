@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }: {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # Module options
   options.enableKitty = lib.mkEnableOption "Kitty (Terminal emulator)";
 
@@ -45,7 +50,7 @@
         # Terminal bell
         enable_audio_bell = false;
         window_alert_on_bell = true;
-  
+
         # URLs
         detect_urls = true;
         url_prefixes = "file ftp ftps gemini git gopher http https irc ircs kitty mailto news sftp ssh";

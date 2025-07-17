@@ -1,14 +1,14 @@
 {
   description = "NixDots";
 
-	# Nix
-	nixConfig = {
-		extra-substituters = [ "https://hyprland.cachix.org" "https://nix-gaming.cachix.org" ];
-		extra-trusted-public-keys = [
-			"hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="		# Hyprland
-			"nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="	# Nix gaming
-		];
-	};
+  # Nix
+  nixConfig = {
+    extra-substituters = ["https://hyprland.cachix.org" "https://nix-gaming.cachix.org"];
+    extra-trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" # Hyprland
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" # Nix gaming
+    ];
+  };
 
   # Dependencies
   inputs = {
@@ -16,26 +16,26 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-		# Manages user-level configuration
+    # Manages user-level configuration
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		# System-wide theming and typography
-		stylix = {
+    # System-wide theming and typography
+    stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		# Hyprland
-		hyprland.url = "github:hyprwm/Hyprland";
-		hyprland-plugins = {
-			url = "github:hyprwm/hyprland-plugins";
-			inputs.hyprland.follows = "hyprland";
-		};
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
-		# Firefox extensions
+    # Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,31 +47,33 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		# Gaming related stuff
-		nix-gaming.url = "github:fufexan/nix-gaming";
+    # Gaming related stuff
+    nix-gaming.url = "github:fufexan/nix-gaming";
 
-		# Declaratively configure Vencord and it's plugins
-		nixcord.url = "github:kaylorben/nixcord";
+    # Declaratively configure Vencord and it's plugins
+    nixcord.url = "github:kaylorben/nixcord";
 
-		# Multiplatform CLI tool to customize the official Spotify client
-		spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    # Multiplatform CLI tool to customize the official Spotify client
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   # Actions to perform after fetching all dependencies
-  outputs = { nixpkgs, ... }@inputs: let
+  outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
-		username = "voxi0";
-		locale = "en_GB.UTF-8";
+    username = "voxi0";
+    locale = "en_GB.UTF-8";
     kbLayout = "gb";
-		genHostConfig = { hostname }: import ./hosts/host-config.nix {
-			inherit nixpkgs system inputs hostname username locale kbLayout;
-		};
+    genHostConfig = {hostname}:
+      import ./hosts/host-config.nix {
+        inherit nixpkgs system inputs hostname username locale kbLayout;
+      };
   in {
-		nixosModules = import ./modules/nixos;
+    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
+    nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home;
     nixosConfigurations = {
-			laptop = genHostConfig { hostname = "laptop"; };
-      desktop = genHostConfig { hostname = "desktop"; };
+      laptop = genHostConfig {hostname = "laptop";};
+      desktop = genHostConfig {hostname = "desktop";};
     };
   };
 }

@@ -1,12 +1,19 @@
-{ lib, config, inputs, pkgs, username, ... }: {
-	# Import Nix modules
-	imports = [ inputs.stylix.nixosModules.stylix ];
+{
+  lib,
+  config,
+  inputs,
+  pkgs,
+  username,
+  ...
+}: {
+  # Import Nix modules
+  imports = [inputs.stylix.nixosModules.stylix];
 
-	# Module options
-	options.enableStylix = lib.mkEnableOption "Enable Stylix for system-wide theming and typography";
+  # Module options
+  options.enableStylix = lib.mkEnableOption "Enable Stylix for system-wide theming and typography";
 
-	# Configuration
-	config = lib.mkIf config.enableStylix {
+  # Configuration
+  config = lib.mkIf config.enableStylix {
     # Stylix
     stylix = {
       enable = true;
@@ -59,10 +66,10 @@
 
     # Home Manager specific - Set icon theme
     home-manager.users.${username}.stylix.iconTheme = {
-			enable = true;
-			package = pkgs.papirus-icon-theme;
-			light = "Papirus-Light";
-			dark = "Papirus-Dark";
+      enable = true;
+      package = pkgs.papirus-icon-theme;
+      light = "Papirus-Light";
+      dark = "Papirus-Dark";
     };
   };
 }
