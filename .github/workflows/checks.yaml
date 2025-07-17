@@ -1,0 +1,64 @@
+name: Analyze and Format All Nix Code
+
+# When to run the workflow
+on:
+  # When code is pushed to `main` branch
+  push:
+    branches: [main]
+
+  # When a PR is opened, pushed to or reopened and it's targeting the `main` branch
+  pull_request:
+    branches: [main]
+
+  # Manually trigger this workflow from the Github Actions tab
+  workflow_dispatch:
+
+# Workflow actions
+jobs:
+  # Check Nix code - Assess quality and find dead/unused Nix code
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      # Clone the repository and install Nix
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v25
+
+      # Assess code quality
+      - name: Statix lint
+        run: nix develop --command statix check
+
+      # Find dead/unused Nix code
+      - name: Deadnix check
+        run: nix develop --command deadnix --fail
+
+  # Format all Nix files with Alejandra - Only after all checks pass
+  format:
+    runs-on: ubuntu-latest
+    needs: check
+    steps:
+      # Clone the repository and install Nix
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+
+      # Run the formatter (Alejandra)
+      - name: Run Alejandra (Formatter)
+        run: nix fmt .
+
+      # Commit and push the formatted changes
+      - name: Commit and Push Formatting Changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet; then
+            git add .
+            git commit -m "CHORE: Autoformat Nix Code With Alejandra"
+            git push
+          else
+            echo "No changes to commit"
+          fi
