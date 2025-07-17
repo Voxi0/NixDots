@@ -13,6 +13,7 @@ and use it as you wish. And kindly star the repo to show support, any contributi
 
 <details>
     <summary>Why NixOS?</summary>
+
 [NixOS][1] is a unique Linux distribution unlike no other that's built around the Nix package manager. It has a very steep learning curve because
 of how different it is from traditional distributions but for me it's worth it for many reasons. For me it's worth it but it may be different for
 you, don't bother spending time on [NixOS][1] if it's benefits are unnecessary for your use case.
