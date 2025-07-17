@@ -1,8 +1,5 @@
 {
-  lib,
-  config,
   system,
-  kbLayout,
   inputs,
   username,
   pkgs,

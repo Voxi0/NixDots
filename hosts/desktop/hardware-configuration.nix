@@ -4,32 +4,37 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
+  # Import Nix modules
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "sd_mod" "sr_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  # Boot
+  boot = {
+    kernelModules = ["kvm-intel"];
+    extraModulePackages = [];
+    initrd = {
+      availableKernelModules = ["xhci_pci" "ahci" "usbhid" "sd_mod" "sr_mod"];
+      kernelModules = [];
+    };
+  };
 
+  # Filesystems and swap
+  swapDevices = [];
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/b5f65ba8-c40f-4ea7-a2e3-19caf8d6a962";
     fsType = "ext4";
   };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/7080-9C9E";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
 
-  swapDevices = [];
-
+  # Platform and CPU
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

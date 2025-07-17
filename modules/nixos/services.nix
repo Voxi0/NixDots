@@ -33,7 +33,7 @@
       services.xserver = {
         enable = true;
         excludePackages = [pkgs.xterm];
-        videoDrivers = [] ++ lib.optional config.enableNvidia "nvidia";
+        videoDrivers = lib.mkIf config.enableNvidia ["nvidia"];
         xkb = {
           layout = kbLayout;
           variant = "";

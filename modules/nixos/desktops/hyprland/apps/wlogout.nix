@@ -1,4 +1,4 @@
-{...}: {
+_: {
   # Wayland logout menu
   programs.wlogout = {
     enable = true;
