@@ -3,8 +3,8 @@
   home = {
     # Extra CLI tools
     packages = with pkgs; [
-      nh													# Nix CLI helper
-			btop												# System monitor
+      nh		# Nix CLI helper
+			btop	# System monitor
     ];
 
     # Shell alises to shorten frequently used commands
@@ -15,6 +15,28 @@
   programs = {
     nix-your-shell.enable = true; # Use the shell we prefer instead of Bash in Nix shells
     zoxide.enable = true;         # Smarter `cd` command which is super handy
+
+		# Fancy and modern TUI file manager written in Rust with previews and such
+		yazi = {
+			enable = true;
+			settings = {
+				input.cursor_blink = false;
+				mgr = {
+					ratio = [ 1 2 3 ];		# Parent, current and preview windows width
+					show_hidden = true;
+					show_symlink = true;
+					sort_by = "natural";
+					sort_reverse = false;
+					sort_sensitive = true;
+					linemode = "size";
+				};
+				preview = {
+					wrap = "no";
+					image_filter = "nearest";
+					image_quality = 50;
+				};
+			};
+		};
 
     # Fetch script
     fastfetch = {
