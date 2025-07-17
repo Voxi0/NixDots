@@ -35,9 +35,11 @@ software repository in existence as of now, even larger than the mighty [Arch Us
 ![Desktop 2](../../assets/showcase/desktop2.png)
 
 ## Contributors
-<a href="https://github.com/voxi0/NixDots/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=voxi0/NixDots&max=100&columns=12&anon=0"/>
-</a>
+<div align="center">
+    <a href="https://github.com/voxi0/NixDots/graphs/contributors">
+        <img src="https://contrib.rocks/image?repo=voxi0/NixDots&max=100&columns=12&anon=0"/>
+    </a>
+</div>
 
 <!-- Reference links -->
 [1]: https://nixos.org/ "NixOS"
