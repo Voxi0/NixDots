@@ -27,11 +27,11 @@ jobs:
 
       # Assess code quality
       - name: Statix lint
-        run: nix develop --command statix check
+        run: nix run git+https://git.peppe.rs/languages/statix -- --check
 
       # Find dead/unused Nix code
       - name: Deadnix check
-        run: nix develop --command deadnix --fail
+        run: nix run github:astro/deadnix -- --fail
 
   # Format all Nix files with Alejandra - Only after all checks pass
   format:
