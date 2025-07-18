@@ -8,7 +8,7 @@ in {
     #################
     "$mainMod" = "SUPER";
     "$terminal" = "uwsm app -- kitty";
-    "$menu" = "uwsm app -- $(wofi --show drun --define=drun-print_desktop_file=true)";
+    "$menu" = "pidof wofi || uwsm app -- $(wofi --show drun)";
 
     # Command to bring up the logout menu
     "$logoutMenuCmd" = "uwsm app -- wlogout";
