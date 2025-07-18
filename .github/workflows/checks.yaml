@@ -23,15 +23,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up Nix
-        uses: cachix/install-nix-action@v25
+        uses: cachix/install-nix-action@v31
 
       # Assess code quality
       - name: Statix lint
-        run: nix run git+https://git.peppe.rs/languages/statix -- --check
+        run: nix run nixpkgs#statix -- check
 
       # Find dead/unused Nix code
       - name: Deadnix check
-        run: nix run github:astro/deadnix -- --fail
+        run: nix run nixpkgs#deadnix -- fail
 
   # Format all Nix files with Alejandra - Only after all checks pass
   format:
@@ -44,7 +44,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install Nix
-        uses: cachix/install-nix-action@v25
+        uses: cachix/install-nix-action@v31
 
       # Run the formatter (Alejandra)
       - name: Run Alejandra (Formatter)
