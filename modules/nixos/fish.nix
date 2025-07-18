@@ -20,7 +20,7 @@
       fi
     '';
 
-    # For full autocompletion
+    # Enable vendor Fish completions provided by Nixpkgs
     programs.fish.enable = true;
 
     # Home Manager
@@ -35,7 +35,7 @@
         '';
       };
 
-      # Minimal, blazingly-fast, and infinitely customizable shell prompt
+      # Fast, minimal and customizable shell prompt
       starship = {
         enable = true;
         enableFishIntegration = true;
