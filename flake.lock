@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752774024,
-        "narHash": "sha256-/2wZETVO3iaFePPLqEqGnk66n6qSRwD+i1CTrX26Qe0=",
+        "lastModified": 1752838016,
+        "narHash": "sha256-7xLu4CUiqDKdELLnwcGvOdOIzvoSUJm2YRp5TxhiY+w=",
         "owner": "Voxi0",
         "repo": "NixNvim",
-        "rev": "c8e4f856bd04da8afb8a41f92bb8ecf81740c1c8",
+        "rev": "8f39a68e924868590e2c971cf60960f04e3f8cc1",
         "type": "github"
       },
       "original": {

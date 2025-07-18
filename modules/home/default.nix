@@ -38,8 +38,7 @@
         wget # To download files
         curl # To make HTTP requests
         obsidian # Free and open source Markdown note taking application
-      ]
-      ++ [inputs.NixNvim.packages.${system}.nvim];
+      ] ++ [ inputs.NixNvim.packages.${pkgs.system}.nvim ];
 
     # Make Neovim the default editor
     sessionVariables = {
