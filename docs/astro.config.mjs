@@ -10,6 +10,7 @@ export default defineConfig({
   integrations: [
 		starlight({
 			title: "NixDots",
+			favicon: "./src/content/assets/logo.svg",
 			logo: {src: "./src/content/assets/logo.svg", replacesTitle: false},
 			customCss: ["./src/styles/global.css"],
 			editLink: {baseUrl: "https://github.com/Voxi0/NixDots/tree/main/docs/"},
