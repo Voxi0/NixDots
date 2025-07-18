@@ -1,5 +1,10 @@
 name: Analyze and Format All Nix Code
 
+# Automatically stop/cancel older jobs from the same PR/branch when new commits arrive
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # When to run the workflow
 on:
   # When code is pushed to `main` branch
