@@ -28,10 +28,12 @@ and use it as you wish. And kindly star the repo to show support, any contributi
 
 ## Contributors
 <div align="center">
-    <a href="https://github.com/voxi0/NixDots/graphs/contributors">
-        <img src="https://contrib.rocks/image?repo=voxi0/NixDots&max=100&columns=12&anon=0"/>
+    <a href="https://github.com/Voxi0/NixDots/graphs/contributors">
+        <img src="https://contrib.rocks/image?repo=Voxi0/NixDots&max=10&columns=12&anon=0"/>
     </a>
 </div>
+
+Made with [contrib.rocks](https://contrib.rocks).
 
 <!-- Reference links -->
 [1]: https://nixos.org/ "NixOS"
