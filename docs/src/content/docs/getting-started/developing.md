@@ -19,10 +19,11 @@ on NixDots.
 - [Git](https://git-scm.com/) - The world's most popular version control system. This needs no
     introduction. You absolutely need this because then you can easily revert code whenever among other
     things.
-- [Deadnix](https://github.com/astro/deadnix) - Scans Nix files for dead/unused code. Just run the
-    `deadnix` command in the base directory of NixDots.
+- [Deadnix](https://github.com/astro/deadnix) - Scans Nix files for dead/unused code. Run `deadnix`
+    in the base directory of NixDots to find them.
 - [Statix](https://github.com/oppiliappan/statix) - Provides linting and suggestions for Nix. This
-    ensures that good Nix practices are being followed throughout the codebase.
+    ensures that good Nix practices are being followed throughout the codebase. Run `statix check`
+    in the base directory of NixDots to analyze all the Nix files and provide linting and suggestions.
 
 ## Formatting
 As you can see in the flake, we're using the [Alejandra](https://github.com/kamadorueda/alejandra)
