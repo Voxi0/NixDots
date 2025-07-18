@@ -31,7 +31,7 @@ jobs:
 
       # Find dead/unused Nix code
       - name: Deadnix check
-        run: nix run nixpkgs#deadnix -- fail
+        run: nix run nixpkgs#deadnix -- --fail
 
   # Format all Nix files with Alejandra - Only after all checks pass
   format:
