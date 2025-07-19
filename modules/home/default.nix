@@ -34,6 +34,7 @@
     packages = with pkgs;
       [
         unzip # To unzip zip files
+        neohtop # GUI system monitor
         mpv # Media player
         wget # To download files
         curl # To make HTTP requests
