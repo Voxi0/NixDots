@@ -12,22 +12,27 @@
 
   # Configuration
   config = lib.mkIf config.enableLaptopSupport {
-    # Tool provided by Intel to enable various power-saving modes in user-space, kernel and hardware
+    # Tool provided by Intel to run diagnostics and analyze power consumption to give suggestions
+    # Apply said suggestions with TLP and auto-cpufreq, use powertop only for analyzing
     powerManagement.powertop.enable = true;
 
     services = {
       libinput.enable = true; # Touchpad support
       thermald.enable = true; # Temperature management daemon
-      power-profiles-daemon.enable = true; # Allows the user to change system behavior by changing power profiles
+
+      # Forcefully disable this because it interferes with TLP and isn't required here
+      power-profiles-daemon.enable = lib.mkForce false;
 
       # For optimizing laptop battery life
       tlp = {
         enable = true;
         settings = {
+          CPU_SCALING_GOVERNOR_ON_AC = "none";
+          CPU_SCALING_GOVERNOR_ON_BAT = "none";
+          CPU_ENERGY_PERF_POLICY_ON_AC = "default";
+          CPU_ENERGY_PERF_POLICY_ON_BAT = "default";
           CPU_BOOST_ON_AC = 1;
-          CPU_BOOST_ON_BAT = 0;
-          CPU_SCALING_GOVERNOR_ON_AC = "performance";
-          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+          CPU_BOOST_ON_BAT = 1;
         };
       };
 
