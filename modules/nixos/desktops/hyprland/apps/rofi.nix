@@ -7,25 +7,25 @@
   # A window switcher, application launcher and dmenu replacement
   programs.rofi = {
     enable = true;
-		plugins = with pkgs; [ rofi-emoji ];
+    plugins = with pkgs; [rofi-emoji];
     terminal = "${pkgs.kitty}/bin/kitty";
     modes = ["drun" "emoji"];
     location = "center";
-		extraConfig = {
-			# Drun app entry config
-			show-icons = true;
-			drun-display-format = "{icon} {name}";
+    extraConfig = {
+      # Drun app entry config
+      show-icons = true;
+      drun-display-format = "{icon} {name}";
 
-			# Emoji picker - Copy emoji with `Control + C` instead of the default `Alt + 1`
-			kb-secondary-copy = "";
-			kb-custom-1 = "Ctrl+c";
-		};
+      # Emoji picker - Copy emoji with `Control + C` instead of the default `Alt + 1`
+      kb-secondary-copy = "";
+      kb-custom-1 = "Ctrl+c";
+    };
     theme = let
       inherit (config.lib.formats.rasi) mkLiteral;
     in {
       # Remove all margin, padding and spacing
       "*" = {
-				border = 0;
+        border = 0;
         margin = 0;
         padding = 0;
         spacing = 0;
@@ -34,7 +34,7 @@
       # Window
       "window" = {
         width = mkLiteral "20%";
-				height = mkLiteral "20%";
+        height = mkLiteral "20%";
         border-radius = mkLiteral "4px";
       };
 
@@ -66,7 +66,7 @@
       "element" = {
         orientation = mkLiteral "horizontal";
         children = map mkLiteral ["element-icon" "element-text"];
-				padding = mkLiteral "6px 4px";
+        padding = mkLiteral "6px 4px";
       };
 
       "inputbar" = {
