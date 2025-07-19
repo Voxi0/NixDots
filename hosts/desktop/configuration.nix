@@ -30,6 +30,7 @@ _: {
   enableNvidia = false;
 
   # Services
+  enableSystem76Scheduler = true;
   enableX11 = false;
   enablePipewire = true;
   enableBluetooth = true;

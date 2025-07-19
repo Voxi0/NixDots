@@ -7,10 +7,10 @@
 }: {
   # Module options
   options = {
+    enableSystem76Scheduler = lib.mkEnableOption "Enable System76's scheduler for improved desktop responsiveness";
     enableX11 = lib.mkEnableOption "Enable X11 display server";
     enablePipewire = lib.mkEnableOption "Enable Pipewire for audio";
     enableBluetooth = lib.mkEnableOption "Enable Bluetooth support";
-    enableLaptopSupport = lib.mkEnableOption "Enable laptop support services e.g. Upower for power management";
     enableSSH = lib.mkEnableOption "Enable OpenSSH";
     enablePrinting = lib.mkEnableOption "Enable printing support";
     enableFingerprint = lib.mkEnableOption "Enable fingerprint support";
@@ -27,6 +27,9 @@
 
     # Fingerprint daemon to support consumer fingerprint readers
     (lib.mkIf config.enableFingerprint {services.fprintd.enable = true;})
+
+    # Optimizes Linux's CPU scheduler and auto-assigns process priorities for better desktop responsiveness
+    (lib.mkIf config.enableSystem76Scheduler {services.system76-scheduler.enable = true;})
 
     # X11/Xorg windowing system
     (lib.mkIf config.enableX11 {
@@ -63,25 +66,6 @@
       hardware.bluetooth = {
         enable = true;
         powerOnBoot = false;
-      };
-    })
-
-    # Laptop support services e.g. Upower for power management
-    (lib.mkIf config.enableLaptopSupport {
-      services = {
-        # Touchpad support
-        libinput.enable = true;
-
-        # Abstraction layer for power management used by applications
-        upower = {
-          enable = true;
-          usePercentageForPolicy = true; # Use battery percentage rather than time left
-          percentageAction = 2;
-          percentageCritical = 5;
-          percentageLow = 10;
-          allowRiskyCriticalPowerAction = false;
-          criticalPowerAction = "PowerOff";
-        };
       };
     })
   ];
