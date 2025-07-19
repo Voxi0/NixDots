@@ -54,6 +54,26 @@
         "type": "github"
       }
     },
+    "auto-cpufreq": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752472124,
+        "narHash": "sha256-uxwCXCfJB9LP8952IZAgUzkAuGEwOd43MJvWSgsACbY=",
+        "owner": "AdnanHodzic",
+        "repo": "auto-cpufreq",
+        "rev": "bb1abd934265054d27b0973adaa43cf285e3549a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AdnanHodzic",
+        "repo": "auto-cpufreq",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -841,6 +861,7 @@
     "root": {
       "inputs": {
         "NixNvim": "NixNvim",
+        "auto-cpufreq": "auto-cpufreq",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "hyprland": "hyprland",

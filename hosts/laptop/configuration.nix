@@ -30,10 +30,11 @@ _: {
   enableNvidia = false;
 
   # Services
+  enableSystem76Scheduler = true;
+  enableLaptopSupport = true;
   enableX11 = false;
   enablePipewire = true;
   enableBluetooth = true;
-  enableLaptopSupport = true;
   enableSSH = true;
   enablePrinting = false;
   enableFingerprint = false;
