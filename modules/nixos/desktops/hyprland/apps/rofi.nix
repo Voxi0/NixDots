@@ -8,6 +8,7 @@
   programs.rofi = {
     enable = true;
     plugins = with pkgs; [rofi-emoji];
+    package = pkgs.rofi-wayland;
     terminal = "${pkgs.kitty}/bin/kitty";
     modes = ["drun" "emoji"];
     location = "center";
@@ -15,10 +16,6 @@
       # Drun app entry config
       show-icons = true;
       drun-display-format = "{icon} {name}";
-
-      # Emoji picker - Copy emoji with `Control + C` instead of the default `Alt + 1`
-      kb-secondary-copy = "";
-      kb-custom-1 = "Ctrl+c";
     };
     theme = let
       inherit (config.lib.formats.rasi) mkLiteral;
@@ -34,22 +31,15 @@
       # Window
       "window" = {
         width = mkLiteral "20%";
-        height = mkLiteral "20%";
-        border-radius = mkLiteral "4px";
-      };
-
-      # Change cursor type to a pointer when hovering over an entry's icon/text
-      "element-icon" = {
-        cursor = mkLiteral "pointer";
-        size = mkLiteral "0.8em";
-        vertical-align = mkLiteral "0.5";
-      };
-      "element-text" = {
-        cursor = mkLiteral "pointer";
-        vertical-align = mkLiteral "0.5";
+        border-radius = mkLiteral "6px";
       };
 
       # Search bar
+      "inputbar" = {
+        children = map mkLiteral ["icon-search" "entry"];
+        spacing = mkLiteral "8px";
+        padding = mkLiteral "4px 8px";
+      };
       "icon-search" = {
         expand = false;
         filename = "search-symbolic";
@@ -62,26 +52,34 @@
         vertical-align = mkLiteral "0.5";
       };
 
-      # Menu
-      "element" = {
-        orientation = mkLiteral "horizontal";
-        children = map mkLiteral ["element-icon" "element-text"];
-        padding = mkLiteral "6px 4px";
-      };
-
-      "inputbar" = {
-        spacing = mkLiteral "8px";
-        padding = mkLiteral "4px 8px";
-        children = map mkLiteral ["icon-search" "entry"];
-      };
-
+      # Container that holds all the entries
       "listview" = {
-        padding = mkLiteral "4px 0px";
-        lines = 12;
+        lines = 4;
         columns = 1;
         scrollbar = false;
         fixed-height = true;
-        dynamic = true;
+        spacing = mkLiteral "0px";
+        padding = mkLiteral "0px";
+      };
+
+      # Menu entries
+      "element" = {
+        orientation = mkLiteral "horizontal";
+        children = map mkLiteral ["element-icon" "element-text"];
+        margin = mkLiteral "0px 4px";
+        padding = mkLiteral "4px";
+        border-radius = mkLiteral "6px";
+      };
+      "element-icon" = {
+        cursor = mkLiteral "pointer";
+        size = mkLiteral "32px";
+        vertical-align = mkLiteral "0.5";
+        padding = mkLiteral "0px";
+      };
+      "element-text" = {
+        cursor = mkLiteral "pointer";
+        vertical-align = mkLiteral "0.5";
+        padding = mkLiteral "0px";
       };
     };
   };
