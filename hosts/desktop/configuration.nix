@@ -31,10 +31,10 @@ _: {
 
   # Services
   enableSystem76Scheduler = true;
+  enableLaptopSupport = false;
   enableX11 = false;
   enablePipewire = true;
   enableBluetooth = true;
-  enableLaptopSupport = false;
   enableSSH = true;
   enablePrinting = false;
   enableFingerprint = false;
