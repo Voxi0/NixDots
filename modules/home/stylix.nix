@@ -16,7 +16,6 @@
     # Stylix
     stylix = {
       enable = true;
-      autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
       # Icons
@@ -59,7 +58,7 @@
         };
       };
 
-      # Opacity/Transparency of various applications
+      # Transparency of various applications
       opacity = {
         desktop = 1.0;
         applications = 1.0;
