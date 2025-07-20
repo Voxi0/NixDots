@@ -5,7 +5,7 @@ _: {
     ./../../modules/nixos
   ];
 
-  # Enable/Disable our custom system modules
+  # Enable/Disable system modules
   enableGraphics = true;
   enableGraphics32Bit = true;
   enableNetworking = true;
