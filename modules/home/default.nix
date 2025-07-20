@@ -8,7 +8,7 @@
   # Import Nix modules
   imports = [
     ./kitty.nix # Terminal emulator
-    ./cli.nix # CLI applications and such
+    ./fish.nix ./cli.nix # Terminal shell + CLI utils and such
     ./git.nix # Git (Version Control System (VCS)) and LazyGit
     ./browser # Web browser
     ./music # Music related stuff e.g. Spotify and MPD
