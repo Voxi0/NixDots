@@ -10,7 +10,7 @@ _: {
   enableGraphics32Bit = true;
   enableNetworking = true;
   enableXdgPortals = true;
-  enablePlymouth = true;
+  enablePlymouth = false;
   enableStylix = true;
   enableFish = true;
   enableVirtualization = true;
@@ -18,8 +18,6 @@ _: {
     enable = false;
     enableSteam = false;
     enableRoblox = false;
-    enableOsu = false;
-    enableOsuLazer = false;
     enableLutris = false;
     enableHeroic = false;
   };

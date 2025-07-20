@@ -64,14 +64,14 @@
     username = "voxi0";
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
-    genHostConfig = {hostname}:
+    mkSystem = {hostname}:
       import ./hosts/host-config.nix {
         inherit nixpkgs system inputs hostname username locale kbLayout;
       };
   in {
     # Devtools - For working with NixDots, use command `nix develop` to start the devshell
     formatter.${system} = pkgs.alejandra;
-    devShells.${system}.default = pkgs.mkShell {
+    devShells.${system}.default = pkgs.mkShellNoCC {
       buildInputs = with pkgs; [
         inputs.NixNvim.packages.${system}.nvim # My custom Neovim configuration made with Nix and nixCats
         git # Version control system
@@ -86,8 +86,8 @@
 
     # NixOS hosts
     nixosConfigurations = {
-      laptop = genHostConfig {hostname = "laptop";};
-      desktop = genHostConfig {hostname = "desktop";};
+      laptop = mkSystem {hostname = "laptop";};
+      desktop = mkSystem {hostname = "desktop";};
     };
   };
 }

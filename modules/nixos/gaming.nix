@@ -21,8 +21,6 @@
     enable = lib.mkEnableOption "Enable gaming related stuff";
     enableSteam = lib.mkEnableOption "Enable Steam";
     enableRoblox = lib.mkEnableOption "Enable Sober for playing Roblox";
-    enableOsu = lib.mkEnableOption "Enable Osu! stable";
-    enableOsuLazer = lib.mkEnableOption "Enable Osu Lazer";
     enableLutris = lib.mkEnableOption "Enable Lutris game launcher";
     enableHeroic = lib.mkEnableOption "Enable Heroic game launcher";
   };
@@ -61,16 +59,6 @@
           then [pkgs.heroic]
           else []
         )
-        ++ (
-          if config.gaming.enableOsu
-          then [inputs.nix-gaming.packages.${pkgs.hostPlatform.system}.osu-stable]
-          else []
-        )
-        ++ (
-          if config.gaming.enableOsuLazer
-          then [pkgs.osu-lazer]
-          else []
-        );
     };
 
     # Configure Steam and other stuff to improve game performance

@@ -2,6 +2,7 @@
   lib,
   config,
   locale,
+  hostname,
   username,
   pkgs,
   ...
@@ -29,9 +30,24 @@
   config = lib.mkMerge [
     # No conditions used here
     {
+      # Nix/Nixpkgs
+      nixpkgs.config.allowUnfree = true;
+      nix = {
+        optimise.automatic = true;
+        settings = {
+          trusted-users = ["root" "${username}"];
+          experimental-features = ["nix-command" "flakes"];
+          auto-optimise-store = true;
+        };
+      };
+
+      # Console
+      console.font = "Lat2-Terminus16";
+
       # Boot
       boot = {
         kernelPackages = pkgs.linuxPackages_latest;
+        tmp.cleanOnBoot = true;
         loader = {
           systemd-boot.enable = true;
           efi.canTouchEfiVariables = true;
@@ -52,7 +68,7 @@
         isNormalUser = true;
         initialPassword = "nixos";
         description = "${username}";
-        extraGroups = ["networkmanager" "wheel" "cdrom"];
+        extraGroups = ["networkmanager" "wheel"];
       };
 
       # Some programs need SUID wrappers - Can be configured further or are started in user sessions
@@ -70,9 +86,9 @@
 
     # Networking
     (lib.mkIf config.enableNetworking {
-      environment.systemPackages = [pkgs.networkmanagerapplet];
+			programs.nm-applet.enable = true;
       networking = {
-        hostName = "NixOS-Desktop";
+        hostName = hostname;
         networkmanager.enable = true;
         firewall.enable = true;
       };
@@ -82,7 +98,7 @@
     (lib.mkIf config.enableXdgPortals {
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+        extraPortals = with pkgs; [xdg-desktop-portal-wlr xdg-desktop-portal-gtk];
       };
     })
 
