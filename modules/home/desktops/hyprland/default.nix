@@ -1,29 +1,22 @@
 {
+  lib,
+  config,
   system,
   inputs,
-  username,
   pkgs,
   ...
 }: let
   hyprlandPkgs = inputs.hyprland.packages.${system};
   hyprlandPluginsPkgs = inputs.hyprland-plugins.packages.${system};
 in {
-  # Hyprland NixOS module - Required as it enables critical components needed to run Hyprland properly
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    package = hyprlandPkgs.hyprland;
-    portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
-  };
+  # Import Nix modules
+  imports = [./hypr ./apps];
 
-  # Udisks2 - D-Bus service to access and manipulate storage devices
-  services.udisks2.enable = true;
+  # Module options
+  options.desktop.hyprland.enable = lib.mkEnableOption "Enable Hyprland Wayland compositor";
 
-  # Home Manager specific configuration
-  home-manager.users.${username} = {
-    # Import Home Manager modules
-    imports = [./hypr ./apps];
-
+  # Configuration
+  config = lib.mkIf config.desktop.hyprland.enable {
     # Required packages
     home.packages = with pkgs; [
       nwg-displays # Manage monitors
@@ -53,7 +46,7 @@ in {
     # XDG desktop portals - D-Bus service allowing apps to interact with the desktop safely
     xdg.portal = {
       enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+      extraPortals = with pkgs; [xdg-desktop-portal-wlr xdg-desktop-portal-gtk];
     };
 
     # Hyprland

@@ -14,7 +14,7 @@
     ./laptop.nix # Laptop support stuff e.g. battery optimizations
     ./plymouth.nix # Graphical splash screen during boot/poweroff
     ./stylix.nix # System-wide theming and typography
-    ./desktops/hyprland # Desktop environment / Window manager
+    ./desktops # Desktop environments and window managers
     ./fish.nix # Fancy shell
     ./gaming.nix # Gaming related stuff
   ];
@@ -22,7 +22,6 @@
   # Module options
   options = {
     enableNetworking = lib.mkEnableOption "Enable networking";
-    enableXdgPortals = lib.mkEnableOption "Enable XDG portals - Service that allows apps to interact with the desktop safely";
     enableVirtualization = lib.mkEnableOption "Enable virtualization support e.g. QEMU";
   };
 
@@ -86,19 +85,11 @@
 
     # Networking
     (lib.mkIf config.enableNetworking {
-			programs.nm-applet.enable = true;
+      programs.nm-applet.enable = true;
       networking = {
         hostName = hostname;
         networkmanager.enable = true;
         firewall.enable = true;
-      };
-    })
-
-    # XDG desktop portals
-    (lib.mkIf config.enableXdgPortals {
-      xdg.portal = {
-        enable = true;
-        extraPortals = with pkgs; [xdg-desktop-portal-wlr xdg-desktop-portal-gtk];
       };
     })
 

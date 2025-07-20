@@ -58,7 +58,7 @@
           if config.gaming.enableHeroic
           then [pkgs.heroic]
           else []
-        )
+        );
     };
 
     # Configure Steam and other stuff to improve game performance

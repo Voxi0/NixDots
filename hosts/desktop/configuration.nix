@@ -9,10 +9,8 @@ _: {
   enableGraphics = true;
   enableGraphics32Bit = true;
   enableNetworking = true;
-  enableXdgPortals = true;
   enablePlymouth = false;
   enableStylix = true;
-  enableFish = true;
   enableVirtualization = true;
   gaming = {
     enable = true;
@@ -36,4 +34,8 @@ _: {
   enableSSH = true;
   enablePrinting = false;
   enableFingerprint = false;
+
+  # ALSO ENABLE THIS OPTION IN HOME MANAGER IF YOU ENABLE ANY OF THESE
+  enableFish = true;
+  desktop.hyprland.enable = true;
 }
