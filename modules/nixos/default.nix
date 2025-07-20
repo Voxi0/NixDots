@@ -13,7 +13,6 @@
     ./services.nix # System services
     ./laptop.nix # Laptop support stuff e.g. battery optimizations
     ./plymouth.nix # Graphical splash screen during boot/poweroff
-    ./stylix.nix # System-wide theming and typography
     ./desktops # Desktop environments and window managers
     ./fish.nix # Fancy shell
     ./gaming.nix # Gaming related stuff
