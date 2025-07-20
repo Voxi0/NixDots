@@ -13,7 +13,7 @@
     powerManagement.powertop.enable = true;
 
     services = {
-			# Daemon that monitors and controls temperature to prevent overheating
+      # Daemon that monitors and controls temperature to prevent overheating
       thermald.enable = true;
 
       # Forcefully disable this because it interferes with TLP and isn't required here
