@@ -8,6 +8,7 @@
   # Import Nix modules
   imports = [
     ./desktops # Desktop environments and window managers
+		./stylix.nix # System-wide theming and typography
     ./kitty.nix # Terminal emulator
     ./fish.nix
     ./cli.nix # Terminal shell + CLI utils and such

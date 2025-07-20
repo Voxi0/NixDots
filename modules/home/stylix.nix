@@ -3,11 +3,10 @@
   config,
   inputs,
   pkgs,
-  username,
   ...
 }: {
   # Import Nix modules
-  imports = [inputs.stylix.nixosModules.stylix];
+  imports = [inputs.stylix.homeManagerModules.stylix];
 
   # Module options
   options.enableStylix = lib.mkEnableOption "Enable Stylix for system-wide theming and typography";
@@ -20,6 +19,14 @@
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
+			# Icons
+			iconTheme = {
+      	enable = true;
+      	package = pkgs.papirus-icon-theme;
+      	light = "Papirus-Light";
+      	dark = "Papirus-Dark";
+    	};
+
       # Cursor
       cursor = {
         package = pkgs.bibata-cursors;
@@ -29,10 +36,7 @@
 
       # Fonts
       fonts = {
-        serif = {
-          package = pkgs.nerd-fonts.jetbrains-mono;
-          name = "JetBrainsMono Nerd Font Propo";
-        };
+        serif = config.stylix.fonts.sansSerif;
         sansSerif = {
           package = pkgs.nerd-fonts.jetbrains-mono;
           name = "JetBrainsMono Nerd Font Propo";
@@ -62,14 +66,6 @@
         terminal = 1.0;
         popups = 1.0;
       };
-    };
-
-    # Home Manager specific - Set icon theme
-    home-manager.users.${username}.stylix.iconTheme = {
-      enable = true;
-      package = pkgs.papirus-icon-theme;
-      light = "Papirus-Light";
-      dark = "Papirus-Dark";
     };
   };
 }
