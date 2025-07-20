@@ -22,12 +22,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Automatic CPU speed & power optimizer
-    auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # System-wide theming and typography
     stylix = {
       url = "github:danth/stylix";
