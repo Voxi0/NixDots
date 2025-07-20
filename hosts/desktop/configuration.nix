@@ -10,7 +10,6 @@ _: {
   enableGraphics32Bit = true;
   enableNetworking = true;
   enablePlymouth = false;
-  enableStylix = true;
   enableVirtualization = true;
   gaming = {
     enable = true;

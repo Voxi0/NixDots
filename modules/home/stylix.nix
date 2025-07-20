@@ -6,7 +6,7 @@
   ...
 }: {
   # Import Nix modules
-  imports = [inputs.stylix.homeManagerModules.stylix];
+  imports = [inputs.stylix.homeModules.stylix];
 
   # Module options
   options.enableStylix = lib.mkEnableOption "Enable Stylix for system-wide theming and typography";
@@ -19,13 +19,13 @@
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
-			# Icons
-			iconTheme = {
-      	enable = true;
-      	package = pkgs.papirus-icon-theme;
-      	light = "Papirus-Light";
-      	dark = "Papirus-Dark";
-    	};
+      # Icons
+      iconTheme = {
+        enable = true;
+        package = pkgs.papirus-icon-theme;
+        light = "Papirus-Light";
+        dark = "Papirus-Dark";
+      };
 
       # Cursor
       cursor = {

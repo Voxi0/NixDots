@@ -7,6 +7,7 @@ _: {
   desktop.hyprland.enable = true;
 
   # Enable/Disable Home Manager modules
+  enableStylix = true;
   enableKitty = true;
   enableFirefox = true;
   enableGit = true;
