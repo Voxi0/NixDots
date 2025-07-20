@@ -1,7 +1,7 @@
 _: {
-	# Import Nix modules
-	imports = [
-		# Wayland compositors
-		./hyprland
-	];
+  # Import Nix modules
+  imports = [
+    # Wayland compositors
+    ./hyprland
+  ];
 }

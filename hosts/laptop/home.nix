@@ -2,9 +2,9 @@ _: {
   # Import Nix modules
   imports = [../../modules/home];
 
-	# IF USING NIXOS THEN ENABLE THIS OPTION IN NIXOS CONFIGURATION TOO
-	enableFish = true;
-	desktop.hyprland.enable = true;
+  # IF USING NIXOS THEN ENABLE THIS OPTION IN NIXOS CONFIGURATION TOO
+  enableFish = true;
+  desktop.hyprland.enable = true;
 
   # Enable/Disable Home Manager modules
   enableKitty = true;
