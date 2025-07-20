@@ -29,9 +29,24 @@
   config = lib.mkMerge [
     # No conditions used here
     {
+      # Nix/Nixpkgs
+      nixpkgs.config.allowUnfree = true;
+      nix = {
+        optimise.automatic = true;
+        settings = {
+          trusted-users = ["root" "${username}"];
+          experimental-features = ["nix-command" "flakes"];
+          auto-optimise-store = true;
+        };
+      };
+
+      # Console
+      console.font = "Lat2-Terminus16";
+
       # Boot
       boot = {
         kernelPackages = pkgs.linuxPackages_latest;
+        tmp.cleanOnBoot = true;
         loader = {
           systemd-boot.enable = true;
           efi.canTouchEfiVariables = true;
@@ -72,7 +87,6 @@
     (lib.mkIf config.enableNetworking {
       environment.systemPackages = [pkgs.networkmanagerapplet];
       networking = {
-        hostName = "NixOS-Desktop";
         networkmanager.enable = true;
         firewall.enable = true;
       };

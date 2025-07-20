@@ -10,7 +10,7 @@ _: {
   enableGraphics32Bit = true;
   enableNetworking = true;
   enableXdgPortals = true;
-  enablePlymouth = true;
+  enablePlymouth = false;
   enableStylix = true;
   enableFish = true;
   enableVirtualization = true;

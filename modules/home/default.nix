@@ -1,6 +1,7 @@
 {
   inputs,
   system,
+  username,
   pkgs,
   ...
 }: {
@@ -30,6 +31,13 @@
 
   # Manage user files
   home = {
+    # User information
+    inherit username;
+    homeDirectory = "/home/${username}";
+
+    # Never change this value
+    stateVersion = "25.05";
+
     # Default packages that should be installed
     packages = with pkgs;
       [
@@ -58,14 +66,20 @@
     };
   };
 
-  # OBS studio for screen recording
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      wlrobs # Lets you capture from Wlroots based Wayland compositors e.g. Sway
-      obs-pipewire-audio-capture # Pipewire audio capturing
-      obs-vaapi # GStreamer based VAAPI encoder implementation - Supports H.264, H.265 and AV1
-      obs-vkcapture # For Vulkan/OpenGL game capture on Linux
-    ];
+  # Programs
+  programs = {
+    # For screen recording
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs # Lets you capture from Wlroots based Wayland compositors
+        obs-pipewire-audio-capture # Pipewire audio capturing
+        obs-vaapi # GStreamer based VAAPI encoder implementation - Supports H.264, H.265 and AV1
+        obs-vkcapture # For Vulkan/OpenGL game capture on Linux
+      ];
+    };
+
+    # Let Home Manager install and manage itself
+    home-manager.enable = true;
   };
 }
