@@ -18,8 +18,6 @@ _: {
     enable = true;
     enableSteam = true;
     enableRoblox = true;
-    enableOsu = true;
-    enableOsuLazer = false;
     enableLutris = false;
     enableHeroic = false;
   };

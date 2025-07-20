@@ -15,7 +15,6 @@ nixpkgs.lib.nixosSystem {
   modules = [
     # NixOS config
     ./${hostname}/configuration.nix
-    {networking.hostName = hostname;}
 
     # Home Manager config
     inputs.home-manager.nixosModules.home-manager

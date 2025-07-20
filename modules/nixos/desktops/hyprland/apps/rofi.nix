@@ -16,6 +16,10 @@
       # Drun app entry config
       show-icons = true;
       drun-display-format = "{icon} {name}";
+
+      # Copy emojis using `Control + C` instead of the default `Alt + 1`
+      kb-secondary-copy = "";
+      kb-custom-1 = "Ctrl+c";
     };
     theme = let
       inherit (config.lib.formats.rasi) mkLiteral;
