@@ -11,7 +11,7 @@
   home.packages = [pkgs.quickshell];
   programs.quickshell = {
     enable = true;
-    systemd.enable = true;
+    systemd.enable = false;
     activeConfig = "default";
     configs = {
       default = ../quickshell;
