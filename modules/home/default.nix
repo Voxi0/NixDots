@@ -7,6 +7,7 @@
 }: {
   # Import Nix modules
   imports = [
+    ./wallpapers # Wallpapers
     ./desktops # Desktop environments and window managers
     ./stylix.nix # System-wide theming and typography
     ./kitty.nix # Terminal emulator
@@ -57,15 +58,6 @@
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-    };
-
-    # User files
-    file = {
-      # Wallpapers
-      "Pictures/Wallpapers" = {
-        source = ./../../modules/home/Pictures/Wallpapers;
-        recursive = true;
-      };
     };
   };
 

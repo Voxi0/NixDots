@@ -83,6 +83,7 @@
     # Export all custom NixOS/Home Manager modules so they can be used by other flakes
     nixosModules = import ./modules/nixos;
     homeManagerModules = rec {
+      wallpapers = import ./modules/home/wallpapers;
       default = import ./modules/home;
       desktops = import ./modules/home/desktops;
       stylix = import ./modules/home/stylix.nix;
