@@ -12,6 +12,6 @@
     "uwsm app -- swww-daemon"
     "swww restore"
     "uwsm app -- swaync"
-    (lib.optionalString (config.enableMPD && pkgs ? mpdscribble) "uwsm app -- mpdscribble")
+    (lib.optionals (pkgs ? mpdscribble) "uwsm app -- mpdscribble")
   ];
 }
