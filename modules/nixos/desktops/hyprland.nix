@@ -6,10 +6,10 @@
   ...
 }: {
   # Module options
-  options.desktop.hyprland.enable = lib.mkEnableOption "Enable Hyprland Wayland compositor";
+  options.desktops.enableHyprland = lib.mkEnableOption "Enable Hyprland Wayland compositor";
 
   # Configuration
-  config = lib.mkIf config.desktop.hyprland.enable {
+  config = lib.mkIf config.desktops.enableHyprland {
     # Required as it enables critical components needed to run Hyprland properly
     programs.hyprland = {
       enable = true;

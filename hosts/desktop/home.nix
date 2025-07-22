@@ -4,19 +4,19 @@ _: {
 
   # IF USING NIXOS THEN ENABLE THIS OPTION IN NIXOS CONFIGURATION TOO
   enableFish = true;
-  desktop.hyprland.enable = true;
+  desktops.enableHyprland = true;
 
   # Enable/Disable Home Manager modules
   enableStylix = true;
   enableKitty = true;
   enableFirefox = true;
-  enableGit = true;
   enableSpotify = true;
   enableMPD = true;
   enableNcmpcpp = true;
   enableDiscord = true;
   cli = {
     enableNixHelper = true;
+    enableGit = true;
     enableFastfetch = true;
     enableBtop = true;
     enableYazi = true;

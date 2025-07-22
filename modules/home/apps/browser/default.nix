@@ -6,10 +6,10 @@
   ...
 }: {
   # Module options
-  options.enableFirefox = lib.mkEnableOption "Enable Firefox";
+  options.apps.enableFirefox = lib.mkEnableOption "Enable Firefox";
 
   # Configuration
-  config = lib.mkIf config.enableFirefox {
+  config = lib.mkIf config.apps.enableFirefox {
     # Stylix - List all Firefox profiles here as well because Stylix can't detect it
     stylix.targets.firefox.profileNames = ["NixDots"];
 

@@ -10,13 +10,9 @@
     ./wallpapers # Wallpapers
     ./desktops # Desktop environments and window managers
     ./stylix.nix # System-wide theming and typography
-    ./kitty.nix # Terminal emulator
     ./fish.nix
-    ./cli.nix # Terminal shell + CLI utils and such
-    ./git.nix # Git (Version Control System (VCS)) and LazyGit
-    ./browser # Web browser
-    ./music # Music related stuff e.g. Spotify and MPD
-    ./discord.nix # Discord
+    ./cli # Terminal shell + CLI utils and such
+    ./apps
   ];
 
   # GTK and QT
