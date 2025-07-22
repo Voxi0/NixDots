@@ -7,6 +7,7 @@
   # Module options
   options.cli = {
     enableNixHelper = lib.mkEnableOption "Enable Nix Helper CLI - Reimplements well known NixOS commands for a better interface and more features";
+    enableGit = lib.mkEnableOption "Enable Git - The most popular version control system";
     enableFastfetch = lib.mkEnableOption "Enable Fastfetch - A feature-rich and performant system information tool";
     enableBtop = lib.mkEnableOption "Enable Btop - Terminal based system resource monitor";
     enableYazi = lib.mkEnableOption "Enable Yazi - A modern and fancy TUI file manager with file previews and such";
@@ -26,6 +27,22 @@
     # Useful/Handy CLI utilities
     (lib.mkIf config.cli.enableNixHelper {home.packages = [pkgs.nh];})
     (lib.mkIf config.cli.enableBtop {home.packages = [pkgs.btop];})
+
+    # Git and LazyGIT (Beautiful TUI for Git that makes using Git super fast and easy)
+    (lib.mkIf config.enableGit {
+      home.packages = with pkgs; [git];
+      programs.lazygit = {
+        enable = true;
+        settings = {
+          gui.theme = {
+            lightTheme = false;
+            activeBorderColor = ["blue" "bold"];
+            inactiveBorderColor = ["black"];
+            selectedLineBgColor = ["default"];
+          };
+        };
+      };
+    })
 
     # Fancy and modern TUI file manager written in Rust with previews and such
     (lib.mkIf config.cli.enableYazi {
@@ -57,10 +74,7 @@
       programs.fastfetch = {
         enable = true;
         settings = {
-          logo = {
-            source = "nixos_small";
-            padding.right = 2;
-          };
+          logo.padding.right = 2;
 
           display = {
             color = "red";
