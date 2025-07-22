@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  username,
   pkgs,
   ...
 }: {
@@ -9,7 +10,7 @@
 
   # Configuration
   config = lib.mkIf config.cli.enableNcmpcpp {
-		# MPD scrobbler - Sends scrobbling information to scrobbling services e.g. LastFM
+    # MPD scrobbler - Sends scrobbling information to scrobbling services e.g. LastFM
     home.packages = [pkgs.mpdscribble];
 
     # Services

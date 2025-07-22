@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: {
-	# Import Nix modules
-	imports = [
-		./fastfetch.nix	# Modern system info tool designed to replace Neofetch
-		./ncmpcpp.nix	# MPD client - TUI music player
-	];
+  # Import Nix modules
+  imports = [
+    ./fastfetch.nix # Modern system info tool designed to replace Neofetch
+    ./ncmpcpp.nix # MPD client - TUI music player
+  ];
 
   # Module options
   options.cli = {

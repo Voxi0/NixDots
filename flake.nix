@@ -64,6 +64,9 @@
     username = "voxi0";
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
+
+    homeDir = ./modules/home;
+    appsDir = ./${homeDir}/apps;
     mkSystem = {hostname}:
       import ./hosts/host-config.nix {
         inherit nixpkgs system inputs hostname username locale kbLayout;
@@ -82,16 +85,24 @@
 
     # Export all custom NixOS/Home Manager modules so they can be used by other flakes
     nixosModules = rec {
-			default = import ./modules/nixos;
-		};
+      default = import ./modules/nixos;
+    };
     homeManagerModules = rec {
-			default = import ./modules/home;
+      default = import ./modules/home;
       wallpapers = import ./modules/home/wallpapers;
-			stylix = import ./modules/home/stylix.nix;
+      stylix = import ./modules/home/stylix.nix;
       desktops = import ./modules/home/desktops;
+
+      # CLI
       fish = import ./modules/home/fish.nix;
-      cli = import ./modules/home/cli.nix;
-			apps = import ./modules/home/apps;
+      cli = import ./modules/home/cli;
+
+      # Apps
+      apps.default = import ./${appsDir};
+      apps.kitty = import ./${appsDir}/kitty.nix;
+      apps.browser = import ./${appsDir}/browser;
+      apps.spotify = import ./${appsDir}/spotify.nix;
+      apps.discord = import ./${appsDir}/discord.nix;
     };
 
     # NixOS hosts

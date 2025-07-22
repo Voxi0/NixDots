@@ -8,17 +8,19 @@ _: {
 
   # Enable/Disable Home Manager modules
   enableStylix = true;
-  enableKitty = true;
-  enableFirefox = true;
-  enableSpotify = true;
-  enableMPD = true;
-  enableNcmpcpp = true;
-  enableDiscord = true;
   cli = {
     enableNixHelper = true;
     enableGit = true;
     enableFastfetch = true;
     enableBtop = true;
     enableYazi = true;
+    enableNcmpcpp = true;
+  };
+  apps = {
+    enableKitty = true;
+    enableFirefox = true;
+    enableSpotify = true;
+    enableDiscord = true;
+    enableOBS = true;
   };
 }
