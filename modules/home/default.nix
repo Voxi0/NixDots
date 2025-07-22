@@ -11,7 +11,7 @@
     ./desktops # Desktop environments and window managers
     ./stylix.nix # System-wide theming and typography
     ./fish.nix
-    ./cli.nix # Terminal shell + CLI utils and such
+    ./cli # Terminal shell + CLI utils and such
     ./apps
   ];
 

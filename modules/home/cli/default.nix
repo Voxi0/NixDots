@@ -4,11 +4,16 @@
   pkgs,
   ...
 }: {
+	# Import Nix modules
+	imports = [
+		./fastfetch.nix	# Modern system info tool designed to replace Neofetch
+		./ncmpcpp.nix	# MPD client - TUI music player
+	];
+
   # Module options
   options.cli = {
     enableNixHelper = lib.mkEnableOption "Enable Nix Helper CLI - Reimplements well known NixOS commands for a better interface and more features";
     enableGit = lib.mkEnableOption "Enable Git - The most popular version control system";
-    enableFastfetch = lib.mkEnableOption "Enable Fastfetch - A feature-rich and performant system information tool";
     enableBtop = lib.mkEnableOption "Enable Btop - Terminal based system resource monitor";
     enableYazi = lib.mkEnableOption "Enable Yazi - A modern and fancy TUI file manager with file previews and such";
   };
@@ -64,64 +69,6 @@
             image_filter = "nearest";
             image_quality = 50;
           };
-        };
-      };
-    })
-
-    # Fetch script
-    (lib.mkIf config.cli.enableFastfetch {
-      home.shellAliases."ff" = "fastfetch";
-      programs.fastfetch = {
-        enable = true;
-        settings = {
-          logo.padding.right = 2;
-
-          display = {
-            color = "red";
-            separator = "";
-          };
-
-          modules = [
-            # Username and hostname
-            {
-              type = "title";
-              # To display host name next to username - {at-symbol-colored}{host-name-colored}
-              key = " ";
-              format = "{user-name}";
-            }
-
-            # Distro name, kernel
-            {
-              type = "os";
-              key = " ";
-              format = "{3}";
-            }
-            {
-              type = "kernel";
-              key = " ";
-              format = "{1} {2}";
-            }
-
-            # Shell, Window Manager (WM) / Desktop Environment (DE) and terminal
-            {
-              type = "shell";
-              key = " ";
-              format = "{6}";
-            }
-            {
-              key = " ";
-              type = "wm";
-            }
-            {
-              key = "󱂬 ";
-              type = "de";
-            }
-            {
-              type = "terminal";
-              key = " ";
-              format = "{5}";
-            }
-          ];
         };
       };
     })

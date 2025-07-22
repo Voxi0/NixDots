@@ -8,10 +8,10 @@
   imports = [inputs.nixcord.homeModules.nixcord];
 
   # Module options
-  options.enableDiscord = lib.mkEnableOption "Enable Discord";
+  options.apps.enableDiscord = lib.mkEnableOption "Enable Discord";
 
   # Configuration
-  config = lib.mkIf config.enableDiscord {
+  config = lib.mkIf config.apps.enableDiscord {
     programs.nixcord = {
       enable = true;
       discord.openASAR.enable = true;

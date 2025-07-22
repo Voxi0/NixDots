@@ -4,10 +4,10 @@
   ...
 }: {
   # Module options
-  options.enableKitty = lib.mkEnableOption "Kitty (Terminal emulator)";
+  options.apps.enableKitty = lib.mkEnableOption "Kitty (Terminal emulator)";
 
   # Configuration
-  config = lib.mkIf config.enableKitty {
+  config = lib.mkIf config.apps.enableKitty {
     programs.kitty = {
       enable = true;
       settings = {

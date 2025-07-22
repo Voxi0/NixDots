@@ -9,10 +9,10 @@
   imports = [inputs.spicetify-nix.homeManagerModules.spicetify];
 
   # Module options
-  options.enableSpotify = lib.mkEnableOption "Enable Spotify (Spicetify)";
+  options.apps.enableSpotify = lib.mkEnableOption "Enable Spotify (Spicetify)";
 
   # Configuration
-  config = lib.mkIf config.enableSpotify {
+  config = lib.mkIf config.apps.enableSpotify {
     # Spicetify - Powerful CLI tool to take control of the Spotify client
     programs.spicetify = {
       enable = true;
