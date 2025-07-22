@@ -36,5 +36,5 @@ _: {
 
   # ALSO ENABLE THIS OPTION IN HOME MANAGER IF YOU ENABLE ANY OF THESE
   enableFish = true;
-  desktop.hyprland.enable = true;
+  desktops.enableHyprland = true;
 }

@@ -29,7 +29,7 @@
     (lib.mkIf config.cli.enableBtop {home.packages = [pkgs.btop];})
 
     # Git and LazyGIT (Beautiful TUI for Git that makes using Git super fast and easy)
-    (lib.mkIf config.enableGit {
+    (lib.mkIf config.cli.enableGit {
       home.packages = with pkgs; [git];
       programs.lazygit = {
         enable = true;

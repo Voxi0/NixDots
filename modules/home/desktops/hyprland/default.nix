@@ -16,7 +16,7 @@ in {
   options.desktops.enableHyprland = lib.mkEnableOption "Enable Hyprland Wayland compositor";
 
   # Configuration
-  config = lib.mkIf config.desktop.hyprland.enable {
+  config = lib.mkIf config.desktops.enableHyprland {
     # Required packages
     home.packages = with pkgs; [
       nwg-displays # Manage monitors
