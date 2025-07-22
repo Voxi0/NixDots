@@ -90,7 +90,7 @@
       stylix = import ./modules/home/stylix.nix;
       desktops = import ./modules/home/desktops;
       fish = import ./modules/home/fish.nix;
-      cli = import ./modules/home/cli.nix;
+      cli = import ./modules/home/cli;
       apps = import ./modules/home/apps;
     };
 
