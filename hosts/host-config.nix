@@ -16,6 +16,14 @@ nixpkgs.lib.nixosSystem {
     # NixOS config
     ./${hostname}/configuration.nix
 
+    # Flatpak for Sober (Roblox client)
+    inputs.nix-flatpak.nixosModules.nix-flatpak
+
+    # Extra optimizations and stuff for gaming
+    inputs.nix-gaming.nixosModules.ntsync
+    inputs.nix-gaming.nixosModules.pipewireLowLatency
+    inputs.nix-gaming.nixosModules.platformOptimizations
+
     # Home Manager config
     inputs.home-manager.nixosModules.home-manager
     {
@@ -24,7 +32,14 @@ nixpkgs.lib.nixosSystem {
         useUserPackages = true;
         extraSpecialArgs = {inherit system inputs kbLayout username;};
         backupFileExtension = "bak";
-        users.${username} = import ./${hostname}/home.nix;
+        users.${username} = {
+          imports = [
+            ./${hostname}/home.nix
+            inputs.stylix.homeModules.stylix
+            inputs.spicetify-nix.homeManagerModules.spicetify
+            inputs.nixcord.homeModules.nixcord
+          ];
+        };
       };
     }
   ];
