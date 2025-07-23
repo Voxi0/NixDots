@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: {
+_: {
   # Import Nix modules
   imports = [
     ./browser # Browser
