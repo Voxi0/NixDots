@@ -20,7 +20,7 @@ nixpkgs.lib.nixosSystem {
     inputs.nix-flatpak.nixosModules.nix-flatpak
 
     # Extra optimizations and stuff for gaming
-    inputs.nix-gaming.nixosModules.ntsync
+    inputs.nix-gaming.nixosModules.wine
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.nix-gaming.nixosModules.platformOptimizations
 
