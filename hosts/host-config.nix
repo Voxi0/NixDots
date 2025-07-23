@@ -35,10 +35,9 @@ nixpkgs.lib.nixosSystem {
         users.${username} = {
           imports = [
             ./${hostname}/home.nix
-            inputs.stylix.homeModules.stylix # System-wide theming and typography
-            inputs.walker.homeManagerModules.default # Native Wayland launcher
-            inputs.spicetify-nix.homeManagerModules.spicetify # Spotify
-            inputs.nixcord.homeModules.nixcord # Discord (Using Vencord)
+            inputs.stylix.homeModules.stylix
+            inputs.spicetify-nix.homeManagerModules.spicetify
+            inputs.nixcord.homeModules.nixcord
           ];
         };
       };
