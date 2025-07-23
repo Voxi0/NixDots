@@ -14,7 +14,7 @@
     programs.spicetify = {
       enable = true;
       wayland = true;
-      enabledExtensions = with inputs.spicetify-nix.legacyPackages.$system}.extensions; [
+      enabledExtensions = with inputs.spicetify-nix.legacyPackages.${system}.extensions; [
         adblock # Remove ads
         lastfm # Integrate with LastFM to show listening stats for a song and get it's LastFM link
         autoSkipVideo # Video playback e.g. ads causes issues in some regions where videos can't be played so skip them
