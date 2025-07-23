@@ -2,7 +2,7 @@
 title: Developing
 description: How to develop NixDots
 sidebar:
-    order: 4
+    order: 5
 ---
 Now that you've got NixDots set up and ready to roll, it's time to start learning how to develop it
 so you can change things to your liking or even better, if you desire to contribute to this project.

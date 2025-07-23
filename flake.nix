@@ -64,8 +64,6 @@
     username = "voxi0";
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
-
-    appsDir = ./modules/home/apps;
     mkSystem = {hostname}:
       import ./hosts/host-config.nix {
         inherit nixpkgs system inputs hostname username locale kbLayout;
