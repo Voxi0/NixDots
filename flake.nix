@@ -65,8 +65,7 @@
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
 
-    homeDir = ./modules/home;
-    appsDir = ./${homeDir}/apps;
+    appsDir = ./modules/home/apps;
     mkSystem = {hostname}:
       import ./hosts/host-config.nix {
         inherit nixpkgs system inputs hostname username locale kbLayout;
@@ -98,11 +97,11 @@
       cli = import ./modules/home/cli;
 
       # Apps
-      apps.default = import ./${appsDir};
-      apps.kitty = import ./${appsDir}/kitty.nix;
-      apps.browser = import ./${appsDir}/browser;
-      apps.spotify = import ./${appsDir}/spotify.nix;
-      apps.discord = import ./${appsDir}/discord.nix;
+      apps.default = import ./modules/home/apps;
+      apps.kitty = import ./modules/home/apps/kitty.nix;
+      apps.browser = import ./modules/home/apps/browser;
+      apps.spotify = import ./modules/home/apps/spotify.nix;
+      apps.discord = import ./modules/home/apps/discord.nix;
     };
 
     # NixOS hosts
