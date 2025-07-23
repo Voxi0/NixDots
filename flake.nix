@@ -3,9 +3,14 @@
 
   # Nix
   nixConfig = {
-    extra-substituters = ["https://hyprland.cachix.org" "https://nix-gaming.cachix.org"];
+    extra-substituters = [
+      "https://hyprland.cachix.org" # Hyprland
+      "https://walker.cachix.org" # Native Wayland launcher
+      "https://nix-gaming.cachix.org" # Nix gaming
+    ];
     extra-trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" # Hyprland
+      "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM=" # Native Wayland launcher
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" # Nix gaming
     ];
   };
@@ -28,7 +33,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hyprland
+    # Walker (App launcher) and Hyprland (Fanciest and most popular Wayland compositor)
+    walker.url = "github:abenz1267/walker";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -64,8 +70,6 @@
     username = "voxi0";
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
-
-    appsDir = ./modules/home/apps;
     mkSystem = {hostname}:
       import ./hosts/host-config.nix {
         inherit nixpkgs system inputs hostname username locale kbLayout;
