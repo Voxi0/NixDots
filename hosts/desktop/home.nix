@@ -21,5 +21,6 @@ _: {
     enableFirefox = true;
     enableSpotify = true;
     enableDiscord = true;
+    enableOBS = true;
   };
 }

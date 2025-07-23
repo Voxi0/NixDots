@@ -57,20 +57,6 @@
     };
   };
 
-  # Programs
-  programs = {
-    # For screen recording
-    obs-studio = {
-      enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs # Lets you capture from Wlroots based Wayland compositors
-        obs-pipewire-audio-capture # Pipewire audio capturing
-        obs-vaapi # GStreamer based VAAPI encoder implementation - Supports H.264, H.265 and AV1
-        obs-vkcapture # For Vulkan/OpenGL game capture on Linux
-      ];
-    };
-
-    # Let Home Manager install and manage itself
-    home-manager.enable = true;
-  };
+  # Let Home Manager install and manage itself
+  programs.home-manager.enable = true;
 }

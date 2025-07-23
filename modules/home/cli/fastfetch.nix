@@ -12,7 +12,10 @@
     programs.fastfetch = {
       enable = true;
       settings = {
-        logo.padding.right = 2;
+        logo = {
+          type = "small";
+          padding.right = 2;
+        };
 
         display = {
           color = "red";
