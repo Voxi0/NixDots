@@ -1,53 +1,57 @@
-{ inputs, system, username, pkgs, ... }: {
-	# Import Nix modules
-	imports = with inputs; [
-		# You don't need to import these unless.....
+{
+  inputs,
+  username,
+  ...
+}: {
+  # Import Nix modules
+  imports = with inputs; [
+    # You don't need to import these unless.....
 
-		# You enabled Stylix
-		stylix.homeModules.stylix
+    # You enabled Stylix
+    stylix.homeModules.stylix
 
-		# You enabled Spotify
-		spicetify-nix.homeManagerModules.spicetify
+    # You enabled Spotify
+    spicetify-nix.homeManagerModules.spicetify
 
-		# You enabled Discord
-		nixcord.homeModules.nixcord
-	];
+    # You enabled Discord
+    nixcord.homeModules.nixcord
+  ];
 
-	# Tell Home Manager that we aren't on Non NixOS
-	targets.genericLinux.enable = true;
+  # Tell Home Manager that we aren't on Non NixOS
+  targets.genericLinux.enable = true;
 
-	# User home
-	home = {
-		inherit username;
-		homeDirectory = "/usr/home/\${username}";
-		stateVersion = "25.05";
-	};
+  # User home
+  home = {
+    inherit username;
+    homeDirectory = "/usr/home/${username}";
+    stateVersion = "25.05";
+  };
 
-	# Enable/Disable NixDots modules
-	enableStylix = false;
+  # Enable/Disable NixDots modules
+  enableStylix = false;
 
-	# NOT RECOMMENDED
-	desktops.enableHyprland = false;
+  # NOT RECOMMENDED
+  desktops.enableHyprland = false;
 
-	# CLI
-	cli = {
-		enableNixHelper = false;
-		enableGit = false;
-		enableFastfetch = false;
-		enableBtop = false;
-		enableYazi = false;
-		enableNcmpcpp = false;
-	};
+  # CLI
+  cli = {
+    enableNixHelper = false;
+    enableGit = false;
+    enableFastfetch = false;
+    enableBtop = false;
+    enableYazi = false;
+    enableNcmpcpp = false;
+  };
 
-	# Apps
-	apps = {
-		enableKitty = false;
-		enableFirefox = false;
-		enableSpotify = false;
-		enableDiscord = false;
-		enableOBS = false;
-	};
+  # Apps
+  apps = {
+    enableKitty = false;
+    enableFirefox = false;
+    enableSpotify = false;
+    enableDiscord = false;
+    enableOBS = false;
+  };
 
-	# Let Home-Manager install and manage itself
-	programs.home-manager.enable = true;
+  # Let Home-Manager install and manage itself
+  programs.home-manager.enable = true;
 }
