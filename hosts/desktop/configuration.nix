@@ -15,7 +15,7 @@ _: {
     enable = true;
     enableSteam = true;
     enableRoblox = true;
-    enableLutris = false;
+    enableLutris = true;
     enableHeroic = false;
   };
 
