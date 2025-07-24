@@ -10,9 +10,10 @@
     ./wallpapers # Wallpapers
     ./desktops # Desktop environments and window managers
     ./stylix.nix # System-wide theming and typography
-    ./fish.nix
+    ./fish.nix	# Friendly, interactive and easy-to-use modern shell
     ./cli # Terminal shell + CLI utils and such
-    ./apps
+    ./apps	# Applications
+		./gaming.nix	# Lutris and other gaming stuff
   ];
 
   # GTK and QT

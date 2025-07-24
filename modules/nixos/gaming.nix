@@ -9,8 +9,6 @@
     enable = lib.mkEnableOption "Enable gaming related stuff";
     enableSteam = lib.mkEnableOption "Enable Steam";
     enableRoblox = lib.mkEnableOption "Enable Sober for playing Roblox";
-    enableLutris = lib.mkEnableOption "Enable Lutris game launcher";
-    enableHeroic = lib.mkEnableOption "Enable Heroic game launcher";
   };
 
   # Configuration
@@ -28,25 +26,6 @@
           origin = "flathub";
         }
       ];
-    };
-
-    # Extra packages
-    environment = {
-      # Extra packages
-      systemPackages = with pkgs;
-        [
-          mangohud # Monitor game performance
-        ]
-        ++ (
-          if config.gaming.enableLutris
-          then [pkgs.lutris]
-          else []
-        )
-        ++ (
-          if config.gaming.enableHeroic
-          then [pkgs.heroic]
-          else []
-        );
     };
 
     # Configure Steam and other stuff to improve game performance
