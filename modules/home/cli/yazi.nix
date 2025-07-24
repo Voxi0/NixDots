@@ -4,7 +4,7 @@
   ...
 }: {
   # Module options
-  options.enableYazi = lib.mkEnableOption "Enable Yazi - A modern and fancy TUI file manager with file previews and such";
+  options.cli.enableYazi = lib.mkEnableOption "Enable Yazi - A modern and fancy TUI file manager with file previews and such";
 
   # Fancy and modern TUI file manager written in Rust with previews and such
   config = lib.mkIf config.cli.enableYazi {
