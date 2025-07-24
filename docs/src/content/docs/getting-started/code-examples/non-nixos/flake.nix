@@ -50,7 +50,11 @@
 
         # CLI stuff
         nixdotsHomeModules.fish
-        nixdotsHomeModules.cli
+        nixdotsHomeModules.cli.default
+        nixdotsHomeModules.cli.git
+        nixdotsHomeModules.cli.fastfetch
+        nixdotsHomeModules.cli.ncmpcpp
+        nixdotsHomeModules.cli.yazi
 
         # Apps
         nixdotsHomeModules.apps.default
