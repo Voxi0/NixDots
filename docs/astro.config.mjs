@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import starlightThemeRapide from 'starlight-theme-rapide'
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
@@ -12,7 +13,7 @@ export default defineConfig({
 			title: "NixDots",
 			favicon: "/logo.svg",
 			logo: {src: "./public/logo.svg", replacesTitle: false},
-			customCss: ["./src/styles/global.css"],
+			plugins: [starlightThemeRapide()],
 			editLink: {baseUrl: "https://github.com/Voxi0/NixDots/tree/main/docs/"},
 			credits: true,
 			social: [
