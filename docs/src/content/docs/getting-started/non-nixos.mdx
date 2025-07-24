@@ -1,0 +1,32 @@
+---
+title: Non-NixOS
+description: How to use Home Manager modules from NixDots on Non-NixOS machines
+sidebar:
+    order: 4
+---
+import { Code } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import exampleFlake from "./code-examples/non-nixos/flake.nix?raw";
+import exampleHome from "./code-examples/non-nixos/home.nix?raw";
+
+:::caution
+Window managers / Desktop environments installed by Nix can be a bit problematic on non-NixOS machines.
+Using [nixGL](https://github.com/nix-community/nixGL) is an absolute must to avoid getting OpenGL errors
+and such.
+
+Hyprland is configured to work with [UWSM](https://github.com/Vladimir-csp/uwsm) so you are expected to
+manually install that system package and all, reminder that it requires SystemD so OpenRC and other init
+systems may not work properly.
+:::
+
+It's entirely possible to use all the Home Manager modules that are defined in NixDots as long as you have Nix
+installed of course.
+
+<Tabs>
+  <TabItem label="flake.nix" icon="nix">
+		<Code lang="nix" title={"flake.nix"} code={exampleFlake}/>
+	</TabItem>
+  <TabItem label="home.nix" icon="nix">
+		<Code lang="nix" title={"home.nix"} code={exampleHome}/>
+	</TabItem>
+</Tabs>
