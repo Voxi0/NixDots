@@ -92,7 +92,11 @@
 
       # CLI
       fish = import ./modules/home/fish.nix;
-      cli = import ./modules/home/cli;
+      cli.default = import ./modules/home/cli;
+      cli.git = import ./modules/home/git.nix;
+      cli.fastfetch = import ./modules/home/cli/fastfetch.nix;
+      cli.ncmpcpp = import ./modules/home/cli/ncmpcpp.nix;
+      cli.yazi = import ./modules/home/cli/yazi.nix;
 
       # Apps
       apps.default = import ./modules/home/apps;
