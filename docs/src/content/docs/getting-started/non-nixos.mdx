@@ -10,13 +10,13 @@ import exampleFlake from "./code-examples/non-nixos/flake.nix?raw";
 import exampleHome from "./code-examples/non-nixos/home.nix?raw";
 
 :::caution
-Window managers / Desktop environments installed by Nix can be a bit problematic on non-NixOS machines.
-Using [nixGL](https://github.com/nix-community/nixGL) is an absolute must to avoid getting OpenGL errors
+Window managers / Desktop environments installed by Nix can be a bit problematic on non-NixOS machines so
+using [nixGL](https://github.com/nix-community/nixGL) is an absolute must to avoid getting OpenGL errors
 and such.
 
 Hyprland is configured to work with [UWSM](https://github.com/Vladimir-csp/uwsm) so you are expected to
 manually install that system package and all, reminder that it requires SystemD so OpenRC and other init
-systems may not work properly.
+systems may not work properly and shall also remain undocumented by me.
 :::
 
 It's entirely possible to use all the Home Manager modules that are defined in NixDots as long as you have Nix
@@ -30,3 +30,11 @@ installed of course.
 		<Code lang="nix" title={"home.nix"} code={exampleHome}/>
 	</TabItem>
 </Tabs>
+
+## Using WMs / DEs
+I haven't tested any other Window Manager (WM) / Desktop Environment (DE) other than Hyprland thus far. But
+I'm sure the things you need to do will be the same or very similar to what you have to do to run Hyprland.
+
+### Hyprland
+Install [UWSM](https://github.com/Vladimir-csp/uwsm) and [nixGL](https://github.com/nix-community/nixGL)
+and then run `uwsm start $(nixGL hyprland)`.
