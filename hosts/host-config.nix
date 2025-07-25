@@ -1,7 +1,7 @@
 # Function to easily create new NixOS configurations in the system flake
 {
-  system,
   inputs,
+  system,
   hostname,
   username,
   locale,
@@ -10,18 +10,10 @@
 }:
 inputs.nixpkgs.lib.nixosSystem {
   inherit system;
-  specialArgs = {inherit system inputs hostname username locale kbLayout;};
+  specialArgs = {inherit inputs system hostname username locale kbLayout;};
   modules = [
     # NixOS config
     ./${hostname}/configuration.nix
-
-    # Flatpak for Sober (Roblox client)
-    inputs.nix-flatpak.nixosModules.nix-flatpak
-
-    # Extra optimizations and stuff for gaming
-    inputs.nix-gaming.nixosModules.wine
-    inputs.nix-gaming.nixosModules.pipewireLowLatency
-    inputs.nix-gaming.nixosModules.platformOptimizations
 
     # Home Manager config
     inputs.home-manager.nixosModules.home-manager
@@ -29,16 +21,9 @@ inputs.nixpkgs.lib.nixosSystem {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        extraSpecialArgs = {inherit system inputs kbLayout username;};
+        extraSpecialArgs = {inherit inputs system kbLayout username;};
         backupFileExtension = "bak";
-        users.${username} = {
-          imports = [
-            ./${hostname}/home.nix
-            inputs.stylix.homeModules.stylix
-            inputs.spicetify-nix.homeManagerModules.spicetify
-            inputs.nixcord.homeModules.nixcord
-          ];
-        };
+        users.${username} = import ./${hostname}/home.nix;
       };
     }
   ];

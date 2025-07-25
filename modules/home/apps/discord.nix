@@ -3,6 +3,9 @@
   config,
   ...
 }: {
+  # Import Nix modules
+  imports = [inputs.nixcord.homeModules.nixcord];
+
   # Module options
   options.apps.enableDiscord = lib.mkEnableOption "Enable Discord";
 

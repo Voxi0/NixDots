@@ -5,6 +5,9 @@
   inputs,
   ...
 }: {
+  # Import Nix modules
+  imports = [inputs.spicetify-nix.homeManagerModules.spicetify];
+
   # Module options
   options.apps.enableSpotify = lib.mkEnableOption "Enable Spotify (Spicetify)";
 

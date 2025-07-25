@@ -4,6 +4,9 @@
   pkgs,
   ...
 }: {
+  # Import Nix modules
+  imports = [inputs.stylix.homeModules.stylix];
+
   # Module options
   options.enableStylix = lib.mkEnableOption "Enable Stylix for system-wide theming and typography";
 
