@@ -3,20 +3,6 @@
   username,
   ...
 }: {
-  # Import Nix modules
-  imports = with inputs; [
-    # You don't need to import these unless.....
-
-    # You enabled Stylix
-    stylix.homeModules.stylix
-
-    # You enabled Spotify
-    spicetify-nix.homeManagerModules.spicetify
-
-    # You enabled Discord
-    nixcord.homeModules.nixcord
-  ];
-
   # Tell Home Manager that we aren't on Non NixOS
   targets.genericLinux.enable = true;
 
