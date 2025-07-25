@@ -93,7 +93,7 @@
       # CLI
       fish = import ./modules/home/fish.nix;
       cli = {
-        default = import ./modules/home/cli;
+        default = import ./modules/home/cli/default.nix;
         git = import ./modules/home/git.nix;
         fastfetch = import ./modules/home/cli/fastfetch.nix;
         ncmpcpp = import ./modules/home/cli/ncmpcpp.nix;
@@ -102,7 +102,7 @@
 
       # Apps
       apps = {
-        default = import ./modules/home/apps;
+        default = import ./modules/home/apps/default.nix;
         kitty = import ./modules/home/apps/kitty.nix;
         browser = import ./modules/home/apps/browser;
         spotify = import ./modules/home/apps/spotify.nix;
