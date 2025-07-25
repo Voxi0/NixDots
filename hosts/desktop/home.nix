@@ -23,4 +23,8 @@ _: {
     enableDiscord = true;
     enableOBS = true;
   };
+  gaming = {
+    enableLutris = true;
+    enableHeroic = false;
+  };
 }

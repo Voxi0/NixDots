@@ -1,19 +1,22 @@
-{ lib, config, ... }: {
-	# Module options
-	options.gaming = {
-		enableLutris = lib.mkEnableOption "Enable Lutris game launcher";
-		enableHeroic = lib.mkEnableOption "Enable Heroic game launcher";
-	};
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  # Module options
+  options.gaming = {
+    enableLutris = lib.mkEnableOption "Enable Lutris game launcher";
+    enableHeroic = lib.mkEnableOption "Enable Heroic game launcher";
+  };
 
-	# Configuration
-	config = {
-		home.packages = lib.mkIf config.gaming.enableHeroic [ pkgs.heroic ];
-
-		programs.lutris = lib.mkIf config.gaming.enableLutris {
-			enable = true;
-			steamPackage = osConfig.programs.steam.package;
-			protonPackages = [ pkgs.proton-ge-bin ];
-			winePackages = [ pkgs.wineWow64Packages.full ];
-		};
-	};
+  # Configuration
+  config = {
+    home.packages = lib.mkIf config.gaming.enableHeroic [pkgs.heroic];
+    programs.lutris = lib.mkIf config.gaming.enableLutris {
+      enable = true;
+      protonPackages = [pkgs.proton-ge-bin];
+      winePackages = [pkgs.wineWow64Packages.full];
+    };
+  };
 }
