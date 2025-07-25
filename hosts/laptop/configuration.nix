@@ -15,8 +15,6 @@ _: {
     enable = false;
     enableSteam = false;
     enableRoblox = false;
-    enableLutris = false;
-    enableHeroic = false;
   };
 
   # Hardware
