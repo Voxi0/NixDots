@@ -13,19 +13,21 @@
 
   # Configuration
   config = lib.mkIf config.gaming.enable {
-    # Low latency audio
-    services.pipewire.lowLatency.enable = lib.mkIf config.enablePipewire true;
+    services = {
+      # Low-latency audio
+      pipewire.lowLatency.enable = lib.mkIf config.enablePipewire true;
 
-    # Install Sober (Roblox) - Only available as a Flatpak for now
-    services.flatpak = lib.mkIf config.gaming.enableRoblox {
-      enable = true;
-      update.auto.enable = false;
-      packages = [
-        {
-          appId = "org.vinegarhq.Sober";
-          origin = "flathub";
-        }
-      ];
+      # Install Sober (Roblox player/client) - Only available as a Flatpak for now
+      flatpak = lib.mkIf config.gaming.enableRoblox {
+        enable = true;
+        update.auto.enable = false;
+        packages = [
+          {
+            appId = "org.vinegarhq.Sober";
+            origin = "flathub";
+          }
+        ];
+      };
     };
 
     # Configure Steam and other stuff to improve game performance

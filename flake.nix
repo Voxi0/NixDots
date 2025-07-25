@@ -58,15 +58,15 @@
   };
 
   # Actions to perform after fetching all dependencies
-  outputs = {nixpkgs, ...} @ inputs: let
+  outputs = inputs: let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = inputs.nixpkgs.legacyPackages.${system};
     username = "voxi0";
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
     mkSystem = {hostname}:
       import ./hosts/host-config.nix {
-        inherit nixpkgs system inputs hostname username locale kbLayout;
+        inherit system inputs hostname username locale kbLayout;
       };
   in {
     # Devtools - For working with NixDots, use command `nix develop` to start the devshell
@@ -92,18 +92,22 @@
 
       # CLI
       fish = import ./modules/home/fish.nix;
-      cli.default = import ./modules/home/cli;
-      cli.git = import ./modules/home/git.nix;
-      cli.fastfetch = import ./modules/home/cli/fastfetch.nix;
-      cli.ncmpcpp = import ./modules/home/cli/ncmpcpp.nix;
-      cli.yazi = import ./modules/home/cli/yazi.nix;
+      cli = {
+        default = import ./modules/home/cli;
+        git = import ./modules/home/git.nix;
+        fastfetch = import ./modules/home/cli/fastfetch.nix;
+        ncmpcpp = import ./modules/home/cli/ncmpcpp.nix;
+        yazi = import ./modules/home/cli/yazi.nix;
+      };
 
       # Apps
-      apps.default = import ./modules/home/apps;
-      apps.kitty = import ./modules/home/apps/kitty.nix;
-      apps.browser = import ./modules/home/apps/browser;
-      apps.spotify = import ./modules/home/apps/spotify.nix;
-      apps.discord = import ./modules/home/apps/discord.nix;
+      apps = {
+        default = import ./modules/home/apps;
+        kitty = import ./modules/home/apps/kitty.nix;
+        browser = import ./modules/home/apps/browser;
+        spotify = import ./modules/home/apps/spotify.nix;
+        discord = import ./modules/home/apps/discord.nix;
+      };
     };
 
     # NixOS hosts

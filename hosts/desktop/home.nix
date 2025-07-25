@@ -24,6 +24,7 @@ _: {
     enableOBS = true;
   };
   gaming = {
+    enable = true;
     enableLutris = true;
     enableHeroic = false;
   };

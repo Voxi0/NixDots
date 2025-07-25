@@ -1,6 +1,5 @@
 # Function to easily create new NixOS configurations in the system flake
 {
-  nixpkgs,
   system,
   inputs,
   hostname,
@@ -9,7 +8,7 @@
   kbLayout,
   ...
 }:
-nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem {
   inherit system;
   specialArgs = {inherit system inputs hostname username locale kbLayout;};
   modules = [
