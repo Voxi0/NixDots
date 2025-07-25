@@ -27,10 +27,9 @@
     homeConfigurations.${username} = inputs.NixDots.inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        # So you can avoid having to define any inputs that NixDots requires, using it's own inputs instead
-        inherit (inputs.NixDots) inputs;
-
         # REQUIRED FOR NIXDOTS TO WORK
+        # Merge the inputs of NixDots with your own to avoid having to redefine any inputs that NixDots requires
+        inputs = inputs // inputs.NixDots.inputs;
         inherit system username kbLayout;
       };
       modules = [
@@ -38,6 +37,9 @@
         ./home.nix
 
         # Choose whatever modules you desire
+        # Anything ending with `.default` imports everything related
+        # For example, `nixdotsHomeModules.cli.default` imports all CLI related modules e.g. `nixdotsHomeModules.cli.git`
+
         # Every single module
         nixdotsHomeModules.default
 
