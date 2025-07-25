@@ -1,8 +1,4 @@
-{
-  inputs,
-  username,
-  ...
-}: {
+{username, ...}: {
   # Tell Home Manager that we aren't on Non NixOS
   targets.genericLinux.enable = true;
 
