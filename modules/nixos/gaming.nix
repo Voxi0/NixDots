@@ -4,6 +4,17 @@
   pkgs,
   ...
 }: {
+  # Import Nix modules
+  imports = with inputs; [
+    # Flatpak for Sober (Roblox client)
+    nix-flatpak.nixosModules.nix-flatpak
+
+    # Extra optimizations and stuff for gaming
+    nix-gaming.nixosModules.wine
+    nix-gaming.nixosModules.pipewireLowLatency
+    nix-gaming.nixosModules.platformOptimizations
+  ];
+
   # Module options
   options.gaming = {
     enable = lib.mkEnableOption "Enable gaming related stuff";
