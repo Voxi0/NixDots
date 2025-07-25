@@ -1,8 +1,8 @@
 {
+  inputs,
   lib,
   config,
   system,
-  inputs,
   ...
 }: {
   # Import Nix modules
