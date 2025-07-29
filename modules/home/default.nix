@@ -49,7 +49,7 @@
         curl # To make HTTP requests
         obsidian # Free and open source Markdown note taking application
       ]
-      ++ [inputs.NixNvim.packages.${pkgs.system}.nvim];
+      ++ [inputs.NixNvim.packages.${system}.default];
 
     # Make Neovim the default editor
     sessionVariables = {
