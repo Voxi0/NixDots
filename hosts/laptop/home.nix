@@ -9,10 +9,8 @@ _: {
   # Enable/Disable Home Manager modules
   enableStylix = true;
   cli = {
-    enableNixHelper = true;
     enableGit = true;
     enableFastfetch = true;
-    enableBtop = true;
     enableYazi = true;
     enableNcmpcpp = true;
   };
