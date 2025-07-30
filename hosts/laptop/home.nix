@@ -12,7 +12,7 @@ _: {
     enableGit = true;
     enableFastfetch = true;
     enableYazi = true;
-    enableNcmpcpp = true;
+    enableNcmpcpp = false;
   };
   apps = {
     enableKitty = true;
