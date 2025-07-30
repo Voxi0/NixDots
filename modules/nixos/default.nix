@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  inputs,
   locale,
   hostname,
   username,
@@ -15,6 +16,7 @@
     ./plymouth.nix # Graphical splash screen during boot/poweroff
     ./desktops # Desktop environments and window managers
     ./fish.nix # Fancy shell
+    ./bongocat.nix # Bongocat overlay for Wayland
     ./gaming.nix # Gaming related stuff
   ];
 
@@ -66,7 +68,7 @@
         isNormalUser = true;
         initialPassword = "nixos";
         description = "${username}";
-        extraGroups = ["networkmanager" "wheel"];
+        extraGroups = ["networkmanager" "wheel" "input"];
       };
 
       # Some programs need SUID wrappers - Can be configured further or are started in user sessions
