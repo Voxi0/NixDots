@@ -38,6 +38,9 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    # Bongocat overlay for Wayland
+    bongocat.url = "github:saatvik333/wayland-bongocat";
+
     # Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
