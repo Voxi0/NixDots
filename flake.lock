@@ -9,11 +9,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1753832875,
-        "narHash": "sha256-ZAdOcepvXDMbN5bd6rj/z8qnHIPSo2X49h9Sd/i6GOM=",
+        "lastModified": 1753925908,
+        "narHash": "sha256-VtWOfiywQf3c3jXIQl4dVUONVPPlSBnGHnJHDwuG7Do=",
         "owner": "Voxi0",
         "repo": "NixNvim",
-        "rev": "671818cc0cfef2d8c34410037385332a01d1da7a",
+        "rev": "23410d96059f63af7c8253ad4b684742f3bdaadc",
         "type": "github"
       },
       "original": {
@@ -124,19 +124,19 @@
     },
     "bongocat": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1753872084,
-        "narHash": "sha256-3JMcVw4d/4XUzmraj4PPCXTLY0/zimayXT8BoLlEC4M=",
-        "owner": "saatvik333",
+        "lastModified": 1753923528,
+        "narHash": "sha256-BduatT5VcAdDkEq+E1NFcYmJ1o2+zsfEaxB4WbzhYJ4=",
+        "owner": "Voxi0",
         "repo": "wayland-bongocat",
-        "rev": "432376676cc2de3c078794af37c8077db10d4fee",
+        "rev": "b811005ca05d66621a7bc1dbd17fab2247ac0e46",
         "type": "github"
       },
       "original": {
-        "owner": "saatvik333",
+        "owner": "Voxi0",
         "repo": "wayland-bongocat",
         "type": "github"
       }
@@ -323,28 +323,6 @@
       }
     },
     "flake-utils_2": {
-      "inputs": {
-        "systems": [
-          "NixNvim",
-          "nvf",
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_3": {
       "inputs": {
         "systems": "systems_3"
       },
@@ -967,17 +945,16 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
-        "flake-utils": "flake-utils_2",
         "mnw": "mnw",
         "nixpkgs": "nixpkgs",
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1753710899,
-        "narHash": "sha256-5Du8IMbCBQiMuzpkZJuTGEa5v/oTC5pCS1FYrY49v/g=",
+        "lastModified": 1753878721,
+        "narHash": "sha256-Y+Kr6FTHggnZ31nhaiOhIboIi+dhnLmQ9p0xf0wwnDc=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "3ae510fefafa35f8b457bfbc8944d884fe18ba98",
+        "rev": "e35a74c44a35b28fd09f136dd3c0dbe9f300258f",
         "type": "github"
       },
       "original": {

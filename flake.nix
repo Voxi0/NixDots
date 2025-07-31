@@ -39,7 +39,7 @@
     };
 
     # Bongocat overlay for Wayland
-    bongocat.url = "github:saatvik333/wayland-bongocat";
+    bongocat.url = "github:Voxi0/wayland-bongocat";
 
     # Firefox extensions
     firefox-addons = {

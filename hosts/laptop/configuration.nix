@@ -6,21 +6,17 @@ _: {
   ];
 
   # Enable/Disable system modules
-  enableGraphics = true;
-  enableGraphics32Bit = true;
-  enableNetworking = true;
-  enablePlymouth = false;
-  enableVirtualization = true;
-  gaming = {
-    enable = false;
-    enableSteam = false;
-    enableRoblox = false;
-  };
-
   # Hardware
   enableIntel = true;
   enableAmd = false;
   enableNvidia = false;
+
+  # Core
+  enableGraphics = true;
+  enableGraphics32Bit = false;
+  enableNetworking = true;
+  enablePlymouth = false;
+  enableVirtualization = true;
 
   # Services
   enableSystem76Scheduler = true;
@@ -31,6 +27,14 @@ _: {
   enableSSH = true;
   enablePrinting = false;
   enableFingerprint = false;
+  enableBongocat = true;
+
+  # Gaming
+  gaming = {
+    enable = false;
+    enableSteam = false;
+    enableRoblox = false;
+  };
 
   # ALSO ENABLE THIS OPTION IN HOME MANAGER IF YOU ENABLE ANY OF THESE
   enableFish = true;

@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   pkgs,
   ...
 }: {
@@ -11,6 +12,7 @@
     "uwsm app -- swww-daemon"
     "swww restore"
     "uwsm app -- swaync"
+    "uwsm app -- bongocat-exec"
     (lib.optionals (pkgs ? mpdscribble) "uwsm app -- mpdscribble")
   ];
 }
