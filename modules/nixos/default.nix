@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  inputs,
   locale,
   hostname,
   username,
