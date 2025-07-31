@@ -79,7 +79,7 @@
     formatter.${system} = pkgs.alejandra;
     devShells.${system}.default = pkgs.mkShellNoCC {
       buildInputs = with pkgs; [
-        inputs.NixNvim.packages.${system}.nvim # My custom Neovim configuration made with Nix and nixCats
+        inputs.NixNvim.packages.${system}.default # My custom Neovim configuration made with Nix and NVF
         git # Version control system
         deadnix # Catches unused/dead Nix code
         statix # Lints and suggestions for the Nix language
