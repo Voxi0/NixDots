@@ -128,11 +128,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1754013578,
-        "narHash": "sha256-NKeaKJLB2Iasg7gCsCrgOZ6LUwwDcsUy7LzM+l9dNbc=",
+        "lastModified": 1754159529,
+        "narHash": "sha256-CpEkhHFSWoZl4hQAIcxp7vAX6XacKGk/+Nw2ekKNvFE=",
         "owner": "Voxi0",
         "repo": "wayland-bongocat",
-        "rev": "f5e425a2a37dbfd8b7c65af960457c52a7a6c328",
+        "rev": "822c49232859860df762bc6cdbefa24c4c8a0bde",
         "type": "github"
       },
       "original": {

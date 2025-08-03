@@ -18,7 +18,7 @@ in {
     programs.wayland-bongocat = {
       inherit inputDevices;
       enable = true;
-      autostart = false;
+      autostart = true;
       overlayOpacity = 0;
     };
   };
