@@ -9,11 +9,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1753925908,
-        "narHash": "sha256-VtWOfiywQf3c3jXIQl4dVUONVPPlSBnGHnJHDwuG7Do=",
+        "lastModified": 1754358618,
+        "narHash": "sha256-lEbZPydznesmudamyGkViMlERchwR7akNS9uw8cZ8Ik=",
         "owner": "Voxi0",
         "repo": "NixNvim",
-        "rev": "23410d96059f63af7c8253ad4b684742f3bdaadc",
+        "rev": "05920a4902ad3e4d64d18887fdb79c464c932c3b",
         "type": "github"
       },
       "original": {
@@ -950,11 +950,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1753878721,
-        "narHash": "sha256-Y+Kr6FTHggnZ31nhaiOhIboIi+dhnLmQ9p0xf0wwnDc=",
+        "lastModified": 1754137146,
+        "narHash": "sha256-V2AE32tLNvtYVBuc8ZRbkGjAZGsJchFbNVd6v5JXvg8=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "e35a74c44a35b28fd09f136dd3c0dbe9f300258f",
+        "rev": "16d396f039ffefabf93b7b3261e2a17e2f84439b",
         "type": "github"
       },
       "original": {
