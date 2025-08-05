@@ -9,11 +9,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1754358618,
-        "narHash": "sha256-lEbZPydznesmudamyGkViMlERchwR7akNS9uw8cZ8Ik=",
+        "lastModified": 1754424050,
+        "narHash": "sha256-HeMOj7ocqpQpAOQkOVviqPLVIMnanXua8/bHrua94Gk=",
         "owner": "Voxi0",
         "repo": "NixNvim",
-        "rev": "05920a4902ad3e4d64d18887fdb79c464c932c3b",
+        "rev": "f7b788be2672f2c6a4361d32ee76d7809f35815d",
         "type": "github"
       },
       "original": {

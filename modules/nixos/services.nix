@@ -18,6 +18,12 @@
 
   # Services
   config = lib.mkMerge [
+    # Default
+    {
+      # Firmware update manager
+      services.fwupd.enable = true;
+    }
+
     # Handy utilities
     # Suite of secure networking utilities
     (lib.mkIf config.enableSSH {services.openssh.enable = true;})
