@@ -8,6 +8,7 @@
   # Import Nix modules
   imports = [
     ./wallpapers # Wallpapers
+    ./xremap.nix # Key remaps
     ./desktops # Desktop environments and window managers
     ./stylix.nix # System-wide theming and typography
     ./fish.nix # Friendly, interactive and easy-to-use modern shell
@@ -55,6 +56,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
+      PAGER = "nvim";
     };
   };
 
