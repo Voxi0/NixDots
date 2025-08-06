@@ -15,6 +15,8 @@
 
   # Dependencies
   inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     # Nix packages repository and declarative Flatpak manager
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
@@ -32,7 +34,10 @@
     };
 
     # Linux key remapper
-    xremap.url = "github:xremap/nix-flake";
+    xremap = {
+      url = "github:xremap/nix-flake";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
@@ -67,62 +72,83 @@
   };
 
   # Actions to perform after fetching all dependencies
-  outputs = inputs: let
+  outputs = {self, ...} @ inputs: let
     system = "x86_64-linux";
-    pkgs = inputs.nixpkgs.legacyPackages.${system};
     username = "voxi0";
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
-    mkSystem = {hostname}:
-      import ./hosts/host-config.nix {
-        inherit system inputs hostname username locale kbLayout;
-      };
-  in {
-    # Devtools - For working with NixDots, use command `nix develop` to start the devshell
-    formatter.${system} = pkgs.alejandra;
-    devShells.${system}.default = pkgs.mkShellNoCC {
-      buildInputs = with pkgs; [
-        inputs.NixNvim.packages.${system}.default # My custom Neovim configuration made with Nix and NVF
-        git # Version control system
-        deadnix # Catches unused/dead Nix code
-        statix # Lints and suggestions for the Nix language
+  in
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
       ];
-    };
-
-    # Export all custom NixOS/Home Manager modules so they can be used by other flakes
-    nixosModules = rec {
-      default = import ./modules/nixos;
-    };
-    homeManagerModules = rec {
-      default = import ./modules/home;
-      wallpapers = import ./modules/home/wallpapers;
-      stylix = import ./modules/home/stylix.nix;
-      desktops = import ./modules/home/desktops;
-
-      # CLI
-      fish = import ./modules/home/fish.nix;
-      cli = {
-        default = import ./modules/home/cli/default.nix;
-        git = import ./modules/home/git.nix;
-        fastfetch = import ./modules/home/cli/fastfetch.nix;
-        ncmpcpp = import ./modules/home/cli/ncmpcpp.nix;
-        yazi = import ./modules/home/cli/yazi.nix;
+      perSystem = {system, ...}: let
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in {
+        packages = import ./pkgs pkgs;
+        formatter = pkgs.alejandra;
+        devShells.default = pkgs.mkShellNoCC {
+          buildInputs = with pkgs; [
+            deadnix # Catches unused/dead Nix code
+            statix # Lints and suggestions for the Nix language
+          ];
+        };
       };
+      flake = {
+        lib = import ./lib inputs;
 
-      # Apps
-      apps = {
-        default = import ./modules/home/apps/default.nix;
-        kitty = import ./modules/home/apps/kitty.nix;
-        browser = import ./modules/home/apps/browser;
-        spotify = import ./modules/home/apps/spotify.nix;
-        discord = import ./modules/home/apps/discord.nix;
+        # Export all custom Home Manager modules so they can be used by other flakes
+        homeManagerModules = rec {
+          default = import ./modules/home;
+          wallpapers = import ./modules/home/wallpapers;
+          stylix = import ./modules/home/stylix.nix;
+          desktops = import ./modules/home/desktops;
+
+          # CLI
+          fish = import ./modules/home/fish.nix;
+          cli = {
+            default = import ./modules/home/cli/default.nix;
+            git = import ./modules/home/git.nix;
+            fastfetch = import ./modules/home/cli/fastfetch.nix;
+            ncmpcpp = import ./modules/home/cli/ncmpcpp.nix;
+            yazi = import ./modules/home/cli/yazi.nix;
+          };
+
+          # Apps
+          apps = {
+            default = import ./modules/home/apps/default.nix;
+            kitty = import ./modules/home/apps/kitty.nix;
+            browser = import ./modules/home/apps/browser;
+            spotify = import ./modules/home/apps/spotify.nix;
+            discord = import ./modules/home/apps/discord.nix;
+          };
+        };
+
+        # NixOS hosts
+        nixosConfigurations = let
+          defaultInherits = system inputs username locale kbLayout;
+        in {
+          laptop = self.lib.makeNixosConfig {
+            inherit defaultInherits;
+            hostname = "laptop";
+          };
+          desktop = self.lib.makeNixosConfig {
+            inherit system inputs username locale kbLayout;
+            hostname = "desktop";
+          };
+        };
+
+        # Home Manager configurations
+        homeConfigurations.${username} = self.lib.makeHomeManagerConfig {
+          inherit system inputs username kbLayout;
+          hostname = "desktop";
+        };
       };
     };
-
-    # NixOS hosts
-    nixosConfigurations = {
-      laptop = mkSystem {hostname = "laptop";};
-      desktop = mkSystem {hostname = "desktop";};
-    };
-  };
 }

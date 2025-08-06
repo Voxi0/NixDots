@@ -29,8 +29,7 @@
   config = lib.mkMerge [
     # No conditions used here
     {
-      # Nix/Nixpkgs
-      nixpkgs.config.allowUnfree = true;
+      # Nix
       nix = {
         optimise.automatic = true;
         settings = {
