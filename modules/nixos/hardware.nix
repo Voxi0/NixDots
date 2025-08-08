@@ -6,25 +6,28 @@
 }: {
   # Module options
   options = {
-    enableGraphics = lib.mkEnableOption "Enable graphics drivers";
-    enableGraphics32Bit = lib.mkEnableOption "Enable 32-bit graphics drivers";
-    enableIntel = lib.mkEnableOption "Enable Intel GPU support";
-    enableAmd = lib.mkEnableOption "Enable AMD GPU support";
-    enableNvidia = lib.mkEnableOption "Enables Nvidia GPU support";
+    graphics = {
+      enable = lib.mkEnableOption "Enable graphics drivers";
+      enable32Bit = lib.mkEnableOption "Enable 32-bit graphics drivers";
+      enableIntel = lib.mkEnableOption "Enable Intel GPU support";
+      enableAmd = lib.mkEnableOption "Enable AMD GPU support";
+      enableNvidia = lib.mkEnableOption "Enables Nvidia GPU support";
+    };
   };
 
   # Configuration
   config = lib.mkMerge [
     # Graphics
     {
-      hardware.graphics = lib.mkIf config.enableGraphics {
-        enable = true;
-        enable32Bit = lib.mkIf config.enableGraphics32Bit true;
+      hardware.graphics = {
+        enable = lib.mkIf config.graphics.enable true;
+        enable32Bit = lib.mkIf config.graphics.enable32Bit true;
       };
     }
 
-    # Enable Intel GPU support
-    (lib.mkIf (config.enableGraphics && config.enableIntel) {
+    # Intel GPU support
+    (lib.mkIf (config.graphics.enable && config.graphics.enableIntel) {
+      # Drivers
       hardware.graphics.extraPackages = with pkgs; [
         # vaapiIntel				# For Intel Gen7 or older (Sandy/Ivy/Haswell)
         intel-media-driver # For Intel Gen8+ (Broadwell and newer)
@@ -32,13 +35,26 @@
       ];
     })
 
-    # Enable AMD GPU support
-    (lib.mkIf (config.enableGraphics && config.enableAmd) {
-      # Force Mesa RADV drivers when possible since AMDVLK could have noticeable performance issues
-      environment.variables.AMD_VULKAN_ICD = "RADV";
+    # AMD GPU support
+    (lib.mkIf (config.graphics.enable && config.graphics.enableAmd) {
+      # Environment variables
+      environment.variables = {
+        # Force Mesa RADV drivers when possible since AMDVLK could have noticeable performance issues
+        AMD_VULKAN_ICD = "RADV";
+
+        # Re-enable OpenCL for Polaris-based cards
+        ROC_ENABLE_PRE_VEGA = "1";
+      };
+
+      # Drivers
       hardware.graphics = {
-        extraPackages = [pkgs.amdvlk];
-        extraPackages32 = lib.mkIf config.enableGraphics32Bit [pkgs.driversi686Linux.amdvlk];
+        extraPackages = with pkgs; [
+          amdvlk
+          rocmPackages.clr.icd # OpenCL
+        ];
+        extraPackages32 = lib.mkIf config.graphics.enable32Bit (with pkgs; [
+          driversi686Linux.amdvlk
+        ]);
       };
 
       # Linux AMDGPU Controller (LACT) - Allows overclocking, undervolting and setting fans curves of AMD GPUs
@@ -49,8 +65,8 @@
       };
     })
 
-    # Enable Nvidia GPU support
-    (lib.mkIf (config.enableGraphics && config.enableNvidia) {
+    # Nvidia GPU support
+    (lib.mkIf (config.graphics.enable && config.graphics.enableNvidia) {
       boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
       hardware.nvidia = lib.mkIf config.enableNVidia {
         modesetting.enable = true; # REQUIRED

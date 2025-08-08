@@ -6,17 +6,17 @@ _: {
   ];
 
   # Enable/Disable system modules
-  # Hardware
-  enableIntel = true;
-  enableAmd = false;
-  enableNvidia = false;
-
   # Core
-  enableGraphics = true;
-  enableGraphics32Bit = true;
   enableNetworking = true;
   enablePlymouth = false;
   enableVirtualization = true;
+  graphics = {
+    enable = true;
+    enable32Bit = false;
+    enableIntel = false;
+    enableAmd = true;
+    enableNvidia = false;
+  };
 
   # Services
   enableSystem76Scheduler = true;
