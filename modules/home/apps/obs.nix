@@ -13,10 +13,13 @@
     programs.obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [
-        wlrobs # Lets you capture from Wlroots based Wayland compositors
-        obs-pipewire-audio-capture # Pipewire audio capturing
-        obs-vaapi # GStreamer based VAAPI encoder implementation - Supports H.264, H.265 and AV1
-        obs-vkcapture # For Vulkan/OpenGL game capture on Linux
+        wlrobs # Capture from Wlroots based Wayland compositors
+        obs-pipewire-audio-capture
+        obs-vaapi # VAAPI encoder implementation for H.264, H.265 and AV1
+
+        # AMD hardware acceleration
+        obs-gstreamer
+        obs-vkcapture
       ];
     };
   };
