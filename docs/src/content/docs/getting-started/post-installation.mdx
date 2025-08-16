@@ -9,7 +9,9 @@ import { Steps } from '@astrojs/starlight/components';
 
 ## Basics
 <Steps>
-	1. **Download NixDots (Fresh Install Only)**: If you did a fresh install of NixOS with NixDots, you've noticed we
+  1. **WiFi**: Network manager is used to handle connections. Enable WiFi with `sudo nmcli radio wifi on`
+    and connect to your network with `sudo nmcli dev wifi connect <SSID> password <password>`
+	2. **Download NixDots (Fresh Install Only)**: If you did a fresh install of NixOS with NixDots, you've noticed we
 		never actually moved NixDots to the fresh install. This is to keep the installation process simple. This is all
 		you have to do now -
 		```bash
@@ -18,12 +20,12 @@ import { Steps } from '@astrojs/starlight/components';
 		cd NixDots
 		sudo nixos-generate-config --show-hardware-config > hosts/<hostname>/hardware-configuration.nix
 		```
-	2. **Update the system**: [Nix Helper CLI](https://github.com/nix-community/nh) is installed by default.
+	3. **Update the system**: [Nix Helper CLI](https://github.com/nix-community/nh) is installed by default.
 		Update the system with `nh os boot <path to NixDots> -H <hostname> --update`. The `--update` flag updates the flake.
 		Check out the [Github repo](https://github.com/nix-community/nh) to learn more.
-	3 **Set Timezone**: The timezone will default to UTC so set the correct timezone for you with the command
+	4. **Set Timezone**: The timezone will default to UTC so set the correct timezone for you with the command
 		`timedatectl set-timezone <timezone>`. The list of valid timezones can be found
 		[here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). This has to be done only once don't worry.
-	4. **Gaming**: Run `flatpak update` to update [Sober](https://sober.vinegarhq.org/) which is the Roblox client I'm
+	5. **Gaming**: Run `flatpak update` to update [Sober](https://sober.vinegarhq.org/) which is the Roblox client I'm
 	using here. It's only available as a Flatpak on Flathub sadly.
 </Steps>
