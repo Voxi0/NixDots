@@ -27,7 +27,6 @@ _: {
   enableSSH = true;
   enablePrinting = false;
   enableFingerprint = false;
-  enableBongocat = true;
 
   # Gaming
   gaming = {

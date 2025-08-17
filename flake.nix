@@ -46,9 +46,6 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    # Bongocat overlay for Wayland
-    bongocat.url = "github:Voxi0/wayland-bongocat";
-
     # Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -131,11 +128,9 @@
         };
 
         # NixOS hosts
-        nixosConfigurations = let
-          defaultInherits = system inputs username locale kbLayout;
-        in {
+        nixosConfigurations = {
           laptop = self.lib.makeNixosConfig {
-            inherit defaultInherits;
+            inherit system inputs username locale kbLayout;
             hostname = "laptop";
           };
           desktop = self.lib.makeNixosConfig {
