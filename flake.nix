@@ -46,6 +46,9 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    # Launcher
+    vicinae.url = "github:vicinaehq/vicinae";
+
     # Firefox extensions
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
