@@ -31,9 +31,8 @@ and use it as you wish. And kindly star the repo to show support, any contributi
     <a href="https://github.com/Voxi0/NixDots/graphs/contributors">
         <img src="https://contrib.rocks/image?repo=Voxi0/NixDots&max=10&columns=12&anon=0"/>
     </a>
+    <p>Made with <a href="https://contrib.rocks">contrib.rocks</a></p>
 </div>
-
-Made with [contrib.rocks](https://contrib.rocks).
 
 <!-- Reference links -->
 [1]: https://nixos.org/ "NixOS"
