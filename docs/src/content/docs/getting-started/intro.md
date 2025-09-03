@@ -23,7 +23,7 @@ software repository in existence as of now, even larger than the mighty [Arch Us
 - **Kernel** - [Linux (Latest)][5]
 - **Shell** - [Fish][6]
 - **Terminal** - [Kitty][7]
-- **Editor** - [Neovim][8] (Using [nixCats][9])
+- **Editor** - [Neovim][8] (Using [nvf][9])
 - **DE/WM** - [Hyprland][10]
 - **Widgets** - [Quickshell][11]
 - **App Theme** - [Catppuccin Mocha][12]
@@ -50,7 +50,7 @@ software repository in existence as of now, even larger than the mighty [Arch Us
 [6]: https://fishshell.com/ "Fish"
 [7]: https://sw.kovidgoyal.net/kitty/ "Kitty"
 [8]: https://github.com/Voxi0/NvimDots/ "Neovim"
-[9]: https://nixcats.org/ "NixCats"
+[9]: https://github.com/NotAShelf/nvf "nvf"
 [10]: https://hyprland.org/ "Hyprland"
 [11]: https://quickshell.outfoxxed.me/ "Quickshell"
 [12]: https://catppuccin.com/ "Catppuccin"
