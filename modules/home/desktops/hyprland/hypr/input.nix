@@ -21,9 +21,6 @@
     };
 
     # Touchpad gestures
-    gestures = {
-      workspace_swipe = true;
-      workspace_swipe_forever = true;
-    };
+    gestures.workspace_swipe_forever = true;
   };
 }
