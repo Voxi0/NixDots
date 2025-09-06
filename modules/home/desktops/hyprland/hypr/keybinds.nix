@@ -8,7 +8,7 @@ in {
     #################
     "$mainMod" = "SUPER";
     "$terminal" = "uwsm app -- kitty";
-    "$menu" = ''rofi -show drun -emoji-format '{emoji} {name}' -run-command "uwsm app -- {cmd}"'';
+    "$menu" = "uwsm app -- vicinae";
 
     # Command to bring up the logout menu
     "$logoutMenuCmd" = "uwsm app -- wlogout";
