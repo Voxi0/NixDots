@@ -12,6 +12,9 @@
     # Apply said suggestions with TLP and auto-cpufreq, use powertop only for analyzing
     powerManagement.powertop.enable = true;
 
+    # Enable extra power savings
+    networking.networkmanager.wifi.powersave = true;
+
     services = {
       # Daemon that monitors and controls temperature to prevent overheating
       thermald.enable = true;

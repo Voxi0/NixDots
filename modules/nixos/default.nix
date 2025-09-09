@@ -86,8 +86,11 @@
       programs.nm-applet.enable = true;
       networking = {
         hostName = hostname;
-        networkmanager.enable = true;
         firewall.enable = true;
+        networkmanager = {
+          enable = true;
+          wifi.backend = "iwd";
+        };
       };
     })
 
