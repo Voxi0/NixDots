@@ -33,12 +33,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Linux key remapper
-    xremap = {
-      url = "github:xremap/nix-flake";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {

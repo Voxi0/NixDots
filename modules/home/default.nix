@@ -8,7 +8,6 @@
   # Import Nix modules
   imports = [
     ./wallpapers # Wallpapers
-    ./xremap.nix # Key remaps
     ./desktops # Desktop environments and window managers
     ./stylix.nix # System-wide theming and typography
     ./fish.nix # Friendly, interactive and easy-to-use modern shell
@@ -44,7 +43,6 @@
     packages = with pkgs;
       [
         unzip # To unzip zip files
-        neohtop # GUI system monitor
         mpv # Media player
         wget # To download files
         curl # To make HTTP requests
