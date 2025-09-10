@@ -18,13 +18,12 @@
 
   # Module options
   options.gaming = {
-    enable = lib.mkEnableOption "Enable gaming related stuff";
     enableSteam = lib.mkEnableOption "Enable Steam";
     enableRoblox = lib.mkEnableOption "Enable Sober for playing Roblox";
   };
 
   # Configuration
-  config = lib.mkIf config.gaming.enable {
+  config = {
     services = {
       # Low-latency audio
       pipewire.lowLatency.enable = lib.mkIf config.enablePipewire true;

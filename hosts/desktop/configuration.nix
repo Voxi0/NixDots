@@ -30,7 +30,6 @@ _: {
 
   # Gaming
   gaming = {
-    enable = true;
     enableSteam = true;
     enableRoblox = true;
   };
